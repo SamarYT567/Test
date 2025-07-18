@@ -375,7 +375,7 @@
     .social-icons a {
         color: var(--text-secondary);
         transition: color 0.3s ease, transform 0.3s ease;
-        display: inline-flex;
+        display: flex;
         align-items: center;
         justify-content: center;
     }
@@ -383,8 +383,12 @@
         transform: translateY(-3px);
     }
     .social-icons img {
-        width: 30px;
-        height: 30px;
+        height: auto;
+        width: min(8vw, 30px);
+        max-width: 100%;
+        aspect-ratio: 1 / 1;
+        object-fit: contain;
+        display: block;
     }
 
     .footer-section {
@@ -556,24 +560,23 @@
 
             <div id="socials" class="grid-item full-width socials-section" data-scroll>
                 <h2 class="section-heading">My Socials</h2>
- <div class="social-icons">
-  <a href="https://www.youtube.com/channel/UCRLPBBL_LGFl14mIGaOMnxA" target="_blank" rel="noopener noreferrer" title="YouTube">
-    <img src="https://raw.githubusercontent.com/samaryt567/Test/main/Assets/Youtube.svg" alt="YouTube">
-  </a>
-  <a href="https://www.instagram.com/the.silent.kidd/" target="_blank" rel="noopener noreferrer" title="Instagram">
-    <img src="https://raw.githubusercontent.com/samaryt567/Test/main/Assets/instagram.svg" alt="Instagram">
-  </a>
-  <a href="https://x.com/SamPlaysHindi" target="_blank" rel="noopener noreferrer" title="X / Twitter">
-    <img src="https://raw.githubusercontent.com/samaryt567/Test/main/Assets/Twitter.svg" alt="X / Twitter">
-  </a>
-  <a href="https://discord.com/invite/shM9m47vBa" target="_blank" rel="noopener noreferrer" title="Discord">
-    <img src="https://raw.githubusercontent.com/samaryt567/Test/main/Assets/discord.svg" alt="Discord">
-  </a>
-  <a href="https://github.com/Samplayshindi/Main" target="_blank" rel="noopener noreferrer" title="GitHub">
-    <img src="https://raw.githubusercontent.com/samaryt567/Test/main/Assets/github.svg" alt="GitHub">
-  </a>
-</div>
-              
+                <div class="social-icons">
+                    <a href="https://www.youtube.com/channel/UCRLPBBL_LGFl14mIGaOMnxA" target="_blank" rel="noopener noreferrer" title="YouTube">
+                        <img src="https://raw.githubusercontent.com/samaryt567/Test/main/Assets/Youtube.svg" alt="YouTube">
+                    </a>
+                    <a href="https://www.instagram.com/the.silent.kidd/" target="_blank" rel="noopener noreferrer" title="Instagram">
+                        <img src="https://raw.githubusercontent.com/samaryt567/Test/main/Assets/instagram.svg" alt="Instagram">
+                    </a>
+                    <a href="https://x.com/SamPlaysHindi" target="_blank" rel="noopener noreferrer" title="X / Twitter">
+                        <img src="https://raw.githubusercontent.com/samaryt567/Test/main/Assets/Twitter.svg" alt="X / Twitter">
+                    </a>
+                    <a href="https://discord.com/invite/shM9m47vBa" target="_blank" rel="noopener noreferrer" title="Discord">
+                        <img src="https://raw.githubusercontent.com/samaryt567/Test/main/Assets/discord.svg" alt="Discord">
+                    </a>
+                    <a href="https://github.com/Samplayshindi/Main" target="_blank" rel="noopener noreferrer" title="GitHub">
+                        <img src="https://raw.githubusercontent.com/samaryt567/Test/main/Assets/github.svg" alt="GitHub">
+                    </a>
+                </div>
             </div>
 
         </div>
