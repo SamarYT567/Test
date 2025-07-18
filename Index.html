@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sam Plays - Home</title>
+  <link rel="icon" type="image/png" href="https://i2.imageban.ru/out/2025/04/12/7f6f0dae06fbdc5d9a8b592f4a3ba931.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/dungeon-depths" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css">
+
+  <style>
+    html {
+      overflow-x: hidden;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', Arial, sans-serif;
+      background-color: #0d1117;
+      color: #c9d1d9;
+      cursor: default;
+      overflow-x: hidden;
+    }
+
+    :root {
+      --main-red: #ff4757;
+      --main-blue: #3498db;
+      --light-accent: #f1faee;
+      --dark-bg: #0d1117;
+      --card-bg: #161b22;
+      --border-color: #30363d;
+      --text-primary: #c9d1d9;
+      --text-secondary: #8b949e;
+    }
+
+    #loader {
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      background: var(--dark-bg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.8s ease-out 0.5s, visibility 0.8s ease-out 0.5s;
+    }
+    .spinner {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 5px solid var(--border-color);
+      border-top-color: var(--main-red);
+      border-right-color: var(--main-blue);
+      animation: spinEnhanced 1.2s linear infinite;
+    }
+    @keyframes spinEnhanced {
+      to { transform: rotate(360deg); }
+    }
+    #loader.hide {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 15px 5%;
+      box-sizing: border-box;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: transparent;
+      transition: background-color 0.4s ease, backdrop-filter 0.4s ease;
+    }
+    header.scrolled {
+      background-color: rgba(22, 27, 34, 0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-color);
+    }
+    .header-title {
+      flex-grow: 1;
+      text-align: center;
+    }
+    .header-title h1 {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--light-accent);
+      font-size: 1.8em;
+      margin: 0;
+      text-shadow: 0 0 5px var(--main-red);
+      display: inline-block;
+    }
+    .header-placeholder {
+      width: 44px;
+    }
+
+    #menuBtn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 10px;
+        z-index: 1002;
+        width: 30px;
+        height: 22px;
+        position: relative;
+    }
+    .menu-icon span {
+        display: block;
+        position: absolute;
+        height: 3px;
+        width: 100%;
+        background: var(--light-accent);
+        border-radius: 3px;
+        transition: all .35s ease-in-out;
+    }
+    .menu-icon span:nth-child(1) { top: 0; }
+    .menu-icon span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+    .menu-icon span:nth-child(3) { bottom: 0; }
+    #menuBtn.open .menu-icon span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    #menuBtn.open .menu-icon span:nth-child(2) { opacity: 0; }
+    #menuBtn.open .menu-icon span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    #sideMenu {
+        position: fixed;
+        top: 0;
+        right: -320px;
+        width: 300px;
+        height: 100%;
+        background: #1c2128;
+        z-index: 1001;
+        transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+        box-shadow: -10px 0 30px rgba(0,0,0,0.3);
+        border-left: 1px solid var(--border-color);
+        display: flex;
+        flex-direction: column;
+    }
+    #sideMenu.visible {
+        right: 0;
+    }
+    .side-menu-header {
+        display: flex;
+        justify-content: flex-end;
+        padding: 15px 20px;
+    }
+    #closeMenuBtn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: var(--text-secondary);
+        font-size: 2rem;
+        transition: color 0.3s, transform 0.3s;
+    }
+    #closeMenuBtn:hover {
+        color: var(--main-red);
+        transform: rotate(90deg);
+    }
+    .side-menu-content {
+        padding: 20px 30px 30px;
+        box-sizing: border-box;
+        color: var(--text-primary);
+        flex-grow: 1;
+        overflow-y: auto;
+    }
+    .setting-section h3 {
+        margin-top: 20px;
+        margin-bottom: 15px;
+        font-size: 1.1em;
+        font-weight: 600;
+        color: var(--light-accent);
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 8px;
+    }
+    .menu-nav-links a {
+        display: block;
+        color: var(--text-primary);
+        text-decoration: none;
+        font-size: 1.2em;
+        padding: 15px 0;
+        border-bottom: 1px solid var(--border-color);
+        transition: color 0.3s ease, padding-left 0.3s ease;
+        cursor: pointer;
+    }
+    .menu-nav-links a:hover {
+        color: var(--main-red);
+        padding-left: 10px;
+    }
+
+    .main-container {
+        padding: 120px 5% 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .grid-layout {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .grid-item {
+        background-color: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        padding: 25px;
+        transition: box-shadow 0.3s ease;
+    }
+    .grid-item.full-width {
+        grid-column: 1 / -1;
+    }
+    
+    .section-heading {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 2rem;
+        color: var(--light-accent);
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .hero-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .image-wrapper {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        margin-bottom: 20px;
+        border: 4px solid var(--main-blue);
+        overflow: hidden;
+    }
+    .image-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .welcome-text {
+        font-family: 'Dungeon Depths', sans-serif;
+        font-size: 3rem;
+        color: var(--light-accent);
+        margin: 0 0 10px 0;
+    }
+    .experience-text {
+        font-size: 1.1rem;
+        color: var(--text-secondary);
+        line-height: 1.6;
+        max-width: 500px;
+        margin-bottom: 25px;
+    }
+    .subscribe-button {
+      display: inline-block;
+      padding: 12px 25px;
+      text-decoration: none;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: white;
+      background: var(--main-red);
+      border: none;
+      border-radius: 8px;
+      transition: background-color 0.2s ease, transform 0.15s ease-in-out, box-shadow 0.2s ease;
+      cursor: pointer;
+    }
+    .subscribe-button:hover {
+      background-color: #ff6b81;
+      transform: scale(1.05);
+      box-shadow: 0 0 15px var(--main-red);
+    }
+
+    .about-section p {
+        color: var(--text-secondary);
+        line-height: 1.7;
+        font-size: 1.05rem;
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .quote-section {
+        text-align: center;
+    }
+    .quote-text {
+        font-size: 1.1rem;
+        font-style: italic;
+        color: var(--text-primary);
+        line-height: 1.7;
+        border-left: 4px solid var(--main-blue);
+        padding-left: 20px;
+        display: inline-block;
+        text-align: left;
+    }
+    
+    .faq-container {
+        padding: 25px;
+        border: none;
+        background: transparent;
+    }
+    .faq-item {
+        background-color: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        margin-bottom: 15px;
+        overflow: hidden;
+    }
+    .faq-question {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+        background: transparent;
+        color: var(--text-primary);
+        border: none;
+        padding: 20px;
+        width: 100%;
+        text-align: left;
+        font-size: 1.1rem;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: color 0.3s ease;
+    }
+    .faq-question:hover {
+        color: var(--main-blue);
+    }
+    .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        color: var(--text-secondary);
+        transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), padding 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        opacity: 0;
+        padding: 0 20px;
+    }
+    .faq-answer p {
+        margin: 0;
+        padding-bottom: 20px;
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+    .faq-item.active .faq-answer {
+        max-height: 300px;
+        opacity: 1;
+    }
+    .faq-icon {
+        transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        flex-shrink: 0;
+        margin-left: 15px;
+    }
+    .faq-item.active .faq-icon {
+        transform: rotate(45deg);
+    }
+    .faq-item.active .faq-question {
+        color: var(--main-blue);
+    }
+
+    .socials-section {
+        text-align: center;
+        padding: 20px 0;
+    }
+    .social-icons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 25px;
+    }
+    .social-icons a {
+        color: var(--text-secondary);
+        transition: color 0.3s ease, transform 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .social-icons a:hover {
+        color: var(--main-blue);
+        transform: translateY(-3px);
+    }
+    .social-icons svg {
+        width: 30px;
+        height: 30px;
+    }
+
+    .footer-section {
+        text-align: center;
+        padding: 40px 20px;
+    }
+    .thanks-text {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 2.5rem;
+        color: var(--light-accent);
+        margin-bottom: 10px;
+    }
+    .contact-text {
+        color: var(--text-secondary);
+        margin-bottom: 20px;
+    }
+    #openFeedbackFormBtn {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+        font-size: 1rem;
+        color: white;
+        background-color: var(--main-blue);
+        border: none;
+        border-radius: 8px;
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        text-decoration: none;
+    }
+    #openFeedbackFormBtn:hover {
+        background-color: #4a9eda;
+        transform: translateY(-3px);
+        box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+    }
+
+    #scrollTopBtn {
+      position: fixed; bottom: 20px; right: 20px; z-index: 999;
+      background-color: var(--main-red);
+      border: none;
+      border-radius: 50%;
+      width: 45px; height: 45px;
+      cursor: pointer; opacity: 0; visibility: hidden;
+      transform: translateY(20px);
+      transition: all 0.4s ease;
+      display: flex; align-items: center; justify-content: center;
+    }
+    #scrollTopBtn.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+    #scrollTopBtn:hover { background-color: #ff6b81; transform: scale(1.1); }
+    #scrollTopBtn svg { width: 20px; height: 20px; fill: white; }
+
+    @media (max-width: 768px) {
+      .header-title h1 { font-size: 1.5em; }
+      .welcome-text { font-size: 2.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div data-scroll-container>
+
+    <div id="loader">
+      <div class="spinner"></div>
+    </div>
+
+    <header id="mainHeader">
+        <div class="header-placeholder"></div>
+        <div class="header-title">
+            <h1>Sam Plays</h1>
+        </div>
+        <button id="menuBtn" title="Open Menu" aria-label="Open Menu">
+            <div class="menu-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </button>
+    </header>
+
+    <div id="sideMenu">
+        <div class="side-menu-header">
+            <button id="closeMenuBtn" title="Close Menu" aria-label="Close Menu">&times;</button>
+        </div>
+        <div class="side-menu-content">
+            <div class="setting-section menu-nav-links">
+                 <a class="menu-link" data-target="#about">About Me</a>
+                 <a class="menu-link" data-target="#faq">FAQ</a>
+                 <a class="menu-link" data-target="#socials">Socials</a>
+                 <a href="https://www.youtube.com/channel/UCRLPBBL_LGFl14mIGaOMnxA?sub_confirmation=1" target="_blank" rel="noopener noreferrer">YouTube</a>
+            </div>
+            <div class="setting-section cursor-options">
+                <h3>Cursor Style</h3>
+                <label>
+                    <input type="radio" name="cursor-style" value="default" checked> <span>Default</span>
+                </label>
+                <label>
+                    <input type="radio" name="cursor-style" value="crosshair"> <span>Crosshair</span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <main class="main-container" data-scroll-section>
+        <div class="grid-layout">
+            
+            <div class="grid-item full-width hero-content" data-scroll data-scroll-speed="1">
+                <div class="image-wrapper">
+                    <img src="https://i7.imageban.ru/out/2025/04/06/8ceada8ba819390324da470129adb577.jpg" alt="Gaming Setup" onerror="this.onerror=null;this.src='https://placehold.co/150x150/0d1117/c9d1d9?text=SP';">
+                </div>
+                <div class="hero-text-column">
+                    <div class="welcome-text">Welcome.</div>
+                    <div class="experience-text">Experience high-quality gaming content across titles like Minecraft, Subnautica and Grand Theft Auto.</div>
+                    <a href="https://www.youtube.com/channel/UCRLPBBL_LGFl14mIGaOMnxA?sub_confirmation=1" class="subscribe-button" target="_blank" rel="noopener noreferrer">Subscribe</a>
+                </div>
+            </div>
+            
+            <div id="about" class="grid-item full-width about-section" data-scroll>
+                <h2 class="section-heading">About Me</h2>
+                <p>
+                    Hey there! I'm Samar, the creator behind Sam Plays, where I dive into games like Minecraft, Would You Rather, and PUBG. It all started on a random day when a simple question popped into my head: "How do people upload videos to their channel?" That curiosity sparked something big—and just like that, Sam Plays was born. Now, I'm here to share my gaming adventures, have fun, and connect with awesome people like you. Hit that subscribe button and join the journey!
+                </p>
+            </div>
+            
+            <div class="grid-item full-width quote-section" data-scroll>
+                <div class="quote-text">
+                    "Sam Plays is a very good content creator. His gaming videos are engaging and entertaining. Keep up the great work, Sam Plays! Thank you for providing such awesome videos. I hope he never quits."
+                </div>
+            </div>
+
+            <div id="faq" class="grid-item full-width faq-container" data-scroll>
+                <h2 class="section-heading">Frequently Asked Questions</h2>
+                <div class="faq-list">
+                  <div class="faq-item">
+                    <button class="faq-question">
+                      <span class="question-text">What types of games do you play?</span> 
+                      <div class="faq-icon">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                      </div>
+                    </button>
+                    <div class="faq-answer"><p>I play a wide variety of games, from popular AAA titles to indie games. My main focus is on open-world, survival, and story-driven games, but I'm always open to trying new genres based on community suggestions!</p></div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question">
+                      <span class="question-text">Do you create original gaming content?</span> 
+                      <div class="faq-icon">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                      </div>
+                    </button>
+                    <div class="faq-answer"><p>Yes. 100% of my content is original. I handle everything from gameplay recording and editing to voiceovers and thumbnails. I haven't and don't plan to copy anyone's content.</p></div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question">
+                      <span class="question-text">Can I request a specific game to be featured?</span> 
+                      <div class="faq-icon">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                      </div>
+                    </button>
+                    <div class="faq-answer"><p>Absolutely! I welcome requests from my subscribers and consider featuring their favorite games in my upcoming videos. The best way to suggest a game is to leave a comment on my latest YouTube video.</p></div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question">
+                      <span class="question-text">How frequently do you upload new videos?</span> 
+                      <div class="faq-icon">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                      </div>
+                    </button>
+                    <div class="faq-answer"><p>Since I am the only person who makes the content, I am not very consistent, but I mostly upload at least two videos in a month. Quality is more important to me than quantity, so I take my time to make each video enjoyable.</p></div>
+                  </div>
+                </div>
+            </div>
+
+            <div id="socials" class="grid-item full-width socials-section" data-scroll>
+                <h2 class="section-heading">My Socials</h2>
+                <div class="social-icons">
+                    <a href="https://www.youtube.com/channel/UCRLPBBL_LGFl14mIGaOMnxA" target="_blank" rel="noopener noreferrer" title="YouTube">
+                        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M21.582,6.186c-0.23-0.86-0.908-1.538-1.768-1.768C18.267,4,12,4,12,4S5.733,4,4.186,4.418 c-0.86,0.23-1.538,0.908-1.768,1.768C2,7.733,2,12,2,12s0,4.267,0.418,5.814c0.23,0.86,0.908,1.538,1.768,1.768 C5.733,20,12,20,12,20s6.267,0,7.814-0.418c0.861-0.23,1.538-0.908,1.768-1.768C22,16.267,22,12,22,12S22,7.733,21.582,6.186z M9.5,15.5V8.5L16.5,12L9.5,15.5z"/></svg>
+                    </a>
+                    <a href="https://www.instagram.com/the.silent.kidd/" target="_blank" rel="noopener noreferrer" title="Instagram">
+                        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2c-2.717 0-3.056.01-4.122.06-1.065.05-1.79.217-2.428.465a4.898 4.898 0 00-1.77 1.144A4.898 4.898 0 002.536 5.44c-.248.638-.415 1.363-.465 2.428C2.01 8.944 2 9.283 2 12s.01 3.056.06 4.122c.05 1.065.217 1.79.465 2.428.255.66.588 1.214 1.144 1.77.556.556 1.11.889 1.77 1.144.638.248 1.363.415 2.428.465C8.944 21.99 9.283 22 12 22s3.056-.01 4.122-.06c1.065-.05 1.79-.217 2.428-.465.66-.255 1.214-.588 1.77-1.144.556-.556.889-1.11 1.144-1.77.248-.638.415-1.363.465-2.428.05-1.066.06-1.405.06-4.122s-.01-3.056-.06-4.122c-.05-1.065-.217-1.79-.465-2.428a4.898 4.898 0 00-1.144-1.77c-.556-.556-1.11-.889-1.77-1.144-.638-.248-1.363-.415-2.428-.465C15.056 2.01 14.717 2 12 2zm0 4c-3.309 0-6 2.691-6 6s2.691 6 6 6 6-2.691 6-6-2.691-6-6-6zm0 10c-2.206 0-4-1.794-4-4s1.794-4 4-4 4 1.794 4 4-1.794 4-4 4zm6.4-10.8c-.663 0-1.2.537-1.2 1.2s.537 1.2 1.2 1.2 1.2-.537 1.2-1.2-.537-1.2-1.2-1.2z"/></svg>
+                    </a>
+                    <a href="https://x.com/SamPlaysHindi" target="_blank" rel="noopener noreferrer" title="X / Twitter">
+                        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117l12.966 15.644z"/></svg>
+                    </a>
+                    <a href="https://discord.com/invite/shM9m47vBa" target="_blank" rel="noopener noreferrer" title="Discord">
+                        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M20.317,4.431c-0.468-0.297-0.962-0.543-1.48-0.732C18.3,3.5,17.74,3.36,17.15,3.29C17.12,3.28,17.09,3.28,17.06,3.27C17.03,3.26,17,3.26,16.97,3.25c-0.08-0.01-0.17-0.01-0.25-0.01c-0.03,0-0.05,0-0.08,0c-0.54-0.07-1.1-0.1-1.69-0.1s-1.15,0.03-1.69,0.1c-0.03,0-0.05,0-0.08,0c-0.08,0-0.17,0.01-0.25,0.01c-0.03,0-0.06,0.01-0.09,0.01c-0.03,0.01-0.06,0.01-0.09,0.02c-0.58,0.07-1.15,0.21-1.69,0.41c-0.52,0.19-1.01,0.43-1.48,0.73C6.3,5.4,5.15,6.91,4.6,8.86C4.5,9.34,4.37,9.8,4.27,10.28c-0.02,0.15-0.05,0.29-0.08,0.44c-0.01,0.08-0.03,0.17-0.04,0.25c-0.01,0.06-0.01,0.11-0.01,0.17s0,0.11,0.01,0.17c0.01,0.08,0.02,0.17,0.04,0.25c0.02,0.15,0.05,0.29,0.08,0.44c0.1,0.48,0.23,0.94,0.39,1.38c0.55,1.95,1.7,3.47,3.22,4.43c0.47,0.3,0.96,0.54,1.48,0.73c0.54,0.2,1.1,0.34,1.69,0.41c0.03,0.01,0.06,0.01,0.09,0.02c0.03,0.01,0.06,0.01,0.09,0.01c0.08,0,0.17,0.01,0.25,0.01c0.03,0,0.05,0,0.08,0c0.54,0.07,1.1,0.1,1.69,0.1s1.15-0.03,1.69-0.1c0.03,0,0.05,0,0.08,0c0.08,0,0.17-0.01,0.25-0.01c0.03,0,0.06-0.01,0.09-0.01c0.03,0,0.06-0.01,0.09-0.02c0.58-0.07,1.15-0.21,1.69-0.41c0.52-0.19,1.01-0.43,1.48-0.73c1.52-0.96,2.67-2.48,3.22-4.43c0.16-0.45,0.29-0.9,0.39-1.38c0.02-0.15,0.05-0.29,0.08-0.44c0.01-0.08,0.03-0.17,0.04-0.25c0.01-0.06,0.01-0.11,0.01-0.17s0-0.11-0.01-0.17c-0.01-0.08-0.02-0.17-0.04-0.25c-0.02-0.15-0.05-0.29-0.08-0.44C20.03,9.8,19.9,9.34,19.74,8.86C19.19,6.91,18.04,5.4,16.52,4.43z M10,15.5c-0.83,0-1.5-0.67-1.5-1.5s0.67-1.5,1.5-1.5s1.5,0.67,1.5,1.5S10.83,15.5,10,15.5z M14,15.5c-0.83,0-1.5-0.67-1.5-1.5s0.67-1.5,1.5-1.5s1.5,0.67,1.5,1.5S14.83,15.5,14,15.5z"/></svg>
+                    </a>
+                    <a href="https://github.com/Samplayshindi/Main" target="_blank" rel="noopener noreferrer" title="GitHub">
+                        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605C6.062 15.34 3.398 14.33 3.398 8.4c0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 5.93-2.665 6.94-5.475 7.24.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12z"/></svg>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        <footer class="footer-section" data-scroll>
+            <div class="thanks-text">Thanks for Visiting</div>
+            <div class="contact-text">Contact stgbussiness436@gmail.com for more info.</div>
+            <a href="mailto:stgbussiness436@gmail.com" 
+               id="openFeedbackFormBtn" rel="noopener noreferrer">Contact / Feedback</a>
+        </footer>
+    </main>
+
+    <button id="scrollTopBtn" title="Go to top" aria-label="Scroll to top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 4l8 8h-6v8h-4v-8H4l8-8z"/></svg>
+    </button>
+  </div> 
+  
+  <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.min.js"></script>
+  <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+
+  <script>
+    let locoScroll;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const scrollContainer = document.querySelector('[data-scroll-container]');
+      if (!scrollContainer) return;
+
+      const loader = document.getElementById("loader");
+      if (loader) {
+        setTimeout(() => {
+          loader.classList.add("hide");
+        }, 500);
+      }
+
+      locoScroll = new LocomotiveScroll({
+          el: scrollContainer,
+          smooth: true,
+          getDirection: true,
+      });
+
+      imagesLoaded(scrollContainer, { background: true }, () => {
+          if (locoScroll) locoScroll.update();
+      });
+      
+      new ResizeObserver(() => locoScroll.update()).observe(scrollContainer);
+
+      const header = document.getElementById('mainHeader');
+      const scrollTopBtn = document.getElementById('scrollTopBtn');
+
+      locoScroll.on('scroll', (args) => {
+          if (args.scroll.y > 50) {
+              header.classList.add('scrolled');
+          } else {
+              header.classList.remove('scrolled');
+          }
+          if (scrollTopBtn) {
+              scrollTopBtn.classList.toggle('visible', args.scroll.y > window.innerHeight / 2);
+          }
+      });
+
+      const menuBtn = document.getElementById('menuBtn');
+      const closeMenuBtn = document.getElementById('closeMenuBtn');
+      const sideMenu = document.getElementById('sideMenu');
+      
+      function toggleMenu() {
+        menuBtn.classList.toggle('open');
+        sideMenu.classList.toggle('visible');
+      }
+
+      if (menuBtn && sideMenu && closeMenuBtn) {
+          menuBtn.addEventListener('click', (event) => {
+              event.stopPropagation();
+              toggleMenu();
+          });
+          closeMenuBtn.addEventListener('click', toggleMenu);
+          
+          document.addEventListener('click', (event) => {
+              if (sideMenu.classList.contains('visible') && !sideMenu.contains(event.target) && !menuBtn.contains(event.target)) {
+                  toggleMenu();
+              }
+          });
+      }
+      
+      const menuLinks = document.querySelectorAll('.menu-link');
+      menuLinks.forEach(link => {
+          link.addEventListener('click', (e) => {
+              e.preventDefault();
+              const targetId = link.getAttribute('data-target');
+              if (targetId && locoScroll) {
+                  locoScroll.scrollTo(targetId);
+              }
+              if (sideMenu.classList.contains('visible')) {
+                  toggleMenu();
+              }
+          });
+      });
+
+      const faqItems = document.querySelectorAll('.faq-item');
+      faqItems.forEach(item => {
+        const button = item.querySelector('.faq-question');
+        button.addEventListener('click', () => {
+          const wasActive = item.classList.contains('active');
+
+          faqItems.forEach(otherItem => {
+            otherItem.classList.remove('active');
+          });
+          
+          if (!wasActive) {
+            item.classList.add('active');
+          }
+
+          setTimeout(() => {
+            if (locoScroll) locoScroll.update();
+          }, 500);
+        });
+      });
+
+      if (scrollTopBtn) {
+          scrollTopBtn.addEventListener('click', () => {
+            if (locoScroll) locoScroll.scrollTo('top');
+          });
+      }
+
+      const cursorRadios = document.querySelectorAll('input[name="cursor-style"]');
+      cursorRadios.forEach(radio => {
+        radio.addEventListener('change', (e) => {
+          document.body.style.cursor = e.target.value;
+        });
+      });
+      
+    });
+  </script>
+</body>
+</html>
