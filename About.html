@@ -448,10 +448,10 @@
             color: var(--section-heading-color-light);
         }
 
-        /* Go Back Button Styles - Adapted from original About.html, integrated with new design */
+        /* Go Back Button Styles - Adjusted position */
         .go-back-btn {
             position: fixed; 
-            top: 80px; /* Adjusted to be below fixed header */
+            top: 100px; /* Moved lower */
             left: 20px;
             background: rgba(52, 152, 219, 0.2); /* Use main-blue with opacity */
             padding: 10px;
@@ -488,6 +488,7 @@
             color: var(--light-accent);
             margin-bottom: 20px;
             text-shadow: 0 0 5px var(--main-red);
+            text-align: center; /* Centered for all h2 in these sections */
         }
         body.light-theme .about-page-section h2 {
             color: var(--section-heading-color-light);
@@ -515,49 +516,56 @@
             border-radius: var(--border-radius-soft);
             margin-bottom: 30px;
         }
-        .vision-section {
+        .specs-section { /* Renamed from vision-section */
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: var(--border-radius-soft);
+            text-align: center; /* Center the content within the specs section */
+        }
+        .specs-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 auto; /* Center the ul block */
+            max-width: 600px; /* Constrain width for readability */
+            text-align: left; /* Keep text left-aligned within the list items for readability */
+        }
+        /* Remove bullet and padding for main list items */
+        .specs-section ul > li {
+            padding-left: 0; 
+            margin-bottom: 15px; /* Added spacing between main specs */
+        }
+        .specs-section ul > li::before { 
+            content: none; /* Remove bullet */
+        }
+        /* Keep bullet and padding for nested list items */
+        .specs-section ul ul li {
+            position: relative; /* Needed for absolute positioning of ::before */
+            padding-left: 1.8em; /* Adjusted padding to make space for bullet */
+            margin-bottom: 5px; /* Small spacing for nested items */
+        }
+        .specs-section ul ul li::before { 
+            content: '•'; /* Custom bullet point */
+            color: var(--main-blue); /* Blue bullet */
+            position: absolute;
+            left: 0.5em; /* Adjusted position to be inside the padding */
+            font-size: 1.2em;
+            line-height: 1;
+        }
+        .specs-section strong {
+            color: var(--light-accent);
+        }
+        body.light-theme .specs-section strong {
+            color: var(--text-primary);
         }
 
-        /* Footer - Copied from Index.html */
+
+        /* Footer - Content removed as per request */
         .footer-section {
             text-align: center;
             padding: 40px 20px;
             margin-top: 30px; /* Add margin to separate from content */
         }
-        .thanks-text {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.5rem;
-            color: var(--light-accent);
-            margin-bottom: 10px;
-        }
-        body.light-theme .thanks-text {
-            color: var(--footer-thanks-color-light);
-        }
-        .contact-text {
-            color: var(--text-secondary);
-            margin-bottom: 20px;
-        }
-        #openFeedbackFormBtn {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            font-size: 1rem;
-            color: white;
-            background-color: var(--main-blue);
-            border: none;
-            border-radius: var(--border-radius-soft);
-            padding: 10px 20px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-            text-decoration: none;
-        }
-        #openFeedbackFormBtn:hover {
-            background-color: #4a9eda;
-            transform: translateY(-3px);
-            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
-        }
+        /* Removed .thanks-text, .contact-text, #openFeedbackFormBtn styles as elements are removed */
 
         /* Scroll to Top Button - Copied from Index.html */
         #scrollTopBtn {
@@ -734,7 +742,7 @@
             opacity: 1;
             visibility: visible;
         }
-        #cookieSettingsModal .modal-content {
+        .cookie-settings-modal .modal-content {
             background-color: var(--modal-bg);
             padding: 30px 40px;
             border: 1px solid var(--border-color);
@@ -824,7 +832,7 @@
                 flex-direction: column;
             }
             .go-back-btn {
-                top: 75px; /* Adjust for smaller screens if header height changes */
+                top: 95px; /* Adjusted for smaller screens */
                 left: 15px;
             }
         }
@@ -832,7 +840,7 @@
             .header-title h1 { font-size: 1.3em; }
             .about-page-section h2 { font-size: 1.8rem; }
             .go-back-btn {
-                top: 70px; /* Further adjust for very small screens */
+                top: 90px; /* Further adjust for very small screens */
                 left: 10px;
                 padding: 8px;
             }
@@ -919,7 +927,7 @@
         </div>
 
         <main class="main-container" data-scroll-section>
-            <a href="index.html" class="go-back-btn" title="Go Back" aria-label="Go back to home page">
+            <a href="#" class="go-back-btn" title="Go Back" aria-label="Go back to previous page" onclick="history.back(); return false;">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <path d="M15.5 19.5a1 1 0 0 1-.7-1.7l5.3-5.3H3a1 1 0 0 1 0-2h17.1l-5.3-5.3a1 1 0 0 1 1.4-1.4l7 7a1 1 0 0 1 0 1.4l-7 7a1 1 0 0 1-.7.3z"/>
                 </svg>
@@ -929,29 +937,56 @@
                 <div class="grid-item full-width about-page-section philosophy-section" data-scroll>
                     <h2 data-i18n-key="aboutPhilosophyTitle">My Gaming Philosophy</h2>
                     <p data-i18n-key="aboutPhilosophyContent">
-                        At Sam Plays, gaming is more than just entertainment; it's a journey of discovery, creativity, and connection. My philosophy revolves around sharing authentic experiences, whether it's the thrill of overcoming a boss, the joy of building intricate worlds, or the laughter from unexpected in-game moments. I believe in fostering a positive and inclusive community where everyone feels welcome to share their passion for games.
+                        At Sam Plays, gaming isn't only about playing. it's about the vibes, the stories, and the memories that linger. Whether it's that rush of adrenaline from a boss battle, the joy of crafting something from nothing, or those unexpected twists. I'm in for all of it. If you're a games enthusiast, awkward moments, in depth content, or just here to chill, you're in the right community. Let's game, laugh, create, and get lost in the worlds we cherish, Together.
                     </p>
                 </div>
 
                 <div class="grid-item full-width about-page-section process-section" data-scroll>
                     <h2 data-i18n-key="aboutProcessTitle">The Creation Process</h2>
                     <p data-i18n-key="aboutProcessContent">
-                        Every video on Sam Plays is crafted with care. From meticulously planning content ideas and recording high-quality gameplay, to the intricate process of editing, sound design, and creating engaging thumbnails – I handle it all. It's a labor of love, ensuring that each video not only entertains but also provides value and a unique perspective on the games I play. My goal is to deliver content that resonates with you long after the video ends.
+                        Each video at Sam Plays is made for perfection. From planning content ideas and recording high quality gameplay, to the process of editing, sound design, and creating the eye catching thumbnails, I handle it all. It's a labor of love, ensuring that each video provides value and a unique perspective on the games I play. My goal is to deliver content that resonates with you long even after the video ends.
                     </p>
                 </div>
 
-                <div class="grid-item full-width about-page-section vision-section" data-scroll>
-                    <h2 data-i18n-key="aboutVisionTitle">Future Aspirations</h2>
-                    <p data-i18n-key="aboutVisionContent">
-                        Looking ahead, I'm excited to explore new gaming horizons, experiment with different content formats, and grow the Sam Plays community. I envision a space where we can collectively celebrate the magic of gaming, learn from each other, and embark on countless virtual adventures together. Your feedback and support are invaluable in shaping this journey, and I can't wait to see what we build next!
-                    </p>
+                <div class="grid-item full-width about-page-section specs-section" data-scroll>
+                    <h2 data-i18n-key="aboutSpecsTitle">My PC Specs</h2>
+                    <ul>
+                        <li><strong>Cabinet (Case):</strong> HP Slim Desktop Chassis (Stock Compact Case)</li>
+                        <li><strong>Power Supply (PSU):</strong> HP OEM Power Supply (limited GPU support)</li>
+                        <li><strong>Motherboard:</strong> HP Slim Desktop Motherboard
+                            <ul>
+                                <li>Form Factor: Custom Micro-ATX / Proprietary</li>
+                                <li>RAM Support: Up to 64GB DDR4, 2933 MT/s</li>
+                                <li>Socket: LGA1200 (for Intel 10th Gen CPUs)</li>
+                            </ul>
+                        </li>
+                        <li><strong>CPU (Processor):</strong> Intel Core i9-10900</li>
+                        <li><strong>GPU (Graphics Card):</strong> AMD Radeon RX 6400 (Low Profile)</li>
+                        <li><strong>RAM:</strong> 64GB DDR4 (2933 MT/s)
+                            <ul>
+                                <li>2 x 32GB Modules (Dual Channel)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Storage:</strong>
+                            <ul>
+                                <li>SSD: 500GB NVMe SSD</li>
+                                <li>HDD: 500GB (7200 RPM)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Operating System:</strong> Windows 11 Home 64-bit</li>
+                        <li><strong>Monitor:</strong> Acer HA270 27" Full HD IPS Monitor</li>
+                        <li><strong>Audio & Peripherals:</strong>
+                            <ul>
+                                <li>Boat Rockerz 425 headphones</li>
+                                <li>Zebronics transformer keyboard and Mouse (white)</li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
             </div>
 
             <footer class="footer-section" data-scroll>
-                <div class="thanks-text" data-i18n-key="footerThanks">Thanks for Visiting</div>
-                <div class="contact-text" data-i18n-key="footerContact">Contact stgbussiness436@gmail.com for more info.</div>
-                <a href="mailto:stgbussiness436@gmail.com" id="openFeedbackFormBtn" rel="noopener noreferrer" data-i18n-key="footerContactBtn">Contact / Feedback</a>
+                <!-- Footer content removed as per request -->
             </footer>
         </main>
 
@@ -1040,11 +1075,11 @@
                 themeDark: "Dark",
                 headingLanguage: "Language",
                 aboutPhilosophyTitle: "My Gaming Philosophy",
-                aboutPhilosophyContent: `At Sam Plays, gaming is more than just entertainment; it's a journey of discovery, creativity, and connection. My philosophy revolves around sharing authentic experiences, whether it's the thrill of overcoming a boss, the joy of building intricate worlds, or the laughter from unexpected in-game moments. I believe in fostering a positive and inclusive community where everyone feels welcome to share their passion for games.`,
+                aboutPhilosophyContent: `At Sam Plays, gaming isn't only about playing. it's about the vibes, the stories, and the memories that linger. Whether it's that rush of adrenaline from a boss battle, the joy of crafting something from nothing, or those unexpected twists. I'm in for all of it. If you're a games enthusiast, awkward moments, in depth content, or just here to chill, you're in the right community. Let's game, laugh, create, and get lost in the worlds we cherish, Together.`,
                 aboutProcessTitle: "The Creation Process",
-                aboutProcessContent: `Every video on Sam Plays is crafted with care. From meticulously planning content ideas and recording high-quality gameplay, to the intricate process of editing, sound design, and creating engaging thumbnails – I handle it all. It's a labor of love, ensuring that each video not only entertains but also provides value and a unique perspective on the games I play. My goal is to deliver content that resonates with you long after the video ends.`,
-                aboutVisionTitle: "Future Aspirations",
-                aboutVisionContent: `Looking ahead, I'm excited to explore new gaming horizons, experiment with different content formats, and grow the Sam Plays community. I envision a space where we can collectively celebrate the magic of gaming, learn from each other, and embark on countless virtual adventures together. Your feedback and support are invaluable in shaping this journey, and I can't wait to see what we build next!`,
+                aboutProcessContent: `Each video at Sam Plays is made for perfection. From planning content ideas and recording high quality gameplay, to the process of editing, sound design, and creating the eye catching thumbnails, I handle it all. It's a labor of love, ensuring that each video provides value and a unique perspective on the games I play. My goal is to deliver content that resonates with you long even after the video ends.`,
+                aboutSpecsTitle: "My PC Specs", // New key for PC Specs title
+                aboutSpecsContent: ``, // Content will be directly in HTML for detailed list
                 footerThanks: "Thanks for Visiting",
                 footerContact: "Contact stgbussiness436@gmail.com for more info.",
                 footerContactBtn: "Contact / Feedback",
@@ -1081,11 +1116,11 @@
                 themeDark: "Dunkel",
                 headingLanguage: "Sprache",
                 aboutPhilosophyTitle: "Meine Gaming-Philosophie",
-                aboutPhilosophyContent: `Bei Sam Spielt ist Gaming mehr als nur Unterhaltung; es ist eine Reise der Entdeckung, Kreativität und Verbindung. Meine Philosophie dreht sich darum, authentische Erfahrungen zu teilen, sei es der Nervenkitzel, einen Boss zu besiegen, die Freude am Bau komplexer Welten oder das Lachen über unerwartete In-Game-Momente. Ich glaube daran, eine positive und inklusive Gemeinschaft zu fördern, in der sich jeder willkommen fühlt, seine Leidenschaft für Spiele zu teilen.`,
+                aboutPhilosophyContent: `Bei Sam Spielt geht es nicht nur ums Spielen. Es geht um die Stimmung, die Geschichten und die Erinnerungen, die bleiben. Ob es der Adrenalinkick eines Bosskampfes ist, die Freude, etwas aus dem Nichts zu erschaffen, oder unerwartete Wendungen. Ich bin für alles dabei. Wenn du ein Gaming-Enthusiast bist, für peinliche Momente, tiefgehenden Inhalt oder einfach nur zum Entspannen hier bist, bist du in der richtigen Community. Lass uns spielen, lachen, kreieren und uns in den Welten verlieren, die wir schätzen, Gemeinsam.`,
                 aboutProcessTitle: "Der Erstellungsprozess",
-                aboutProcessContent: `Jedes Video auf Sam Spielt wird mit Sorgfalt erstellt. Von der akribischen Planung der Content-Ideen und der Aufnahme hochwertiger Gameplays bis hin zum komplexen Prozess der Bearbeitung, des Sounddesigns und der Erstellung ansprechender Thumbnails – ich kümmere mich um alles. Es ist eine Herzensangelegenheit, um sicherzustellen, dass jedes Video nicht nur unterhält, sondern auch Wert und eine einzigartige Perspektive auf die Spiele bietet, die ich spiele. Mein Ziel ist es, Inhalte zu liefern, die Sie lange nach dem Ende des Videos ansprechen.`,
-                aboutVisionTitle: "Zukünftige Bestrebungen",
-                aboutVisionContent: `Mit Blick in die Zukunft freue ich mich darauf, neue Gaming-Horizonte zu erkunden, mit verschiedenen Content-Formaten zu experimentieren und die Sam Spielt-Community zu vergrößern. Ich stelle mir einen Raum vor, in dem wir gemeinsam die Magie des Gamings feiern, voneinander lernen und unzählige virtuelle Abenteuer gemeinsam erleben können. Ihr Feedback und Ihre Unterstützung sind von unschätzbarem Wert bei der Gestaltung dieser Reise, und ich kann es kaum erwarten zu sehen, was wir als Nächstes aufbauen werden!`,
+                aboutProcessContent: `Jedes Video bei Sam Spielt ist auf Perfektion ausgelegt. Von der Planung der Inhalte und der Aufnahme hochwertiger Gameplays bis hin zum Prozess des Bearbeitens, des Sounddesigns und des Erstellens der auffälligen Thumbnails – ich kümmere mich um alles. Es ist eine Herzensangelegenheit, um sicherzustellen, dass jedes Video einen Mehrwert und eine einzigartige Perspektive auf die Spiele bietet, die ich spiele. Mein Ziel ist es, Inhalte zu liefern, die Sie noch lange nach dem Ende des Videos ansprechen.`,
+                aboutSpecsTitle: "Meine PC-Spezifikationen", // New key for PC Specs title
+                aboutSpecsContent: ``, // Content will be directly in HTML for detailed list
                 footerThanks: "Danke für den Besuch",
                 footerContact: "Kontaktiere stgbussiness436@gmail.com für mehr Infos.",
                 footerContactBtn: "Kontakt / Feedback",
