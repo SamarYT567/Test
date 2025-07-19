@@ -7,316 +7,438 @@
   <link rel="icon" type="image/png" href="https://i2.imageban.ru/out/2025/04/12/7f6f0dae06fbdc5d9a8b592f4a3ba931.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.cdnfonts.com/css/dungeon-depths" rel="stylesheet">
-  <link href="https://fonts.cdnfonts.com/css/globoface-gothic-display-2001" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css">
 
   <style>
+    /* Basic setup and variables - Copied from Index.html */
     html {
-      overflow-x: hidden; /* Default, will be managed by JS/Locomotive */
+      overflow-x: hidden;
     }
 
     body {
       margin: 0;
       padding: 0;
-      font-family: 'Montserrat', sans-serif;
-      overflow-x: hidden;
-      background-color: #000;
-      user-select: none;
+      font-family: 'Poppins', Arial, sans-serif;
       cursor: default;
+      overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
-    /* Reduce Motion: Disable animations and transitions globally */
-    body.reduce-motion *,
-    body.reduce-motion *::before,
-    body.reduce-motion *::after {
-        animation-duration: 0s !important;
-        animation-delay: 0s !important;
-        transition: none !important;
-    }
-    
-    /* Reduce Motion: Ensure content visibility for elements normally animated by data-scroll */
-    body.reduce-motion [data-scroll] {
-        opacity: 1 !important;
-        transform: none !important;
+    :root {
+      /* Dark Theme Defaults */
+      --main-red: #ff4757;
+      --main-blue: #3498db;
+      --light-accent: #f1faee;
+      --dark-bg: #0d1117;
+      --card-bg: #161b22;
+      --border-color: #30363d;
+      --text-primary: #c9d1d9;
+      --text-secondary: #8b949e;
+      --side-menu-bg: #1c2128;
+      --modal-bg: #161b22;
+      --cookie-banner-bg: #1c2128;
+      --cookie-text-color: #c9d1d9;
+      --cookie-button-bg: #3498db;
+      --cookie-button-hover-bg: #4a9eda;
+
+      --border-radius-soft: 12px; /* Consistent border radius */
     }
 
-    /* Reduce Motion: Ensure html/body allow native scrolling */
-    html.reduce-motion-active {
-        overflow-y: auto !important;
-    }
-    body.reduce-motion {
-        overflow-y: auto !important;
-    }
-    body.reduce-motion [data-scroll-container] {
-        overflow: visible !important; 
-        display: block !important;
-        height: auto !important;
-        transform: none !important;
-    }
-     body.reduce-motion .page-section, /* Targeting common class for sections */
-     body.reduce-motion .sixth-page { /* Targeting specific section if needed */
-        transform: none !important;
-        opacity: 1 !important;
+    /* Light Theme - Copied from Index.html */
+    body.light-theme {
+      --dark-bg: #f0f2f5;
+      --card-bg: #ffffff;
+      --border-color: #d1d5db;
+      --text-primary: #1f2937;
+      --text-secondary: #4b5563;
+      --side-menu-bg: #ffffff;
+      --modal-bg: #ffffff;
+      --cookie-banner-bg: #ffffff;
+      --cookie-text-color: #1f2937;
+      --cookie-button-bg: #3b82f6;
+      --cookie-button-hover-bg: #60a5fa;
+      
+      /* Light theme specific overrides for cursor and welcome text */
+      --cursor-dot-color-light: #000000; /* Black for ambient dot in light mode */
+      --welcome-text-color-light: #000000; /* Black for welcome text in light mode */
+      --header-text-color-light: #000000; /* Black for header text in light mode */
+      --section-heading-color-light: #000000; /* Black for section headings in light mode */
+      --footer-thanks-color-light: #000000; /* Black for footer thanks text in light mode */
+      --side-menu-heading-color-light: #000000; /* Black for side menu headings in light mode */
+      --hamburger-icon-color-light: #000000; /* Black for hamburger icon in light mode */
     }
 
+    body {
+      background-color: var(--dark-bg);
+      color: var(--text-primary);
+    }
 
-    /* --- Custom Cursor Classes --- */
-    body.cursor-crosshair { cursor: crosshair; }
+    /* Reduce Motion - Copied from Index.html */
+    body.reduce-motion * {
+      animation: none !important;
+      transition: none !important;
+    }
 
-    /* --- Enhanced Loader Styles --- */
+    /* Custom Cursor: Ambient Dot - Copied from Index.html */
+    .cursor-dot, .cursor-follower {
+      position: fixed;
+      top: 0;
+      left: 0;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      z-index: 10003; /* Increased z-index to be on top of modals/banners */
+      pointer-events: none;
+      display: none; /* Hidden by default */
+    }
+    .cursor-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--main-blue);
+    }
+    body.light-theme .cursor-dot { /* Ambient dot black in light mode */
+        background-color: var(--cursor-dot-color-light);
+    }
+    .cursor-follower {
+      width: 40px;
+      height: 40px;
+      background-color: rgba(52, 152, 219, 0.1);
+      border: 1px solid var(--main-blue);
+      transition: transform 0.3s ease-out, width 0.3s ease-out, height 0.3s ease-out;
+    }
+    body.light-theme .cursor-follower { /* Ambient dot (big one) black in light mode */
+        background-color: rgba(0, 0, 0, 0.1);
+        border: 1px solid var(--cursor-dot-color-light);
+    }
+    body.cursor-ambient-dot .cursor-dot,
+    body.cursor-ambient-dot .cursor-follower {
+      display: block;
+    }
+    .cursor-follower.active {
+        transform: scale(1.5);
+    }
+    /* Ensure ambient dot cursor doesn't change over interactive elements */
+    body.cursor-ambient-dot a,
+    body.cursor-ambient-dot button,
+    body.cursor-ambient-dot .faq-question,
+    body.cursor-ambient-dot .slider,
+    body.cursor-ambient-dot select {
+        cursor: none !important;
+    }
+
+    /* Page Loader - Copied from Index.html */
     #loader {
       position: fixed;
       width: 100vw;
       height: 100vh;
-      background: #0a0f14; /* Darker background */
-      color: white;
+      background: var(--dark-bg);
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
       z-index: 10000;
       opacity: 1;
       visibility: visible;
-      transition: opacity 0.8s ease-out 0.5s, visibility 0.8s ease-out 0.5s; /* Added delay for fade-out */
+      transition: opacity 0.8s ease-out 0.5s, visibility 0.8s ease-out 0.5s;
     }
-
-    .loader-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        animation: pulseLoaderContent 2s infinite ease-in-out;
-    }
-
-    @keyframes pulseLoaderContent {
-        0%, 100% { transform: scale(1); opacity: 0.8; }
-        50% { transform: scale(1.03); opacity: 1; }
-    }
-
     .spinner {
-      width: 70px; /* Slightly smaller */
-      height: 70px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
-      border: 6px solid rgba(255, 255, 255, 0.2); /* Lighter border base */
-      border-top-color: #61dafb; /* Brighter accent */
-      border-right-color: #61dafb; /* Second accent for effect */
-      animation: spinEnhanced 1.2s linear infinite;
-      margin-bottom: 25px;
+      border: 5px solid var(--border-color);
+      border-top-color: var(--main-blue);
+      animation: spinSimple 1s linear infinite;
     }
-
-    @keyframes spinEnhanced {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+    @keyframes spinSimple {
+      to { transform: rotate(360deg); }
     }
-
-    .loader-text {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1.3em;
-      text-align: center;
-      color: #cce7ff; /* Lighter text */
-      letter-spacing: 1px;
-    }
-
     #loader.hide {
       opacity: 0;
       visibility: hidden;
     }
-    /* --- End Loader Styles --- */
 
-    /* --- Header --- */
+    /* Header Styling - Copied from Index.html */
     header {
-      background-image: url('https://i8.imageban.ru/out/2025/05/04/75362458277a6b1aa7b76085614aa66a.jpg');
-      background-size: cover;
-      background-position: center;
-      padding: 15px 20px;
-      border-bottom: 4px solid white;
-      position: fixed; /* Changed to fixed */
+      position: fixed;
       top: 0;
       left: 0;
+      width: 100%;
+      padding: 15px 5%;
+      box-sizing: border-box;
       z-index: 1000;
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center; /* Center H1 */
-      width: 100%;
-      box-sizing: border-box;
+      /* Glassmorphism effect for header */
+      background-color: rgba(22, 27, 34, 0.6); /* Semi-transparent background */
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px); /* For Safari */
+      border-bottom: 1px solid var(--border-color); /* Always show border */
+      transition: background-color 0.4s ease, backdrop-filter 0.4s ease;
     }
-
-    header::before {
-        content: "";
-        position: absolute;
-        top: 0; left: 0; right: 0; bottom: 0;
-        background-color: rgba(0, 0, 0, 0.3);
-        z-index: 1;
+    /* Remove header.scrolled as glassmorphism is always on */
+    .header-title {
+      flex-grow: 1;
+      text-align: center;
     }
-
-    header h1 {
-      font-family: 'Globoface-Gothic-Display-2001', sans-serif;
-      color: white;
-      font-size: 2.2em;
-      letter-spacing: 2px;
-      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
-      z-index: 2;
+    .header-title h1 {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--light-accent);
+      font-size: 1.8em;
       margin: 0;
+      text-shadow: 0 0 5px var(--main-red);
+      display: inline-block;
+    }
+    body.light-theme .header-title h1 { /* Header text black in light mode */
+        color: var(--header-text-color-light);
+        text-shadow: none; /* Remove text shadow in light mode */
+    }
+    .header-placeholder {
+      width: 44px; /* Placeholder for menu button on the left */
     }
 
-    /* --- Hamburger Menu Button (Copied from Index.html) --- */
+    /* Menu Button (Hamburger) - Copied from Index.html */
     #menuBtn {
         background: none;
         border: none;
         cursor: pointer;
         padding: 10px;
         z-index: 1002;
-        position: absolute;
-        right: 20px;
-    }
-
-    .menu-icon {
         width: 30px;
         height: 22px;
         position: relative;
-        transform: rotate(0deg);
-        transition: .5s ease-in-out;
     }
     .menu-icon span {
-        display: block; position: absolute; height: 4px; width: 100%;
-        background: #fff; border-radius: 2px; opacity: 1; left: 0;
-        transform: rotate(0deg); transition: .25s ease-in-out;
+        display: block;
+        position: absolute;
+        height: 3px;
+        width: 100%;
+        background: var(--light-accent);
+        border-radius: 3px;
+        transition: all .35s ease-in-out;
     }
-    .menu-icon span:nth-child(1) { top: 0px; }
-    .menu-icon span:nth-child(2), .menu-icon span:nth-child(3) { top: 9px; }
-    .menu-icon span:nth-child(4) { top: 18px; }
-    #menuBtn:hover .menu-icon span:nth-child(1) { transform: scaleX(0.8); }
-    #menuBtn:hover .menu-icon span:nth-child(4) { transform: scaleX(0.8); }
-    #menuBtn.open .menu-icon span:nth-child(1) { top: 9px; width: 0%; left: 50%; }
-    #menuBtn.open .menu-icon span:nth-child(2) { transform: rotate(45deg); }
-    #menuBtn.open .menu-icon span:nth-child(3) { transform: rotate(-45deg); }
-    #menuBtn.open .menu-icon span:nth-child(4) { top: 9px; width: 0%; left: 50%; }
+    body.light-theme .menu-icon span { /* Hamburger menu icon black in light mode */
+        background: var(--hamburger-icon-color-light);
+    }
+    .menu-icon span:nth-child(1) { top: 0; }
+    .menu-icon span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+    .menu-icon span:nth-child(3) { bottom: 0; }
+    #menuBtn.open .menu-icon span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    #menuBtn.open .menu-icon span:nth-child(2) { opacity: 0; }
+    #menuBtn.open .menu-icon span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
-    /* --- Side Menu Panel (Copied from Index.html) --- */
+    /* Side Menu - Copied from Index.html */
     #sideMenu {
-        position: fixed; top: 0; right: 0; width: 100%; height: 100%;
-        background: rgba(0, 0, 0, 0.7);
-        backdrop-filter: blur(10px) saturate(180%);
-        -webkit-backdrop-filter: blur(10px) saturate(180%);
-        z-index: 1001; visibility: hidden; opacity: 0;
-        transition: opacity 0.4s ease, visibility 0.4s ease;
-        display: flex; justify-content: flex-end;
+        position: fixed;
+        top: 0;
+        right: -320px;
+        width: 300px;
+        height: 100%;
+        background: var(--side-menu-bg);
+        z-index: 1001;
+        transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+        box-shadow: -10px 0 30px rgba(0,0,0,0.3);
+        border-left: 1px solid var(--border-color);
+        display: flex;
+        flex-direction: column;
+        border-radius: var(--border-radius-soft) 0 0 var(--border-radius-soft);
     }
-    #sideMenu.visible { opacity: 1; visibility: visible; }
+    #sideMenu.visible {
+        right: 0;
+    }
+    .side-menu-header {
+        display: flex;
+        justify-content: flex-end;
+        padding: 15px 20px;
+    }
+    #closeMenuBtn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: var(--text-secondary);
+        font-size: 2rem;
+        transition: color 0.3s, transform 0.3s;
+    }
+    #closeMenuBtn:hover {
+        color: var(--main-red);
+        transform: rotate(90deg);
+    }
     .side-menu-content {
-        background: #111; width: 320px; max-width: 90%; height: 100%;
-        padding: 80px 25px 25px; box-sizing: border-box; color: white;
-        transform: translateX(100%);
-        transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        padding: 20px 30px 30px;
+        box-sizing: border-box;
+        color: var(--text-primary);
+        flex-grow: 1;
         overflow-y: auto;
     }
-    #sideMenu.visible .side-menu-content { transform: translateX(0); }
-    .setting-section { margin-bottom: 25px; }
     .setting-section h3 {
-        margin-top: 0; margin-bottom: 15px; font-size: 1.1em; font-weight: 600;
-        color: #e0f7fa; border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        margin-top: 20px;
+        margin-bottom: 15px;
+        font-size: 1.1em;
+        font-weight: 600;
+        color: var(--light-accent);
+        border-bottom: 1px solid var(--border-color);
         padding-bottom: 8px;
     }
-    .cursor-options label {
-        display: block; margin-bottom: 10px; cursor: pointer;
-        font-size: 0.95em; color: #eee;
+    body.light-theme .setting-section h3 {
+        color: var(--side-menu-heading-color-light);
     }
-    .cursor-options input[type="radio"] {
-        margin-right: 10px; accent-color: #4fc3f7; cursor: pointer;
+    .menu-nav-links a {
+        display: block;
+        color: var(--text-primary);
+        text-decoration: none;
+        font-size: 1.2em;
+        padding: 15px 0;
+        border-bottom: 1px solid var(--border-color);
+        transition: color 0.3s ease, background-color 0.3s ease;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
     }
-    .reduce-motion-option { display: flex; justify-content: space-between; align-items: center; }
-    .toggle-switch { position: relative; display: inline-block; width: 50px; height: 28px; }
-    .toggle-switch input { display: none; }
+    .menu-nav-links a::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: var(--main-red);
+        transition: width 0.3s ease-out;
+    }
+    .menu-nav-links a:hover {
+        color: var(--main-red);
+        background-color: rgba(52, 152, 219, 0.05);
+    }
+    .menu-nav-links a:hover::after {
+        width: 100%;
+    }
+    
+    /* Toggle Switch Base - Copied from Index.html */
+    .toggle-switch-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+    }
+    .toggle-switch {
+        position: relative;
+        display: inline-block;
+        width: 50px;
+        height: 28px;
+    }
+    .toggle-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
     .slider {
-        position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
-        background-color: #555; transition: .4s; border-radius: 28px;
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: var(--border-color);
+        transition: .4s;
+        border-radius: 28px;
     }
     .slider:before {
-        position: absolute; content: ""; height: 20px; width: 20px; left: 4px; bottom: 4px;
-        background-color: white; transition: .4s; border-radius: 50%;
+        position: absolute;
+        content: "";
+        height: 20px;
+        width: 20px;
+        left: 4px;
+        bottom: 4px;
+        background-color: var(--light-accent);
+        transition: .4s;
+        border-radius: 50%;
     }
-    input:checked + .slider { background-color: #4fc3f7; }
-    input:checked + .slider:before { transform: translateX(22px); }
-    .menu-nav-links a {
-        display: block; color: white; text-decoration: none; font-size: 1.1em;
-        padding: 12px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        transition: background-color 0.3s ease;
+    input:checked + .slider {
+        background-color: var(--main-blue);
     }
-    .menu-nav-links a:hover { background-color: rgba(255, 255, 255, 0.1); }
-    .menu-nav-links a.disabled {
-        opacity: 0.6; cursor: default; pointer-events: none;
-        background-color: transparent !important;
+    input:checked + .slider:before {
+        transform: translateX(22px);
     }
-    /* --- End Header & Menu Styles --- */
 
-    .sixth-page { /* Main content section */
-      min-height: 100vh;
-      width: 100%; /* Changed from 100vw to 100% for loco-scroll */
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 100px 40px 60px 40px; /* Increased top padding for fixed header */
-      box-sizing: border-box;
-      background-image: url('https://i1.imageban.ru/out/2025/04/06/5243d476031464519085b4403a378f02.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed; /* Keep for parallax if not using loco scroll for this section bg */
-      position: relative;
-      color: white;
+    /* Radio Buttons for Cursor Style & Theme - Copied from Index.html */
+    .cursor-options label,
+    .theme-options label {
+        display: block;
+        padding: 8px 0;
+        cursor: pointer;
+        transition: color 0.3s ease;
     }
-     body.reduce-motion .sixth-page {
+    .cursor-options label:hover,
+    .theme-options label:hover {
+        color: var(--main-blue);
+    }
+    .cursor-options input[type="radio"],
+    .theme-options input[type="radio"] {
+        margin-right: 8px;
+    }
+    /* Disable cursor options when reduce motion is active */
+    body.reduce-motion .cursor-options label {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+    body.reduce-motion .cursor-options input[type="radio"] {
+        pointer-events: none; /* Prevent clicks */
+    }
+
+    /* Language Selector - Copied from Index.html */
+    .language-options select {
+        width: 100%;
+        padding: 8px;
+        background-color: var(--card-bg);
+        color: var(--text-primary);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-soft);
+        font-family: 'Poppins', sans-serif;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c9d1d9' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 8px center;
+        background-size: 16px;
+    }
+    body.light-theme .language-options select {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231f2937' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    }
+    .language-options select:focus {
+        outline: none;
+        border-color: var(--main-blue);
+        box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.3);
+    }
+
+    /* Main Content Layout - Adapted for RecentVideos */
+    .main-container {
+      padding: 120px 5% 40px; /* Adjusted top padding for fixed header */
+      max-width: 1200px;
+      margin: 0 auto;
+      /* Removed background image */
+      background-color: var(--dark-bg); /* Use theme background color */
+      position: relative;
+      color: var(--text-primary); /* Use text-primary for main content text */
+    }
+    body.light-theme .main-container {
+        background-color: var(--dark-bg); /* Ensure light theme background is applied */
+    }
+    body.reduce-motion .main-container {
         background-attachment: scroll; /* Disable fixed background when reduce motion is on */
     }
 
-
     .page-heading { /* "Recent Videos" title */
-      font-family: 'Dungeon Depths', sans-serif;
-      font-weight: normal;
-      font-size: 3.2rem;
-      color: #e8faff;
+      font-family: 'Orbitron', sans-serif; /* Changed font to Orbitron */
+      font-weight: 700; /* Bold for Orbitron */
+      font-size: 2.5rem; /* Made smaller */
+      color: var(--light-accent); /* Use light-accent for heading */
       text-align: center;
       margin-bottom: 40px;
-      margin-top: 0; /* Adjusted as padding-top on .sixth-page handles spacing */
-      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+      margin-top: 0;
+      text-shadow: 0 0 5px var(--main-red); /* Consistent text shadow */
       width: 100%;
     }
-
-    .go-back-btn {
-      position: absolute;
-      top: 20px; /* Relative to .sixth-page */
-      left: 20px;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 10px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
-      cursor: pointer;
-      z-index: 15; 
-      text-decoration: none;
-    }
-     body:not(.reduce-motion) .go-back-btn {
-        /* Adjust if it needs to be fixed relative to viewport with loco scroll */
-         position: fixed; 
-         top: calc(var(--header-height, 70px) + 20px); /* Example: header height + desired margin */
-
-    }
-
-
-    .go-back-btn:hover {
-      background: rgba(255, 255, 255, 0.25);
-      transform: scale(1.1);
-    }
-
-    .go-back-btn svg {
-      width: 22px;
-      height: 22px;
-      fill: white;
-      transform: scaleX(-1);
+    body.light-theme .page-heading {
+        color: var(--section-heading-color-light);
+        text-shadow: none;
     }
 
     /* Grid Container */
@@ -329,10 +451,10 @@
       padding: 0;
     }
 
-    /* --- Video Box Styles --- */
+    /* --- Video Box Styles (Redesigned) --- */
     .video-box {
-      background-color: rgba(15, 23, 32, 0.65);
-      border-radius: 12px;
+      background-color: var(--card-bg); /* Use card-bg */
+      border-radius: 20px; /* Increased border-radius for more rounded corners */
       padding: 20px;
       box-sizing: border-box;
       display: flex;
@@ -340,7 +462,9 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
       transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
                   background-color 0.3s ease,
-                  box-shadow 0.3s ease;
+                  box-shadow 0.3s ease,
+                  border-color 0.3s ease; /* Added border-color transition */
+      border: 1px solid var(--border-color); /* Consistent border */
     }
 
     .video-box a {
@@ -351,20 +475,20 @@
       flex-grow: 1;
     }
 
-    /* MODIFIED: New container for thumbnail and GIF */
     .thumbnail-container {
         position: relative;
         display: block;
         aspect-ratio: 16 / 9;
         margin-bottom: 15px;
-        border-radius: 8px;
-        overflow: hidden; /* This clips the corners of the images inside */
-        border: 2px solid transparent;
-        transition: border-color 0.3s ease;
+        border-radius: 15px; /* Increased border-radius for inner thumbnail */
+        overflow: hidden;
+        border: 2px solid transparent; /* Initial transparent border */
+        transition: border-color 0.3s ease, transform 0.3s ease; /* Added transform for subtle scale */
     }
     
     .video-box:hover .thumbnail-container {
-        border-color: #58c9f3;
+        border-color: var(--main-blue); /* Blue border on hover */
+        transform: scale(1.02); /* Subtle scale effect on hover */
     }
 
     .video-thumbnail {
@@ -372,40 +496,326 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: opacity 0.4s ease-in-out;
+      /* Removed opacity transition as GIF is removed */
     }
     
-    .video-gif {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        opacity: 0;
-        transition: opacity 0.4s ease-in-out;
-        pointer-events: none;
-        z-index: 2;
-    }
-
+    /* Removed .video-gif styles entirely */
 
     .video-box .video-title {
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'Poppins', sans-serif; /* Changed to Poppins */
       font-size: 1.05em;
       font-weight: 600;
-      color: #e0f0ff;
+      color: var(--text-primary); /* Use text-primary */
       margin: 0;
       line-height: 1.35;
       margin-top: auto; /* Push title to the bottom if link grows */
     }
 
     .video-box:hover {
-      transform: translateY(-10px) scale(1.02);
-      background-color: rgba(25, 38, 50, 0.8);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.45);
+      transform: translateY(-8px); /* More pronounced lift on hover */
+      background-color: var(--card-bg); /* Keep same background, border changes */
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* More pronounced shadow */
+    }
+    body.light-theme .video-box:hover {
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Lighter shadow for light theme */
     }
 
-    /* --- Animation on Scroll (data-scroll attributes) --- */
+    /* Footer - Copied from Index.html */
+    .footer-section {
+        text-align: center;
+        padding: 40px 20px;
+        margin-top: 30px; /* Add margin to separate from content */
+    }
+    .thanks-text {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 2.5rem;
+        color: var(--light-accent);
+        margin-bottom: 10px;
+    }
+    body.light-theme .thanks-text { /* Thanks for Visiting text black in light mode */
+        color: var(--footer-thanks-color-light);
+    }
+    .contact-text {
+        color: var(--text-secondary);
+        margin-bottom: 20px;
+    }
+    #openFeedbackFormBtn {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+        font-size: 1rem;
+        color: white;
+        background-color: var(--main-blue);
+        border: none;
+        border-radius: var(--border-radius-soft); /* Soften button corners */
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        text-decoration: none;
+    }
+    #openFeedbackFormBtn:hover {
+        background-color: #4a9eda;
+        transform: translateY(-3px);
+        box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+    }
+
+    /* Scroll to Top Button - Copied from Index.html */
+    #scrollTopBtn {
+      position: fixed; bottom: 20px; right: 20px; z-index: 999;
+      background-color: var(--main-red);
+      border: none;
+      border-radius: 50%;
+      width: 45px; height: 45px;
+      cursor: pointer; opacity: 0; visibility: hidden;
+      transform: translateY(20px);
+      transition: all 0.4s ease;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    #scrollTopBtn.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+    #scrollTopBtn:hover { background-color: #ff6b81; transform: scale(1.1); }
+    #scrollTopBtn svg { width: 20px; height: 20px; fill: white; }
+
+    /* Hotkey Help Modal - Copied from Index.html */
+    .hotkey-modal {
+      position: fixed;
+      z-index: 10001;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .hotkey-modal[hidden] {
+        display: none;
+    }
+    .hotkey-modal:not([hidden]) {
+        opacity: 1;
+        visibility: visible;
+    }
+    .hotkey-modal .modal-content {
+        background-color: var(--modal-bg);
+        padding: 30px 40px;
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-soft);
+        width: 90%;
+        max-width: 400px;
+        position: relative;
+        color: var(--text-primary);
+        box-shadow: 0 5px 25px rgba(0,0,0,0.4);
+    }
+    .hotkey-modal .close-btn {
+        position: absolute;
+        top: 10px; right: 15px;
+        font-size: 2rem;
+        color: var(--text-secondary);
+        background: none;
+        border: none;
+        cursor: pointer;
+        transition: color 0.3s, transform 0.3s;
+    }
+    .hotkey-modal .close-btn:hover {
+        color: var(--main-red);
+        transform: rotate(90deg);
+    }
+    .hotkey-modal h2 {
+        font-family: 'Orbitron', sans-serif;
+        text-align: center;
+        color: var(--light-accent);
+        margin-top: 0;
+        margin-bottom: 25px;
+    }
+    body.light-theme .hotkey-modal h2 {
+        color: var(--section-heading-color-light);
+    }
+    .hotkey-modal ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .hotkey-modal li {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--border-color);
+    }
+    .hotkey-modal li:last-child {
+        border-bottom: none;
+    }
+    .hotkey-modal li span {
+        background-color: var(--dark-bg);
+        padding: 3px 8px;
+        border-radius: 5px;
+        border: 1px solid var(--border-color);
+        font-family: monospace;
+        color: var(--light-accent);
+        margin-left: 10px;
+    }
+
+    /* Cookie Consent Banner - Copied from Index.html */
+    #cookieConsentBanner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: var(--cookie-banner-bg);
+      color: var(--cookie-text-color);
+      padding: 20px;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+      z-index: 10000;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      border-top-left-radius: var(--border-radius-soft);
+      border-top-right-radius: var(--border-radius-soft);
+    }
+    #cookieConsentBanner.show {
+      display: flex;
+    }
+    .cookie-content {
+      text-align: center;
+      max-width: 800px;
+    }
+    .cookie-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .cookie-buttons button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: var(--border-radius-soft);
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    #acceptCookies {
+      background-color: var(--cookie-button-bg);
+      color: white;
+    }
+    #acceptCookies:hover {
+      background-color: var(--cookie-button-hover-bg);
+      transform: translateY(-2px);
+    }
+    #rejectCookies, #customizeCookies {
+      background-color: var(--card-bg);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+    }
+    #rejectCookies:hover, #customizeCookies:hover {
+      background-color: var(--border-color);
+      transform: translateY(-2px);
+    }
+
+    /* Cookie Settings Modal - Copied from Index.html */
+    #cookieSettingsModal {
+      position: fixed;
+      z-index: 10002;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    #cookieSettingsModal[hidden] {
+        display: none;
+    }
+    .cookie-settings-modal:not([hidden]) {
+        opacity: 1;
+        visibility: visible;
+    }
+    .cookie-settings-modal .modal-content {
+        background-color: var(--modal-bg);
+        padding: 30px 40px;
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-soft);
+        width: 90%;
+        max-width: 500px;
+        position: relative;
+        color: var(--text-primary);
+        box-shadow: 0 5px 25px rgba(0,0,0,0.4);
+    }
+    #cookieSettingsModal .close-btn {
+        position: absolute;
+        top: 10px; right: 15px;
+        font-size: 2rem;
+        color: var(--text-secondary);
+        background: none;
+        border: none;
+        cursor: pointer;
+        transition: color 0.3s, transform 0.3s;
+    }
+    #cookieSettingsModal .close-btn:hover {
+        color: var(--main-red);
+        transform: rotate(90deg);
+    }
+    #cookieSettingsModal h2 {
+        font-family: 'Orbitron', sans-serif;
+        text-align: center;
+        color: var(--light-accent);
+        margin-top: 0;
+        margin-bottom: 25px;
+    }
+    body.light-theme #cookieSettingsModal h2 {
+        color: var(--section-heading-color-light);
+    }
+    .cookie-setting-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+        border-bottom: 1px solid var(--border-color);
+    }
+    .cookie-setting-item:last-of-type {
+        border-bottom: none;
+    }
+    .cookie-setting-item p {
+        margin: 0;
+        font-size: 0.95em;
+    }
+    .cookie-setting-item .toggle-switch {
+        margin-left: 15px;
+    }
+    .cookie-settings-actions {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 25px;
+    }
+    .cookie-settings-actions button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: var(--border-radius-soft);
+        cursor: pointer;
+        font-weight: 600;
+        transition: background-color 0.3s ease;
+    }
+    #saveCookieSettings {
+        background-color: var(--main-blue);
+        color: white;
+    }
+    #saveCookieSettings:hover {
+        background-color: #4a9eda;
+    }
+    #resetCookieSettings {
+        background-color: var(--card-bg);
+        color: var(--text-primary);
+        border: 1px solid var(--border-color);
+    }
+    #resetCookieSettings:hover {
+        background-color: var(--border-color);
+    }
+
+    /* Animation on Scroll (data-scroll attributes) */
     [data-scroll] {
       opacity: 0;
       transform: translateY(30px);
@@ -417,15 +827,16 @@
       transform: translateY(0);
     }
     
-    /* --- Responsive Styles --- */
+    /* Responsive Styles - Copied from Index.html and adjusted */
     @media (max-width: 768px) {
-      header h1 { font-size: 1.8em; }
-      .sixth-page {
-        padding: 80px 20px 40px 20px; /* Adjust top padding for header */
-        background-attachment: scroll;
+      header h1 { font-size: 1.5em; }
+      .main-container {
+        padding: 90px 20px 40px 20px; /* Adjusted top padding for header */
+        /* background-attachment: scroll; - Removed as main-container background image is removed */
       }
       .page-heading {
-        font-size: 2.8rem; margin-bottom: 30px; margin-top: 0;
+        font-size: 2rem; /* Adjusted for smaller screens */
+        margin-bottom: 30px; margin-top: 0;
       }
       .content-container {
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -433,329 +844,767 @@
       }
       .video-box { padding: 15px; }
       .video-box .video-title { font-size: 1em; }
-      .go-back-btn {
-        top: 15px; left: 15px; padding: 8px;
+      .cookie-buttons {
+        flex-direction: column;
       }
-       body:not(.reduce-motion) .go-back-btn {
-         top: calc(var(--header-height, 60px) + 15px); /* Adjust for smaller header */
-       }
-      .go-back-btn svg { width: 20px; height: 20px; }
     }
 
     @media (max-width: 480px) {
-      header h1 { font-size: 1.6em; white-space: normal; }
-      .page-heading { font-size: 2.2rem; }
+      header h1 { font-size: 1.3em; white-space: normal; }
+      .page-heading { font-size: 1.8rem; } /* Further adjusted for very small screens */
       .content-container { grid-template-columns: 1fr; gap: 20px; }
-       body:not(.reduce-motion) .go-back-btn {
-         top: calc(var(--header-height, 55px) + 10px); /* Further adjust */
-       }
+    }
+
+    /* Style for the "View More" button */
+    .view-more-container {
+        text-align: center;
+        margin-top: 40px;
+    }
+
+    #viewMoreBtn {
+        background-color: var(--main-blue);
+        color: white;
+        padding: 12px 25px;
+        border: none;
+        border-radius: var(--border-radius-soft);
+        font-size: 1.1em;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    #viewMoreBtn:hover {
+        background-color: #4a9eda;
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+    }
+
+    #viewMoreBtn:disabled {
+        background-color: var(--border-color);
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+        opacity: 0.7;
     }
   </style>
 </head>
 <body>
+  <div class="cursor-dot"></div>
+  <div class="cursor-follower"></div>
 
   <div data-scroll-container>
     <div id="loader">
-      <div class="loader-content">
-        <div class="spinner"></div>
-        <div class="loader-text">Loading, Please Wait</div>
-      </div>
+      <div class="spinner"></div>
     </div>
 
-    <header>
-        <h1>Sam Plays</h1>
+    <header id="mainHeader">
+        <div class="header-placeholder"></div>
+        <div class="header-title">
+            <h1 data-i18n-key="channelTitle">Sam Plays</h1>
+        </div>
         <button id="menuBtn" title="Open Menu" aria-label="Open Menu">
             <div class="menu-icon">
-                <span></span><span></span><span></span><span></span>
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
         </button>
     </header>
 
     <div id="sideMenu">
+        <div class="side-menu-header">
+            <button id="closeMenuBtn" title="Close Menu" aria-label="Close Menu">×</button>
+        </div>
         <div class="side-menu-content">
             <div class="setting-section menu-nav-links">
-                 <a href="https://samplayshindi.github.io/Main/Index.html">Home</a>
-                 <a href="https://samplayshindi.github.io/Main/About.html">About</a>
-                 <a href="https://samplayshindi.github.io/Main/RecentVideos.html" class="disabled">Recent Videos</a>
+                 <a href="index.html" data-i18n-key="navHome">Home</a>
+                 <a href="About.html" data-i18n-key="navAbout">About</a>
+                 <a href="RecentVideos.html" data-i18n-key="navRecentVideos">Recent Videos</a>
             </div>
-            <div class="setting-section cursor-options">
-                <h3>Cursor Style</h3>
-                <label><input type="radio" name="cursor-style" value="default" checked> <span>Default</span></label>
-                <label><input type="radio" name="cursor-style" value="crosshair"> <span>Crosshair</span></label>
-            </div>
-            <div class="setting-section">
-                <div class="reduce-motion-option">
-                    <h3 style="margin: 0; border: none; padding: 0;">Reduce Motion</h3>
+            <div class="setting-section accessibility-options">
+                <h3 data-i18n-key="headingAccessibility">Accessibility</h3>
+                <div class="toggle-switch-container">
+                    <span data-i18n-key="optionReduceMotion">Reduce Motion</span>
                     <label class="toggle-switch">
                         <input type="checkbox" id="reduceMotionToggle">
                         <span class="slider"></span>
                     </label>
                 </div>
             </div>
+            <div class="setting-section cursor-options">
+                <h3 data-i18n-key="headingCursorStyle">Cursor Style</h3>
+                <label>
+                    <input type="radio" name="cursor-style" value="ambient-dot" checked> <span data-i18n-key="cursorAmbientDot">Ambient Dot</span>
+                </label>
+                <label>
+                    <input type="radio" name="cursor-style" value="default"> <span data-i18n-key="cursorDefault">Default</span>
+                </label>
+                <label>
+                    <input type="radio" name="cursor-style" value="crosshair"> <span data-i18n-key="cursorCrosshair">Crosshair</span>
+                </label>
+            </div>
+            <div class="setting-section theme-options">
+                <h3 data-i18n-key="headingTheme">Theme</h3>
+                <label>
+                    <input type="radio" name="theme-style" value="system" checked> <span data-i18n-key="themeSystem">System</span>
+                </label>
+                <label>
+                    <input type="radio" name="theme-style" value="light"> <span data-i18n-key="themeLight">Light</span>
+                </label>
+                <label>
+                    <input type="radio" name="theme-style" value="dark"> <span data-i18n-key="themeDark">Dark</span>
+                </label>
+            </div>
+            <div class="setting-section language-options">
+                <h3 data-i18n-key="headingLanguage">Language</h3>
+                <select id="languageSelector" aria-label="Select Language">
+                    <option value="en">English</option>
+                    <option value="de">Deutsch</option>
+                </select>
+            </div>
         </div>
     </div>
 
-    <section class="sixth-page" data-scroll-section>
-      <a href="https://samplayshindi.github.io/Main/Index.html" class="go-back-btn" title="Go Back">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path d="M15.5 19.5a1 1 0 0 1-.7-1.7l5.3-5.3H3a1 1 0 0 1 0-2h17.1l-5.3-5.3a1 1 0 0 1 1.4-1.4l7 7a1 1 0 0 1 0 1.4l-7 7a1 1 0 0 1-.7.3z"/>
-        </svg>
-      </a>
+    <main class="main-container" data-scroll-section>
+      <h2 class="page-heading" data-i18n-key="recentVideosTitle">Recent Videos</h2>
 
-      <h2 class="page-heading">Recent Videos</h2>
-
-      <div class="content-container">
-          <!-- MODIFIED: GTA III Video -->
-          <div class="video-box gif-enabled" data-scroll data-scroll-class="is-inview" data-scroll-delay="0.05">
-              <a href="https://youtu.be/eRou7u-pUdw?list=PLEEomKNPrBBCF0uRNRa03BGEmR-0kpiHq" target="_blank" title="Watch GTA III Episode 1: First Day in Liberty City">
-                  <div class="thumbnail-container">
-                      <img class="video-thumbnail" src="https://iili.io/F5bo2x1.jpg" alt="GTA III Episode 1 Thumbnail" onerror="this.onerror=null;this.src='https://placehold.co/600x338/0a0f14/cce7ff?text=Video+Not+Found';">
-                      <img class="video-gif" src="https://iili.io/F5bADhl.gif" alt="GTA III Episode 1 GIF Preview">
-                  </div>
-                  <p class="video-title">GTA III Episode 1: First Day in Liberty City</p>
-              </a>
-          </div>
-          <!-- MODIFIED: Minecraft Video -->
-          <div class="video-box gif-enabled" data-scroll data-scroll-class="is-inview" data-scroll-delay="0.1">
-              <a href="https://youtu.be/Hy67SdfabQQ" target="_blank" title="Watch Making my First Farm 🧑‍🌾 [Minecraft Part 6]">
-                  <div class="thumbnail-container">
-                    <img class="video-thumbnail" src="https://i1.imageban.ru/out/2025/04/13/28e4502f5ab1865fe25957a5d79204b6.jpg" alt="Minecraft Farm Thumbnail" onerror="this.onerror=null;this.src='https://placehold.co/600x338/0a0f14/cce7ff?text=Video+Not+Found';">
-                    <img class="video-gif" src="https://iili.io/F5m9os2.gif" alt="Minecraft Part 6 GIF Preview">
-                  </div>
-                  <p class="video-title">Making my First Farm 🧑‍🌾 [Minecraft Part 6]</p>
-              </a>
-          </div>
-          <div class="video-box gif-enabled" data-scroll data-scroll-class="is-inview" data-scroll-delay="0.15">
-              <a href="https://youtu.be/tWY0ghnb8-Y" target="_blank" title="Watch Can i beat this guy? [Akinator Part 2]">
-                   <div class="thumbnail-container">
-                    <img class="video-thumbnail" src="https://i3.imageban.ru/out/2025/04/13/9f227beacfd43f082b239a1b9b25994b.jpg" alt="Akinator Thumbnail" onerror="this.onerror=null;this.src='https://placehold.co/600x338/0a0f14/cce7ff?text=Video+Not+Found';">
-                    <img class="video-gif" src="https://iili.io/F5mqt4f.gif" alt="Akinator Part 2 GIF Preview">
-                  </div>
-                  <p class="video-title">Can i beat this guy? [Akinator Part 2]</p>
-              </a>
-          </div>
-          <div class="video-box gif-enabled" data-scroll data-scroll-class="is-inview" data-scroll-delay="0.2">
-              <a href="https://youtu.be/lS8X0lv1Xm8" target="_blank" title="Watch Playing this game once again... [Minecraft Survival Part 5]">
-                   <div class="thumbnail-container">
-                    <img class="video-thumbnail" src="https://i4.imageban.ru/out/2025/04/13/275c5407c98edca94ebc0a64c0dcf9b8.jpg" alt="Minecraft Survival Thumbnail" onerror="this.onerror=null;this.src='https://placehold.co/600x338/0a0f14/cce7ff?text=Video+Not+Found';">
-                    <img class="video-gif" src="https://iili.io/F5muV2e.gif" alt="Minecraft Part 5 GIF Preview">
-                  </div>
-                  <p class="video-title">Playing this game once again... [Minecraft Survival Part 5]</p>
-              </a>
-          </div>
-          <div class="video-box gif-enabled" data-scroll data-scroll-class="is-inview" data-scroll-delay="0.25">
-              <a href="https://youtu.be/_xAe_RBzuYM" target="_blank" title="Exploring The Mysterious Depths! | Subnautica Part 2">
-                   <div class="thumbnail-container">
-                    <img class="video-thumbnail" src="https://i5.imageban.ru/out/2025/04/13/5d2a407f8dade569402c04a0c05974b2.jpg" alt="Subnautica Thumbnail" onerror="this.onerror=null;this.src='https://placehold.co/600x338/0a0f14/cce7ff?text=Video+Not+Found';">
-                    <img class="video-gif" src="https://iili.io/F5mYVbs.gif" alt="Subnautica Part 2 GIF Preview">
-                  </div>
-                  <p class="video-title">Exploring The Mysterious Depths! | Subnautica Part 2</p>
-              </a>
-          </div>
-          <div class="video-box gif-enabled" data-scroll data-scroll-class="is-inview" data-scroll-delay="0.3">
-              <a href="https://youtu.be/lDNlLVJVNgc" target="_blank" title="Watch Ocean World with Aliens | Subnautica Part - 1">
-                   <div class="thumbnail-container">
-                    <img class="video-thumbnail" src="https://i8.imageban.ru/out/2025/04/13/c45dc5c4c679216ffb4d3c28125e7bc9.jpg" alt="Subnautica Part 1 Thumbnail" onerror="this.onerror=null;this.src='https://placehold.co/600x338/0a0f14/cce7ff?text=Video+Not+Found';">
-                    <img class="video-gif" src="https://iili.io/F5mWUFa.gif" alt="Subnautica Part 1 GIF Preview">
-                  </div>
-                  <p class="video-title">Ocean World with Aliens | Subnautica Part - 1</p>
-              </a>
-          </div>
+      <div class="content-container" id="videoContainer">
+          <!-- Video boxes will be dynamically loaded here -->
       </div>
-    </section>
+
+      <div class="view-more-container">
+          <button id="viewMoreBtn">
+              <span data-i18n-key="viewMoreVideos">View More Videos</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-down"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+          </button>
+      </div>
+    </main>
+
+    <button id="scrollTopBtn" title="Go to top" aria-label="Scroll to top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 4l8 8h-6v8h-4v-8H4l8-8z"/></svg>
+    </button>
+  </div> 
+
+  <div id="hotkeyHelpModal" class="hotkey-modal" role="dialog" aria-modal="true" aria-labelledby="hotkey-title" hidden>
+      <div class="modal-content">
+          <button id="closeHelpModalBtn" class="close-btn" aria-label="Close hotkey help">&times;</button>
+          <h2 id="hotkey-title" data-i18n-key="hotkeyTitle">Keyboard Shortcuts</h2>
+          <ul>
+              <li><span data-i18n-key="hotkeyHelp">Show this help menu</span><div><span>?</span> or <span>H</span></div></li>
+              <li><span data-i18n-key="hotkeyMenu">Toggle menu</span><span>M</span></li>
+              <li><span data-i18n-key="hotkeyScrollTop">Scroll to top</span><span>T</span></li>
+              <li><span data-i18n-key="hotkeyScrollBottom">Scroll to bottom</span><span>B</span></li>
+              <li><span data-i18n-key="hotkeyClose">Close menu or dialog</span><span>ESC</span></li>
+          </ul>
+      </div>
   </div>
+
+  <!-- Cookie Consent Banner -->
+  <div id="cookieConsentBanner" class="cookie-banner">
+    <div class="cookie-content">
+      <p data-i18n-key="cookieConsentText">We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies.</p>
+    </div>
+    <div class="cookie-buttons">
+      <button id="acceptCookies" data-i18n-key="cookieAcceptAll">Accept All</button>
+      <button id="rejectCookies" data-i18n-key="cookieRejectAll">Reject All</button>
+      <button id="customizeCookies" data-i18n-key="cookieCustomize">Customize</button>
+    </div>
+  </div>
+
+  <!-- Cookie Settings Modal -->
+  <div id="cookieSettingsModal" class="hotkey-modal" role="dialog" aria-modal="true" aria-labelledby="cookie-settings-title" hidden>
+    <div class="modal-content">
+      <button id="closeCookieSettingsModalBtn" class="close-btn" aria-label="Close cookie settings">&times;</button>
+      <h2 id="cookie-settings-title" data-i18n-key="cookieSettingsTitle">Privacy Settings</h2>
+      <div class="cookie-setting-item">
+        <p data-i18n-key="cookieEssential">Essential Cookies (Required)</p>
+        <label class="toggle-switch">
+          <input type="checkbox" id="essentialCookiesToggle" checked disabled>
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="cookie-setting-item">
+        <p data-i18n-key="cookieAnalytics">Analytics Cookies</p>
+        <label class="toggle-switch">
+          <input type="checkbox" id="analyticsCookiesToggle">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="cookie-setting-item">
+        <p data-i18n-key="cookieMarketing">Marketing Cookies</p>
+        <label class="toggle-switch">
+          <input type="checkbox" id="marketingCookiesToggle">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="cookie-settings-actions">
+        <button id="saveCookieSettings" data-i18n-key="cookieSaveSettings">Save Settings</button>
+        <button id="resetCookieSettings" data-i18n-key="cookieResetSettings">Reset to Default</button>
+      </div>
+    </div>
+  </div>
+  
   <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.min.js"></script>
-  <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
-  <script>
+
+  <script defer>
+    // --- i18n Translation Scaffolding ---
+    const translations = {
+        'en': {
+            channelTitle: "Sam Plays",
+            navHome: "Home",
+            navAbout: "About",
+            navRecentVideos: "Recent Videos",
+            headingAccessibility: "Accessibility",
+            optionReduceMotion: "Reduce Motion",
+            headingCursorStyle: "Cursor Style",
+            cursorAmbientDot: "Ambient Dot",
+            cursorDefault: "Default",
+            cursorCrosshair: "Crosshair",
+            headingTheme: "Theme",
+            themeSystem: "System",
+            themeLight: "Light",
+            themeDark: "Dark",
+            headingLanguage: "Language",
+            recentVideosTitle: "Recent Videos", // New key for the title
+            footerThanks: "Thanks for Visiting",
+            footerContact: "Contact stgbussiness436@gmail.com for more info.",
+            footerContactBtn: "Contact / Feedback",
+            hotkeyTitle: "Keyboard Shortcuts",
+            hotkeyHelp: "Show this help menu",
+            hotkeyMenu: "Toggle menu",
+            hotkeyScrollTop: "Scroll to top",
+            hotkeyScrollBottom: "Scroll to bottom",
+            hotkeyClose: "Close menu or dialog",
+            cookieConsentText: `We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies.`,
+            cookieAcceptAll: "Accept All",
+            cookieRejectAll: "Reject All",
+            cookieCustomize: "Customize",
+            cookieSettingsTitle: "Privacy Settings",
+            cookieEssential: "Essential Cookies (Required)",
+            cookieAnalytics: "Analytics Cookies",
+            cookieMarketing: "Marketing Cookies",
+            cookieSaveSettings: "Save Settings",
+            cookieResetSettings: "Reset to Default",
+            viewMoreVideos: "View More Videos" // New key for the button
+        },
+        'de': {
+            channelTitle: "Sam Spielt",
+            navHome: "Startseite",
+            navAbout: "Über Mich",
+            navRecentVideos: "Neueste Videos",
+            headingAccessibility: "Barrierefreiheit",
+            optionReduceMotion: "Bewegung reduzieren",
+            headingCursorStyle: "Cursor-Stil",
+            cursorAmbientDot: "Umgebungs-Punkt",
+            cursorDefault: "Standard",
+            cursorCrosshair: "Fadenkreuz",
+            headingTheme: "Thema",
+            themeSystem: "System",
+            themeLight: "Hell",
+            themeDark: "Dunkel",
+            headingLanguage: "Sprache",
+            recentVideosTitle: "Neueste Videos", // New key for the title
+            footerThanks: "Danke für den Besuch",
+            footerContact: "Kontaktiere stgbussiness436@gmail.com für mehr Infos.",
+            footerContactBtn: "Kontakt / Feedback",
+            hotkeyTitle: "Tastaturkürzel",
+            hotkeyHelp: "Dieses Hilfemenü anzeigen",
+            hotkeyMenu: "Menü umschalten",
+            hotkeyScrollTop: "Nach oben scrollen",
+            hotkeyScrollBottom: "Nach unten scrollen",
+            hotkeyClose: "Menü oder Dialog schließen",
+            cookieConsentText: `Wir verwenden Cookies, um Ihr Surferlebnis zu verbessern, personalisierte Anzeigen oder Inhalte bereitzustellen und unseren Traffic zu analysieren. Indem Sie auf "Alle akzeptieren" klicken, stimmen Sie der Verwendung von Cookies zu.`,
+            cookieAcceptAll: "Alle akzeptieren",
+            cookieRejectAll: "Alle ablehnen",
+            cookieCustomize: "Anpassen",
+            cookieSettingsTitle: "Datenschutzeinstellungen",
+            cookieEssential: "Essenzielle Cookies (Erforderlich)",
+            cookieAnalytics: "Analyse-Cookies",
+            cookieMarketing: "Marketing-Cookies",
+            cookieSaveSettings: "Einstellungen speichern",
+            cookieResetSettings: "Auf Standard zurücksetzen",
+            viewMoreVideos: "Weitere Videos anzeigen" // New key for the button
+        }
+    };
+
+    function setLanguage(lang) {
+        document.documentElement.lang = lang;
+        document.querySelectorAll('[data-i18n-key]').forEach(el => {
+            const key = el.dataset.i18nKey;
+            const translation = translations[lang][key];
+            if (translation) {
+                el.innerHTML = translation;
+            }
+        });
+        if (locoScroll) locoScroll.update();
+    }
+
+    // --- Theme Management ---
+    const themeRadios = document.querySelectorAll('input[name="theme-style"]');
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+    function applyTheme(theme) {
+        document.body.classList.remove('light-theme', 'dark-theme');
+        if (theme === 'light') {
+            document.body.classList.add('light-theme');
+        } else if (theme === 'dark') {
+            document.body.classList.add('dark-theme');
+        } else if (theme === 'system') {
+            if (prefersDarkScheme.matches) {
+                document.body.classList.add('dark-theme');
+            } else {
+                document.body.classList.add('light-theme');
+            }
+        }
+        localStorage.setItem('theme', theme);
+    }
+
+    function initializeTheme() {
+        const savedTheme = localStorage.getItem('theme') || 'system';
+        applyTheme(savedTheme);
+        const initialThemeRadio = document.querySelector(`input[name="theme-style"][value="${savedTheme}"]`);
+        if (initialThemeRadio) {
+            initialThemeRadio.checked = true;
+        }
+    }
+
+    prefersDarkScheme.addEventListener('change', () => {
+        if (localStorage.getItem('theme') === 'system') {
+            applyTheme('system');
+        }
+    });
+
+    // --- Accessibility Settings ---
+    const reduceMotion = localStorage.getItem('reduceMotion') === 'true';
+    if (reduceMotion) {
+        document.body.classList.add('reduce-motion');
+    }
+
     let locoScroll;
-    let nativeScrollListenerActive = false;
-
-    const loader = document.getElementById("loader");
-    const menuBtn = document.getElementById('menuBtn');
-    const sideMenu = document.getElementById('sideMenu');
-    const cursorRadios = document.querySelectorAll('input[name="cursor-style"]');
-    const reduceMotionToggle = document.getElementById('reduceMotionToggle');
-    const scrollContainer = document.querySelector('[data-scroll-container]');
-    const htmlElement = document.documentElement;
-    const goBackBtn = document.querySelector('.go-back-btn');
-    const headerElement = document.querySelector('header');
-
-
-    function updateHeaderHeightVar() {
-        if (headerElement) {
-            const headerHeight = headerElement.offsetHeight;
-            document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
-        }
-    }
-
-
-    function handleNativeScroll() { /* Only for fallback if needed, not primary for scroll-to-top */ }
-
-    function initLocomotiveScroll() {
-        if (!scrollContainer) {
-            console.warn('Locomotive Scroll container not found.');
-            return;
-        }
-        if (locoScroll) locoScroll.destroy();
-
-        locoScroll = new LocomotiveScroll({
-            el: scrollContainer,
-            smooth: true,
-            tablet: { smooth: true },
-            smartphone: { smooth: true },
-        });
-
-        imagesLoaded(scrollContainer, { background: true }, () => {
-            if (locoScroll) locoScroll.update();
-        });
-        
-        window.addEventListener('resize', () => {
-            if (locoScroll) locoScroll.update();
-            updateHeaderHeightVar();
-        });
-        updateHeaderHeightVar();
-
-
-        if (nativeScrollListenerActive) {
-            window.removeEventListener('scroll', handleNativeScroll);
-            nativeScrollListenerActive = false;
-        }
-        htmlElement.classList.remove('reduce-motion-active');
-    }
-
-    function destroyLocomotiveScroll() {
-        if (locoScroll) {
-            locoScroll.destroy();
-            locoScroll = null;
-        }
-        htmlElement.classList.remove('has-scroll-smooth', 'has-scroll-dragging');
-        document.body.classList.remove('has-scroll-smooth', 'has-scroll-dragging');
-        htmlElement.classList.add('reduce-motion-active');
-
-        if (!nativeScrollListenerActive) {
-            window.addEventListener('scroll', handleNativeScroll); // Basic listener if needed for other things
-            nativeScrollListenerActive = true;
-        }
-    }
-    
-    function applyReduceMotion(isReduced) {
-        document.body.classList.toggle('reduce-motion', isReduced);
-        localStorage.setItem('reduceMotion', isReduced ? 'true' : 'false');
-        
-        if (isReduced) {
-            destroyLocomotiveScroll();
-        } else {
-            initLocomotiveScroll();
-        }
-    }
-
-    function applyCursor(cursorType) {
-      const isMobile = window.matchMedia("(max-width: 768px)").matches;
-      if (isMobile) {
-          document.body.style.cursor = 'auto';
-          document.body.classList.remove('cursor-crosshair');
-          cursorRadios.forEach(radio => radio.disabled = true);
-          return;
-      }
-      cursorRadios.forEach(radio => radio.disabled = false);
-      document.body.classList.remove('cursor-default', 'cursor-crosshair');
-      if (cursorType !== 'default') {
-          document.body.classList.add(`cursor-${cursorType}`);
-      }
-      localStorage.setItem('selectedCursor', cursorType);
-    }
 
     document.addEventListener('DOMContentLoaded', () => {
-      const firstVisitSessionKey = 'recentVideosFirstVisitDone';
-      const isFirstVisit = !localStorage.getItem(firstVisitSessionKey);
-      const loaderDisplayDuration = isFirstVisit ? 4000 : 200; // 4 seconds for first visit, 200ms otherwise
+        const scrollContainer = document.querySelector('[data-scroll-container]');
+        if (!scrollContainer) return;
 
-      if (loader) {
-        setTimeout(() => {
-            loader.classList.add("hide");
-            if (isFirstVisit) {
-                localStorage.setItem(firstVisitSessionKey, 'true');
-            }
-        }, loaderDisplayDuration);
-      }
-      
-      if (menuBtn && sideMenu) {
-          menuBtn.addEventListener('click', (event) => {
-              event.stopPropagation();
-              menuBtn.classList.toggle('open');
-              sideMenu.classList.toggle('visible');
-          });
-          sideMenu.addEventListener('click', (event) => {
-              if (event.target === sideMenu) {
-                 menuBtn.classList.remove('open');
-                 sideMenu.classList.remove('visible');
-              }
-          });
-      }
+        initializeTheme();
 
-      const savedCursor = localStorage.getItem('selectedCursor') || 'default';
-      cursorRadios.forEach(radio => {
-        if (radio.value === savedCursor) { radio.checked = true; }
-        radio.addEventListener('change', (e) => { if (e.target.checked) { applyCursor(e.target.value); } });
-      });
-      applyCursor(savedCursor);
-      window.addEventListener('resize', () => applyCursor(localStorage.getItem('selectedCursor') || 'default'));
-
-      const savedReduceMotion = localStorage.getItem('reduceMotion') === 'true';
-      reduceMotionToggle.checked = savedReduceMotion;
-      applyReduceMotion(savedReduceMotion); 
-
-      reduceMotionToggle.addEventListener('change', () => {
-          applyReduceMotion(reduceMotionToggle.checked);
-      });
-      
-      const videoBoxes = document.querySelectorAll('.video-box');
-      videoBoxes.forEach(box => {
-        box.addEventListener('contextmenu', (event) => event.preventDefault());
-        const img = box.querySelector('img');
-        if (img) {
-          img.addEventListener('dragstart', (event) => event.preventDefault());
+        // --- Loader ---
+        const loader = document.getElementById("loader");
+        if (loader) {
+            setTimeout(() => {
+                loader.classList.add("hide");
+            }, 500);
         }
-      });
-      updateHeaderHeightVar(); // Initial call
 
-      // --- MODIFIED: New generalized logic for all GIF-enabled video boxes ---
-      const gifBoxes = document.querySelectorAll('.gif-enabled');
-      
-      gifBoxes.forEach(box => {
-          const thumbnailContainer = box.querySelector('.thumbnail-container');
-          if (!thumbnailContainer) return; // Skip if the structure is wrong
+        // --- Locomotive Scroll ---
+        locoScroll = new LocomotiveScroll({
+            el: scrollContainer,
+            smooth: !reduceMotion,
+            getDirection: false, // Set to false for performance if not used
+        });
 
-          const thumbnail = thumbnailContainer.querySelector('.video-thumbnail');
-          const gif = thumbnailContainer.querySelector('.video-gif');
-          
-          if (!thumbnail || !gif) return; // Skip if images are missing
+        locoScroll.on('scroll', (args) => {
+            const header = document.getElementById('mainHeader');
+            if (args.scroll.y > 50) {
+                header.classList.add('scrolled'); /* Kept for potential future use or subtle visual change */
+            } else {
+                header.classList.remove('scrolled');
+            }
+            const scrollTopBtn = document.getElementById('scrollTopBtn');
+            if (scrollTopBtn) {
+                scrollTopBtn.classList.toggle('visible', args.scroll.y > window.innerHeight / 2);
+            }
+        });
+        
+        new ResizeObserver(() => locoScroll.update()).observe(scrollContainer);
 
-          let fadeOutTimer = null;
+        // --- Side Menu ---
+        const menuBtn = document.getElementById('menuBtn');
+        const closeMenuBtn = document.getElementById('closeMenuBtn');
+        const sideMenu = document.getElementById('sideMenu');
+        
+        function toggleMenu() {
+            const isOpen = menuBtn.classList.contains('open');
+            menuBtn.classList.toggle('open', !isOpen);
+            sideMenu.classList.toggle('visible', !isOpen);
+        }
 
-          thumbnailContainer.addEventListener('mouseenter', () => {
-              const originalSrc = gif.src;
-              gif.src = '';
-              gif.src = originalSrc;
+        if (menuBtn && sideMenu && closeMenuBtn) {
+            menuBtn.addEventListener('click', (event) => {
+                event.stopPropagation();
+                toggleMenu();
+            });
+            closeMenuBtn.addEventListener('click', toggleMenu);
+            
+            document.addEventListener('click', (event) => {
+                if (sideMenu.classList.contains('visible') && !sideMenu.contains(event.target) && !menuBtn.contains(event.target)) {
+                    toggleMenu();
+                }
+            });
+        }
+        
+        // --- Scroll to Top ---
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
+        if (scrollTopBtn) {
+            scrollTopBtn.addEventListener('click', () => {
+                if (locoScroll) locoScroll.scrollTo('top');
+            });
+        }
 
-              thumbnail.style.opacity = '0';
-              gif.style.opacity = '1';
+        // --- Settings ---
+        const reduceMotionToggle = document.getElementById('reduceMotionToggle');
+        const cursorRadios = document.querySelectorAll('input[name="cursor-style"]');
 
-              clearTimeout(fadeOutTimer);
+        if (reduceMotionToggle) {
+            reduceMotionToggle.checked = reduceMotion;
+            applyReduceMotionSettings(reduceMotion);
 
-              fadeOutTimer = setTimeout(() => {
-                  thumbnail.style.opacity = '1';
-                  gif.style.opacity = '0';
-              }, 3000); // Assumes a GIF duration of 3 seconds
-          });
+            reduceMotionToggle.addEventListener('change', (e) => {
+                localStorage.setItem('reduceMotion', e.target.checked);
+                applyReduceMotionSettings(e.target.checked);
+                location.reload();
+            });
+        }
 
-          thumbnailContainer.addEventListener('mouseleave', () => {
-              thumbnail.style.opacity = '1';
-              gif.style.opacity = '0';
-              clearTimeout(fadeOutTimer);
-          });
-      });
-      // --- End of new logic ---
+        function applyReduceMotionSettings(isReduced) {
+            if (isReduced) {
+                document.body.classList.add('reduce-motion');
+                cursorRadios.forEach(radio => {
+                    radio.disabled = true;
+                });
+                const defaultCursorRadio = document.querySelector('input[name="cursor-style"][value="default"]');
+                if (defaultCursorRadio) {
+                    defaultCursorRadio.checked = true;
+                    updateCursorStyle('default');
+                }
+            } else {
+                document.body.classList.remove('reduce-motion');
+                cursorRadios.forEach(radio => {
+                    radio.disabled = false;
+                });
+                const ambientDotRadio = document.querySelector('input[name="cursor-style"][value="ambient-dot"]');
+                if (ambientDotRadio) {
+                    ambientDotRadio.checked = true;
+                    updateCursorStyle('ambient-dot');
+                }
+            }
+        }
+
+        // --- Theme Switcher Event Listener ---
+        themeRadios.forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                applyTheme(e.target.value);
+            });
+        });
+
+        // --- i18n Language Selector ---
+        const languageSelector = document.getElementById('languageSelector');
+        const savedLanguage = localStorage.getItem('language') || 'en';
+        languageSelector.value = savedLanguage;
+        setLanguage(savedLanguage);
+
+        languageSelector.addEventListener('change', (e) => {
+            const selectedLang = e.target.value;
+            localStorage.setItem('language', selectedLang);
+            setLanguage(selectedLang);
+        });
+        
+        // --- Hotkey Help Modal & Keyboard Shortcuts ---
+        const hotkeyModal = document.getElementById('hotkeyHelpModal');
+        const closeHelpModalBtn = document.getElementById('closeHelpModalBtn');
+
+        function showHelpModal() { hotkeyModal.hidden = false; }
+        function hideHelpModal() { hotkeyModal.hidden = true; }
+
+        closeHelpModalBtn.addEventListener('click', hideHelpModal);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') {
+                return;
+            }
+            
+            const key = e.key.toLowerCase();
+
+            if (e.key === '?' || key === 'h') {
+                showHelpModal();
+            }
+            if (key === 'm') {
+                toggleMenu();
+            }
+            if (key === 't') {
+                locoScroll.scrollTo('top');
+            }
+            if (key === 'b') {
+                locoScroll.scrollTo('bottom');
+            }
+            if (e.key === 'Escape') {
+                if (!hotkeyModal.hidden) {
+                    hideHelpModal();
+                } else if (sideMenu.classList.contains('visible')) {
+                    toggleMenu();
+                } else if (!cookieSettingsModal.hidden) {
+                    hideCookieSettingsModal();
+                }
+            }
+        });
+
+        // --- Custom Cursor Logic ---
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorFollower = document.querySelector('.cursor-follower');
+        
+        let mouseX = 0, mouseY = 0;
+        let followerX = 0, followerY = 0;
+        
+        window.addEventListener('mousemove', e => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animateCursor() {
+            if (document.body.classList.contains('cursor-ambient-dot')) {
+                cursorDot.style.left = `${mouseX}px`;
+                cursorDot.style.top = `${mouseY}px`;
+                followerX += (mouseX - followerX) * 0.1;
+                followerY += (mouseY - followerY) * 0.1;
+                cursorFollower.style.left = `${followerX}px`;
+                cursorFollower.style.top = `${followerY}px`;
+            }
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        function updateCursorStyle(style) {
+            document.body.classList.remove('cursor-ambient-dot');
+            document.body.style.cursor = 'default';
+
+            if (style === 'ambient-dot') {
+                document.body.classList.add('cursor-ambient-dot');
+                document.body.style.cursor = 'none';
+            } else {
+                document.body.style.cursor = style;
+            }
+            localStorage.setItem('cursorStyle', style);
+        }
+        
+        cursorRadios.forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                updateCursorStyle(e.target.value);
+            });
+        });
+        
+        const initialCursor = localStorage.getItem('cursorStyle') || document.querySelector('input[name="cursor-style"][value="ambient-dot"]').value;
+        updateCursorStyle(initialCursor);
+
+        document.querySelectorAll('a, button, .faq-question, .slider, select').forEach(el => {
+            el.addEventListener('mouseenter', () => cursorFollower.classList.add('active'));
+            el.addEventListener('mouseleave', () => cursorFollower.classList.remove('active'));
+        });
+
+        // --- Cookie Consent Logic ---
+        const cookieConsentBanner = document.getElementById('cookieConsentBanner');
+        const acceptCookiesBtn = document.getElementById('acceptCookies');
+        const rejectCookiesBtn = document.getElementById('rejectCookies');
+        const customizeCookiesBtn = document.getElementById('customizeCookies');
+        const cookieSettingsModal = document.getElementById('cookieSettingsModal');
+        const closeCookieSettingsModalBtn = document.getElementById('closeCookieSettingsModalBtn');
+        const essentialCookiesToggle = document.getElementById('essentialCookiesToggle');
+        const analyticsCookiesToggle = document.getElementById('analyticsCookiesToggle');
+        const marketingCookiesToggle = document.getElementById('marketingCookiesToggle');
+        const saveCookieSettingsBtn = document.getElementById('saveCookieSettings');
+        const resetCookieSettingsBtn = document.getElementById('resetCookieSettings');
+
+        function showCookieBanner() {
+            if (!localStorage.getItem('cookieConsent')) {
+                cookieConsentBanner.classList.add('show');
+            }
+        }
+
+        function hideCookieBanner() {
+            cookieConsentBanner.classList.remove('show');
+        }
+
+        function showCookieSettingsModal() {
+            cookieSettingsModal.hidden = false;
+            const consent = JSON.parse(localStorage.getItem('cookieConsentSettings')) || {};
+            analyticsCookiesToggle.checked = consent.analytics || false;
+            marketingCookiesToggle.checked = consent.marketing || false;
+        }
+
+        function hideCookieSettingsModal() {
+            cookieSettingsModal.hidden = true;
+        }
+
+        function saveCookieConsent(consentType) {
+            let settings = {
+                essential: true,
+                analytics: false,
+                marketing: false
+            };
+
+            if (consentType === 'acceptAll') {
+                settings.analytics = true;
+                settings.marketing = true;
+            } else if (consentType === 'rejectAll') {
+                // All non-essential are false
+            } else if (consentType === 'custom') {
+                settings.analytics = analyticsCookiesToggle.checked;
+                settings.marketing = marketingCookiesToggle.checked;
+            }
+            
+            localStorage.setItem('cookieConsent', 'true');
+            localStorage.setItem('cookieConsentSettings', JSON.stringify(settings));
+            hideCookieBanner();
+            hideCookieSettingsModal();
+            console.log('Cookie consent saved:', settings);
+        }
+
+        acceptCookiesBtn.addEventListener('click', () => saveCookieConsent('acceptAll'));
+        rejectCookiesBtn.addEventListener('click', () => saveCookieConsent('rejectAll'));
+        customizeCookiesBtn.addEventListener('click', showCookieSettingsModal);
+
+        closeCookieSettingsModalBtn.addEventListener('click', hideCookieSettingsModal);
+        saveCookieSettingsBtn.addEventListener('click', () => saveCookieConsent('custom'));
+        resetCookieSettingsBtn.addEventListener('click', () => {
+            analyticsCookiesToggle.checked = false;
+            marketingCookiesToggle.checked = false;
+        });
+
+        setTimeout(showCookieBanner, 1000);
+
+        // --- Dynamic Video Loading Logic ---
+        // Note: For true real-time updates from a YouTube channel, a backend server
+        // and YouTube Data API key would be required to avoid exposing the API key
+        // and handle CORS restrictions. This example uses hardcoded YouTube video data.
+        const allVideosData = [
+            {
+                thumbnailUrl: "https://i3.ytimg.com/vi/d3oIJsELCoM/sddefault.jpg", 
+                videoUrl: "https://www.youtube.com/watch?v=uL_f_3x_4y_5",
+                title: "Further Into The Depths (Hindi) | Subnautica Part 3 | Sam Plays"
+            },
+            {
+                thumbnailUrl: "https://i3.ytimg.com/vi/u6PCFCBlMA8/sddefault.jpg", 
+                videoUrl: "https://www.youtube.com/watch?v=rC500sK_t2o",
+                title: "Surviving as an Undercover Cop (Hindi) | Sleeping Dogs Episode 1 | Sam Plays"
+            },
+            {
+                thumbnailUrl: "https://img.youtube.com/vi/eRou7u-pUdw/hqdefault.jpg",
+                videoUrl: "https://www.youtube.com/watch?v=eRou7u-pUdw",
+                title: "Surviving my First day in Liberty City (Hindi) | GTA III Story Mode Walkthrough | Episode 1"
+            },
+            {
+                thumbnailUrl: "https://img.youtube.com/vi/Hy67SdfabQQ/hqdefault.jpg",
+                videoUrl: "https://www.youtube.com/watch?v=Hy67SdfabQQ",
+                title: "Making my First Farm [Minecraft Part 6]"
+            },
+            {
+                thumbnailUrl: "https://img.youtube.com/vi/tWY0ghnb8-Y/hqdefault.jpg",
+                videoUrl: "https://www.youtube.com/watch?v=tWY0ghnb8-Y",
+                title: "Can i beat this guy? [Akinator Part 2]"
+            },
+            {
+                thumbnailUrl: "https://img.youtube.com/vi/lS8X0lv1Xm8/hqdefault.jpg",
+                videoUrl: "https://www.youtube.com/watch?v=lS8X0lv1Xm8",
+                title: "Playing this game once again... [Minecraft Survival Part 5]"
+            },
+            {
+                thumbnailUrl: "https://img.youtube.com/vi/_xAe_RBzuYM/hqdefault.jpg",
+                videoUrl: "https://www.youtube.com/watch?v=_xAe_RBzuYM",
+                title: "Exploring The Mysterious Depths! | Subnautica Part 2"
+            },
+            {
+                thumbnailUrl: "https://img.youtube.com/vi/lDNlLVJVNgc/hqdefault.jpg",
+                videoUrl: "https://www.youtube.com/watch?v=lDNlLVJVNgc",
+                title: "Ocean World with Aliens | Subnautica Part - 1"
+            },
+            {
+                thumbnailUrl: "https://i3.ytimg.com/vi/n5c0EJnTRAQ/sddefault.jpg", 
+                videoUrl: "https://www.youtube.com/watch?v=5L-1aB2c3D4",
+                title: "A Bad Decision"
+            },
+            {
+                thumbnailUrl: "https://i3.ytimg.com/vi/qTBNixDtIxo/sddefault.jpg", 
+                videoUrl: "https://www.youtube.com/watch?v=xY_z_1a2b3c",
+                title: "Would You Rather (Episode 2)"
+            },
+            {
+                thumbnailUrl: "https://i3.ytimg.com/vi/919shCeew-M/sddefault.jpg", 
+                videoUrl: "https://www.youtube.com/watch?v=8Pq2vGj-0s4",
+                title: "WE DID IT! A Difficult Game About Climbing (Episode 4)"
+            },
+            {
+                thumbnailUrl: "https://i3.ytimg.com/vi/1I74ECLn_5g/sddefault.jpg", 
+                videoUrl: "https://www.youtube.com/watch?v=kM0nO_p1q2r",
+                title: "Ultimate Comeback! A Difficult Game About Climbing (Episode 3)"
+            }
+        ];
+
+        const videosPerPage = 6;
+        let currentVideoIndex = 0;
+        const videoContainer = document.getElementById('videoContainer');
+        const viewMoreBtn = document.getElementById('viewMoreBtn');
+
+        function renderVideos() {
+            // Determine the end index for slicing the array
+            const endIndex = currentVideoIndex + videosPerPage;
+            const videosToRender = allVideosData.slice(currentVideoIndex, endIndex);
+
+            videosToRender.forEach((video, index) => {
+                const videoBox = document.createElement('div');
+                videoBox.className = 'video-box';
+                // Add data-scroll attributes for Locomotive Scroll animation
+                videoBox.setAttribute('data-scroll', '');
+                videoBox.setAttribute('data-scroll-class', 'is-inview');
+                // Calculate delay based on its position in the overall list
+                videoBox.setAttribute('data-scroll-delay', `${0.05 * (currentVideoIndex + index + 1)}`); 
+
+                const videoLink = document.createElement('a');
+                videoLink.href = video.videoUrl;
+                videoLink.target = '_blank';
+                videoLink.title = `Watch ${video.title}`;
+
+                const thumbnailContainer = document.createElement('div');
+                thumbnailContainer.className = 'thumbnail-container';
+
+                const thumbnailImg = document.createElement('img');
+                thumbnailImg.className = 'video-thumbnail';
+                thumbnailImg.src = video.thumbnailUrl;
+                thumbnailImg.alt = `${video.title} Thumbnail`;
+                thumbnailImg.onerror = function() { this.onerror=null; this.src='https://placehold.co/600x338/0a0f14/cce7ff?text=Video+Not+Found'; };
+
+                const videoTitle = document.createElement('p');
+                videoTitle.className = 'video-title';
+                videoTitle.textContent = video.title;
+
+                thumbnailContainer.appendChild(thumbnailImg);
+                videoLink.appendChild(thumbnailContainer);
+                videoLink.appendChild(videoTitle);
+                videoBox.appendChild(videoLink);
+                videoContainer.appendChild(videoBox);
+            });
+
+            currentVideoIndex = endIndex; // Update the index for the next load
+
+            // Hide/show the "View More" button
+            if (currentVideoIndex >= allVideosData.length) {
+                viewMoreBtn.style.display = 'none';
+            } else {
+                viewMoreBtn.style.display = 'inline-flex'; // Or 'block' depending on desired layout
+            }
+
+            // Update Locomotive Scroll after new content is added
+            if (locoScroll) locoScroll.update();
+        }
+
+        // Initial render
+        renderVideos(); 
+
+        // Event listener for "View More" button
+        if (viewMoreBtn) {
+            viewMoreBtn.addEventListener('click', renderVideos);
+        }
     });
   </script>
 
