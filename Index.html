@@ -23,13 +23,13 @@
       margin: 0;
       padding: 0;
       font-family: 'Poppins', Arial, sans-serif;
-      background-color: #0d1117;
-      color: #c9d1d9;
       cursor: default;
       overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     :root {
+      /* Dark Theme Defaults */
       --main-red: #ff4757;
       --main-blue: #3498db;
       --light-accent: #f1faee;
@@ -38,6 +38,43 @@
       --border-color: #30363d;
       --text-primary: #c9d1d9;
       --text-secondary: #8b949e;
+      --side-menu-bg: #1c2128;
+      --modal-bg: #161b22;
+      --cookie-banner-bg: #1c2128;
+      --cookie-text-color: #c9d1d9;
+      --cookie-button-bg: #3498db;
+      --cookie-button-hover-bg: #4a9eda;
+
+      --border-radius-soft: 12px; /* Consistent border radius */
+    }
+
+    /* Light Theme */
+    body.light-theme {
+      --dark-bg: #f0f2f5;
+      --card-bg: #ffffff;
+      --border-color: #d1d5db;
+      --text-primary: #1f2937;
+      --text-secondary: #4b5563;
+      --side-menu-bg: #ffffff;
+      --modal-bg: #ffffff;
+      --cookie-banner-bg: #ffffff;
+      --cookie-text-color: #1f2937;
+      --cookie-button-bg: #3b82f6;
+      --cookie-button-hover-bg: #60a5fa;
+      
+      /* Light theme specific overrides for cursor and welcome text */
+      --cursor-dot-color-light: #000000; /* Black for ambient dot in light mode */
+      --welcome-text-color-light: #000000; /* Black for welcome text in light mode */
+      --header-text-color-light: #000000; /* Black for header text in light mode */
+      --section-heading-color-light: #000000; /* Black for section headings in light mode */
+      --footer-thanks-color-light: #000000; /* Black for footer thanks text in light mode */
+      --side-menu-heading-color-light: #000000; /* Black for side menu headings in light mode */
+      --hamburger-icon-color-light: #000000; /* Black for hamburger icon in light mode */
+    }
+
+    body {
+      background-color: var(--dark-bg);
+      color: var(--text-primary);
     }
 
     /* Reduce Motion */
@@ -53,7 +90,7 @@
       left: 0;
       transform: translate(-50%, -50%);
       border-radius: 50%;
-      z-index: 9999;
+      z-index: 10003; /* Increased z-index to be on top of modals/banners */
       pointer-events: none;
       display: none; /* Hidden by default */
     }
@@ -62,12 +99,19 @@
       height: 8px;
       background-color: var(--main-blue);
     }
+    body.light-theme .cursor-dot { /* Ambient dot black in light mode */
+        background-color: var(--cursor-dot-color-light);
+    }
     .cursor-follower {
       width: 40px;
       height: 40px;
       background-color: rgba(52, 152, 219, 0.1);
       border: 1px solid var(--main-blue);
       transition: transform 0.3s ease-out, width 0.3s ease-out, height 0.3s ease-out;
+    }
+    body.light-theme .cursor-follower { /* Ambient dot (big one) black in light mode */
+        background-color: rgba(0, 0, 0, 0.1);
+        border: 1px solid var(--cursor-dot-color-light);
     }
     body.cursor-ambient-dot .cursor-dot,
     body.cursor-ambient-dot .cursor-follower {
@@ -76,6 +120,15 @@
     .cursor-follower.active {
         transform: scale(1.5);
     }
+    /* Ensure ambient dot cursor doesn't change over interactive elements */
+    body.cursor-ambient-dot a,
+    body.cursor-ambient-dot button,
+    body.cursor-ambient-dot .faq-question,
+    body.cursor-ambient-dot .slider,
+    body.cursor-ambient-dot select {
+        cursor: none !important;
+    }
+
 
     /* Page Loader */
     #loader {
@@ -123,7 +176,7 @@
       transition: background-color 0.4s ease, backdrop-filter 0.4s ease;
     }
     header.scrolled {
-      background-color: rgba(22, 27, 34, 0.8);
+      background-color: var(--card-bg); /* Use card-bg for scrolled header */
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border-color);
     }
@@ -138,6 +191,10 @@
       margin: 0;
       text-shadow: 0 0 5px var(--main-red);
       display: inline-block;
+    }
+    body.light-theme .header-title h1 { /* Header text black in light mode */
+        color: var(--header-text-color-light);
+        text-shadow: none; /* Remove text shadow in light mode */
     }
     .header-placeholder {
       width: 44px;
@@ -163,6 +220,9 @@
         border-radius: 3px;
         transition: all .35s ease-in-out;
     }
+    body.light-theme .menu-icon span { /* Hamburger menu icon black in light mode */
+        background: var(--hamburger-icon-color-light);
+    }
     .menu-icon span:nth-child(1) { top: 0; }
     .menu-icon span:nth-child(2) { top: 50%; transform: translateY(-50%); }
     .menu-icon span:nth-child(3) { bottom: 0; }
@@ -177,13 +237,14 @@
         right: -320px;
         width: 300px;
         height: 100%;
-        background: #1c2128;
+        background: var(--side-menu-bg);
         z-index: 1001;
         transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
         box-shadow: -10px 0 30px rgba(0,0,0,0.3);
         border-left: 1px solid var(--border-color);
         display: flex;
         flex-direction: column;
+        border-radius: var(--border-radius-soft) 0 0 var(--border-radius-soft); /* Soften side menu corners */
     }
     #sideMenu.visible {
         right: 0;
@@ -221,22 +282,40 @@
         border-bottom: 1px solid var(--border-color);
         padding-bottom: 8px;
     }
+    body.light-theme .setting-section h3 { /* Side menu headings black in light mode */
+        color: var(--side-menu-heading-color-light);
+    }
     .menu-nav-links a {
-        display: block;
+        display: block; /* Make the entire block clickable */
         color: var(--text-primary);
         text-decoration: none;
         font-size: 1.2em;
-        padding: 15px 0;
+        padding: 15px 0; /* Adjust padding to increase clickable area */
         border-bottom: 1px solid var(--border-color);
-        transition: color 0.3s ease, padding-left 0.3s ease;
+        transition: color 0.3s ease, background-color 0.3s ease; /* Add background transition */
         cursor: pointer;
+        position: relative; /* For animated underline */
+        overflow: hidden; /* Hide overflow of pseudo-element */
+    }
+    .menu-nav-links a::after { /* Animated underline */
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: var(--main-red);
+        transition: width 0.3s ease-out;
     }
     .menu-nav-links a:hover {
         color: var(--main-red);
-        padding-left: 10px;
+        background-color: rgba(52, 152, 219, 0.05); /* Subtle background highlight on hover */
+    }
+    .menu-nav-links a:hover::after { /* Expand underline on hover */
+        width: 100%;
     }
     
-    /* Reduce Motion Toggle Switch */
+    /* Toggle Switch Base */
     .toggle-switch-container {
         display: flex;
         justify-content: space-between;
@@ -261,7 +340,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background-color: #30363d;
+        background-color: var(--border-color); /* Use border-color for slider background */
         transition: .4s;
         border-radius: 28px;
     }
@@ -272,7 +351,7 @@
         width: 20px;
         left: 4px;
         bottom: 4px;
-        background-color: white;
+        background-color: var(--light-accent); /* Use light-accent for slider thumb */
         transition: .4s;
         border-radius: 50%;
     }
@@ -283,6 +362,32 @@
         transform: translateX(22px);
     }
 
+    /* Radio Buttons for Cursor Style & Theme */
+    .cursor-options label,
+    .theme-options label {
+        display: block; /* Make labels block for better click area */
+        padding: 8px 0;
+        cursor: pointer;
+        transition: color 0.3s ease;
+    }
+    .cursor-options label:hover,
+    .theme-options label:hover {
+        color: var(--main-blue);
+    }
+    .cursor-options input[type="radio"],
+    .theme-options input[type="radio"] {
+        margin-right: 8px;
+    }
+    /* Disable cursor options when reduce motion is active */
+    body.reduce-motion .cursor-options label {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+    body.reduce-motion .cursor-options input[type="radio"] {
+        pointer-events: none; /* Prevent clicks */
+    }
+
+
     /* Language Selector */
     .language-options select {
       width: 100%;
@@ -290,8 +395,21 @@
       background-color: var(--card-bg);
       color: var(--text-primary);
       border: 1px solid var(--border-color);
-      border-radius: 5px;
+      border-radius: var(--border-radius-soft); /* Soften select */
       font-family: 'Poppins', sans-serif;
+      appearance: none; /* Remove default arrow */
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c9d1d9' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 8px center;
+      background-size: 16px;
+    }
+    body.light-theme .language-options select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231f2937' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    }
+    .language-options select:focus {
+        outline: none;
+        border-color: var(--main-blue);
+        box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.3);
     }
 
     /* Main Content Layout */
@@ -310,10 +428,16 @@
     .grid-item {
         background-color: var(--card-bg);
         border: 1px solid var(--border-color);
-        border-radius: 10px;
+        border-radius: var(--border-radius-soft); /* Consistent border radius */
         padding: 25px;
-        transition: box-shadow 0.3s ease;
+        /* Removed hover animations */
+        transition: none; /* Explicitly remove transition */
     }
+    .grid-item:hover {
+        box-shadow: none;
+        transform: none;
+    }
+    
     .grid-item.full-width {
         grid-column: 1 / -1;
     }
@@ -325,6 +449,9 @@
         text-align: center;
         margin-bottom: 30px;
     }
+    body.light-theme .section-heading { /* Section headings black in light mode */
+        color: var(--section-heading-color-light);
+    }
 
     /* Hero Section */
     .hero-content {
@@ -334,9 +461,10 @@
         text-align: center;
     }
     .image-wrapper {
-        width: 240px;
-        height: 160px;
-        border-radius: 10px;
+        max-width: 240px; /* Use max-width for responsiveness */
+        width: 100%; /* Ensure it takes full width of its container up to max-width */
+        height: 160px; /* Keep height for aspect ratio, or set to auto if image aspect is variable */
+        border-radius: var(--border-radius-soft); /* Soften image wrapper corners */
         margin-bottom: 20px;
         border: 4px solid var(--main-blue);
         overflow: hidden;
@@ -351,6 +479,9 @@
         font-size: 3rem;
         color: var(--light-accent);
         margin: 0 0 10px 0;
+    }
+    body.light-theme .welcome-text { /* Welcome text black in light mode */
+        color: var(--welcome-text-color-light);
     }
     .experience-text {
         font-size: 1.1rem;
@@ -369,7 +500,7 @@
       color: white;
       background: var(--main-red);
       border: none;
-      border-radius: 8px;
+      border-radius: var(--border-radius-soft); /* Soften button corners */
       transition: background-color 0.2s ease, transform 0.15s ease-in-out, box-shadow 0.2s ease;
       cursor: pointer;
     }
@@ -413,9 +544,17 @@
     .faq-item {
         background-color: var(--card-bg);
         border: 1px solid var(--border-color);
-        border-radius: 8px;
+        border-radius: var(--border-radius-soft); /* Consistent border radius */
         margin-bottom: 15px;
         overflow: hidden;
+        transition: box-shadow 0.3s ease;
+    }
+    .faq-item:hover {
+        box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    }
+    /* Light theme hover effect adjustment */
+    body.light-theme .faq-item:hover {
+        box-shadow: 0 5px 20px rgba(0,0,0,0.08);
     }
     .faq-question {
         font-family: 'Poppins', sans-serif;
@@ -431,10 +570,11 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        transition: color 0.3s ease;
+        transition: color 0.3s ease, background-color 0.3s ease;
     }
     .faq-question:hover {
         color: var(--main-blue);
+        background-color: rgba(52, 152, 219, 0.05); /* Subtle highlight on hover */
     }
     .faq-answer {
         max-height: 0;
@@ -451,8 +591,9 @@
         line-height: 1.6;
     }
     .faq-item.active .faq-answer {
-        max-height: 300px;
+        max-height: 300px; /* Adjust as needed for content */
         opacity: 1;
+        padding: 0 20px 20px; /* Add padding when active */
     }
     .faq-icon {
         transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
@@ -479,13 +620,22 @@
     }
     .social-icons a {
         color: var(--text-secondary);
-        transition: color 0.3s ease, transform 0.3s ease;
+        /* Enhanced hover animation */
+        transition: color 0.3s ease, transform 0.3s ease, filter 0.3s ease, box-shadow 0.3s ease;
         display: flex;
         align-items: center;
         justify-content: center;
+        padding: 5px; /* Add padding for better hover area */
+        border-radius: 50%; /* Make it round */
     }
     .social-icons a:hover {
-        transform: translateY(-3px);
+        transform: translateY(-5px) scale(1.1); /* More pronounced lift and slight scale */
+        filter: brightness(1.3); /* Brighter highlight */
+        color: var(--main-blue); /* Change color on hover */
+        box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3); /* Add subtle shadow */
+    }
+    body.light-theme .social-icons img { /* Social media icons black in light mode */
+        filter: invert(1);
     }
     .social-icons img {
         height: auto;
@@ -507,6 +657,9 @@
         color: var(--light-accent);
         margin-bottom: 10px;
     }
+    body.light-theme .thanks-text { /* Thanks for Visiting text black in light mode */
+        color: var(--footer-thanks-color-light);
+    }
     .contact-text {
         color: var(--text-secondary);
         margin-bottom: 20px;
@@ -518,7 +671,7 @@
         color: white;
         background-color: var(--main-blue);
         border: none;
-        border-radius: 8px;
+        border-radius: var(--border-radius-soft); /* Soften button corners */
         padding: 10px 20px;
         cursor: pointer;
         transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
@@ -541,6 +694,7 @@
       transform: translateY(20px);
       transition: all 0.4s ease;
       display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2); /* Add shadow */
     }
     #scrollTopBtn.visible { opacity: 1; visibility: visible; transform: translateY(0); }
     #scrollTopBtn:hover { background-color: #ff6b81; transform: scale(1.1); }
@@ -568,10 +722,10 @@
         visibility: visible;
     }
     .hotkey-modal .modal-content {
-        background-color: var(--card-bg);
+        background-color: var(--modal-bg); /* Use modal-bg for modal background */
         padding: 30px 40px;
         border: 1px solid var(--border-color);
-        border-radius: 10px;
+        border-radius: var(--border-radius-soft); /* Soften modal corners */
         width: 90%;
         max-width: 400px;
         position: relative;
@@ -599,6 +753,9 @@
         margin-top: 0;
         margin-bottom: 25px;
     }
+    body.light-theme .hotkey-modal h2 { /* Hotkey modal heading black in light mode */
+        color: var(--section-heading-color-light);
+    }
     .hotkey-modal ul {
         list-style: none;
         padding: 0;
@@ -614,7 +771,7 @@
         border-bottom: none;
     }
     .hotkey-modal li span {
-        background-color: #0d1117;
+        background-color: var(--dark-bg); /* Use dark-bg for hotkey background */
         padding: 3px 8px;
         border-radius: 5px;
         border: 1px solid var(--border-color);
@@ -623,10 +780,174 @@
         margin-left: 10px;
     }
 
+    /* Cookie Consent Banner */
+    #cookieConsentBanner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: var(--cookie-banner-bg);
+      color: var(--cookie-text-color);
+      padding: 20px;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+      z-index: 10000;
+      display: none; /* Hidden by default */
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      border-top-left-radius: var(--border-radius-soft);
+      border-top-right-radius: var(--border-radius-soft);
+    }
+    #cookieConsentBanner.show {
+      display: flex;
+    }
+    .cookie-content {
+      text-align: center;
+      max-width: 800px;
+    }
+    .cookie-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .cookie-buttons button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: var(--border-radius-soft);
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    #acceptCookies {
+      background-color: var(--cookie-button-bg);
+      color: white;
+    }
+    #acceptCookies:hover {
+      background-color: var(--cookie-button-hover-bg);
+      transform: translateY(-2px);
+    }
+    #rejectCookies, #customizeCookies {
+      background-color: var(--card-bg);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+    }
+    #rejectCookies:hover, #customizeCookies:hover {
+      background-color: var(--border-color);
+      transform: translateY(-2px);
+    }
+
+    /* Cookie Settings Modal */
+    #cookieSettingsModal {
+      position: fixed;
+      z-index: 10002;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    #cookieSettingsModal[hidden] {
+        display: none;
+    }
+    #cookieSettingsModal:not([hidden]) {
+        opacity: 1;
+        visibility: visible;
+    }
+    #cookieSettingsModal .modal-content {
+        background-color: var(--modal-bg);
+        padding: 30px 40px;
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-soft);
+        width: 90%;
+        max-width: 500px;
+        position: relative;
+        color: var(--text-primary);
+        box-shadow: 0 5px 25px rgba(0,0,0,0.4);
+    }
+    #cookieSettingsModal .close-btn {
+        position: absolute;
+        top: 10px; right: 15px;
+        font-size: 2rem;
+        color: var(--text-secondary);
+        background: none;
+        border: none;
+        cursor: pointer;
+        transition: color 0.3s, transform 0.3s;
+    }
+    #cookieSettingsModal .close-btn:hover {
+        color: var(--main-red);
+        transform: rotate(90deg);
+    }
+    #cookieSettingsModal h2 {
+        font-family: 'Orbitron', sans-serif;
+        text-align: center;
+        color: var(--light-accent);
+        margin-top: 0;
+        margin-bottom: 25px;
+    }
+    body.light-theme #cookieSettingsModal h2 { /* Cookie settings modal heading black in light mode */
+        color: var(--section-heading-color-light);
+    }
+    .cookie-setting-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+        border-bottom: 1px solid var(--border-color);
+    }
+    .cookie-setting-item:last-of-type {
+        border-bottom: none;
+    }
+    .cookie-setting-item p {
+        margin: 0;
+        font-size: 0.95em;
+    }
+    .cookie-setting-item .toggle-switch {
+        margin-left: 15px;
+    }
+    .cookie-settings-actions {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 25px;
+    }
+    .cookie-settings-actions button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: var(--border-radius-soft);
+        cursor: pointer;
+        font-weight: 600;
+        transition: background-color 0.3s ease;
+    }
+    #saveCookieSettings {
+        background-color: var(--main-blue);
+        color: white;
+    }
+    #saveCookieSettings:hover {
+        background-color: #4a9eda;
+    }
+    #resetCookieSettings {
+        background-color: var(--card-bg);
+        color: var(--text-primary);
+        border: 1px solid var(--border-color);
+    }
+    #resetCookieSettings:hover {
+        background-color: var(--border-color);
+    }
+
+
     /* Responsive Adjustments */
     @media (max-width: 768px) {
       .header-title h1 { font-size: 1.5em; }
       .welcome-text { font-size: 2.5rem; }
+      .cookie-buttons {
+        flex-direction: column;
+      }
     }
   </style>
 </head>
@@ -683,6 +1004,18 @@
                 </label>
                 <label>
                     <input type="radio" name="cursor-style" value="crosshair"> <span data-i18n-key="cursorCrosshair">Crosshair</span>
+                </label>
+            </div>
+            <div class="setting-section theme-options">
+                <h3 data-i18n-key="headingTheme">Theme</h3>
+                <label>
+                    <input type="radio" name="theme-style" value="system" checked> <span data-i18n-key="themeSystem">System</span>
+                </label>
+                <label>
+                    <input type="radio" name="theme-style" value="light"> <span data-i18n-key="themeLight">Light</span>
+                </label>
+                <label>
+                    <input type="radio" name="theme-style" value="dark"> <span data-i18n-key="themeDark">Dark</span>
                 </label>
             </div>
             <div class="setting-section language-options">
@@ -793,11 +1126,56 @@
           </ul>
       </div>
   </div>
+
+  <!-- Cookie Consent Banner -->
+  <div id="cookieConsentBanner" class="cookie-banner">
+    <div class="cookie-content">
+      <p data-i18n-key="cookieConsentText">We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies.</p>
+    </div>
+    <div class="cookie-buttons">
+      <button id="acceptCookies" data-i18n-key="cookieAcceptAll">Accept All</button>
+      <button id="rejectCookies" data-i18n-key="cookieRejectAll">Reject All</button>
+      <button id="customizeCookies" data-i18n-key="cookieCustomize">Customize</button>
+    </div>
+  </div>
+
+  <!-- Cookie Settings Modal -->
+  <div id="cookieSettingsModal" class="hotkey-modal" role="dialog" aria-modal="true" aria-labelledby="cookie-settings-title" hidden>
+    <div class="modal-content">
+      <button id="closeCookieSettingsModalBtn" class="close-btn" aria-label="Close cookie settings">&times;</button>
+      <h2 id="cookie-settings-title" data-i18n-key="cookieSettingsTitle">Privacy Settings</h2>
+      <div class="cookie-setting-item">
+        <p data-i18n-key="cookieEssential">Essential Cookies (Required)</p>
+        <label class="toggle-switch">
+          <input type="checkbox" id="essentialCookiesToggle" checked disabled>
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="cookie-setting-item">
+        <p data-i18n-key="cookieAnalytics">Analytics Cookies</p>
+        <label class="toggle-switch">
+          <input type="checkbox" id="analyticsCookiesToggle">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="cookie-setting-item">
+        <p data-i18n-key="cookieMarketing">Marketing Cookies</p>
+        <label class="toggle-switch">
+          <input type="checkbox" id="marketingCookiesToggle">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="cookie-settings-actions">
+        <button id="saveCookieSettings" data-i18n-key="cookieSaveSettings">Save Settings</button>
+        <button id="resetCookieSettings" data-i18n-key="cookieResetSettings">Reset to Default</button>
+      </div>
+    </div>
+  </div>
   
   <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.min.js"></script>
   <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
 
-  <script>
+  <script defer>
     // --- i18n Translation Scaffolding ---
     const translations = {
         'en': {
@@ -810,6 +1188,10 @@
             cursorAmbientDot: "Ambient Dot",
             cursorDefault: "Default",
             cursorCrosshair: "Crosshair",
+            headingTheme: "Theme",
+            themeSystem: "System",
+            themeLight: "Light",
+            themeDark: "Dark",
             headingLanguage: "Language",
             heroWelcome: "Welcome.",
             heroExperience: "Experience high-quality gaming content across titles like Minecraft, Subnautica and Grand Theft Auto.",
@@ -836,6 +1218,16 @@
             hotkeyScrollTop: "Scroll to top",
             hotkeyScrollBottom: "Scroll to bottom",
             hotkeyClose: "Close menu or dialog",
+            cookieConsentText: "We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking \"Accept All\", you consent to our use of cookies.",
+            cookieAcceptAll: "Accept All",
+            cookieRejectAll: "Reject All",
+            cookieCustomize: "Customize",
+            cookieSettingsTitle: "Privacy Settings",
+            cookieEssential: "Essential Cookies (Required)",
+            cookieAnalytics: "Analytics Cookies",
+            cookieMarketing: "Marketing Cookies",
+            cookieSaveSettings: "Save Settings",
+            cookieResetSettings: "Reset to Default",
         },
         'de': {
             channelTitle: "Sam Spielt",
@@ -847,6 +1239,10 @@
             cursorAmbientDot: "Umgebungs-Punkt",
             cursorDefault: "Standard",
             cursorCrosshair: "Fadenkreuz",
+            headingTheme: "Thema",
+            themeSystem: "System",
+            themeLight: "Hell",
+            themeDark: "Dunkel",
             headingLanguage: "Sprache",
             heroWelcome: "Willkommen.",
             heroExperience: "Erlebe hochwertige Gaming-Inhalte zu Titeln wie Minecraft, Subnautica und Grand Theft Auto.",
@@ -858,10 +1254,10 @@
             faq1Question: "Welche Arten von Spielen spielst du?",
             faq1Answer: "Ich spiele eine Vielzahl von Spielen, von beliebten AAA-Titeln bis hin zu Indie-Spielen. Mein Hauptaugenmerk liegt auf Open-World-, Survival- und storybasierten Spielen, aber ich bin immer offen für neue Genres basierend auf Community-Vorschlägen!",
             faq2Question: "Erstellst du originale Spielinhalte?",
-            faq2Answer: "Ja. 100% meiner Inhalte sind original. Ich kümmere mich um alles, von der Spielaufnahme und Bearbeitung bis hin zu Voiceover und Thumbnails. Ich habe und plane nicht, die Inhalte anderer zu kopieren.",
+            faq2Answer: "Ja. 100% meiner Inhalte sind original. Ich handle alles von Gameplay-Aufnahme und Bearbeitung bis hin zu Voiceover und Thumbnails. Ich habe und plane nicht, Inhalte von anderen zu kopieren.",
             faq3Question: "Kann ich ein bestimmtes Spiel vorschlagen?",
             faq3Answer: "Absolut! Ich freue mich über Anfragen meiner Abonnenten und ziehe es in Betracht, ihre Lieblingsspiele in meinen kommenden Videos zu zeigen. Der beste Weg, ein Spiel vorzuschlagen, ist ein Kommentar unter meinem neuesten YouTube-Video.",
-            faq4Question: "Wie oft lädst du neue Videos hoch?",
+            faq4Question: "Wie häufig lädst du neue Videos hoch?",
             faq4Answer: "Da ich die einzige Person bin, die den Inhalt erstellt, bin ich nicht sehr konsistent, aber ich lade meistens mindestens zwei Videos pro Monat hoch. Qualität ist mir wichtiger als Quantität, daher nehme ich mir Zeit, jedes Video unterhaltsam zu gestalten.",
             socialsTitle: "Meine Socials",
             footerThanks: "Danke für den Besuch",
@@ -873,6 +1269,16 @@
             hotkeyScrollTop: "Nach oben scrollen",
             hotkeyScrollBottom: "Nach unten scrollen",
             hotkeyClose: "Menü oder Dialog schließen",
+            cookieConsentText: "Wir verwenden Cookies, um Ihr Surferlebnis zu verbessern, personalisierte Anzeigen oder Inhalte bereitzustellen und unseren Traffic zu analysieren. Indem Sie auf \"Alle akzeptieren\" klicken, stimmen Sie der Verwendung von Cookies zu.",
+            cookieAcceptAll: "Alle akzeptieren",
+            cookieRejectAll: "Alle ablehnen",
+            cookieCustomize: "Anpassen",
+            cookieSettingsTitle: "Datenschutzeinstellungen",
+            cookieEssential: "Essenzielle Cookies (Erforderlich)",
+            cookieAnalytics: "Analyse-Cookies",
+            cookieMarketing: "Marketing-Cookies",
+            cookieSaveSettings: "Einstellungen speichern",
+            cookieResetSettings: "Auf Standard zurücksetzen",
         }
     };
 
@@ -888,6 +1294,43 @@
         if (locoScroll) locoScroll.update();
     }
 
+    // --- Theme Management ---
+    const themeRadios = document.querySelectorAll('input[name="theme-style"]');
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+    function applyTheme(theme) {
+        document.body.classList.remove('light-theme', 'dark-theme');
+        if (theme === 'light') {
+            document.body.classList.add('light-theme');
+        } else if (theme === 'dark') {
+            document.body.classList.add('dark-theme');
+        } else if (theme === 'system') {
+            if (prefersDarkScheme.matches) {
+                document.body.classList.add('dark-theme');
+            } else {
+                document.body.classList.add('light-theme');
+            }
+        }
+        localStorage.setItem('theme', theme);
+    }
+
+    function initializeTheme() {
+        const savedTheme = localStorage.getItem('theme') || 'system';
+        applyTheme(savedTheme);
+        // Set the radio button to the saved theme
+        const initialThemeRadio = document.querySelector(`input[name="theme-style"][value="${savedTheme}"]`);
+        if (initialThemeRadio) {
+            initialThemeRadio.checked = true;
+        }
+    }
+
+    // Listen for system theme changes
+    prefersDarkScheme.addEventListener('change', () => {
+        if (localStorage.getItem('theme') === 'system') {
+            applyTheme('system');
+        }
+    });
+
     // --- Accessibility Settings ---
     const reduceMotion = localStorage.getItem('reduceMotion') === 'true';
     if (reduceMotion) {
@@ -899,6 +1342,9 @@
     document.addEventListener('DOMContentLoaded', () => {
       const scrollContainer = document.querySelector('[data-scroll-container]');
       if (!scrollContainer) return;
+
+      // Initialize theme on DOMContentLoaded
+      initializeTheme();
 
       // --- Loader ---
       const loader = document.getElementById("loader");
@@ -919,6 +1365,7 @@
       let lastScrollY = 0;
       locoScroll.on('scroll', (args) => {
           lastScrollY = args.scroll.y;
+          const header = document.getElementById('mainHeader');
           if (args.scroll.y > 50) {
               header.classList.add('scrolled');
           } else {
@@ -999,13 +1446,53 @@
 
       // --- Settings ---
       const reduceMotionToggle = document.getElementById('reduceMotionToggle');
+      const cursorOptionsContainer = document.querySelector('.cursor-options');
+      const cursorRadios = document.querySelectorAll('input[name="cursor-style"]');
+
       if (reduceMotionToggle) {
         reduceMotionToggle.checked = reduceMotion;
+        applyReduceMotionSettings(reduceMotion); // Apply on load
+
         reduceMotionToggle.addEventListener('change', (e) => {
             localStorage.setItem('reduceMotion', e.target.checked);
-            location.reload();
+            applyReduceMotionSettings(e.target.checked);
+            location.reload(); // Reload to fully apply motion reduction
         });
       }
+
+      function applyReduceMotionSettings(isReduced) {
+          if (isReduced) {
+              document.body.classList.add('reduce-motion');
+              // Disable other cursor options and select default
+              cursorRadios.forEach(radio => {
+                  radio.disabled = true;
+              });
+              const defaultCursorRadio = document.querySelector('input[name="cursor-style"][value="default"]');
+              if (defaultCursorRadio) {
+                  defaultCursorRadio.checked = true;
+                  updateCursorStyle('default'); // Ensure default cursor is applied
+              }
+          } else {
+              document.body.classList.remove('reduce-motion');
+              // Enable all cursor options
+              cursorRadios.forEach(radio => {
+                  radio.disabled = false;
+              });
+              // Set ambient-dot as default and apply
+              const ambientDotRadio = document.querySelector('input[name="cursor-style"][value="ambient-dot"]');
+              if (ambientDotRadio) {
+                  ambientDotRadio.checked = true;
+                  updateCursorStyle('ambient-dot');
+              }
+          }
+      }
+
+      // --- Theme Switcher Event Listener ---
+      themeRadios.forEach(radio => {
+          radio.addEventListener('change', (e) => {
+              applyTheme(e.target.value);
+          });
+      });
 
       // --- i18n Language Selector ---
       const languageSelector = document.getElementById('languageSelector');
@@ -1053,6 +1540,8 @@
             hideHelpModal();
           } else if (sideMenu.classList.contains('visible')) {
             toggleMenu();
+          } else if (!cookieSettingsModal.hidden) { // Close cookie settings modal
+            hideCookieSettingsModal();
           }
         }
       });
@@ -1060,7 +1549,7 @@
       // --- Custom Cursor Logic ---
       const cursorDot = document.querySelector('.cursor-dot');
       const cursorFollower = document.querySelector('.cursor-follower');
-      const cursorRadios = document.querySelectorAll('input[name="cursor-style"]');
+      
       let mouseX = 0, mouseY = 0;
       let followerX = 0, followerY = 0;
       
@@ -1092,6 +1581,7 @@
         } else {
           document.body.style.cursor = style;
         }
+        localStorage.setItem('cursorStyle', style); // Save cursor style
       }
       
       cursorRadios.forEach(radio => {
@@ -1100,13 +1590,90 @@
         });
       });
       
-      const initialCursor = document.querySelector('input[name="cursor-style"]:checked').value;
+      // Initialize cursor based on saved preference or default
+      const initialCursor = localStorage.getItem('cursorStyle') || document.querySelector('input[name="cursor-style"][value="ambient-dot"]').value;
       updateCursorStyle(initialCursor);
 
       document.querySelectorAll('a, button, .faq-question, .slider, select').forEach(el => {
         el.addEventListener('mouseenter', () => cursorFollower.classList.add('active'));
         el.addEventListener('mouseleave', () => cursorFollower.classList.remove('active'));
       });
+
+      // --- Cookie Consent Logic ---
+      const cookieConsentBanner = document.getElementById('cookieConsentBanner');
+      const acceptCookiesBtn = document.getElementById('acceptCookies');
+      const rejectCookiesBtn = document.getElementById('rejectCookies');
+      const customizeCookiesBtn = document.getElementById('customizeCookies');
+      const cookieSettingsModal = document.getElementById('cookieSettingsModal');
+      const closeCookieSettingsModalBtn = document.getElementById('closeCookieSettingsModalBtn');
+      const essentialCookiesToggle = document.getElementById('essentialCookiesToggle');
+      const analyticsCookiesToggle = document.getElementById('analyticsCookiesToggle');
+      const marketingCookiesToggle = document.getElementById('marketingCookiesToggle');
+      const saveCookieSettingsBtn = document.getElementById('saveCookieSettings');
+      const resetCookieSettingsBtn = document.getElementById('resetCookieSettings');
+
+      function showCookieBanner() {
+        if (!localStorage.getItem('cookieConsent')) {
+          cookieConsentBanner.classList.add('show');
+        }
+      }
+
+      function hideCookieBanner() {
+        cookieConsentBanner.classList.remove('show');
+      }
+
+      function showCookieSettingsModal() {
+        cookieSettingsModal.hidden = false;
+        // Load current settings into toggles
+        const consent = JSON.parse(localStorage.getItem('cookieConsentSettings')) || {};
+        analyticsCookiesToggle.checked = consent.analytics || false;
+        marketingCookiesToggle.checked = consent.marketing || false;
+      }
+
+      function hideCookieSettingsModal() {
+        cookieSettingsModal.hidden = true;
+      }
+
+      function saveCookieConsent(consentType) {
+        let settings = {
+          essential: true, // Essential cookies are always true
+          analytics: false,
+          marketing: false
+        };
+
+        if (consentType === 'acceptAll') {
+          settings.analytics = true;
+          settings.marketing = true;
+        } else if (consentType === 'rejectAll') {
+          // All non-essential are false
+        } else if (consentType === 'custom') {
+          settings.analytics = analyticsCookiesToggle.checked;
+          settings.marketing = marketingCookiesToggle.checked;
+        }
+        
+        localStorage.setItem('cookieConsent', 'true'); // Mark that consent has been given
+        localStorage.setItem('cookieConsentSettings', JSON.stringify(settings));
+        hideCookieBanner();
+        hideCookieSettingsModal();
+        console.log('Cookie consent saved:', settings);
+      }
+
+      // Event Listeners for Cookie Banner
+      acceptCookiesBtn.addEventListener('click', () => saveCookieConsent('acceptAll'));
+      rejectCookiesBtn.addEventListener('click', () => saveCookieConsent('rejectAll'));
+      customizeCookiesBtn.addEventListener('click', showCookieSettingsModal);
+
+      // Event Listeners for Cookie Settings Modal
+      closeCookieSettingsModalBtn.addEventListener('click', hideCookieSettingsModal);
+      saveCookieSettingsBtn.addEventListener('click', () => saveCookieConsent('custom'));
+      resetCookieSettingsBtn.addEventListener('click', () => {
+        analyticsCookiesToggle.checked = false;
+        marketingCookiesToggle.checked = false;
+        // Do not save immediately, user needs to click "Save Settings"
+      });
+
+      // Show banner after a short delay to ensure DOM is ready
+      setTimeout(showCookieBanner, 1000);
     });
   </script>
 </body>
