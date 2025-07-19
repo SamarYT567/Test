@@ -46,6 +46,13 @@
       --cookie-button-hover-bg: #4a9eda;
 
       --border-radius-soft: 12px; /* Consistent border radius */
+
+      /* New Light theme specific overrides for elements that need black in light mode */
+      --image-border-color-light: #000000;
+      --subscribe-button-bg-light: #000000;
+      --subscribe-button-hover-bg-light: #333333; /* Slightly lighter black on hover */
+      --contact-button-bg-light: #000000;
+      --contact-button-hover-bg-light: #333333; /* Slightly lighter black on hover */
     }
 
     /* Light Theme */
@@ -172,13 +179,22 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: transparent;
-      transition: background-color 0.4s ease, backdrop-filter 0.4s ease;
+      /* Default transparent state */
+      background-color: transparent;
+      backdrop-filter: blur(0px);
+      -webkit-backdrop-filter: blur(0px);
+      border-bottom: 1px solid transparent;
+      transition: background-color 0.4s ease, backdrop-filter 0.4s ease, border-bottom-color 0.4s ease;
     }
     header.scrolled {
-      background-color: var(--card-bg); /* Use card-bg for scrolled header */
+      /* Glassmorphism effect when scrolled */
+      background-color: rgba(22, 27, 34, 0.8); /* Dark theme glassmorphism */
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border-color);
+    }
+    body.light-theme header.scrolled { /* Apply light theme glassmorphism when scrolled */
+      background-color: rgba(255, 255, 255, 0.8);
     }
     .header-title {
       flex-grow: 1;
@@ -187,7 +203,7 @@
     .header-title h1 {
       font-family: 'Orbitron', sans-serif;
       color: var(--light-accent);
-      font-size: 1.8em;
+      font-size: clamp(1.5em, 4vw, 1.8em); /* Auto-adjusting font size */
       margin: 0;
       text-shadow: 0 0 5px var(--main-red);
       display: inline-block;
@@ -261,6 +277,7 @@
         color: var(--text-secondary);
         font-size: 2rem;
         transition: color 0.3s, transform 0.3s;
+        padding: 10px;
     }
     #closeMenuBtn:hover {
         color: var(--main-red);
@@ -469,6 +486,9 @@
         border: 4px solid var(--main-blue);
         overflow: hidden;
     }
+    body.light-theme .image-wrapper { /* Image border black in light mode */
+        border: 4px solid var(--image-border-color-light);
+    }
     .image-wrapper img {
         width: 100%;
         height: 100%;
@@ -504,10 +524,17 @@
       transition: background-color 0.2s ease, transform 0.15s ease-in-out, box-shadow 0.2s ease;
       cursor: pointer;
     }
+    body.light-theme .subscribe-button { /* Subscribe button black in light mode */
+        background: var(--subscribe-button-bg-light);
+    }
     .subscribe-button:hover {
       background-color: #ff6b81;
       transform: scale(1.05);
       box-shadow: 0 0 15px var(--main-red);
+    }
+    body.light-theme .subscribe-button:hover { /* Subscribe button hover lighter black in light mode */
+        background-color: var(--subscribe-button-hover-bg-light);
+        box-shadow: none; /* Remove shadow on hover in light mode for a cleaner look */
     }
 
     /* About Section */
@@ -677,10 +704,17 @@
         transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
         text-decoration: none;
     }
+    body.light-theme #openFeedbackFormBtn { /* Contact button black in light mode */
+        background-color: var(--contact-button-bg-light);
+    }
     #openFeedbackFormBtn:hover {
         background-color: #4a9eda;
         transform: translateY(-3px);
         box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+    }
+    body.light-theme #openFeedbackFormBtn:hover { /* Contact button hover lighter black in light mode */
+        background-color: var(--contact-button-hover-bg-light);
+        box-shadow: none; /* Remove shadow on hover in light mode */
     }
 
     /* Scroll to Top Button */
@@ -1254,11 +1288,11 @@
             faq1Question: "Welche Arten von Spielen spielst du?",
             faq1Answer: "Ich spiele eine Vielzahl von Spielen, von beliebten AAA-Titeln bis hin zu Indie-Spielen. Mein Hauptaugenmerk liegt auf Open-World-, Survival- und storybasierten Spielen, aber ich bin immer offen für neue Genres basierend auf Community-Vorschlägen!",
             faq2Question: "Erstellst du originale Spielinhalte?",
-            faq2Answer: "Ja. 100% meiner Inhalte sind original. Ich handle alles von Gameplay-Aufnahme und Bearbeitung bis hin zu Voiceover und Thumbnails. Ich habe und plane nicht, Inhalte von anderen zu kopieren.",
+            faq2Answer: "Ja. 100% meiner Inhalte sind original. Ich handle alles von Gameplay-Aufnahme und Bearbeitung bis hin zu Voiceover und Thumbnails. Ich habe und don't plan to copy anyone's content.",
             faq3Question: "Kann ich ein bestimmtes Spiel vorschlagen?",
-            faq3Answer: "Absolut! Ich freue mich über Anfragen meiner Abonnenten und ziehe es in Betracht, ihre Lieblingsspiele in meinen kommenden Videos zu zeigen. Der beste Weg, ein Spiel vorzuschlagen, ist ein Kommentar unter meinem neuesten YouTube-Video.",
-            faq4Question: "Wie häufig lädst du neue Videos hoch?",
-            faq4Answer: "Da ich die einzige Person bin, die den Inhalt erstellt, bin ich nicht sehr konsistent, aber ich lade meistens mindestens zwei Videos pro Monat hoch. Qualität ist mir wichtiger als Quantität, daher nehme ich mir Zeit, jedes Video unterhaltsam zu gestalten.",
+            faq3Answer: "Absolut! Ich welcome requests from my subscribers and consider featuring their favorite games in my upcoming videos. The best way to suggest a game is to leave a comment on my latest YouTube video.",
+            faq4Question: "How frequently do you upload new videos?",
+            faq4Answer: "Since I am the only person who makes the content, I am not very consistent, but I mostly upload at least two videos in a month. Quality is more important to me than quantity, so I take my time to make each video enjoyable.",
             socialsTitle: "Meine Socials",
             footerThanks: "Danke für den Besuch",
             footerContact: "Kontaktiere stgbussiness436@gmail.com für mehr Infos.",
