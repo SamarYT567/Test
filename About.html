@@ -448,40 +448,6 @@
             color: var(--section-heading-color-light);
         }
 
-        /* Go Back Button Styles - Adjusted position */
-        .go-back-btn {
-            position: fixed; 
-            top: 100px; /* Moved lower */
-            left: 20px;
-            background: rgba(52, 152, 219, 0.2); /* Use main-blue with opacity */
-            padding: 10px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            text-decoration: none;
-            z-index: 990; 
-            border: 1px solid var(--main-blue); /* Add border */
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-        }
-        .go-back-btn:hover {
-            background: rgba(52, 152, 219, 0.4);
-            transform: scale(1.1);
-            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
-        }
-        .go-back-btn svg {
-            width: 22px; height: 22px; fill: var(--light-accent); /* Use light-accent for SVG fill */
-            transform: scaleX(-1); 
-        }
-
-        /* Ensure go-back-btn position is stable even with reduce-motion */
-        body.reduce-motion .go-back-btn {
-            top: 100px !important; /* Re-assert fixed position */
-            left: 20px !important; /* Re-assert fixed position */
-        }
-
         /* New Content Sections for About.html */
         .about-page-section {
             padding: 25px;
@@ -837,22 +803,10 @@
             .cookie-buttons {
                 flex-direction: column;
             }
-            .go-back-btn {
-                top: 95px; /* Adjusted for smaller screens */
-                left: 15px;
-            }
         }
         @media (max-width: 480px) {
             .header-title h1 { font-size: 1.3em; }
             .about-page-section h2 { font-size: 1.8rem; }
-            .go-back-btn {
-                top: 90px; /* Further adjust for very small screens */
-                left: 10px;
-                padding: 8px;
-            }
-            .go-back-btn svg {
-                width: 18px; height: 18px;
-            }
         }
     </style>
 </head>
@@ -933,12 +887,6 @@
         </div>
 
         <main class="main-container" data-scroll-section>
-            <a href="#" class="go-back-btn" title="Go Back" aria-label="Go back to previous page" onclick="history.back(); return false;">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path d="M15.5 19.5a1 1 0 0 1-.7-1.7l5.3-5.3H3a1 1 0 0 1 0-2h17.1l-5.3-5.3a1 1 0 0 1 1.4-1.4l7 7a1 1 0 0 1 0 1.4l-7 7a1 1 0 0 1-.7.3z"/>
-                </svg>
-            </a>
-
             <div class="grid-layout">
                 <div class="grid-item full-width about-page-section philosophy-section" data-scroll>
                     <h2 data-i18n-key="aboutPhilosophyTitle">My Gaming Philosophy</h2>
@@ -992,8 +940,7 @@
             </div>
 
             <footer class="footer-section" data-scroll>
-                <!-- Footer content removed as per request -->
-            </footer>
+                </footer>
         </main>
 
         <button id="scrollTopBtn" title="Go to top" aria-label="Scroll to top">
@@ -1015,10 +962,9 @@
         </div>
     </div>
 
-    <!-- Cookie Consent Banner -->
     <div id="cookieConsentBanner" class="cookie-banner">
         <div class="cookie-content">
-            <p data-i18n-key="cookieConsentText">We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies.</p>
+            <p data-i18n-key="cookieConsentText">We use cookies to enhance your Browse experience, serve personalized ads or content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies.</p>
         </div>
         <div class="cookie-buttons">
             <button id="acceptCookies" data-i18n-key="cookieAcceptAll">Accept All</button>
@@ -1027,7 +973,6 @@
         </div>
     </div>
 
-    <!-- Cookie Settings Modal -->
     <div id="cookieSettingsModal" class="hotkey-modal" role="dialog" aria-modal="true" aria-labelledby="cookie-settings-title" hidden>
         <div class="modal-content">
             <button id="closeCookieSettingsModalBtn" class="close-btn" aria-label="Close cookie settings">&times;</button>
@@ -1061,7 +1006,7 @@
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.min.js"></script>
-    <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+    
     <script defer>
         // --- i18n Translation Scaffolding ---
         const translations = {
@@ -1095,7 +1040,7 @@
                 hotkeyScrollTop: "Scroll to top",
                 hotkeyScrollBottom: "Scroll to bottom",
                 hotkeyClose: "Close menu or dialog",
-                cookieConsentText: "We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking \"Accept All\", you consent to our use of cookies.",
+                cookieConsentText: "We use cookies to enhance your Browse experience, serve personalized ads or content, and analyze our traffic. By clicking \"Accept All\", you consent to our use of cookies.",
                 cookieAcceptAll: "Accept All",
                 cookieRejectAll: "Reject All",
                 cookieCustomize: "Customize",
@@ -1222,13 +1167,10 @@
             locoScroll = new LocomotiveScroll({
                 el: scrollContainer,
                 smooth: !reduceMotion,
-                getDirection: true,
+                getDirection: false, // Set to false for performance if not used
             });
 
-            // --- Scroll Position Restoration ---
-            let lastScrollY = 0;
             locoScroll.on('scroll', (args) => {
-                lastScrollY = args.scroll.y;
                 const header = document.getElementById('mainHeader');
                 if (args.scroll.y > 50) {
                     header.classList.add('scrolled');
@@ -1239,25 +1181,11 @@
                     scrollTopBtn.classList.toggle('visible', args.scroll.y > window.innerHeight / 2);
                 }
             });
-
-            window.addEventListener('beforeunload', () => {
-                sessionStorage.setItem('scrollPosition', lastScrollY);
-            });
             
-            const navigationEntries = performance.getEntriesByType("navigation");
-            if (sessionStorage.getItem('scrollPosition') && navigationEntries.length > 0 && navigationEntries[0].type === 'back_forward') {
-                const savedPosition = parseInt(sessionStorage.getItem('scrollPosition'), 10);
-                if (!isNaN(savedPosition)) {
-                    setTimeout(() => {
-                        locoScroll.scrollTo(savedPosition, { duration: 0, disableLerp: true });
-                        sessionStorage.removeItem('scrollPosition');
-                    }, 100);
-                }
-            }
-
-            imagesLoaded(scrollContainer, { background: true }, () => {
-                if (locoScroll) locoScroll.update();
-            });
+            // Remove imagesLoaded if not strictly necessary for performance
+            // imagesLoaded(scrollContainer, { background: true }, () => {
+            //     if (locoScroll) locoScroll.update();
+            // });
             
             new ResizeObserver(() => locoScroll.update()).observe(scrollContainer);
 
