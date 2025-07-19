@@ -476,6 +476,12 @@
             transform: scaleX(-1); 
         }
 
+        /* Ensure go-back-btn position is stable even with reduce-motion */
+        body.reduce-motion .go-back-btn {
+            top: 100px !important; /* Re-assert fixed position */
+            left: 20px !important; /* Re-assert fixed position */
+        }
+
         /* New Content Sections for About.html */
         .about-page-section {
             padding: 25px;
@@ -532,7 +538,7 @@
         /* Remove bullet and padding for main list items */
         .specs-section ul > li {
             padding-left: 0; 
-            margin-bottom: 15px; /* Added spacing between main specs */
+            margin-bottom: 20px; /* Increased spacing between main specs */
         }
         .specs-section ul > li::before { 
             content: none; /* Remove bullet */
@@ -540,14 +546,14 @@
         /* Keep bullet and padding for nested list items */
         .specs-section ul ul li {
             position: relative; /* Needed for absolute positioning of ::before */
-            padding-left: 1.8em; /* Adjusted padding to make space for bullet */
+            padding-left: 1.5em; /* Adjusted padding to make space for bullet */
             margin-bottom: 5px; /* Small spacing for nested items */
         }
         .specs-section ul ul li::before { 
             content: '•'; /* Custom bullet point */
             color: var(--main-blue); /* Blue bullet */
             position: absolute;
-            left: 0.5em; /* Adjusted position to be inside the padding */
+            left: 0; /* Position bullet at the very left of the padded area */
             font-size: 1.2em;
             line-height: 1;
         }
