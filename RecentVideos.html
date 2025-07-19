@@ -157,7 +157,7 @@
       visibility: hidden;
     }
 
-    /* Header Styling - Copied from Index.html */
+    /* Header Styling */
     header {
       position: fixed;
       top: 0;
@@ -169,14 +169,23 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      /* Glassmorphism effect for header */
-      background-color: rgba(22, 27, 34, 0.6); /* Semi-transparent background */
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px); /* For Safari */
-      border-bottom: 1px solid var(--border-color); /* Always show border */
-      transition: background-color 0.4s ease, backdrop-filter 0.4s ease;
+      /* Default transparent state */
+      background-color: transparent;
+      backdrop-filter: blur(0px);
+      -webkit-backdrop-filter: blur(0px);
+      border-bottom: 1px solid transparent;
+      transition: background-color 0.4s ease, backdrop-filter 0.4s ease, border-bottom-color 0.4s ease;
     }
-    /* Remove header.scrolled as glassmorphism is always on */
+    header.scrolled {
+      /* Glassmorphism effect when scrolled */
+      background-color: rgba(22, 27, 34, 0.8);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-color);
+    }
+    body.light-theme header.scrolled { /* Apply light theme glassmorphism when scrolled */
+      background-color: rgba(255, 255, 255, 0.8);
+    }
     .header-title {
       flex-grow: 1;
       text-align: center;
@@ -184,7 +193,7 @@
     .header-title h1 {
       font-family: 'Orbitron', sans-serif;
       color: var(--light-accent);
-      font-size: 1.8em;
+      font-size: clamp(1.5em, 4vw, 1.8em); /* Auto-adjusting font size */
       margin: 0;
       text-shadow: 0 0 5px var(--main-red);
       display: inline-block;
@@ -202,7 +211,7 @@
         background: none;
         border: none;
         cursor: pointer;
-        padding: 10px;
+        padding: 10px; /* Increased padding for better touch target */
         z-index: 1002;
         width: 30px;
         height: 22px;
@@ -258,6 +267,7 @@
         color: var(--text-secondary);
         font-size: 2rem;
         transition: color 0.3s, transform 0.3s;
+        padding: 10px; /* Increased padding for better touch target */
     }
     #closeMenuBtn:hover {
         color: var(--main-red);
@@ -304,11 +314,13 @@
         background-color: var(--main-red);
         transition: width 0.3s ease-out;
     }
-    .menu-nav-links a:hover {
+    .menu-nav-links a:hover,
+    .menu-nav-links a:active {
         color: var(--main-red);
         background-color: rgba(52, 152, 219, 0.05);
     }
-    .menu-nav-links a:hover::after {
+    .menu-nav-links a:hover::after,
+    .menu-nav-links a:active::after {
         width: 100%;
     }
     
@@ -410,10 +422,9 @@
 
     /* Main Content Layout - Adapted for RecentVideos */
     .main-container {
-      padding: 120px 5% 40px; /* Adjusted top padding for fixed header */
+      padding: 120px 5vw 40px; /* Adjusted top padding for fixed header and responsive horizontal padding */
       max-width: 1200px;
       margin: 0 auto;
-      /* Removed background image */
       background-color: var(--dark-bg); /* Use theme background color */
       position: relative;
       color: var(--text-primary); /* Use text-primary for main content text */
@@ -428,7 +439,7 @@
     .page-heading { /* "Recent Videos" title */
       font-family: 'Orbitron', sans-serif; /* Changed font to Orbitron */
       font-weight: 700; /* Bold for Orbitron */
-      font-size: 2.5rem; /* Made smaller */
+      font-size: clamp(1.8rem, 5vw, 2.5rem); /* Made smaller and responsive */
       color: var(--light-accent); /* Use light-accent for heading */
       text-align: center;
       margin-bottom: 40px;
@@ -496,11 +507,8 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      /* Removed opacity transition as GIF is removed */
     }
     
-    /* Removed .video-gif styles entirely */
-
     .video-box .video-title {
       font-family: 'Poppins', sans-serif; /* Changed to Poppins */
       font-size: 1.05em;
@@ -520,42 +528,9 @@
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Lighter shadow for light theme */
     }
 
-    /* Footer - Copied from Index.html */
+    /* Footer - Removed as per request */
     .footer-section {
-        text-align: center;
-        padding: 40px 20px;
-        margin-top: 30px; /* Add margin to separate from content */
-    }
-    .thanks-text {
-        font-family: 'Orbitron', sans-serif;
-        font-size: 2.5rem;
-        color: var(--light-accent);
-        margin-bottom: 10px;
-    }
-    body.light-theme .thanks-text { /* Thanks for Visiting text black in light mode */
-        color: var(--footer-thanks-color-light);
-    }
-    .contact-text {
-        color: var(--text-secondary);
-        margin-bottom: 20px;
-    }
-    #openFeedbackFormBtn {
-        font-family: 'Poppins', sans-serif;
-        font-weight: 600;
-        font-size: 1rem;
-        color: white;
-        background-color: var(--main-blue);
-        border: none;
-        border-radius: var(--border-radius-soft); /* Soften button corners */
-        padding: 10px 20px;
-        cursor: pointer;
-        transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-        text-decoration: none;
-    }
-    #openFeedbackFormBtn:hover {
-        background-color: #4a9eda;
-        transform: translateY(-3px);
-        box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+        display: none; /* Hide the footer section */
     }
 
     /* Scroll to Top Button - Copied from Index.html */
@@ -617,7 +592,7 @@
         cursor: pointer;
         transition: color 0.3s, transform 0.3s;
     }
-    .hotkey-modal .close-btn:hover {
+    #hotkeyModal .close-btn:hover { /* Specificity for hotkey modal close button */
         color: var(--main-red);
         transform: rotate(90deg);
     }
@@ -828,31 +803,79 @@
     }
     
     /* Responsive Styles - Copied from Index.html and adjusted */
+    @media (max-width: 1024px) { /* Combined mobile and tablet for cursor removal */
+        .cursor-dot, .cursor-follower {
+            display: none !important;
+        }
+        body.cursor-ambient-dot {
+            cursor: default !important;
+        }
+        .cursor-options {
+            display: none; /* Hide cursor options on touch devices */
+        }
+    }
+
     @media (max-width: 768px) {
-      header h1 { font-size: 1.5em; }
+      header h1 { font-size: clamp(1.2em, 5vw, 1.5em); }
       .main-container {
-        padding: 90px 20px 40px 20px; /* Adjusted top padding for header */
-        /* background-attachment: scroll; - Removed as main-container background image is removed */
+        padding: 100px 3vw 30px; /* Adjusted top padding for header and responsive horizontal padding */
       }
       .page-heading {
-        font-size: 2rem; /* Adjusted for smaller screens */
+        font-size: clamp(1.5rem, 6vw, 2rem); /* Adjusted for smaller screens */
         margin-bottom: 30px; margin-top: 0;
       }
       .content-container {
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        max-width: 90%; gap: 25px;
+        max-width: 90%; /* Keep max-width for smaller screens */
+        margin: 0 auto; /* Center the grid container on mobile */
+        gap: 25px;
       }
       .video-box { padding: 15px; }
       .video-box .video-title { font-size: 1em; }
       .cookie-buttons {
         flex-direction: column;
       }
+      /* Adjust side menu width for smaller screens */
+      #sideMenu {
+        width: 250px;
+        right: -260px; /* Adjust to match new width + some offset */
+      }
     }
 
     @media (max-width: 480px) {
-      header h1 { font-size: 1.3em; white-space: normal; }
-      .page-heading { font-size: 1.8rem; } /* Further adjusted for very small screens */
+      header h1 { font-size: clamp(1.1em, 6vw, 1.3em); white-space: normal; }
+      .page-heading { font-size: clamp(1.3rem, 7vw, 1.8rem); } /* Further adjusted for very small screens */
       .content-container { grid-template-columns: 1fr; gap: 20px; }
+      #sideMenu {
+        width: 220px;
+        right: -230px;
+      }
+    }
+
+    /* Tablet-specific adjustments */
+    @media (min-width: 769px) and (max-width: 1024px) {
+        .main-container {
+            padding: 120px 7vw 40px;
+        }
+        .video-box {
+            padding: 20px;
+        }
+    }
+
+    /* Landscape phone orientation adjustments */
+    @media screen and (max-width: 820px) and (orientation: landscape) {
+        .main-container {
+            padding: 80px 5vw 20px;
+        }
+        .page-heading {
+            font-size: clamp(1.8rem, 5vw, 2.2rem);
+        }
+        .video-box {
+            padding: 15px;
+        }
+        .video-box .video-title {
+            font-size: 0.9rem;
+        }
     }
 
     /* Style for the "View More" button */
@@ -922,7 +945,7 @@
             <div class="setting-section menu-nav-links">
                  <a href="index.html" data-i18n-key="navHome">Home</a>
                  <a href="About.html" data-i18n-key="navAbout">About</a>
-                 <a href="RecentVideos.html" data-i18n-key="navRecentVideos">Recent Videos</a>
+                 <!-- Removed "Recent Videos" link from the side menu -->
             </div>
             <div class="setting-section accessibility-options">
                 <h3 data-i18n-key="headingAccessibility">Accessibility</h3>
@@ -1048,6 +1071,7 @@
   </div>
   
   <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.min.js"></script>
+  <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
 
   <script defer>
     // --- i18n Translation Scaffolding ---
@@ -1069,9 +1093,6 @@
             themeDark: "Dark",
             headingLanguage: "Language",
             recentVideosTitle: "Recent Videos", // New key for the title
-            footerThanks: "Thanks for Visiting",
-            footerContact: "Contact stgbussiness436@gmail.com for more info.",
-            footerContactBtn: "Contact / Feedback",
             hotkeyTitle: "Keyboard Shortcuts",
             hotkeyHelp: "Show this help menu",
             hotkeyMenu: "Toggle menu",
@@ -1107,9 +1128,6 @@
             themeDark: "Dunkel",
             headingLanguage: "Sprache",
             recentVideosTitle: "Neueste Videos", // New key for the title
-            footerThanks: "Danke für den Besuch",
-            footerContact: "Kontaktiere stgbussiness436@gmail.com für mehr Infos.",
-            footerContactBtn: "Kontakt / Feedback",
             hotkeyTitle: "Tastaturkürzel",
             hotkeyHelp: "Dieses Hilfemenü anzeigen",
             hotkeyMenu: "Menü umschalten",
@@ -1203,14 +1221,14 @@
         locoScroll = new LocomotiveScroll({
             el: scrollContainer,
             smooth: !reduceMotion,
-            getDirection: false, // Set to false for performance if not used
+            getDirection: true, // Set to true for consistent scroll direction tracking
         });
 
         locoScroll.on('scroll', (args) => {
             const header = document.getElementById('mainHeader');
-            if (args.scroll.y > 50) {
-                header.classList.add('scrolled'); /* Kept for potential future use or subtle visual change */
-            } else {
+            if (args.scroll.y > 50) { // Add 'scrolled' class when scrolled down
+                header.classList.add('scrolled');
+            } else { // Remove 'scrolled' class when at the top
                 header.classList.remove('scrolled');
             }
             const scrollTopBtn = document.getElementById('scrollTopBtn');
@@ -1219,7 +1237,15 @@
             }
         });
         
+        // Ensure Locomotive Scroll updates after images are loaded
+        imagesLoaded(scrollContainer, { background: true }, () => {
+            if (locoScroll) locoScroll.update();
+        });
+        
         new ResizeObserver(() => locoScroll.update()).observe(scrollContainer);
+
+        const header = document.getElementById('mainHeader');
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
 
         // --- Side Menu ---
         const menuBtn = document.getElementById('menuBtn');
@@ -1244,10 +1270,35 @@
                     toggleMenu();
                 }
             });
+
+            // --- Swipe to Close Gesture Support ---
+            let touchStartX = 0;
+            let touchEndX = 0;
+            const minSwipeDistance = 50; // Minimum pixels for a swipe to be recognized
+
+            sideMenu.addEventListener('touchstart', (e) => {
+                touchStartX = e.touches[0].clientX;
+                touchEndX = 0; // Reset end position
+            });
+
+            sideMenu.addEventListener('touchmove', (e) => {
+                touchEndX = e.touches[0].clientX;
+            });
+
+            sideMenu.addEventListener('touchend', () => {
+                if (sideMenu.classList.contains('visible') && touchEndX !== 0) {
+                    const swipeDistance = touchEndX - touchStartX;
+                    if (swipeDistance > minSwipeDistance) { // Swiped right
+                        toggleMenu();
+                    }
+                }
+                // Reset touch positions
+                touchStartX = 0;
+                touchEndX = 0;
+            });
         }
         
         // --- Scroll to Top ---
-        const scrollTopBtn = document.getElementById('scrollTopBtn');
         if (scrollTopBtn) {
             scrollTopBtn.addEventListener('click', () => {
                 if (locoScroll) locoScroll.scrollTo('top');
@@ -1256,6 +1307,7 @@
 
         // --- Settings ---
         const reduceMotionToggle = document.getElementById('reduceMotionToggle');
+        const cursorOptionsContainer = document.querySelector('.cursor-options'); // Added for consistency
         const cursorRadios = document.querySelectorAll('input[name="cursor-style"]');
 
         if (reduceMotionToggle) {
@@ -1272,6 +1324,7 @@
         function applyReduceMotionSettings(isReduced) {
             if (isReduced) {
                 document.body.classList.add('reduce-motion');
+                // Disable other cursor options and select default
                 cursorRadios.forEach(radio => {
                     radio.disabled = true;
                 });
@@ -1282,10 +1335,11 @@
                 }
             } else {
                 document.body.classList.remove('reduce-motion');
+                // Enable all cursor options
                 cursorRadios.forEach(radio => {
                     radio.disabled = false;
                 });
-                const ambientDotRadio = document.querySelector('input[name="cursor-style"][value="ambient-dot"]');
+                const ambientDotRadio = document.querySelector('input[name="cursor-style"][value="ambient-dot"]'); // Fixed syntax error here
                 if (ambientDotRadio) {
                     ambientDotRadio.checked = true;
                     updateCursorStyle('ambient-dot');
@@ -1322,6 +1376,7 @@
         closeHelpModalBtn.addEventListener('click', hideHelpModal);
 
         document.addEventListener('keydown', (e) => {
+            // Don't trigger shortcuts if user is typing in an input/textarea
             if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') {
                 return;
             }
@@ -1359,18 +1414,26 @@
         let followerX = 0, followerY = 0;
         
         window.addEventListener('mousemove', e => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
+            // Only update cursor position if not on a touch device or if custom cursor is enabled
+            if (!('ontouchstart' in window) || document.body.classList.contains('cursor-ambient-dot')) {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            }
         });
 
         function animateCursor() {
-            if (document.body.classList.contains('cursor-ambient-dot')) {
+            if (document.body.classList.contains('cursor-ambient-dot') && !('ontouchstart' in window)) {
                 cursorDot.style.left = `${mouseX}px`;
                 cursorDot.style.top = `${mouseY}px`;
                 followerX += (mouseX - followerX) * 0.1;
                 followerY += (mouseY - followerY) * 0.1;
                 cursorFollower.style.left = `${followerX}px`;
                 cursorFollower.style.top = `${followerY}px`;
+                cursorDot.style.display = 'block';
+                cursorFollower.style.display = 'block';
+            } else {
+                cursorDot.style.display = 'none';
+                cursorFollower.style.display = 'none';
             }
             requestAnimationFrame(animateCursor);
         }
@@ -1380,11 +1443,16 @@
             document.body.classList.remove('cursor-ambient-dot');
             document.body.style.cursor = 'default';
 
-            if (style === 'ambient-dot') {
-                document.body.classList.add('cursor-ambient-dot');
-                document.body.style.cursor = 'none';
+            if (!('ontouchstart' in window)) { // Apply custom cursor only on non-touch devices
+                if (style === 'ambient-dot') {
+                    document.body.classList.add('cursor-ambient-dot');
+                    document.body.style.cursor = 'none';
+                } else {
+                    document.body.style.cursor = style;
+                }
             } else {
-                document.body.style.cursor = style;
+                // Force default cursor on touch devices, regardless of setting
+                document.body.style.cursor = 'default';
             }
             localStorage.setItem('cursorStyle', style);
         }
@@ -1399,8 +1467,16 @@
         updateCursorStyle(initialCursor);
 
         document.querySelectorAll('a, button, .faq-question, .slider, select').forEach(el => {
-            el.addEventListener('mouseenter', () => cursorFollower.classList.add('active'));
-            el.addEventListener('mouseleave', () => cursorFollower.classList.remove('active'));
+            el.addEventListener('mouseenter', () => {
+                if (!('ontouchstart' in window)) {
+                    cursorFollower.classList.add('active');
+                }
+            });
+            el.addEventListener('mouseleave', () => {
+                if (!('ontouchstart' in window)) {
+                    cursorFollower.classList.remove('active');
+                }
+            });
         });
 
         // --- Cookie Consent Logic ---
