@@ -1,7 +1,7 @@
 # 🎮 Samplayshindi – The Official Website
 
 **Welcome to the home of all things Samplayshindi!**  
-This is my personal website, built with love (and HTML) and proudly hosted on **GitHub Pages**.
+This is my personal website, built with love (and HTML) and hosted on **GitHub Pages**.
 
 ### 🔗 **[Visit the Live Site](https://your-site-link.github.io)**  
 
