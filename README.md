@@ -38,16 +38,16 @@ Main/
 ```
 
 ### 🔹 `index.html`
-Your first stop! Clean, engaging, and easy to navigate.
+The Main homepage for the site. Featuring About Me, Frequently Asked Questions and Socials.
 
 ### 🔹 `about.html`
-Think of this as the "Wikipedia page" of Samplayshindi—learn who I am and what I do.
+A type of "Wikipedia page" for Samplayshindi—learn who I am and what I do.
 
 ### 🔹 `recentVideos.html`
-Always fresh! Showcasing my latest gaming content and uploads.
+Showcasing my latest gaming content and uploads. Updated to the latest uploads.
 
 ### 🔹 `README.md`
-You’re reading it right now. Your guide to everything about this site repo.
+You are reading it right now. Your guide to everything about this site's repository.
 
 ---
 
