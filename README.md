@@ -41,7 +41,7 @@ Main/
 The Main homepage for the site. Featuring About Me, Frequently Asked Questions and Socials.
 
 ### 🔹 `about.html`
-A type of "Wikipedia page" for Samplayshindi—learn who I am and what I do.
+A type of "Wikipedia page" for Samplayshindi. Learn who I am and what I do.
 
 ### 🔹 `recentVideos.html`
 Showcasing my latest gaming content and uploads. Updated to the latest uploads.
