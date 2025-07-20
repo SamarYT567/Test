@@ -27,9 +27,13 @@ Whether you're a new visitor or a returning one, there's something fresh for you
 ## 📁 Project Structure
 
 Main/
+
 ├── index.html # The homepage – start here!
+
 ├── about.html # Learn more about me
+
 ├── recentVideos.html # See my latest content
+
 └── README.md # This file, containing all key info
 
 
@@ -66,4 +70,4 @@ Let’s build something awesome—together!
 I appreciate you stopping by and checking out my work.  
 **Stay tuned**—more updates, content, and cool stuff are always on the way!
 
-✨ _– Sam from Samplayshindi_
+✨ _Samplayshindi_
