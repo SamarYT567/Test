@@ -202,7 +202,6 @@
     }
     .header-title h1 {
       font-family: 'Orbitron', sans-serif;
-      color: var(--light-accent);
       font-size: clamp(1.5em, 4vw, 1.8em); /* Auto-adjusting font size */
       margin: 0;
       text-shadow: 0 0 5px var(--main-red);
@@ -431,7 +430,7 @@
 
     /* Main Content Layout */
     .main-container {
-        padding: 120px 5% 40px;
+        padding: 120px 5vw 40px; /* Adjusted top padding for fixed header and responsive horizontal padding */
         max-width: 1200px;
         margin: 0 auto;
     }
@@ -461,7 +460,7 @@
     
     .section-heading {
         font-family: 'Orbitron', sans-serif;
-        font-size: 2rem;
+        font-size: clamp(1.8rem, 5vw, 2.5rem); /* Made smaller and responsive */
         color: var(--light-accent);
         text-align: center;
         margin-bottom: 30px;
@@ -496,7 +495,7 @@
     }
     .welcome-text {
         font-family: 'Dungeon Depths', sans-serif;
-        font-size: 3rem;
+        font-size: clamp(2.5rem, 7vw, 3rem); /* Made smaller and responsive */
         color: var(--light-accent);
         margin: 0 0 10px 0;
     }
@@ -504,7 +503,7 @@
         color: var(--welcome-text-color-light);
     }
     .experience-text {
-        font-size: 1.1rem;
+        font-size: clamp(1rem, 2.5vw, 1.1rem); /* Made smaller and responsive */
         color: var(--text-secondary);
         line-height: 1.6;
         max-width: 500px;
@@ -516,7 +515,7 @@
       text-decoration: none;
       font-family: 'Poppins', sans-serif;
       font-weight: 700;
-      font-size: 1rem;
+      font-size: clamp(0.9rem, 2.5vw, 1rem); /* Made smaller and responsive */
       color: white;
       background: var(--main-red);
       border: none;
@@ -541,7 +540,7 @@
     .about-section p {
         color: var(--text-secondary);
         line-height: 1.7;
-        font-size: 1.05rem;
+        font-size: clamp(0.95rem, 2.5vw, 1.05rem); /* Made smaller and responsive */
         max-width: 800px;
         margin: 0 auto;
         text-align: center;
@@ -552,7 +551,7 @@
         text-align: center;
     }
     .quote-text {
-        font-size: 1.1rem;
+        font-size: clamp(1rem, 2.5vw, 1.1rem); /* Made smaller and responsive */
         font-style: italic;
         color: var(--text-primary);
         line-height: 1.7;
@@ -592,7 +591,7 @@
         padding: 20px;
         width: 100%;
         text-align: left;
-        font-size: 1.1rem;
+        font-size: clamp(1rem, 2.5vw, 1.1rem); /* Made smaller and responsive */
         cursor: pointer;
         display: flex;
         justify-content: space-between;
@@ -614,7 +613,7 @@
     .faq-answer p {
         margin: 0;
         padding-bottom: 20px;
-        font-size: 1rem;
+        font-size: clamp(0.9rem, 2.2vw, 1rem); /* Made smaller and responsive */
         line-height: 1.6;
     }
     .faq-item.active .faq-answer {
@@ -680,7 +679,7 @@
     }
     .thanks-text {
         font-family: 'Orbitron', sans-serif;
-        font-size: 2.5rem;
+        font-size: clamp(2rem, 5vw, 2.5rem); /* Made smaller and responsive */
         color: var(--light-accent);
         margin-bottom: 10px;
     }
@@ -694,7 +693,7 @@
     #openFeedbackFormBtn {
         font-family: 'Poppins', sans-serif;
         font-weight: 600;
-        font-size: 1rem;
+        font-size: clamp(0.9rem, 2.5vw, 1rem); /* Made smaller and responsive */
         color: white;
         background-color: var(--main-blue);
         border: none;
@@ -976,12 +975,101 @@
 
 
     /* Responsive Adjustments */
+    @media (max-width: 1024px) { /* Combined mobile and tablet for cursor removal */
+        .cursor-dot, .cursor-follower {
+            display: none !important;
+        }
+        body.cursor-ambient-dot {
+            cursor: default !important;
+        }
+        .cursor-options {
+            display: none; /* Hide cursor options on touch devices */
+        }
+    }
+
     @media (max-width: 768px) {
-      .header-title h1 { font-size: 1.5em; }
-      .welcome-text { font-size: 2.5rem; }
+      header h1 { font-size: clamp(1.2em, 5vw, 1.5em); }
+      .main-container {
+        padding: 100px 3vw 30px; /* Adjusted top padding for header and responsive horizontal padding */
+      }
+      .section-heading {
+        font-size: clamp(1.5rem, 6vw, 2rem); /* Adjusted for smaller screens */
+      }
+      .welcome-text { font-size: clamp(2rem, 8vw, 2.5rem); }
+      .experience-text { font-size: clamp(0.9rem, 2.8vw, 1rem); }
+      .subscribe-button { font-size: clamp(0.85rem, 2.8vw, 0.95rem); }
+      .about-section p { font-size: clamp(0.9rem, 2.8vw, 1rem); }
+      .quote-text { font-size: clamp(0.95rem, 2.8vw, 1.05rem); }
+      .faq-question { font-size: clamp(0.95rem, 2.8vw, 1.05rem); }
+      .faq-answer p { font-size: clamp(0.85rem, 2.5vw, 0.95rem); }
+      .thanks-text { font-size: clamp(1.8rem, 6vw, 2.2rem); }
+      .contact-text { font-size: clamp(0.9rem, 2.8vw, 1rem); }
+      #openFeedbackFormBtn { font-size: clamp(0.85rem, 2.8vw, 0.95rem); }
       .cookie-buttons {
         flex-direction: column;
       }
+      /* Adjust side menu width for smaller screens */
+      #sideMenu {
+        width: 250px;
+        right: -260px; /* Adjust to match new width + some offset */
+      }
+    }
+
+    @media (max-width: 480px) {
+      header h1 { font-size: clamp(1.1em, 6vw, 1.3em); white-space: normal; }
+      .section-heading { font-size: clamp(1.3rem, 7vw, 1.8rem); } /* Further adjusted for very small screens */
+      .main-container {
+        padding: 80px 3vw 20px; /* Further adjusted padding for very small screens */
+      }
+      #sideMenu {
+        width: 220px;
+        right: -230px;
+      }
+    }
+
+    /* Tablet-specific adjustments (769px to 1024px) */
+    @media (min-width: 769px) and (max-width: 1024px) {
+        .main-container {
+            padding: 120px 7vw 40px;
+        }
+        .hero-content .image-wrapper {
+            max-width: 200px;
+            height: 133px;
+        }
+        .welcome-text { font-size: 2.8rem; }
+        .experience-text { font-size: 1.05rem; }
+        .subscribe-button { font-size: 0.95rem; }
+        .about-section p { font-size: 1rem; }
+        .quote-text { font-size: 1.05rem; }
+        .faq-question { font-size: 1.05rem; }
+        .faq-answer p { font-size: 0.95rem; }
+        .thanks-text { font-size: 2.2rem; }
+        .contact-text { font-size: 1rem; }
+        #openFeedbackFormBtn { font-size: 0.95rem; }
+    }
+
+    /* Landscape phone orientation adjustments */
+    @media screen and (max-width: 820px) and (orientation: landscape) {
+        .main-container {
+            padding: 80px 5vw 20px;
+        }
+        .section-heading {
+            font-size: clamp(1.8rem, 5vw, 2.2rem);
+        }
+        .hero-content .image-wrapper {
+            max-width: 180px;
+            height: 120px;
+        }
+        .welcome-text { font-size: 2.2rem; }
+        .experience-text { font-size: 0.9rem; }
+        .subscribe-button { font-size: 0.85rem; }
+        .about-section p { font-size: 0.9rem; }
+        .quote-text { font-size: 0.95rem; }
+        .faq-question { font-size: 0.95rem; }
+        .faq-answer p { font-size: 0.85rem; }
+        .thanks-text { font-size: 2rem; }
+        .contact-text { font-size: 0.9rem; }
+        #openFeedbackFormBtn { font-size: 0.85rem; }
     }
   </style>
 </head>
@@ -1015,8 +1103,9 @@
         </div>
         <div class="side-menu-content">
             <div class="setting-section menu-nav-links">
-                 <a href="https://samaryt567.github.io/Test/About.html" target="_blank" rel="noopener noreferrer" data-i18n-key="navAbout">About</a>
-                 <a href="https://samaryt567.github.io/Test/RecentVideos.html" target="_blank" rel="noopener noreferrer" data-i18n-key="navRecentVideos">Recent Videos</a>
+                 <!-- Removed target="_blank" and rel="noopener noreferrer" to open in same tab -->
+                 <a href="https://samaryt567.github.io/Test/About.html" data-i18n-key="navAbout">About</a>
+                 <a href="https://samaryt567.github.io/Test/RecentVideos.html" data-i18n-key="navRecentVideos">Recent Videos</a>
             </div>
             <div class="setting-section accessibility-options">
                 <h3 data-i18n-key="headingAccessibility">Accessibility</h3>
@@ -1232,7 +1321,7 @@
             heroSubscribe: "Subscribe",
             aboutTitle: "About Me",
             aboutParagraph: `Hey there! I'm Samar, the creator behind Sam Plays, where I dive into games like Minecraft, Would You Rather, and PUBG. It all started on a random day when a simple question popped into my head: "How do people upload videos to their channel?" That curiosity sparked something big—and just like that, Sam Plays was born. Now, I'm here to share my gaming adventures, have fun, and connect with awesome people like you. Hit that subscribe button and join the journey!`,
-            quoteText: `"Sam Plays is a very good content creator. His gaming videos are engaging and entertaining. Keep up the great work, Sam Plays! Thank you for providing such awesome videos. I hope he never quits."`,
+            quoteText: `"Sam Plays is a very good content creator. His gaming videos are engaging and entertaining. Keep up the great work, Sam Plays! Thank a you for providing such awesome videos. I hope he never quits."`,
             faqTitle: "Frequently Asked Questions",
             faq1Question: "What types of games do you play?",
             faq1Answer: "I play a wide variety of games, from popular AAA titles to indie games. My main focus is on open-world, survival, and story-driven games, but I'm always open to trying new genres based on community suggestions!",
@@ -1288,11 +1377,11 @@
             faq1Question: "Welche Arten von Spielen spielst du?",
             faq1Answer: "Ich spiele eine Vielzahl von Spielen, von beliebten AAA-Titeln bis hin zu Indie-Spielen. Mein Hauptaugenmerk liegt auf Open-World-, Survival- und storybasierten Spielen, aber ich bin immer offen für neue Genres basierend auf Community-Vorschlägen!",
             faq2Question: "Erstellst du originale Spielinhalte?",
-            faq2Answer: "Ja. 100% meiner Inhalte sind original. Ich handle alles von Gameplay-Aufnahme und Bearbeitung bis hin zu Voiceover und Thumbnails. Ich habe und don't plan to copy anyone's content.",
+            faq2Answer: "Ja. 100% meiner Inhalte sind original. Ich handle alles von Gameplay-Aufnahme und Bearbeitung bis hin zu Voiceover und Thumbnails. Ich habe und plane nicht, Inhalte von anderen zu kopieren.",
             faq3Question: "Kann ich ein bestimmtes Spiel vorschlagen?",
-            faq3Answer: "Absolut! Ich welcome requests from my subscribers and consider featuring their favorite games in my upcoming videos. The best way to suggest a game is to leave a comment on my latest YouTube video.",
-            faq4Question: "How frequently do you upload new videos?",
-            faq4Answer: "Since I am the only person who makes the content, I am not very consistent, but I mostly upload at least two videos in a month. Quality is more important to me than quantity, so I take my time to make each video enjoyable.",
+            faq3Answer: "Absolut! Ich freue mich über Anfragen meiner Abonnenten und ziehe es in Betracht, ihre Lieblingsspiele in meinen kommenden Videos zu zeigen. Der beste Weg, ein Spiel vorzuschlagen, ist ein Kommentar unter meinem neuesten YouTube-Video.",
+            faq4Question: "Wie häufig lädst du neue Videos hoch?",
+            faq4Answer: "Da ich die einzige Person bin, die den Inhalt erstellt, bin ich nicht sehr konsistent, aber ich lade meistens mindestens zwei Videos pro Monat hoch. Qualität ist mir wichtiger als Quantität, daher nehme ich mir Zeit, jedes Video unterhaltsam zu gestalten.",
             socialsTitle: "Meine Socials",
             footerThanks: "Danke für den Besuch",
             footerContact: "Kontaktiere stgbussiness436@gmail.com für mehr Infos.",
@@ -1449,13 +1538,45 @@
           menuBtn.addEventListener('click', (event) => {
               event.stopPropagation();
               toggleMenu();
+              vibrate(50); // Haptic feedback on menu open
           });
-          closeMenuBtn.addEventListener('click', toggleMenu);
+          closeMenuBtn.addEventListener('click', () => {
+              toggleMenu();
+              vibrate(50); // Haptic feedback on menu close
+          });
           
           document.addEventListener('click', (event) => {
               if (sideMenu.classList.contains('visible') && !sideMenu.contains(event.target) && !menuBtn.contains(event.target)) {
                   toggleMenu();
+                  vibrate(50); // Haptic feedback on menu close via outside click
               }
+          });
+
+          // --- Swipe to Close Gesture Support ---
+          let touchStartX = 0;
+          let touchEndX = 0;
+          const minSwipeDistance = 50; // Minimum pixels for a swipe to be recognized
+
+          sideMenu.addEventListener('touchstart', (e) => {
+              touchStartX = e.touches[0].clientX;
+              touchEndX = 0; // Reset end position
+          });
+
+          sideMenu.addEventListener('touchmove', (e) => {
+              touchEndX = e.touches[0].clientX;
+          });
+
+          sideMenu.addEventListener('touchend', () => {
+              if (sideMenu.classList.contains('visible') && touchEndX !== 0) {
+                  const swipeDistance = touchEndX - touchStartX;
+                  if (swipeDistance > minSwipeDistance) { // Swiped right
+                      toggleMenu();
+                      vibrate(50); // Haptic feedback on swipe close
+                  }
+              }
+              // Reset touch positions
+              touchStartX = 0;
+              touchEndX = 0;
           });
       }
       
@@ -1468,6 +1589,7 @@
           faqItems.forEach(otherItem => otherItem.classList.remove('active'));
           if (!wasActive) item.classList.add('active');
           setTimeout(() => { if (locoScroll) locoScroll.update(); }, 500);
+          vibrate(30); // Haptic feedback on FAQ toggle
         });
       });
 
@@ -1475,6 +1597,7 @@
       if (scrollTopBtn) {
           scrollTopBtn.addEventListener('click', () => {
             if (locoScroll) locoScroll.scrollTo('top');
+            vibrate(50); // Haptic feedback on scroll to top
           });
       }
 
@@ -1525,6 +1648,7 @@
       themeRadios.forEach(radio => {
           radio.addEventListener('change', (e) => {
               applyTheme(e.target.value);
+              vibrate(30); // Haptic feedback on theme change
           });
       });
 
@@ -1538,6 +1662,7 @@
           const selectedLang = e.target.value;
           localStorage.setItem('language', selectedLang);
           setLanguage(selectedLang);
+          vibrate(30); // Haptic feedback on language change
       });
       
       // --- Hotkey Help Modal & Keyboard Shortcuts ---
@@ -1559,23 +1684,30 @@
 
         if (e.key === '?' || key === 'h') {
           showHelpModal();
+          vibrate(20); // Haptic feedback for hotkey help
         }
         if (key === 'm') {
           toggleMenu();
+          vibrate(20); // Haptic feedback for menu toggle
         }
         if (key === 't') {
           locoScroll.scrollTo('top');
+          vibrate(20); // Haptic feedback for scroll to top
         }
         if (key === 'b') {
           locoScroll.scrollTo('bottom');
+          vibrate(20); // Haptic feedback for scroll to bottom
         }
         if (e.key === 'Escape') {
           if (!hotkeyModal.hidden) {
             hideHelpModal();
+            vibrate(20); // Haptic feedback for closing hotkey modal
           } else if (sideMenu.classList.contains('visible')) {
             toggleMenu();
+            vibrate(20); // Haptic feedback for closing menu
           } else if (!cookieSettingsModal.hidden) { // Close cookie settings modal
             hideCookieSettingsModal();
+            vibrate(20); // Haptic feedback for closing cookie modal
           }
         }
       });
@@ -1588,18 +1720,26 @@
       let followerX = 0, followerY = 0;
       
       window.addEventListener('mousemove', e => {
-          mouseX = e.clientX;
-          mouseY = e.clientY;
+          // Only update cursor position if not on a touch device or if custom cursor is enabled
+          if (!('ontouchstart' in window) || document.body.classList.contains('cursor-ambient-dot')) {
+              mouseX = e.clientX;
+              mouseY = e.clientY;
+          }
       });
 
       function animateCursor() {
-          if (document.body.classList.contains('cursor-ambient-dot')) {
+          if (document.body.classList.contains('cursor-ambient-dot') && !('ontouchstart' in window)) {
               cursorDot.style.left = `${mouseX}px`;
               cursorDot.style.top = `${mouseY}px`;
               followerX += (mouseX - followerX) * 0.1;
               followerY += (mouseY - followerY) * 0.1;
               cursorFollower.style.left = `${followerX}px`;
               cursorFollower.style.top = `${followerY}px`;
+              cursorDot.style.display = 'block';
+              cursorFollower.style.display = 'block';
+          } else {
+              cursorDot.style.display = 'none';
+              cursorFollower.style.display = 'none';
           }
           requestAnimationFrame(animateCursor);
       }
@@ -1609,11 +1749,16 @@
         document.body.classList.remove('cursor-ambient-dot');
         document.body.style.cursor = 'default';
 
-        if (style === 'ambient-dot') {
-          document.body.classList.add('cursor-ambient-dot');
-          document.body.style.cursor = 'none';
+        if (!('ontouchstart' in window)) { // Apply custom cursor only on non-touch devices
+            if (style === 'ambient-dot') {
+                document.body.classList.add('cursor-ambient-dot');
+                document.body.style.cursor = 'none';
+            } else {
+                document.body.style.cursor = style;
+            }
         } else {
-          document.body.style.cursor = style;
+            // Force default cursor on touch devices, regardless of setting
+            document.body.style.cursor = 'default';
         }
         localStorage.setItem('cursorStyle', style); // Save cursor style
       }
@@ -1621,6 +1766,7 @@
       cursorRadios.forEach(radio => {
         radio.addEventListener('change', (e) => {
           updateCursorStyle(e.target.value);
+          vibrate(30); // Haptic feedback on cursor style change
         });
       });
       
@@ -1629,9 +1775,32 @@
       updateCursorStyle(initialCursor);
 
       document.querySelectorAll('a, button, .faq-question, .slider, select').forEach(el => {
-        el.addEventListener('mouseenter', () => cursorFollower.classList.add('active'));
-        el.addEventListener('mouseleave', () => cursorFollower.classList.remove('active'));
+        el.addEventListener('mouseenter', () => {
+            if (!('ontouchstart' in window)) {
+                cursorFollower.classList.add('active');
+            }
+        });
+        el.addEventListener('mouseleave', () => {
+            if (!('ontouchstart' in window)) {
+                cursorFollower.classList.remove('active');
+            }
+        });
       });
+
+      // --- Haptic Feedback Function ---
+      function vibrate(duration) {
+          if (navigator.vibrate) {
+              navigator.vibrate(duration);
+          }
+      }
+
+      // Add haptic feedback to all interactive buttons/links
+      document.querySelectorAll('button, a.subscribe-button, #openFeedbackFormBtn, #acceptCookies, #rejectCookies, #customizeCookies, #saveCookieSettings, #resetCookieSettings').forEach(element => {
+          element.addEventListener('click', () => {
+              vibrate(50); // General haptic feedback for clicks
+          });
+      });
+
 
       // --- Cookie Consent Logic ---
       const cookieConsentBanner = document.getElementById('cookieConsentBanner');
