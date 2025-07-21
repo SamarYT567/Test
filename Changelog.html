@@ -36,6 +36,13 @@
             --cookie-button-hover-bg: #4a9eda;
 
             --border-radius-soft: 12px; /* Consistent border radius */
+
+            /* New Light theme specific overrides for elements that need black in light mode */
+            --image-border-color-light: #000000;
+            --subscribe-button-bg-light: #000000;
+            --subscribe-button-hover-bg-light: #333333; /* Slightly lighter black on hover */
+            --contact-button-bg-light: #000000;
+            --contact-button-hover-bg-light: #333333; /* Slightly lighter black on hover */
         }
 
         /* Light Theme from Index.html */
@@ -168,13 +175,22 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: transparent;
-            transition: background-color 0.4s ease, backdrop-filter 0.4s ease;
+            /* Default transparent state */
+            background-color: transparent;
+            backdrop-filter: blur(0px);
+            -webkit-backdrop-filter: blur(0px);
+            border-bottom: 1px solid transparent;
+            transition: background-color 0.4s ease, backdrop-filter 0.4s ease, border-bottom-color 0.4s ease;
         }
         header.scrolled {
-            background-color: var(--card-bg);
+            /* Glassmorphism effect when scrolled */
+            background-color: rgba(22, 27, 34, 0.8); /* Dark theme glassmorphism */
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border-color);
+        }
+        body.light-theme header.scrolled { /* Apply light theme glassmorphism when scrolled */
+            background-color: rgba(255, 255, 255, 0.8);
         }
         .header-title {
             flex-grow: 1;
@@ -182,8 +198,7 @@
         }
         .header-title h1 {
             font-family: 'Orbitron', sans-serif;
-            color: var(--light-accent);
-            font-size: 1.8em;
+            font-size: clamp(1.5em, 4vw, 1.8em); /* Auto-adjusting font size */
             margin: 0;
             text-shadow: 0 0 5px var(--main-red);
             display: inline-block;
@@ -230,7 +245,7 @@
         #sideMenu {
             position: fixed;
             top: 0;
-            right: -320px;
+            right: -320px; /* Hidden by default */
             width: 300px;
             height: 100%;
             background: var(--side-menu-bg);
@@ -257,6 +272,7 @@
             color: var(--text-secondary);
             font-size: 2rem;
             transition: color 0.3s, transform 0.3s;
+            padding: 10px;
         }
         #closeMenuBtn:hover {
             color: var(--main-red);
@@ -408,7 +424,7 @@
 
         /* Main Content Layout */
         .main-container {
-            padding: 120px 5% 40px;
+            padding: 120px 5vw 40px; /* Adjusted top padding for fixed header and responsive horizontal padding */
             max-width: 1200px;
             margin: 0 auto;
         }
@@ -427,7 +443,7 @@
 
         .section-heading {
             font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
+            font-size: clamp(1.8rem, 5vw, 2.5rem); /* Made responsive */
             color: var(--light-accent);
             text-align: center;
             margin-bottom: 30px;
@@ -449,19 +465,19 @@
         .changelog-entry h2 {
             font-family: 'Poppins', sans-serif;
             font-weight: 700;
-            font-size: 1.875rem;
+            font-size: clamp(1.5rem, 4vw, 1.875rem); /* Made responsive */
             color: var(--main-blue);
             margin-bottom: 0.5rem;
         }
         .changelog-entry p.release-date {
-            font-size: 0.875rem;
+            font-size: clamp(0.8rem, 2vw, 0.875rem); /* Made responsive */
             color: var(--text-secondary);
             margin-bottom: 1rem;
         }
         .changelog-entry h3 {
             font-family: 'Poppins', sans-serif;
             font-weight: 600;
-            font-size: 1.25rem;
+            font-size: clamp(1.1rem, 3vw, 1.25rem); /* Made responsive */
             color: var(--text-primary);
             margin-bottom: 0.5rem;
             margin-top: 1.5rem;
@@ -476,7 +492,7 @@
         }
         .changelog-entry ul li {
             margin-bottom: 0.5rem;
-            font-size: 1.125rem;
+            font-size: clamp(1rem, 2.5vw, 1.125rem); /* Made responsive */
         }
         .changelog-entry ul li:last-child {
             margin-bottom: 0;
@@ -658,6 +674,30 @@
             opacity: 1;
             visibility: visible;
         }
+        .cookie-settings-actions button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: var(--border-radius-soft);
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+        #saveCookieSettings {
+            background-color: var(--main-blue);
+            color: white;
+        }
+        #saveCookieSettings:hover {
+            background-color: #4a9eda;
+        }
+        #resetCookieSettings {
+            background-color: var(--card-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+        #resetCookieSettings:hover {
+            background-color: var(--border-color);
+        }
+        /* Styles for cookie modal content from Index.html */
         #cookieSettingsModal .modal-content {
             background-color: var(--modal-bg);
             padding: 30px 40px;
@@ -710,45 +750,77 @@
         .cookie-setting-item .toggle-switch {
             margin-left: 15px;
         }
-        .cookie-settings-actions {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 25px;
-        }
-        .cookie-settings-actions button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: var(--border-radius-soft);
-            cursor: pointer;
-            font-weight: 600;
-            transition: background-color 0.3s ease;
-        }
-        #saveCookieSettings {
-            background-color: var(--main-blue);
-            color: white;
-        }
-        #saveCookieSettings:hover {
-            background-color: #4a9eda;
-        }
-        #resetCookieSettings {
-            background-color: var(--card-bg);
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
-        }
-        #resetCookieSettings:hover {
-            background-color: var(--border-color);
-        }
+
 
         /* Responsive Adjustments */
+        @media (max-width: 1024px) { /* Combined mobile and tablet for cursor removal */
+            .cursor-dot, .cursor-follower {
+                display: none !important;
+            }
+            body.cursor-ambient-dot {
+                cursor: default !important;
+            }
+            .cursor-options {
+                display: none; /* Hide cursor options on touch devices */
+            }
+
+            /* Make side menu full screen on mobile/tablet */
+            #sideMenu {
+                width: 100%;
+                right: -100%; /* Initially off-screen */
+                border-radius: 0; /* Remove rounded corners for full screen */
+            }
+            #sideMenu.visible {
+                right: 0; /* Slide in to cover full screen */
+            }
+        }
+
         @media (max-width: 768px) {
-            .header-title h1 { font-size: 1.5em; }
-            .changelog-entry h2 { font-size: 1.5rem; }
-            .changelog-entry h3 { font-size: 1.125rem; }
-            .changelog-entry ul li { font-size: 1rem; }
+            header h1 { font-size: clamp(1.2em, 5vw, 1.5em); }
+            .main-container {
+                padding: 100px 3vw 30px; /* Adjusted top padding for header and responsive horizontal padding */
+            }
+            .section-heading {
+                font-size: clamp(1.5rem, 6vw, 2rem); /* Adjusted for smaller screens */
+            }
+            .changelog-entry h2 { font-size: clamp(1.3rem, 5vw, 1.5rem); }
+            .changelog-entry h3 { font-size: clamp(1rem, 3.5vw, 1.125rem); }
+            .changelog-entry ul li { font-size: clamp(0.9rem, 2.8vw, 1rem); }
             .cookie-buttons {
                 flex-direction: column;
             }
+        }
+
+        @media (max-width: 480px) {
+            header h1 { font-size: clamp(1.1em, 6vw, 1.3em); white-space: normal; }
+            .section-heading { font-size: clamp(1.3rem, 7vw, 1.8rem); } /* Further adjusted for very small screens */
+            .main-container {
+                padding: 80px 3vw 20px; /* Further adjusted padding for very small screens */
+            }
+        }
+
+        /* Tablet-specific adjustments (769px to 1024px) */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .main-container {
+                padding: 120px 7vw 40px;
+            }
+            .section-heading { font-size: 2.2rem; }
+            .changelog-entry h2 { font-size: 1.7rem; }
+            .changelog-entry h3 { font-size: 1.2rem; }
+            .changelog-entry ul li { font-size: 1.1rem; }
+        }
+
+        /* Landscape phone orientation adjustments */
+        @media screen and (max-width: 820px) and (orientation: landscape) {
+            .main-container {
+                padding: 80px 5vw 20px;
+            }
+            .section-heading {
+                font-size: clamp(1.8rem, 5vw, 2.2rem);
+            }
+            .changelog-entry h2 { font-size: 1.5rem; }
+            .changelog-entry h3 { font-size: 1.1rem; }
+            .changelog-entry ul li { font-size: 0.95rem; }
         }
     </style>
 </head>
@@ -784,8 +856,9 @@
             <div class="side-menu-content">
                 <div class="setting-section menu-nav-links">
                     <a href="https://samaryt567.github.io/Test/Index.html" data-i18n-key="navHome">Home</a>
-                    <a href="https://samaryt567.github.io/Test/About.html" target="_blank" rel="noopener noreferrer" data-i18n-key="navAbout">About</a>
-                    <a href="https://samaryt567.github.io/Test/RecentVideos.html" target="_blank" rel="noopener noreferrer" data-i18n-key="navRecentVideos">Recent Videos</a>
+                    <a href="https://samaryt567.github.io/Test/About.html" data-i18n-key="navAbout">About</a>
+                    <a href="https://samaryt567.github.io/Test/RecentVideos.html" data-i18n-key="navRecentVideos">Recent Videos</a>
+                    <!-- Removed Changelog link as per request -->
                 </div>
                 <div class="setting-section accessibility-options">
                     <h3 data-i18n-key="headingAccessibility">Accessibility</h3>
@@ -833,7 +906,7 @@
 
         <main class="main-container" data-scroll-section>
             <div class="grid-item" style="max-width: 900px; margin: 0 auto; padding: 2rem 3rem;">
-                <h1 class="section-heading" style="font-size: 2.5rem; font-weight: 800; margin-bottom: 2.5rem;">
+                <h1 class="section-heading" style="font-size: clamp(2rem, 6vw, 2.5rem); font-weight: 800; margin-bottom: 2.5rem;">
                     Complete Changelog
                 </h1>
 
@@ -1083,6 +1156,7 @@
                 navHome: "Home",
                 navAbout: "About",
                 navRecentVideos: "Recent Videos",
+                navChangelog: "Changelog", // Added new translation key
                 headingAccessibility: "Accessibility",
                 optionReduceMotion: "Reduce Motion",
                 headingCursorStyle: "Cursor Style",
@@ -1116,6 +1190,7 @@
                 navHome: "Startseite",
                 navAbout: "Über Mich",
                 navRecentVideos: "Neueste Videos",
+                navChangelog: "Änderungsprotokoll", // Added new translation key
                 headingAccessibility: "Barrierefreiheit",
                 optionReduceMotion: "Bewegung reduzieren",
                 headingCursorStyle: "Cursor-Stil",
@@ -1273,13 +1348,45 @@
                 menuBtn.addEventListener('click', (event) => {
                     event.stopPropagation();
                     toggleMenu();
+                    vibrate(50); // Haptic feedback on menu open
                 });
-                closeMenuBtn.addEventListener('click', toggleMenu);
+                closeMenuBtn.addEventListener('click', () => {
+                    toggleMenu();
+                    vibrate(50); // Haptic feedback on menu close
+                });
                 
                 document.addEventListener('click', (event) => {
                     if (sideMenu.classList.contains('visible') && !sideMenu.contains(event.target) && !menuBtn.contains(event.target)) {
                         toggleMenu();
+                        vibrate(50); // Haptic feedback on menu close via outside click
                     }
+                });
+
+                // --- Swipe to Close Gesture Support ---
+                let touchStartX = 0;
+                let touchEndX = 0;
+                const minSwipeDistance = 50; // Minimum pixels for a swipe to be recognized
+
+                sideMenu.addEventListener('touchstart', (e) => {
+                    touchStartX = e.touches[0].clientX;
+                    touchEndX = 0; // Reset end position
+                });
+
+                sideMenu.addEventListener('touchmove', (e) => {
+                    touchEndX = e.touches[0].clientX;
+                });
+
+                sideMenu.addEventListener('touchend', () => {
+                    if (sideMenu.classList.contains('visible') && touchEndX !== 0) {
+                        const swipeDistance = touchEndX - touchStartX;
+                        if (swipeDistance > minSwipeDistance) { // Swiped right
+                            toggleMenu();
+                            vibrate(50); // Haptic feedback on swipe close
+                        }
+                    }
+                    // Reset touch positions
+                    touchStartX = 0;
+                    touchEndX = 0;
                 });
             }
 
@@ -1287,6 +1394,7 @@
             if (scrollTopBtn) {
                 scrollTopBtn.addEventListener('click', () => {
                     if (locoScroll) locoScroll.scrollTo('top');
+                    vibrate(50); // Haptic feedback on scroll to top
                 });
             }
 
@@ -1327,6 +1435,7 @@
             themeRadios.forEach(radio => {
                 radio.addEventListener('change', (e) => {
                     applyTheme(e.target.value);
+                    vibrate(30); // Haptic feedback on theme change
                 });
             });
 
@@ -1339,6 +1448,7 @@
                 const selectedLang = e.target.value;
                 localStorage.setItem('language', selectedLang);
                 setLanguage(selectedLang);
+                vibrate(30); // Haptic feedback on language change
             });
             
             // --- Hotkey Help Modal & Keyboard Shortcuts ---
@@ -1355,14 +1465,33 @@
                 
                 const key = e.key.toLowerCase();
 
-                if (e.key === '?' || key === 'h') showHelpModal();
-                if (key === 'm') toggleMenu();
-                if (key === 't' && locoScroll) locoScroll.scrollTo('top');
-                if (key === 'b' && locoScroll) locoScroll.scrollTo('bottom');
+                if (e.key === '?' || key === 'h') {
+                    showHelpModal();
+                    vibrate(20); // Haptic feedback for hotkey help
+                }
+                if (key === 'm') {
+                    toggleMenu();
+                    vibrate(20); // Haptic feedback for menu toggle
+                }
+                if (key === 't' && locoScroll) {
+                    locoScroll.scrollTo('top');
+                    vibrate(20); // Haptic feedback for scroll to top
+                }
+                if (key === 'b' && locoScroll) {
+                    locoScroll.scrollTo('bottom');
+                    vibrate(20); // Haptic feedback for scroll to bottom
+                }
                 if (e.key === 'Escape') {
-                    if (!hotkeyModal.hidden) hideHelpModal();
-                    else if (sideMenu.classList.contains('visible')) toggleMenu();
-                    else if (!cookieSettingsModal.hidden) hideCookieSettingsModal();
+                    if (!hotkeyModal.hidden) {
+                        hideHelpModal();
+                        vibrate(20); // Haptic feedback for closing hotkey modal
+                    } else if (sideMenu.classList.contains('visible')) {
+                        toggleMenu();
+                        vibrate(20); // Haptic feedback for closing menu
+                    } else if (!cookieSettingsModal.hidden) {
+                        hideCookieSettingsModal();
+                        vibrate(20); // Haptic feedback for closing cookie modal
+                    }
                 }
             });
 
@@ -1374,18 +1503,25 @@
             let followerX = 0, followerY = 0;
             
             window.addEventListener('mousemove', e => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
+                if (!('ontouchstart' in window) || document.body.classList.contains('cursor-ambient-dot')) {
+                    mouseX = e.clientX;
+                    mouseY = e.clientY;
+                }
             });
 
             function animateCursor() {
-                if (document.body.classList.contains('cursor-ambient-dot')) {
+                if (document.body.classList.contains('cursor-ambient-dot') && !('ontouchstart' in window)) {
                     cursorDot.style.left = `${mouseX}px`;
                     cursorDot.style.top = `${mouseY}px`;
                     followerX += (mouseX - followerX) * 0.1;
                     followerY += (mouseY - followerY) * 0.1;
                     cursorFollower.style.left = `${followerX}px`;
                     cursorFollower.style.top = `${followerY}px`;
+                    cursorDot.style.display = 'block';
+                    cursorFollower.style.display = 'block';
+                } else {
+                    cursorDot.style.display = 'none';
+                    cursorFollower.style.display = 'none';
                 }
                 requestAnimationFrame(animateCursor);
             }
@@ -1395,11 +1531,15 @@
                 document.body.classList.remove('cursor-ambient-dot');
                 document.body.style.cursor = 'default';
 
-                if (style === 'ambient-dot' && !document.body.classList.contains('reduce-motion')) {
-                    document.body.classList.add('cursor-ambient-dot');
-                    document.body.style.cursor = 'none';
+                if (!('ontouchstart' in window)) {
+                    if (style === 'ambient-dot') {
+                        document.body.classList.add('cursor-ambient-dot');
+                        document.body.style.cursor = 'none';
+                    } else {
+                        document.body.style.cursor = style;
+                    }
                 } else {
-                    document.body.style.cursor = style;
+                    document.body.style.cursor = 'default';
                 }
                 localStorage.setItem('cursorStyle', style);
             }
@@ -1407,19 +1547,43 @@
             cursorRadios.forEach(radio => {
                 radio.addEventListener('change', (e) => {
                     updateCursorStyle(e.target.value);
+                    vibrate(30); // Haptic feedback on cursor style change
                 });
             });
             
-            const initialCursor = localStorage.getItem('cursorStyle') || 'ambient-dot';
+            const initialCursor = localStorage.getItem('cursorStyle') || document.querySelector('input[name="cursor-style"][value="ambient-dot"]').value;
             updateCursorStyle(initialCursor);
             const initialCursorRadio = document.querySelector(`input[name="cursor-style"][value="${initialCursor}"]`);
             if(initialCursorRadio) initialCursorRadio.checked = true;
 
 
             document.querySelectorAll('a, button, select').forEach(el => {
-                el.addEventListener('mouseenter', () => cursorFollower.classList.add('active'));
-                el.addEventListener('mouseleave', () => cursorFollower.classList.remove('active'));
+                el.addEventListener('mouseenter', () => {
+                    if (!('ontouchstart' in window)) {
+                        cursorFollower.classList.add('active');
+                    }
+                });
+                el.addEventListener('mouseleave', () => {
+                    if (!('ontouchstart' in window)) {
+                        cursorFollower.classList.remove('active');
+                    }
+                });
             });
+
+            // --- Haptic Feedback Function ---
+            function vibrate(duration) {
+                if (navigator.vibrate) {
+                    navigator.vibrate(duration);
+                }
+            }
+
+            // Add haptic feedback to all interactive buttons/links
+            document.querySelectorAll('button, a.subscribe-button, #openFeedbackFormBtn, #acceptCookies, #rejectCookies, #customizeCookies, #saveCookieSettings, #resetCookieSettings').forEach(element => {
+                element.addEventListener('click', () => {
+                    vibrate(50); // General haptic feedback for clicks
+                });
+            });
+
 
             // --- Cookie Consent Logic ---
             const cookieConsentBanner = document.getElementById('cookieConsentBanner');
@@ -1428,6 +1592,7 @@
             const customizeCookiesBtn = document.getElementById('customizeCookies');
             const cookieSettingsModal = document.getElementById('cookieSettingsModal');
             const closeCookieSettingsModalBtn = document.getElementById('closeCookieSettingsModalBtn');
+            const essentialCookiesToggle = document.getElementById('essentialCookiesToggle');
             const analyticsCookiesToggle = document.getElementById('analyticsCookiesToggle');
             const marketingCookiesToggle = document.getElementById('marketingCookiesToggle');
             const saveCookieSettingsBtn = document.getElementById('saveCookieSettings');
@@ -1464,6 +1629,8 @@
                 if (consentType === 'acceptAll') {
                     settings.analytics = true;
                     settings.marketing = true;
+                } else if (consentType === 'rejectAll') {
+                    // All non-essential are false
                 } else if (consentType === 'custom') {
                     settings.analytics = analyticsCookiesToggle.checked;
                     settings.marketing = marketingCookiesToggle.checked;
