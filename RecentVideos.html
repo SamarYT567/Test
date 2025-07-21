@@ -813,6 +813,15 @@
         .cursor-options {
             display: none; /* Hide cursor options on touch devices */
         }
+        /* Make side menu full screen on mobile/tablet */
+        #sideMenu {
+            width: 100%;
+            right: -100%; /* Initially off-screen */
+            border-radius: 0; /* Remove rounded corners for full screen */
+        }
+        #sideMenu.visible {
+            right: 0; /* Slide in to cover full screen */
+        }
     }
 
     @media (max-width: 768px) {
@@ -943,9 +952,9 @@
         </div>
         <div class="side-menu-content">
             <div class="setting-section menu-nav-links">
-                 <a href="index.html" data-i18n-key="navHome">Home</a>
-                 <a href="About.html" data-i18n-key="navAbout">About</a>
-                 <!-- Removed "Recent Videos" link from the side menu -->
+                 <a href="https://samaryt567.github.io/Test/index.html" data-i18n-key="navHome">Home</a>
+                 <a href="https://samaryt567.github.io/Test/About.html" data-i18n-key="navAbout">About</a>
+                 <a href="https://samaryt567.github.io/Test/Changelog.html" data-i18n-key="navChangelog">Changelog</a>
             </div>
             <div class="setting-section accessibility-options">
                 <h3 data-i18n-key="headingAccessibility">Accessibility</h3>
@@ -1081,6 +1090,7 @@
             navHome: "Home",
             navAbout: "About",
             navRecentVideos: "Recent Videos",
+            navChangelog: "Changelog", // Added new translation key
             headingAccessibility: "Accessibility",
             optionReduceMotion: "Reduce Motion",
             headingCursorStyle: "Cursor Style",
@@ -1116,6 +1126,7 @@
             navHome: "Startseite",
             navAbout: "Über Mich",
             navRecentVideos: "Neueste Videos",
+            navChangelog: "Änderungsprotokoll", // Added new translation key
             headingAccessibility: "Barrierefreiheit",
             optionReduceMotion: "Bewegung reduzieren",
             headingCursorStyle: "Cursor-Stil",
