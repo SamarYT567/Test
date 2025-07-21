@@ -813,6 +813,15 @@
             .cursor-options {
                 display: none;
             }
+            /* Make side menu full screen on mobile/tablet */
+            #sideMenu {
+                width: 100%;
+                right: -100%; /* Initially off-screen */
+                border-radius: 0; /* Remove rounded corners for full screen */
+            }
+            #sideMenu.visible {
+                right: 0; /* Slide in to cover full screen */
+            }
         }
 
         @media (max-width: 768px) {
@@ -897,8 +906,9 @@
             </div>
             <div class="side-menu-content">
                 <div class="setting-section menu-nav-links">
-                     <a href="Index.html" data-i18n-key="navHome">Home</a>
-                     <a href="RecentVideos.html" data-i18n-key="navRecentVideos">Recent Videos</a>
+                     <a href="https://samaryt567.github.io/Test/Index.html" data-i18n-key="navHome">Home</a>
+                     <a href="https://samaryt567.github.io/Test/RecentVideos.html" data-i18n-key="navRecentVideos">Recent Videos</a>
+                     <a href="https://samaryt567.github.io/Test/Changelog.html" data-i18n-key="navChangelog">Changelog</a>
                 </div>
                 <div class="setting-section accessibility-options">
                     <h3 data-i18n-key="headingAccessibility">Accessibility</h3>
@@ -1073,6 +1083,7 @@
                 channelTitle: "Sam Plays",
                 navHome: "Home",
                 navRecentVideos: "Recent Videos",
+                navChangelog: "Changelog", // Added new translation key
                 headingAccessibility: "Accessibility",
                 optionReduceMotion: "Reduce Motion",
                 headingCursorStyle: "Cursor Style",
@@ -1114,6 +1125,7 @@
                 channelTitle: "Sam Spielt",
                 navHome: "Startseite",
                 navRecentVideos: "Neueste Videos",
+                navChangelog: "Änderungsprotokoll", // Added new translation key
                 headingAccessibility: "Barrierefreiheit",
                 optionReduceMotion: "Bewegung reduzieren",
                 headingCursorStyle: "Cursor-Stil",
@@ -1126,7 +1138,7 @@
                 themeDark: "Dunkel",
                 headingLanguage: "Sprache",
                 aboutPhilosophyTitle: "Meine Gaming-Philosophie",
-                aboutPhilosophyContent: `Bei Sam Spielt geht es nicht nur ums Spielen. Es geht um die Stimmung, die Geschichten und die Erinnerungen, die bleiben. Ob es der Adrenalinkick eines Bosskampfes ist, die Freude, etwas aus dem Nichts zu erschaffen, oder unerwartete Wendungen. Ich bin für alles dabei. Wenn du ein Gaming-Enthusiast bist, für peinliche Momente, tiefgehenden Inhalt oder einfach nur zum Entspannen hier bist, bist du in der richtigen Community. Lass uns spielen, lachen, kreieren und uns in den Welten verlieren, die wir schätzen, Gemeinsam.`,
+                aboutPhilosophyContent: `Bei Sam Spielt geht es nicht nur ums Spielen. Es geht um die Stimmung, die Geschichten und die Erinnerungen, die bleiben. Ob es der Adrenalinkick eines Bosskampfes ist, die Freude, etwas aus dem Nichts zu erschaffen, oder unerwartete Wendungen. Ich bin für alles dabei. Wenn du ein Gaming-Enthusiast bist, für peinliche Momente, tiefgehenden Inhalt oder einfach nur zum Entspannen hier bist, bist du in der richtigen Community. Let's game, lachen, kreieren und uns in den Welten verlieren, die wir schätzen, Gemeinsam.`,
                 aboutProcessTitle: "Der Erstellungsprozess",
                 aboutProcessContent: `Jedes Video bei Sam Spielt ist auf Perfektion ausgelegt. Von der Planung der Inhalte und der Aufnahme hochwertiger Gameplays bis hin zum Prozess des Bearbeitens, des Sounddesigns und des Erstellens der auffälligen Thumbnails – ich kümmere mich um alles. Es ist eine Herzensangelegenheit, um sicherzustellen, dass jedes Video einen Mehrwert und eine einzigartige Perspektive auf die Spiele bietet, die ich spiele. Mein Ziel ist es, Inhalte zu liefern, die Sie noch lange nach dem Ende des Videos ansprechen.`,
                 aboutSpecsTitle: "Meine PC-Spezifikationen", // New key for PC Specs title
