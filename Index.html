@@ -599,7 +599,7 @@
         transition: color 0.3s ease, background-color 0.3s ease;
     }
     .faq-question:hover {
-        color: var(--main-blue);
+        color: var(--main-red); /* Changed to red on hover */
         background-color: rgba(52, 152, 219, 0.05); /* Subtle highlight on hover */
     }
     .faq-answer {
@@ -630,7 +630,7 @@
         transform: rotate(45deg);
     }
     .faq-item.active .faq-question {
-        color: var(--main-blue);
+        color: var(--main-red); /* Changed to red when active */
     }
 
     /* Socials Section */
@@ -985,6 +985,16 @@
         .cursor-options {
             display: none; /* Hide cursor options on touch devices */
         }
+
+        /* Make side menu full screen on mobile/tablet */
+        #sideMenu {
+            width: 100%;
+            right: -100%; /* Initially off-screen */
+            border-radius: 0; /* Remove rounded corners for full screen */
+        }
+        #sideMenu.visible {
+            right: 0; /* Slide in to cover full screen */
+        }
     }
 
     @media (max-width: 768px) {
@@ -1008,11 +1018,6 @@
       .cookie-buttons {
         flex-direction: column;
       }
-      /* Adjust side menu width for smaller screens */
-      #sideMenu {
-        width: 250px;
-        right: -260px; /* Adjust to match new width + some offset */
-      }
     }
 
     @media (max-width: 480px) {
@@ -1020,10 +1025,6 @@
       .section-heading { font-size: clamp(1.3rem, 7vw, 1.8rem); } /* Further adjusted for very small screens */
       .main-container {
         padding: 80px 3vw 20px; /* Further adjusted padding for very small screens */
-      }
-      #sideMenu {
-        width: 220px;
-        right: -230px;
       }
     }
 
@@ -1103,9 +1104,10 @@
         </div>
         <div class="side-menu-content">
             <div class="setting-section menu-nav-links">
-                 <!-- Removed target="_blank" and rel="noopener noreferrer" to open in same tab -->
+                 <!-- Removed Home option as requested -->
                  <a href="https://samaryt567.github.io/Test/About.html" data-i18n-key="navAbout">About</a>
                  <a href="https://samaryt567.github.io/Test/RecentVideos.html" data-i18n-key="navRecentVideos">Recent Videos</a>
+                 <a href="https://samaryt567.github.io/Test/Changelog.html" data-i18n-key="navChangelog">Changelog</a>
             </div>
             <div class="setting-section accessibility-options">
                 <h3 data-i18n-key="headingAccessibility">Accessibility</h3>
@@ -1303,8 +1305,10 @@
     const translations = {
         'en': {
             channelTitle: "Sam Plays",
+            navHome: "Home",
             navAbout: "About",
             navRecentVideos: "Recent Videos",
+            navChangelog: "Changelog", // Added new translation key
             headingAccessibility: "Accessibility",
             optionReduceMotion: "Reduce Motion",
             headingCursorStyle: "Cursor Style",
@@ -1321,7 +1325,7 @@
             heroSubscribe: "Subscribe",
             aboutTitle: "About Me",
             aboutParagraph: `Hey there! I'm Samar, the creator behind Sam Plays, where I dive into games like Minecraft, Would You Rather, and PUBG. It all started on a random day when a simple question popped into my head: "How do people upload videos to their channel?" That curiosity sparked something big—and just like that, Sam Plays was born. Now, I'm here to share my gaming adventures, have fun, and connect with awesome people like you. Hit that subscribe button and join the journey!`,
-            quoteText: `"Sam Plays is a very good content creator. His gaming videos are engaging and entertaining. Keep up the great work, Sam Plays! Thank a you for providing such awesome videos. I hope he never quits."`,
+            quoteText: `"Sam Plays is a very good content creator. His gaming videos are engaging and entertaining. Keep up the great work, Sam Plays! Thank you for providing such awesome videos. I hope he never quits."`,
             faqTitle: "Frequently Asked Questions",
             faq1Question: "What types of games do you play?",
             faq1Answer: "I play a wide variety of games, from popular AAA titles to indie games. My main focus is on open-world, survival, and story-driven games, but I'm always open to trying new genres based on community suggestions!",
@@ -1354,8 +1358,10 @@
         },
         'de': {
             channelTitle: "Sam Spielt",
+            navHome: "Startseite",
             navAbout: "Über Mich",
             navRecentVideos: "Neueste Videos",
+            navChangelog: "Änderungsprotokoll", // Added new translation key
             headingAccessibility: "Barrierefreiheit",
             optionReduceMotion: "Bewegung reduzieren",
             headingCursorStyle: "Cursor-Stil",
@@ -1379,9 +1385,9 @@
             faq2Question: "Erstellst du originale Spielinhalte?",
             faq2Answer: "Ja. 100% meiner Inhalte sind original. Ich handle alles von Gameplay-Aufnahme und Bearbeitung bis hin zu Voiceover und Thumbnails. Ich habe und plane nicht, Inhalte von anderen zu kopieren.",
             faq3Question: "Kann ich ein bestimmtes Spiel vorschlagen?",
-            faq3Answer: "Absolut! Ich freue mich über Anfragen meiner Abonnenten und ziehe es in Betracht, ihre Lieblingsspiele in meinen kommenden Videos zu zeigen. Der beste Weg, ein Spiel vorzuschlagen, ist ein Kommentar unter meinem neuesten YouTube-Video.",
-            faq4Question: "Wie häufig lädst du neue Videos hoch?",
-            faq4Answer: "Da ich die einzige Person bin, die den Inhalt erstellt, bin ich nicht sehr konsistent, aber ich lade meistens mindestens zwei Videos pro Monat hoch. Qualität ist mir wichtiger als Quantität, daher nehme ich mir Zeit, jedes Video unterhaltsam zu gestalten.",
+            faq3Answer: "Absolut! Ich welcome requests from my subscribers and consider featuring their favorite games in my upcoming videos. The best way to suggest a game is to leave a comment on my latest YouTube video.",
+            faq4Question: "How frequently do you upload new videos?",
+            faq4Answer: "Since I am the only person who makes the content, I am not very consistent, but I mostly upload at least two videos in a month. Quality is more important to me than quantity, so I take my time to make each video enjoyable.",
             socialsTitle: "Meine Socials",
             footerThanks: "Danke für den Besuch",
             footerContact: "Kontaktiere stgbussiness436@gmail.com für mehr Infos.",
