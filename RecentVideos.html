@@ -470,7 +470,7 @@
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Softer initial shadow */
       transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
                   background-color 0.3s ease,
                   box-shadow 0.3s ease,
@@ -522,10 +522,10 @@
     .video-box:hover {
       transform: translateY(-8px); /* More pronounced lift on hover */
       background-color: var(--card-bg); /* Keep same background, border changes */
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* More pronounced shadow */
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); /* Adjusted shadow for a less "weird" effect */
     }
     body.light-theme .video-box:hover {
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Lighter shadow for light theme */
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Lighter shadow for light theme */
     }
 
     /* Footer - Removed as per request */
@@ -844,10 +844,11 @@
       .cookie-buttons {
         flex-direction: column;
       }
-      /* Adjust side menu width for smaller screens */
+      /* Ensure side menu is full width on these screens too */
       #sideMenu {
-        width: 250px;
-        right: -260px; /* Adjust to match new width + some offset */
+        width: 100%;
+        right: -100%;
+        border-radius: 0;
       }
     }
 
@@ -855,9 +856,11 @@
       header h1 { font-size: clamp(1.1em, 6vw, 1.3em); white-space: normal; }
       .page-heading { font-size: clamp(1.3rem, 7vw, 1.8rem); } /* Further adjusted for very small screens */
       .content-container { grid-template-columns: 1fr; gap: 20px; }
+      /* Ensure side menu is full width on these screens too */
       #sideMenu {
-        width: 220px;
-        right: -230px;
+        width: 100%;
+        right: -100%;
+        border-radius: 0;
       }
     }
 
@@ -884,6 +887,12 @@
         }
         .video-box .video-title {
             font-size: 0.9rem;
+        }
+        /* Ensure side menu is full width in landscape phone */
+        #sideMenu {
+            width: 100%;
+            right: -100%;
+            border-radius: 0;
         }
     }
 
@@ -952,7 +961,7 @@
         </div>
         <div class="side-menu-content">
             <div class="setting-section menu-nav-links">
-                 <a href="https://samaryt567.github.io/Test/index.html" data-i18n-key="navHome">Home</a>
+                 <a href="https://samaryt567.github.io/Test/Index.html" data-i18n-key="navHome">Home</a>
                  <a href="https://samaryt567.github.io/Test/About.html" data-i18n-key="navAbout">About</a>
                  <a href="https://samaryt567.github.io/Test/Changelog.html" data-i18n-key="navChangelog">Changelog</a>
             </div>
@@ -1624,7 +1633,7 @@
             {
                 thumbnailUrl: "https://i3.ytimg.com/vi/1I74ECLn_5g/sddefault.jpg", 
                 videoUrl: "https://www.youtube.com/watch?v=kM0nO_p1q2r",
-                title: "Ultimate Comeback! A Difficult Game About Climbing (Episode 3)"
+                title: "  Ultimate Comeback! A Difficult Game About Climbing (Episode 3)"
             }
         ];
 
@@ -1634,17 +1643,14 @@
         const viewMoreBtn = document.getElementById('viewMoreBtn');
 
         function renderVideos() {
-            // Determine the end index for slicing the array
             const endIndex = currentVideoIndex + videosPerPage;
             const videosToRender = allVideosData.slice(currentVideoIndex, endIndex);
 
             videosToRender.forEach((video, index) => {
                 const videoBox = document.createElement('div');
                 videoBox.className = 'video-box';
-                // Add data-scroll attributes for Locomotive Scroll animation
                 videoBox.setAttribute('data-scroll', '');
                 videoBox.setAttribute('data-scroll-class', 'is-inview');
-                // Calculate delay based on its position in the overall list
                 videoBox.setAttribute('data-scroll-delay', `${0.05 * (currentVideoIndex + index + 1)}`); 
 
                 const videoLink = document.createElement('a');
@@ -1660,6 +1666,9 @@
                 thumbnailImg.src = video.thumbnailUrl;
                 thumbnailImg.alt = `${video.title} Thumbnail`;
                 thumbnailImg.onerror = function() { this.onerror=null; this.src='https://placehold.co/600x338/0a0f14/cce7ff?text=Video+Not+Found'; };
+                // Add loading="lazy" for images that are not in the initial viewport
+                // This improves performance by deferring image loading until they are needed.
+                thumbnailImg.loading = 'lazy'; 
 
                 const videoTitle = document.createElement('p');
                 videoTitle.className = 'video-title';
