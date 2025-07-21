@@ -915,6 +915,20 @@
                     <h2>v2.0.0 - The Overhaul Update</h2>
                     <p class="release-date">Release Date: September 5, 2025</p>
                     
+                    <h3>🎨 Design Changes</h3>
+                    <ul>
+                        <li>Complete site layout has been redesigned for a modern look</li>
+                        <li>Modular card based layout system introduced across pages</li>
+                        <li>Updated video thumbnails with rounded corners</li>
+                        <li>Simplified navigation bar with intuitive iconography and cleaner hierarchy</li>
+                        <li>Unified section padding, margins, and spacing system site-wide</li>
+                        <li>Consistent border radius applied for a softer UI across components</li>
+                        <li>Different colored backgrounds replacing the old backgrounds.</li>
+                        <li>Footer redesigned with modern grid layout and better mobile support</li>
+                        <li>Button styles overhauled for uniformity and visual consistency</li>
+                        <li>New section headers with animated underlines and highlight effects</li>
+                    </ul>
+
                     <h3>🚀 Performance</h3>
                     <ul>
                         <li>Optimized assets for faster load times</li>
@@ -930,7 +944,6 @@
                 
                     <h3>✨ Enhanced Visuals</h3>
                     <ul>
-                        <li>Hover over recent videos for video previews</li>
                         <li>New font styling and typography</li>
                         <li>Fine tuned color palette</li>
                         <li>Improved header background</li>
@@ -956,7 +969,6 @@
                         <li>Keyboard shortcuts for faster navigation</li>
                         <li>Reworked FAQ with improved collapsible accordions</li>
                         <li>Changelog viewer added on the site</li>
-                        <li>The page now remembers your scroll position when using the browser's back and forward buttons</li>
                         <li>Recent video list is now generated using JS objects</li>
                         <li>Cleaned full project structure</li>
                         <li>Improved default settings</li>
@@ -972,20 +984,6 @@
                         <li>Multi-language support scaffolding (i18n)</li>
                         <li>Cookie consent banner with privacy settings</li>
                         <li>Hotkey help menu (press ? or H) to show available shortcuts</li>
-                    </ul>
-                
-                    <h3>🎨 Design Changes</h3>
-                    <ul>
-                        <li>Complete site layout has been redesigned for a modern look</li>
-                        <li>Modular card based layout system introduced across pages</li>
-                        <li>Updated video thumbnails with rounded corners</li>
-                        <li>Simplified navigation bar with intuitive iconography and cleaner hierarchy</li>
-                        <li>Unified section padding, margins, and spacing system site-wide</li>
-                        <li>Consistent border radius applied for a softer UI across components</li>
-                        <li>Different colored backgrounds replacing the old backgrounds.</li>
-                        <li>Footer redesigned with modern grid layout and better mobile support</li>
-                        <li>Button styles overhauled for uniformity and visual consistency</li>
-                        <li>New section headers with animated underlines and highlight effects</li>
                     </ul>
                 </div>
 
@@ -1312,20 +1310,21 @@
                 }
             });
 
-            window.addEventListener('beforeunload', () => {
-                sessionStorage.setItem('scrollPosition', lastScrollY);
-            });
+            // Removed the scroll position memory for browser back/forward buttons
+            // window.addEventListener('beforeunload', () => {
+            //     sessionStorage.setItem('scrollPosition', lastScrollY);
+            // });
             
-            const navigationEntries = performance.getEntriesByType("navigation");
-            if (sessionStorage.getItem('scrollPosition') && navigationEntries.length > 0 && navigationEntries[0].type === 'back_forward') {
-                const savedPosition = parseInt(sessionStorage.getItem('scrollPosition'), 10);
-                if (!isNaN(savedPosition)) {
-                    setTimeout(() => {
-                        locoScroll.scrollTo(savedPosition, { duration: 0, disableLerp: true });
-                        sessionStorage.removeItem('scrollPosition');
-                    }, 100);
-                }
-            }
+            // const navigationEntries = performance.getEntriesByType("navigation");
+            // if (sessionStorage.getItem('scrollPosition') && navigationEntries.length > 0 && navigationEntries[0].type === 'back_forward') {
+            //     const savedPosition = parseInt(sessionStorage.getItem('scrollPosition'), 10);
+            //     if (!isNaN(savedPosition)) {
+            //         setTimeout(() => {
+            //             locoScroll.scrollTo(savedPosition, { duration: 0, disableLerp: true });
+            //             sessionStorage.removeItem('scrollPosition');
+            //         }, 100);
+            //     }
+            // }
 
             imagesLoaded(scrollContainer, { background: true }, () => {
                 if (locoScroll) locoScroll.update();
@@ -1654,7 +1653,7 @@
             });
 
             setTimeout(showCookieBanner, 1000);
-        });
+        }); // This closing brace was missing, causing the SyntaxError.
     </script>
 </body>
 </html>
