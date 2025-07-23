@@ -1,1545 +1,1662 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Sam Plays - About</title>
-    <link id="favicon" rel="icon" type="image/png" href="https://raw.githubusercontent.com/SamarYT567/Test/refs/heads/main/Assets/FaviconLight.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.cdnfonts.com/css/dungeon-depths" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sam Plays - Recent Videos</title>
+  <link id="favicon" rel="icon" type="image/png" href="https://raw.githubusercontent.com/SamarYT567/Test/refs/heads/main/Assets/FaviconLight.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/dungeon-depths" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css">
 
-    <style>
-        html {
-            overflow-x: hidden;
-        }
+  <style>
+    html {
+      overflow-x: hidden;
+    }
 
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Poppins', Arial, sans-serif;
-            cursor: default;
-            overflow-x: hidden;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', Arial, sans-serif;
+      cursor: default;
+      overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
 
-        body.no-scroll {
-            overflow: hidden;
-        }
+    body.no-scroll {
+      overflow: hidden;
+    }
 
-        :root {
-            --main-red: #ff4757;
-            --main-blue: #3498db;
-            --light-accent: #f1faee;
-            --dark-bg: #0d1117;
-            --card-bg: #161b22;
-            --border-color: #30363d;
-            --text-primary: #c9d1d9;
-            --text-secondary: #8b949e;
-            --side-menu-bg: #1c2128;
-            --modal-bg: #161b22;
-            --cookie-banner-bg: #1c2128;
-            --cookie-text-color: #c9d1d9;
-            --cookie-button-bg: #3498db;
-            --cookie-button-hover-bg: #4a9eda;
+    :root {
+      --main-red: #ff4757;
+      --main-blue: #3498db;
+      --light-accent: #f1faee;
+      --dark-bg: #0d1117;
+      --card-bg: #161b22;
+      --border-color: #30363d;
+      --text-primary: #c9d1d9;
+      --text-secondary: #8b949e;
+      --side-menu-bg: #1c2128;
+      --modal-bg: #161b22;
+      --cookie-banner-bg: #1c2128;
+      --cookie-text-color: #c9d1d9;
+      --cookie-button-bg: #3498db;
+      --cookie-button-hover-bg: #4a9eda;
 
-            --border-radius-soft: 12px;
-        }
+      --border-radius-soft: 12px;
+    }
 
-        body.light-theme {
-            --dark-bg: #f0f2f5;
-            --card-bg: #ffffff;
-            --border-color: #d1d5db;
-            --text-primary: #1f2937;
-            --text-secondary: #4b5563;
-            --side-menu-bg: #ffffff;
-            --modal-bg: #ffffff;
-            --cookie-banner-bg: #ffffff;
-            --cookie-text-color: #1f2937;
-            --cookie-button-bg: #3b82f6;
-            --cookie-button-hover-bg: #60a5fa;
-            
-            --cursor-dot-color-light: #000000;
-            --welcome-text-color-light: #000000;
-            --header-text-color-light: #000000;
-            --section-heading-color-light: #000000;
-            --footer-thanks-color-light: #000000;
-            --side-menu-heading-color-light: #000000;
-            --hamburger-icon-color-light: #000000;
-        }
+    body.light-theme {
+      --dark-bg: #f0f2f5;
+      --card-bg: #ffffff;
+      --border-color: #d1d5db;
+      --text-primary: #1f2937;
+      --text-secondary: #4b5563;
+      --side-menu-bg: #ffffff;
+      --modal-bg: #ffffff;
+      --cookie-banner-bg: #ffffff;
+      --cookie-text-color: #1f2937;
+      --cookie-button-bg: #3b82f6;
+      --cookie-button-hover-bg: #60a5fa;
+      
+      --cursor-dot-color-light: #000000;
+      --welcome-text-color-light: #000000;
+      --header-text-color-light: #000000;
+      --section-heading-color-light: #000000;
+      --footer-thanks-color-light: #000000;
+      --side-menu-heading-color-light: #000000;
+      --hamburger-icon-color-light: #000000;
+    }
 
-        body {
-            background-color: var(--dark-bg);
-            color: var(--text-primary);
-        }
+    body {
+      background-color: var(--dark-bg);
+      color: var(--text-primary);
+    }
 
-        body.reduce-motion * {
-            animation: none !important;
-            transition: none !important;
-        }
+    body.reduce-motion * {
+      animation: none !important;
+      transition: none !important;
+    }
 
+    .cursor-dot, .cursor-follower {
+      position: fixed;
+      top: 0;
+      left: 0;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      z-index: 10003;
+      pointer-events: none;
+      display: none;
+    }
+    .cursor-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--main-blue);
+    }
+    body.light-theme .cursor-dot {
+        background-color: var(--cursor-dot-color-light);
+    }
+    .cursor-follower {
+      width: 40px;
+      height: 40px;
+      background-color: rgba(52, 152, 219, 0.1);
+      border: 1px solid var(--main-blue);
+      transition: transform 0.3s ease-out, width 0.3s ease-out, height 0.3s ease-out;
+    }
+    body.light-theme .cursor-follower {
+        background-color: rgba(0, 0, 0, 0.1);
+        border: 1px solid var(--cursor-dot-color-light);
+    }
+    body.cursor-ambient-dot .cursor-dot,
+    body.cursor-ambient-dot .cursor-follower {
+      display: block;
+    }
+    .cursor-follower.active {
+        transform: scale(1.5);
+    }
+    body.cursor-ambient-dot a,
+    body.cursor-ambient-dot button,
+    body.cursor-ambient-dot .faq-question,
+    body.cursor-ambient-dot .slider,
+    body.cursor-ambient-dot select {
+        cursor: none !important;
+    }
+
+    #loader {
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      background: var(--dark-bg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.8s ease-out 0.5s, visibility 0.8s ease-out 0.5s;
+    }
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 5px solid var(--border-color);
+      border-top-color: var(--main-blue);
+      animation: spinSimple 1s linear infinite;
+    }
+    @keyframes spinSimple {
+      to { transform: rotate(360deg); }
+    }
+    #loader.hide {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 15px 5%;
+      box-sizing: border-box;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: transparent;
+      backdrop-filter: blur(0px);
+      -webkit-backdrop-filter: blur(0px);
+      border-bottom: 1px solid transparent;
+      transition: background-color 0.4s ease, backdrop-filter 0.4s ease, border-bottom-color 0.4s ease;
+    }
+    header.scrolled {
+      background-color: rgba(22, 27, 34, 0.8);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-color);
+    }
+    body.light-theme header.scrolled {
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+    .header-title {
+      flex-grow: 1;
+      text-align: center;
+    }
+    .header-title h1 {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--light-accent);
+      font-size: clamp(1.5em, 4vw, 1.8em);
+      margin: 0;
+      text-shadow: 0 0 5px var(--main-red);
+      display: inline-block;
+    }
+    body.light-theme .header-title h1 {
+        color: var(--header-text-color-light);
+        text-shadow: none;
+    }
+    .header-placeholder {
+      width: 44px;
+    }
+
+    #menuBtn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 10px;
+        z-index: 1002;
+        width: 30px;
+        height: 22px;
+        position: relative;
+    }
+    .menu-icon span {
+        display: block;
+        position: absolute;
+        height: 3px;
+        width: 100%;
+        background: var(--light-accent);
+        border-radius: 3px;
+        transition: all .35s ease-in-out;
+    }
+    body.light-theme .menu-icon span {
+        background: var(--hamburger-icon-color-light);
+    }
+    .menu-icon span:nth-child(1) { top: 0; }
+    .menu-icon span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+    .menu-icon span:nth-child(3) { bottom: 0; }
+    #menuBtn.open .menu-icon span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    #menuBtn.open .menu-icon span:nth-child(2) { opacity: 0; }
+    #menuBtn.open .menu-icon span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    #sideMenu {
+        position: fixed;
+        top: 0;
+        right: -320px;
+        width: 300px;
+        height: 100%;
+        background: var(--side-menu-bg);
+        z-index: 1001;
+        transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+        box-shadow: -10px 0 30px rgba(0,0,0,0.3);
+        border-left: 1px solid var(--border-color);
+        display: flex;
+        flex-direction: column;
+        border-radius: var(--border-radius-soft) 0 0 var(--border-radius-soft);
+    }
+    #sideMenu.visible {
+        right: 0;
+    }
+    .side-menu-header {
+        display: flex;
+        justify-content: flex-end;
+        padding: 15px 20px;
+    }
+    #closeMenuBtn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: var(--text-secondary);
+        font-size: 2rem;
+        transition: color 0.3s, transform 0.3s;
+        padding: 10px;
+    }
+    #closeMenuBtn:hover {
+        color: var(--main-red);
+        transform: rotate(90deg);
+    }
+    .side-menu-content {
+        padding: 20px 30px 30px;
+        box-sizing: border-box;
+        color: var(--text-primary);
+        flex-grow: 1;
+        overflow-y: auto;
+    }
+    .setting-section h3 {
+        margin-top: 20px;
+        margin-bottom: 15px;
+        font-size: 1.1em;
+        font-weight: 600;
+        color: var(--light-accent);
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 8px;
+    }
+    body.light-theme .setting-section h3 {
+        color: var(--side-menu-heading-color-light);
+    }
+    .menu-nav-links a {
+        display: block;
+        color: var(--text-primary);
+        text-decoration: none;
+        font-size: 1.2em;
+        padding: 15px 0;
+        border-bottom: 1px solid var(--border-color);
+        transition: color 0.3s ease, background-color 0.3s ease;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+    .menu-nav-links a::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: var(--main-red);
+        transition: width 0.3s ease-out;
+    }
+    .menu-nav-links a:hover,
+    .menu-nav-links a:active {
+        color: var(--main-red);
+        background-color: rgba(52, 152, 219, 0.05);
+    }
+    .menu-nav-links a:hover::after,
+    .menu-nav-links a:active::after {
+        width: 100%;
+    }
+    
+    .toggle-switch-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+    }
+    .toggle-switch {
+        position: relative;
+        display: inline-block;
+        width: 50px;
+        height: 28px;
+    }
+    .toggle-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: var(--border-color);
+        transition: .4s;
+        border-radius: 28px;
+    }
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 20px;
+        width: 20px;
+        left: 4px;
+        bottom: 4px;
+        background-color: var(--light-accent);
+        transition: .4s;
+        border-radius: 50%;
+    }
+    input:checked + .slider {
+        background-color: var(--main-blue);
+    }
+    input:checked + .slider:before {
+        transform: translateX(22px);
+    }
+
+    .cursor-options label,
+    .theme-options label {
+        display: block;
+        padding: 8px 0;
+        cursor: pointer;
+        transition: color 0.3s ease;
+    }
+    .cursor-options label:hover,
+    .theme-options label:hover {
+        color: var(--main-blue);
+    }
+    .cursor-options input[type="radio"],
+    .theme-options input[type="radio"] {
+        margin-right: 8px;
+    }
+    body.reduce-motion .cursor-options label {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+    body.reduce-motion .cursor-options input[type="radio"] {
+        pointer-events: none;
+    }
+
+    .language-options select {
+        width: 100%;
+        padding: 8px;
+        background-color: var(--card-bg);
+        color: var(--text-primary);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-soft);
+        font-family: 'Poppins', sans-serif;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c9d1d9' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 8px center;
+        background-size: 16px;
+    }
+    body.light-theme .language-options select {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231f2937' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    }
+    .language-options select:focus {
+        outline: none;
+        border-color: var(--main-blue);
+        box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.3);
+    }
+
+    .main-container {
+      padding: 120px 5vw 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: var(--dark-bg);
+      position: relative;
+      color: var(--text-primary);
+    }
+    body.light-theme .main-container {
+        background-color: var(--dark-bg);
+    }
+    body.reduce-motion .main-container {
+        background-attachment: scroll;
+    }
+
+    .page-heading {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.8rem, 5vw, 2.5rem);
+      color: var(--light-accent);
+      text-align: center;
+      margin-bottom: 40px;
+      margin-top: 0;
+      text-shadow: 0 0 5px var(--main-red);
+      width: 100%;
+    }
+    body.light-theme .page-heading {
+        color: var(--section-heading-color-light);
+        text-shadow: none;
+    }
+
+    .content-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 35px;
+      width: 100%;
+      max-width: 1200px;
+      padding: 0;
+    }
+
+    .video-box {
+      background-color: var(--card-bg);
+      border-radius: 20px;
+      padding: 20px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+                  background-color 0.3s ease,
+                  box-shadow 0.3s ease,
+                  border-color 0.3s ease;
+      border: 1px solid var(--border-color);
+    }
+
+    .video-box a {
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .thumbnail-container {
+        position: relative;
+        display: block;
+        aspect-ratio: 16 / 9;
+        margin-bottom: 15px;
+        border-radius: 15px;
+        overflow: hidden;
+        border: 2px solid transparent;
+        transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+    
+    .video-box:hover .thumbnail-container {
+        border-color: var(--main-blue);
+        transform: scale(1.02);
+    }
+
+    .video-thumbnail {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    
+    .video-box .video-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.05em;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 0;
+      line-height: 1.35;
+      margin-top: auto;
+    }
+
+    .video-box:hover {
+      transform: translateY(-8px);
+      background-color: var(--card-bg);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+    body.light-theme .video-box:hover {
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .footer-section {
+        display: none;
+    }
+
+    #scrollTopBtn {
+      position: fixed; bottom: 20px; right: 20px; z-index: 999;
+      background-color: var(--main-red);
+      border: none;
+      border-radius: 50%;
+      width: 45px; height: 45px;
+      cursor: pointer; opacity: 0; visibility: hidden;
+      transform: translateY(20px);
+      transition: all 0.4s ease;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    #scrollTopBtn.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+    #scrollTopBtn:hover { background-color: #ff6b81; transform: scale(1.1); }
+    #scrollTopBtn svg { width: 20px; height: 20px; fill: white; }
+
+    .hotkey-modal {
+      position: fixed;
+      z-index: 10001;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .hotkey-modal[hidden] {
+        display: none;
+    }
+    .hotkey-modal:not([hidden]) {
+        opacity: 1;
+        visibility: visible;
+    }
+    .hotkey-modal .modal-content {
+        background-color: var(--modal-bg);
+        padding: 30px 40px;
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-soft);
+        width: 90%;
+        max-width: 400px;
+        position: relative;
+        color: var(--text-primary);
+        box-shadow: 0 5px 25px rgba(0,0,0,0.4);
+    }
+    .hotkey-modal .close-btn {
+        position: absolute;
+        top: 10px; right: 15px;
+        font-size: 2rem;
+        color: var(--text-secondary);
+        background: none;
+        border: none;
+        cursor: pointer;
+        transition: color 0.3s, transform 0.3s;
+    }
+    #hotkeyModal .close-btn:hover {
+        color: var(--main-red);
+        transform: rotate(90deg);
+    }
+    .hotkey-modal h2 {
+        font-family: 'Orbitron', sans-serif;
+        text-align: center;
+        color: var(--light-accent);
+        margin-top: 0;
+        margin-bottom: 25px;
+    }
+    body.light-theme .hotkey-modal h2 {
+        color: var(--section-heading-color-light);
+    }
+    .hotkey-modal ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .hotkey-modal li {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--border-color);
+    }
+    .hotkey-modal li:last-child {
+        border-bottom: none;
+    }
+    .hotkey-modal li span {
+        background-color: var(--dark-bg);
+        padding: 3px 8px;
+        border-radius: 5px;
+        border: 1px solid var(--border-color);
+        font-family: monospace;
+        color: var(--light-accent);
+        margin-left: 10px;
+    }
+
+    #cookieConsentBanner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: var(--cookie-banner-bg);
+      color: var(--cookie-text-color);
+      padding: 20px;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+      z-index: 10000;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      border-top-left-radius: var(--border-radius-soft);
+      border-top-right-radius: var(--border-radius-soft);
+    }
+    #cookieConsentBanner.show {
+      display: flex;
+    }
+    .cookie-content {
+      text-align: center;
+      max-width: 800px;
+    }
+    .cookie-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .cookie-buttons button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: var(--border-radius-soft);
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    #acceptCookies {
+      background-color: var(--cookie-button-bg);
+      color: white;
+    }
+    #acceptCookies:hover {
+      background-color: var(--cookie-button-hover-bg);
+      transform: translateY(-2px);
+    }
+    #rejectCookies, #customizeCookies {
+      background-color: var(--card-bg);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+    }
+    #rejectCookies:hover, #customizeCookies:hover {
+      background-color: var(--border-color);
+      transform: translateY(-2px);
+    }
+
+    #cookieSettingsModal {
+      position: fixed;
+      z-index: 10002;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    #cookieSettingsModal[hidden] {
+        display: none;
+    }
+    .cookie-settings-modal:not([hidden]) {
+        opacity: 1;
+        visibility: visible;
+    }
+    .cookie-settings-modal .modal-content {
+        background-color: var(--modal-bg);
+        padding: 30px 40px;
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-soft);
+        width: 90%;
+        max-width: 500px;
+        position: relative;
+        color: var(--text-primary);
+        box-shadow: 0 5px 25px rgba(0,0,0,0.4);
+    }
+    #cookieSettingsModal .close-btn {
+        position: absolute;
+        top: 10px; right: 15px;
+        font-size: 2rem;
+        color: var(--text-secondary);
+        background: none;
+        border: none;
+        cursor: pointer;
+        transition: color 0.3s, transform 0.3s;
+    }
+    #cookieSettingsModal .close-btn:hover {
+        color: var(--main-red);
+        transform: rotate(90deg);
+    }
+    #cookieSettingsModal h2 {
+        font-family: 'Orbitron', sans-serif;
+        text-align: center;
+        color: var(--light-accent);
+        margin-top: 0;
+        margin-bottom: 25px;
+    }
+    body.light-theme #cookieSettingsModal h2 {
+        color: var(--section-heading-color-light);
+    }
+    .cookie-setting-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+        border-bottom: 1px solid var(--border-color);
+    }
+    .cookie-setting-item:last-of-type {
+        border-bottom: none;
+    }
+    .cookie-setting-item p {
+        margin: 0;
+        font-size: 0.95em;
+    }
+    .cookie-setting-item .toggle-switch {
+        margin-left: 15px;
+    }
+    .cookie-settings-actions {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 25px;
+    }
+    .cookie-settings-actions button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: var(--border-radius-soft);
+        cursor: pointer;
+        font-weight: 600;
+        transition: background-color 0.3s ease;
+    }
+    #saveCookieSettings {
+        background-color: var(--main-blue);
+        color: white;
+    }
+    #saveCookieSettings:hover {
+        background-color: #4a9eda;
+    }
+    #resetCookieSettings {
+        background-color: var(--card-bg);
+        color: var(--text-primary);
+        border: 1px solid var(--border-color);
+    }
+    #resetCookieSettings:hover {
+        background-color: var(--border-color);
+    }
+
+    [data-scroll] {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1.0), transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1.0);
+      will-change: opacity, transform;
+    }
+    [data-scroll].is-inview {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    @media (max-width: 1024px) {
         .cursor-dot, .cursor-follower {
-            position: fixed;
-            top: 0;
-            left: 0;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-            z-index: 10003;
-            pointer-events: none;
+            display: none !important;
+        }
+        body.cursor-ambient-dot {
+            cursor: default !important;
+        }
+        .cursor-options {
             display: none;
         }
-        .cursor-dot {
-            width: 8px;
-            height: 8px;
-            background-color: var(--main-blue);
-        }
-        body.light-theme .cursor-dot {
-            background-color: var(--cursor-dot-color-light);
-        }
-        .cursor-follower {
-            width: 40px;
-            height: 40px;
-            background-color: rgba(52, 152, 219, 0.1);
-            border: 1px solid var(--main-blue);
-            transition: transform 0.3s ease-out, width 0.3s ease-out, height 0.3s ease-out;
-        }
-        body.light-theme .cursor-follower {
-            background-color: rgba(0, 0, 0, 0.1);
-            border: 1px solid var(--cursor-dot-color-light);
-        }
-        body.cursor-ambient-dot .cursor-dot,
-        body.cursor-ambient-dot .cursor-follower {
-            display: block;
-        }
-        .cursor-follower.active {
-            transform: scale(1.5);
-        }
-        body.cursor-ambient-dot a,
-        body.cursor-ambient-dot button,
-        body.cursor-ambient-dot .faq-question,
-        body.cursor-ambient-dot .slider,
-        body.cursor-ambient-dot select {
-            cursor: none !important;
-        }
-
-        #loader {
-            position: fixed;
-            width: 100vw;
-            height: 100vh;
-            background: var(--dark-bg);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 10000;
-            opacity: 1;
-            visibility: visible;
-            transition: opacity 0.8s ease-out 0.5s, visibility 0.8s ease-out 0.5s;
-        }
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: 5px solid var(--border-color);
-            border-top-color: var(--main-blue);
-            animation: spinSimple 1s linear infinite;
-        }
-        @keyframes spinSimple {
-            to { transform: rotate(360deg); }
-        }
-        #loader.hide {
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 15px 5%;
-            box-sizing: border-box;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: transparent;
-            transition: background-color 0.4s ease, backdrop-filter 0.4s ease, border-bottom 0.4s ease;
-        }
-        header.scrolled {
-            background-color: rgba(22, 27, 34, 0.8);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
-        }
-        body.light-theme header.scrolled {
-            background-color: rgba(255, 255, 255, 0.8);
-        }
-        .header-title {
-            flex-grow: 1;
-            text-align: center;
-        }
-        .header-title h1 {
-            font-family: 'Orbitron', sans-serif;
-            color: var(--light-accent);
-            font-size: clamp(1.5em, 4vw, 1.8em);
-            margin: 0;
-            text-shadow: 0 0 5px var(--main-red);
-            display: inline-block;
-        }
-        body.light-theme .header-title h1 {
-            color: var(--header-text-color-light);
-            text-shadow: none;
-        }
-        .header-placeholder {
-            width: 44px;
-        }
-
-        #menuBtn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 10px;
-            z-index: 1002;
-            width: 30px;
-            height: 22px;
-            position: relative;
-        }
-        .menu-icon span {
-            display: block;
-            position: absolute;
-            height: 3px;
-            width: 100%;
-            background: var(--light-accent);
-            border-radius: 3px;
-            transition: all .35s ease-in-out;
-        }
-        body.light-theme .menu-icon span {
-            background: var(--hamburger-icon-color-light);
-        }
-        .menu-icon span:nth-child(1) { top: 0; }
-        .menu-icon span:nth-child(2) { top: 50%; transform: translateY(-50%); }
-        .menu-icon span:nth-child(3) { bottom: 0; }
-        #menuBtn.open .menu-icon span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-        #menuBtn.open .menu-icon span:nth-child(2) { opacity: 0; }
-        #menuBtn.open .menu-icon span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-
         #sideMenu {
-            position: fixed;
-            top: 0;
-            right: -320px;
-            width: 300px;
-            height: 100%;
-            background: var(--side-menu-bg);
-            z-index: 1001;
-            transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-            box-shadow: -10px 0 30px rgba(0,0,0,0.3);
-            border-left: 1px solid var(--border-color);
-            display: flex;
-            flex-direction: column;
-            border-radius: var(--border-radius-soft) 0 0 var(--border-radius-soft);
+            width: 100%;
+            right: -100%;
+            border-radius: 0;
         }
         #sideMenu.visible {
             right: 0;
         }
-        .side-menu-header {
-            display: flex;
-            justify-content: flex-end;
-            padding: 15px 20px;
-        }
-        #closeMenuBtn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: var(--text-secondary);
-            font-size: 2rem;
-            transition: color 0.3s, transform 0.3s;
-            padding: 10px;
-        }
-        #closeMenuBtn:hover {
-            color: var(--main-red);
-            transform: rotate(90deg);
-        }
-        .side-menu-content {
-            padding: 20px 30px 30px;
-            box-sizing: border-box;
-            color: var(--text-primary);
-            flex-grow: 1;
-            overflow-y: auto;
-        }
-        .setting-section h3 {
-            margin-top: 20px;
-            margin-bottom: 15px;
-            font-size: 1.1em;
-            font-weight: 600;
-            color: var(--light-accent);
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 8px;
-        }
-        body.light-theme .setting-section h3 {
-            color: var(--side-menu-heading-color-light);
-        }
-        .menu-nav-links a {
-            display: block;
-            color: var(--text-primary);
-            text-decoration: none;
-            font-size: 1.2em;
-            padding: 15px 0;
-            border-bottom: 1px solid var(--border-color);
-            transition: color 0.3s ease, background-color 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-        .menu-nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--main-red);
-            transition: width 0.3s ease-out;
-        }
-        .menu-nav-links a:hover,
-        .menu-nav-links a:active {
-            color: var(--main-red);
-            background-color: rgba(52, 152, 219, 0.05);
-        }
-        .menu-nav-links a:hover::after,
-        .menu-nav-links a:active::after {
-            width: 100%;
-        }
-        
-        .toggle-switch-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
-        }
-        .toggle-switch {
-            position: relative;
-            display: inline-block;
-            width: 50px;
-            height: 28px;
-        }
-        .toggle-switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: var(--border-color);
-            transition: .4s;
-            border-radius: 28px;
-        }
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 20px;
-            width: 20px;
-            left: 4px;
-            bottom: 4px;
-            background-color: var(--light-accent);
-            transition: .4s;
-            border-radius: 50%;
-        }
-        input:checked + .slider {
-            background-color: var(--main-blue);
-        }
-        input:checked + .slider:before {
-            transform: translateX(22px);
-        }
+    }
 
-        .cursor-options label,
-        .theme-options label {
-            display: block;
-            padding: 8px 0;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-        .cursor-options label:hover,
-        .theme-options label:hover {
-            color: var(--main-blue);
-        }
-        .cursor-options input[type="radio"],
-        .theme-options input[type="radio"] {
-            margin-right: 8px;
-        }
-        body.reduce-motion .cursor-options label {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-        body.reduce-motion .cursor-options input[type="radio"] {
-            pointer-events: none;
-        }
+    @media (max-width: 768px) {
+      header h1 { font-size: clamp(1.2em, 5vw, 1.5em); }
+      .main-container {
+        padding: 100px 3vw 30px;
+      }
+      .page-heading {
+        font-size: clamp(1.5rem, 6vw, 2rem);
+        margin-bottom: 30px; margin-top: 0;
+      }
+      .content-container {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        max-width: 90%;
+        margin: 0 auto;
+        gap: 25px;
+      }
+      .video-box { padding: 15px; }
+      .video-box .video-title { font-size: 1em; }
+      .cookie-buttons {
+        flex-direction: column;
+      }
+      #sideMenu {
+        width: 100%;
+        right: -100%;
+        border-radius: 0;
+      }
+    }
 
-        .language-options select {
-            width: 100%;
-            padding: 8px;
-            background-color: var(--card-bg);
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius-soft);
-            font-family: 'Poppins', sans-serif;
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c9d1d9' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 8px center;
-            background-size: 16px;
-        }
-        body.light-theme .language-options select {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231f2937' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-        }
-        .language-options select:focus {
-            outline: none;
-            border-color: var(--main-blue);
-            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.3);
-        }
+    @media (max-width: 480px) {
+      header h1 { font-size: clamp(1.1em, 6vw, 1.3em); white-space: normal; }
+      .page-heading { font-size: clamp(1.3rem, 7vw, 1.8rem); }
+      .content-container { grid-template-columns: 1fr; gap: 20px; }
+      #sideMenu {
+        width: 100%;
+        right: -100%;
+        border-radius: 0;
+      }
+    }
 
+    @media (min-width: 769px) and (max-width: 1024px) {
         .main-container {
-            padding: 120px 5vw 40px;
-            max-width: 1200px;
-            margin: 0 auto;
+            padding: 120px 7vw 40px;
         }
-
-        .grid-layout {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 30px;
-        }
-
-        .grid-item {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius-soft);
-            padding: 25px;
-            transition: none;
-        }
-        .grid-item:hover {
-            box-shadow: none;
-            transform: none;
-        }
-        
-        .grid-item.full-width {
-            grid-column: 1 / -1;
-        }
-        
-        .section-heading {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(1.8rem, 5vw, 2.5rem);
-            color: var(--light-accent);
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        body.light-theme .section-heading {
-            color: var(--section-heading-color-light);
-        }
-
-        .about-page-section {
-            padding: 25px;
-            text-align: center;
-        }
-
-        .about-page-section h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(1.8rem, 5vw, 2.5rem);
-            color: var(--light-accent);
-            margin-bottom: 20px;
-            text-shadow: 0 0 5px var(--main-red);
-            text-align: center;
-        }
-        body.light-theme .about-page-section h2 {
-            color: var(--section-heading-color-light);
-            text-shadow: none;
-        }
-
-        .about-page-section p {
-            color: var(--text-secondary);
-            line-height: 1.7;
-            font-size: 1.05rem;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .philosophy-section {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius-soft);
-            margin-bottom: 30px;
-        }
-        .process-section {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius-soft);
-            margin-bottom: 30px;
-        }
-        .specs-section {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius-soft);
-            text-align: center;
-        }
-        .specs-section ul {
-            list-style: none;
-            padding: 0;
-            margin: 0 auto;
-            max-width: 600px;
-            text-align: left;
-        }
-        .specs-section ul > li {
-            padding-left: 0; 
-            margin-bottom: 20px;
-        }
-        .specs-section ul > li::before { 
-            content: none;
-        }
-        .specs-section ul ul li {
-            position: relative;
-            padding-left: 1.5em;
-            margin-bottom: 5px;
-        }
-        .specs-section ul ul li::before { 
-            content: '•';
-            color: var(--main-blue);
-            position: absolute;
-            left: 0;
-            font-size: 1.2em;
-            line-height: 1;
-        }
-        .specs-section strong {
-            color: var(--light-accent);
-        }
-        body.light-theme .specs-section strong {
-            color: var(--text-primary);
-        }
-
-        .footer-section {
-            text-align: center;
-            padding: 40px 20px;
-            margin-top: 30px;
-        }
-
-        #scrollTopBtn {
-            position: fixed; bottom: 20px; right: 20px; z-index: 999;
-            background-color: var(--main-red);
-            border: none;
-            border-radius: 50%;
-            width: 45px; height: 45px;
-            cursor: pointer; opacity: 0; visibility: hidden;
-            transform: translateY(20px);
-            transition: all 0.4s ease;
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-        #scrollTopBtn.visible { opacity: 1; visibility: visible; transform: translateY(0); }
-        #scrollTopBtn:hover { background-color: #ff6b81; transform: scale(1.1); }
-        #scrollTopBtn svg { width: 20px; height: 20px; fill: white; }
-
-        .hotkey-modal {
-            position: fixed;
-            z-index: 10001;
-            left: 0; top: 0;
-            width: 100%; height: 100%;
-            background-color: rgba(0,0,0,0.7);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-        .hotkey-modal[hidden] {
-            display: none;
-        }
-        .hotkey-modal:not([hidden]) {
-            opacity: 1;
-            visibility: visible;
-        }
-        .hotkey-modal .modal-content {
-            background-color: var(--modal-bg);
-            padding: 30px 40px;
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius-soft);
-            width: 90%;
-            max-width: 400px;
-            position: relative;
-            color: var(--text-primary);
-            box-shadow: 0 5px 25px rgba(0,0,0,0.4);
-        }
-        .hotkey-modal .close-btn {
-            position: absolute;
-            top: 10px; right: 15px;
-            font-size: 2rem;
-            color: var(--text-secondary);
-            background: none;
-            border: none;
-            cursor: pointer;
-            transition: color 0.3s, transform 0.3s;
-        }
-        .hotkey-modal .close-btn:hover {
-            color: var(--main-red);
-            transform: rotate(90deg);
-        }
-        .hotkey-modal h2 {
-            font-family: 'Orbitron', sans-serif;
-            text-align: center;
-            color: var(--light-accent);
-            margin-top: 0;
-            margin-bottom: 25px;
-        }
-        body.light-theme .hotkey-modal h2 {
-            color: var(--section-heading-color-light);
-        }
-        .hotkey-modal ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .hotkey-modal li {
-            display: flex;
-            justify-content: space-between;
-            padding: 12px 0;
-            border-bottom: 1px solid var(--border-color);
-        }
-        .hotkey-modal li:last-child {
-            border-bottom: none;
-        }
-        .hotkey-modal li span {
-            background-color: var(--dark-bg);
-            padding: 3px 8px;
-            border-radius: 5px;
-            border: 1px solid var(--border-color);
-            font-family: monospace;
-            color: var(--light-accent);
-            margin-left: 10px;
-        }
-
-        #cookieConsentBanner {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: var(--cookie-banner-bg);
-            color: var(--cookie-text-color);
+        .video-box {
             padding: 20px;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-            z-index: 10000;
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-            border-top-left-radius: var(--border-radius-soft);
-            border-top-right-radius: var(--border-radius-soft);
         }
-        #cookieConsentBanner.show {
-            display: flex;
-        }
-        .cookie-content {
-            text-align: center;
-            max-width: 800px;
-        }
-        .cookie-buttons {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .cookie-buttons button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: var(--border-radius-soft);
-            cursor: pointer;
-            font-weight: 600;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-        #acceptCookies {
-            background-color: var(--cookie-button-bg);
-            color: white;
-        }
-        #acceptCookies:hover {
-            background-color: var(--cookie-button-hover-bg);
-            transform: translateY(-2px);
-        }
-        #rejectCookies, #customizeCookies {
-            background-color: var(--card-bg);
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
-        }
-        #rejectCookies:hover, #customizeCookies:hover {
-            background-color: var(--border-color);
-            transform: translateY(-2px);
-        }
+    }
 
-        #cookieSettingsModal {
-            position: fixed;
-            z-index: 10002;
-            left: 0; top: 0;
-            width: 100%; height: 100%;
-            background-color: rgba(0,0,0,0.7);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
+    @media screen and (max-width: 820px) and (orientation: landscape) {
+        .main-container {
+            padding: 80px 5vw 20px;
         }
-        #cookieSettingsModal[hidden] {
-            display: none;
+        .page-heading {
+            font-size: clamp(1.8rem, 5vw, 2.2rem);
         }
-        #cookieSettingsModal:not([hidden]) {
-            opacity: 1;
-            visibility: visible;
+        .video-box {
+            padding: 15px;
         }
-        .cookie-settings-modal .modal-content {
-            background-color: var(--modal-bg);
-            padding: 30px 40px;
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius-soft);
-            width: 90%;
-            max-width: 500px;
-            position: relative;
-            color: var(--text-primary);
-            box-shadow: 0 5px 25px rgba(0,0,0,0.4);
+        .video-box .video-title {
+            font-size: 0.9rem;
         }
-        #cookieSettingsModal .close-btn {
-            position: absolute;
-            top: 10px; right: 15px;
-            font-size: 2rem;
-            color: var(--text-secondary);
-            background: none;
-            border: none;
-            cursor: pointer;
-            transition: color 0.3s, transform 0.3s;
+        #sideMenu {
+            width: 100%;
+            right: -100%;
+            border-radius: 0;
         }
-        #cookieSettingsModal .close-btn:hover {
-            color: var(--main-red);
-            transform: rotate(90deg);
-        }
-        #cookieSettingsModal h2 {
-            font-family: 'Orbitron', sans-serif;
-            text-align: center;
-            color: var(--light-accent);
-            margin-top: 0;
-            margin-bottom: 25px;
-        }
-        body.light-theme #cookieSettingsModal h2 {
-            color: var(--section-heading-color-light);
-        }
-        .cookie-setting-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid var(--border-color);
-        }
-        .cookie-setting-item:last-of-type {
-            border-bottom: none;
-        }
-        .cookie-setting-item p {
-            margin: 0;
-            font-size: 0.95em;
-        }
-        .cookie-setting-item .toggle-switch {
-            margin-left: 15px;
-        }
-        .cookie-settings-actions {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 25px;
-        }
-        .cookie-settings-actions button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: var(--border-radius-soft);
-            cursor: pointer;
-            font-weight: 600;
-            transition: background-color 0.3s ease;
-        }
-        #saveCookieSettings {
-            background-color: var(--main-blue);
-            color: white;
-        }
-        #saveCookieSettings:hover {
-            background-color: #4a9eda;
-        }
-        #resetCookieSettings {
-            background-color: var(--card-bg);
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
-        }
-        #resetCookieSettings:hover {
-            background-color: var(--border-color);
-        }
+    }
 
-        @media (max-width: 1024px) {
-            .cursor-dot, .cursor-follower {
-                display: none !important;
-            }
-            body.cursor-ambient-dot {
-                cursor: default !important;
-            }
-            .cursor-options {
-                display: none;
-            }
-            #sideMenu {
-                width: 100%;
-                right: -100%;
-                border-radius: 0;
-            }
-            #sideMenu.visible {
-                right: 0;
-            }
-        }
+    .view-more-container {
+        text-align: center;
+        margin-top: 40px;
+    }
 
-        @media (max-width: 768px) {
-            .header-title h1 { font-size: clamp(1.2em, 5vw, 1.5em); }
-            .about-page-section h2 { font-size: clamp(1.5rem, 6vw, 2rem); }
-            .main-container {
-                padding: 100px 3vw 30px;
-            }
-            .grid-item {
-                padding: 20px;
-            }
-            .cookie-buttons {
-                flex-direction: column;
-            }
-        }
+    #viewMoreBtn {
+        background-color: var(--main-blue);
+        color: white;
+        padding: 12px 25px;
+        border: none;
+        border-radius: var(--border-radius-soft);
+        font-size: 1.1em;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
 
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .main-container {
-                padding: 120px 7vw 40px;
-            }
-            .grid-item {
-                padding: 30px;
-            }
-        }
+    #viewMoreBtn:hover {
+        background-color: #4a9eda;
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+    }
 
-        @media screen and (max-width: 820px) and (orientation: landscape) {
-            .main-container {
-                padding: 80px 5vw 20px;
-            }
-            .about-page-section h2 {
-                font-size: clamp(1.8rem, 5vw, 2.2rem);
-            }
-            .about-page-section p {
-                font-size: 0.9rem;
-            }
-            .grid-item {
-                padding: 15px;
-            }
-        }
-
-        .grid-item[data-scroll] {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .grid-item[data-scroll].is-inview {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    </style>
+    #viewMoreBtn:disabled {
+        background-color: var(--border-color);
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+        opacity: 0.7;
+    }
+  </style>
 </head>
 <body>
-    <div class="cursor-dot"></div>
-    <div class="cursor-follower"></div>
+  <div class="cursor-dot"></div>
+  <div class="cursor-follower"></div>
 
-    <div data-scroll-container>
-        <div id="loader">
-            <div class="spinner"></div>
+  <div data-scroll-container>
+    <div id="loader">
+      <div class="spinner"></div>
+    </div>
+
+    <header id="mainHeader">
+        <div class="header-placeholder"></div>
+        <div class="header-title">
+            <h1 data-i18n-key="channelTitle">Sam Plays</h1>
         </div>
-
-        <header id="mainHeader">
-            <div class="header-placeholder"></div>
-            <div class="header-title">
-                <h1 data-i18n-key="channelTitle">Sam Plays</h1>
+        <button id="menuBtn" title="Open Menu" aria-label="Open Menu">
+            <div class="menu-icon">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
-            <button id="menuBtn" title="Open Menu" aria-label="Open Menu">
-                <div class="menu-icon">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </button>
-        </header>
-        
-        <div id="sideMenu">
-            <div class="side-menu-header">
-                <button id="closeMenuBtn" title="Close Menu" aria-label="Close Menu">×</button>
-            </div>
-            <div class="side-menu-content">
-                <div class="setting-section menu-nav-links">
-                     <a href="https://samaryt567.github.io/Test/Index.html" data-i18n-key="navHome">Home</a>
-                     <a href="https://samaryt567.github.io/Test/RecentVideos.html" data-i18n-key="navRecentVideos">Recent Videos</a>
-                     <a href="https://samaryt567.github.io/Test/Changelog.html" data-i18n-key="navChangelog">Changelog</a>
-                </div>
-                <div class="setting-section accessibility-options">
-                    <h3 data-i18n-key="headingAccessibility">Accessibility</h3>
-                    <div class="toggle-switch-container">
-                        <span data-i18n-key="optionReduceMotion">Reduce Motion</span>
-                        <label class="toggle-switch">
-                            <input type="checkbox" id="reduceMotionToggle">
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-                </div>
-                <div class="setting-section cursor-options">
-                    <h3 data-i18n-key="headingCursorStyle">Cursor Style</h3>
-                    <label>
-                        <input type="radio" name="cursor-style" value="ambient-dot" checked> <span data-i18n-key="cursorAmbientDot">Ambient Dot</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="cursor-style" value="default"> <span data-i18n-key="cursorDefault">Default</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="cursor-style" value="crosshair"> <span data-i18n-key="cursorCrosshair">Crosshair</span>
-                    </label>
-                </div>
-                <div class="setting-section theme-options">
-                    <h3 data-i18n-key="headingTheme">Theme</h3>
-                    <label>
-                        <input type="radio" name="theme-style" value="system" checked> <span data-i18n-key="themeSystem">System</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="theme-style" value="light"> <span data-i18n-key="themeLight">Light</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="theme-style" value="dark"> <span data-i18n-key="themeDark">Dark</span>
-                    </label>
-                </div>
-                <div class="setting-section language-options">
-                    <h3 data-i18n-key="headingLanguage">Language</h3>
-                    <select id="languageSelector" aria-label="Select Language">
-                        <option value="en">English</option>
-                        <option value="de">Deutsch</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-
-        <main class="main-container" data-scroll-section>
-            <div class="grid-layout">
-                <div class="grid-item full-width about-page-section philosophy-section" data-scroll>
-                    <h2 data-i18n-key="aboutPhilosophyTitle">My Gaming Philosophy</h2>
-                    <p data-i18n-key="aboutPhilosophyContent">
-                        At Sam Plays, gaming isn't only about playing. it's about the vibes, the stories, and the memories that linger. Whether it's that rush of adrenaline from a boss battle, the joy of crafting something from nothing, or those unexpected twists. I'm in for all of it. If you're a games enthusiast, awkward moments, in depth content, or just here to chill, you're in the right community. Let's game, laugh, create, and get lost in the worlds we cherish, Together.
-                    </p>
-                </div>
-
-                <div class="grid-item full-width about-page-section process-section" data-scroll>
-                    <h2 data-i18n-key="aboutProcessTitle">The Creation Process</h2>
-                    <p data-i18n-key="aboutProcessContent">
-                        Each video at Sam Plays is made for perfection. From planning content ideas and recording high quality gameplay, to the process of editing, sound design, and creating the eye catching thumbnails, I handle it all. It's a labor of love, ensuring that each video provides value and a unique perspective on the games I play. My goal is to deliver content that resonates with you long even after the video ends.
-                    </p>
-                </div>
-
-                <div class="grid-item full-width about-page-section specs-section" data-scroll>
-                    <h2 data-i18n-key="aboutSpecsTitle">My PC Specs</h2>
-                    <ul>
-                        <li><strong>Cabinet (Case):</strong> HP Slim Desktop Chassis (Stock Compact Case)</li>
-                        <li><strong>Power Supply (PSU):</strong> HP OEM Power Supply (limited GPU support)</li>
-                        <li><strong>Motherboard:</strong> HP Slim Desktop Motherboard
-                            <ul>
-                                <li>Form Factor: Custom Micro-ATX / Proprietary</li>
-                                <li>RAM Support: Up to 64GB DDR4, 2933 MT/s</li>
-                                <li>Socket: LGA1200 (for Intel 10th Gen CPUs)</li>
-                            </ul>
-                        </li>
-                        <li><strong>CPU (Processor):</strong> Intel Core i9-10900</li>
-                        <li><strong>GPU (Graphics Card):</strong> AMD Radeon RX 6400 (Low Profile)</li>
-                        <li><strong>RAM:</strong> 64GB DDR4 (2933 MT/s)
-                            <ul>
-                                <li>2 x 32GB Modules (Dual Channel)</li>
-                            </ul>
-                        </li>
-                        <li><strong>Storage:</strong>
-                            <ul>
-                                <li>SSD: 500GB NVMe SSD</li>
-                                <li>HDD: 500GB (7200 RPM)</li>
-                            </ul>
-                        </li>
-                        <li><strong>Operating System:</strong> Windows 11 Home 64-bit</li>
-                        <li><strong>Monitor:</strong> Acer HA270 27" Full HD IPS Monitor</li>
-                        <li><strong>Audio & Peripherals:</strong>
-                            <ul>
-                                <li>Boat Rockerz 425 headphones</li>
-                                <li>Zebronics transformer keyboard and Mouse (white)</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <footer class="footer-section" data-scroll>
-                </footer>
-        </main>
-
-        <button id="scrollTopBtn" title="Go to top" aria-label="Scroll to top">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 4l8 8h-6v8h-4v-8H4l8-8z"/></svg>
         </button>
-    </div> 
+    </header>
 
-    <div id="hotkeyHelpModal" class="hotkey-modal" role="dialog" aria-modal="true" aria-labelledby="hotkey-title" hidden>
-        <div class="modal-content">
-            <button id="closeHelpModalBtn" class="close-btn" aria-label="Close hotkey help">&times;</button>
-            <h2 id="hotkey-title" data-i18n-key="hotkeyTitle">Keyboard Shortcuts</h2>
-            <ul>
-                <li><span data-i18n-key="hotkeyHelp">Show this help menu</span><div><span>?</span> or <span>H</span></div></li>
-                <li><span data-i18n-key="hotkeyMenu">Toggle menu</span><span>M</span></li>
-                <li><span data-i18n-key="hotkeyScrollTop">Scroll to top</span><span>T</span></li>
-                <li><span data-i18n-key="hotkeyScrollBottom">Scroll to bottom</span><span>B</span></li>
-                <li><span data-i18n-key="hotkeyClose">Close menu or dialog</span><span>ESC</span></li>
-            </ul>
+    <div id="sideMenu">
+        <div class="side-menu-header">
+            <button id="closeMenuBtn" title="Close Menu" aria-label="Close Menu">×</button>
+        </div>
+        <div class="side-menu-content">
+            <div class="setting-section menu-nav-links">
+                 <a href="https://samaryt567.github.io/Test/Index.html" data-i18n-key="navHome">Home</a>
+                 <a href="https://samaryt567.github.io/Test/About.html" data-i18n-key="navAbout">About</a>
+                 <a href="https://samaryt567.github.io/Test/Changelog.html" data-i18n-key="navChangelog">Changelog</a>
+            </div>
+            <div class="setting-section accessibility-options">
+                <h3 data-i18n-key="headingAccessibility">Accessibility</h3>
+                <div class="toggle-switch-container">
+                    <span data-i18n-key="optionReduceMotion">Reduce Motion</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="reduceMotionToggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="setting-section cursor-options">
+                <h3 data-i18n-key="headingCursorStyle">Cursor Style</h3>
+                <label>
+                    <input type="radio" name="cursor-style" value="ambient-dot" checked> <span data-i18n-key="cursorAmbientDot">Ambient Dot</span>
+                </label>
+                <label>
+                    <input type="radio" name="cursor-style" value="default"> <span data-i18n-key="cursorDefault">Default</span>
+                </label>
+                <label>
+                    <input type="radio" name="cursor-style" value="crosshair"> <span data-i18n-key="cursorCrosshair">Crosshair</span>
+                </label>
+            </div>
+            <div class="setting-section theme-options">
+                <h3 data-i18n-key="headingTheme">Theme</h3>
+                <label>
+                    <input type="radio" name="theme-style" value="system" checked> <span data-i18n-key="themeSystem">System</span>
+                </label>
+                <label>
+                    <input type="radio" name="theme-style" value="light"> <span data-i18n-key="themeLight">Light</span>
+                </label>
+                <label>
+                    <input type="radio" name="theme-style" value="dark"> <span data-i18n-key="themeDark">Dark</span>
+                </label>
+            </div>
+            <div class="setting-section language-options">
+                <h3 data-i18n-key="headingLanguage">Language</h3>
+                <select id="languageSelector" aria-label="Select Language">
+                    <option value="en">English</option>
+                    <option value="de">Deutsch</option>
+                </select>
+            </div>
         </div>
     </div>
 
-    <div id="cookieConsentBanner" class="cookie-banner">
-        <div class="cookie-content">
-            <p data-i18n-key="cookieConsentText">We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies.</p>
-        </div>
-        <div class="cookie-buttons">
-            <button id="acceptCookies" data-i18n-key="cookieAcceptAll">Accept All</button>
-            <button id="rejectCookies" data-i18n-key="cookieRejectAll">Reject All</button>
-            <button id="customizeCookies" data-i18n-key="cookieCustomize">Customize</button>
-        </div>
-    </div>
+    <main class="main-container" data-scroll-section>
+      <h2 class="page-heading" data-i18n-key="recentVideosTitle">Recent Videos</h2>
 
-    <div id="cookieSettingsModal" class="hotkey-modal" role="dialog" aria-modal="true" aria-labelledby="cookie-settings-title" hidden>
-        <div class="modal-content">
-            <button id="closeCookieSettingsModalBtn" class="close-btn" aria-label="Close cookie settings">&times;</button>
-            <h2 id="cookie-settings-title" data-i18n-key="cookieSettingsTitle">Privacy Settings</h2>
-            <div class="cookie-setting-item">
-                <p data-i18n-key="cookieEssential">Essential Cookies (Required)</p>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="essentialCookiesToggle" checked disabled>
-                    <span class="slider"></span>
-                </label>
-            </div>
-            <div class="cookie-setting-item">
-                <p data-i18n-key="cookieAnalytics">Analytics Cookies</p>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="analyticsCookiesToggle">
-                    <span class="slider"></span>
-                </label>
-            </div>
-            <div class="cookie-setting-item">
-                <p data-i18n-key="cookieMarketing">Marketing Cookies</p>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="marketingCookiesToggle">
-                    <span class="slider"></span>
-                </label>
-            </div>
-            <div class="cookie-settings-actions">
-                <button id="saveCookieSettings" data-i18n-key="cookieSaveSettings">Save Settings</button>
-                <button id="resetCookieSettings" data-i18n-key="cookieResetSettings">Reset to Default</button>
-            </div>
-        </div>
-    </div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.min.js"></script>
-    <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+      <div class="content-container" id="videoContainer">
+      </div>
 
-    <script defer>
-        const translations = {
-            'en': {
-                channelTitle: "Sam Plays",
-                navHome: "Home",
-                navRecentVideos: "Recent Videos",
-                navChangelog: "Changelog",
-                headingAccessibility: "Accessibility",
-                optionReduceMotion: "Reduce Motion",
-                headingCursorStyle: "Cursor Style",
-                cursorAmbientDot: "Ambient Dot",
-                cursorDefault: "Default",
-                cursorCrosshair: "Crosshair",
-                headingTheme: "Theme",
-                themeSystem: "System",
-                themeLight: "Light",
-                themeDark: "Dark",
-                headingLanguage: "Language",
-                aboutPhilosophyTitle: "My Gaming Philosophy",
-                aboutPhilosophyContent: `At Sam Plays, gaming isn't only about playing. it's about the vibes, the stories, and the memories that linger. Whether it's that rush of adrenaline from a boss battle, the joy of crafting something from nothing, or those unexpected twists. I'm in for all of it. If you're a games enthusiast, awkward moments, in depth content, or just here to chill, you're in the right community. Let's game, laugh, create, and get lost in the worlds we cherish, Together.`,
-                aboutProcessTitle: "The Creation Process",
-                aboutProcessContent: `Each video at Sam Plays is made for perfection. From planning content ideas and recording high quality gameplay, to the process of editing, sound design, and creating the eye catching thumbnails, I handle it all. It's a labor of love, ensuring that each video provides value and a unique perspective on the games I play. My goal is to deliver content that resonates with you long even after the video ends.`,
-                aboutSpecsTitle: "My PC Specs",
-                aboutSpecsContent: ``,
-                footerThanks: "Thanks for Visiting",
-                footerContact: "Contact stgbussiness436@gmail.com for more info.",
-                footerContactBtn: "Contact / Feedback",
-                hotkeyTitle: "Keyboard Shortcuts",
-                hotkeyHelp: "Show this help menu",
-                hotkeyMenu: "Toggle menu",
-                hotkeyScrollTop: "Scroll to top",
-                hotkeyScrollBottom: "Scroll to bottom",
-                hotkeyClose: "Close menu or dialog",
-                cookieConsentText: "We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking \"Accept All\", you consent to our use of cookies.",
-                cookieAcceptAll: "Accept All",
-                cookieRejectAll: "Reject All",
-                cookieCustomize: "Customize",
-                cookieSettingsTitle: "Privacy Settings",
-                cookieEssential: "Essential Cookies (Required)",
-                cookieAnalytics: "Analytics Cookies",
-                cookieMarketing: "Marketing Cookies",
-                cookieSaveSettings: "Save Settings",
-                cookieResetSettings: "Reset to Default",
-            },
-            'de': {
-                channelTitle: "Sam Spielt",
-                navHome: "Startseite",
-                navRecentVideos: "Neueste Videos",
-                navChangelog: "Änderungsprotokoll",
-                headingAccessibility: "Barrierefreiheit",
-                optionReduceMotion: "Bewegung reduzieren",
-                headingCursorStyle: "Cursor-Stil",
-                cursorAmbientDot: "Umgebungs-Punkt",
-                cursorDefault: "Standard",
-                cursorCrosshair: "Fadenkreuz",
-                headingTheme: "Thema",
-                themeSystem: "System",
-                themeLight: "Hell",
-                themeDark: "Dunkel",
-                headingLanguage: "Sprache",
-                aboutPhilosophyTitle: "Meine Gaming-Philosophie",
-                aboutPhilosophyContent: `Bei Sam Spielt geht es nicht nur ums Spielen. Es geht um die Stimmung, die Geschichten und die Erinnerungen, die bleiben. Ob es der Adrenalinkick eines Bosskampfes ist, die Freude, etwas aus dem Nichts zu erschaffen, oder unerwartete Wendungen. Ich bin für alles dabei. Wenn du ein Gaming-Enthusiast bist, für peinliche Momente, tiefgehenden Inhalt oder einfach nur zum Entspannen hier bist, bist du in der richtigen Community. Let's game, lachen, kreieren und uns in den Welten verlieren, die wir schätzen, Gemeinsam.`,
-                aboutProcessTitle: "Der Erstellungsprozess",
-                aboutProcessContent: `Jedes Video bei Sam Spielt ist auf Perfektion ausgelegt. Von der Planung der Inhalte und der Aufnahme hochwertiger Gameplays bis hin zum Prozess des Bearbeitens, des Sounddesigns und des Erstellens der auffälligen Thumbnails – ich kümmere mich um alles. Es ist eine Herzensangelegenheit, um sicherzustellen, dass jedes Video einen Mehrwert und eine einzigartige Perspektive auf die Spiele bietet, die ich spiele. Mein Ziel ist es, Inhalte zu liefern, die Sie noch lange nach dem Ende des Videos ansprechen.`,
-                aboutSpecsTitle: "Meine PC-Spezifikationen",
-                aboutSpecsContent: ``,
-                footerThanks: "Danke für den Besuch",
-                footerContact: "Kontaktiere stgbussiness436@gmail.com für mehr Infos.",
-                footerContactBtn: "Kontakt / Feedback",
-                hotkeyTitle: "Tastaturkürzel",
-                hotkeyHelp: "Dieses Hilfemenü anzeigen",
-                hotkeyMenu: "Menü umschalten",
-                hotkeyScrollTop: "Nach oben scrollen",
-                hotkeyScrollBottom: "Nach unten scrollen",
-                hotkeyClose: "Menü oder Dialog schließen",
-                cookieConsentText: "Wir verwenden Cookies, um Ihr Surferlebnis zu verbessern, personalisierte Anzeigen oder Inhalte bereitzustellen und unseren Traffic zu analysieren. Indem Sie auf \"Alle akzeptieren\" klicken, stimmen Sie der Verwendung von Cookies zu.",
-                cookieAcceptAll: "Alle akzeptieren",
-                cookieRejectAll: "Alle ablehnen",
-                cookieCustomize: "Anpassen",
-                cookieSettingsTitle: "Datenschutzeinstellungen",
-                cookieEssential: "Essenzielle Cookies (Erforderlich)",
-                cookieAnalytics: "Analyse-Cookies",
-                cookieMarketing: "Marketing-Cookies",
-                cookieSaveSettings: "Einstellungen speichern",
-                cookieResetSettings: "Auf Standard zurücksetzen",
+      <div class="view-more-container">
+          <button id="viewMoreBtn">
+              <span data-i18n-key="viewMoreVideos">View More Videos</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-down"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+          </button>
+      </div>
+    </main>
+
+    <button id="scrollTopBtn" title="Go to top" aria-label="Scroll to top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 4l8 8h-6v8h-4v-8H4l8-8z"/></svg>
+    </button>
+  </div> 
+
+  <div id="hotkeyHelpModal" class="hotkey-modal" role="dialog" aria-modal="true" aria-labelledby="hotkey-title" hidden>
+      <div class="modal-content">
+          <button id="closeHelpModalBtn" class="close-btn" aria-label="Close hotkey help">&times;</button>
+          <h2 id="hotkey-title" data-i18n-key="hotkeyTitle">Keyboard Shortcuts</h2>
+          <ul>
+              <li><span data-i18n-key="hotkeyHelp">Show this help menu</span><div><span>?</span> or <span>H</span></div></li>
+              <li><span data-i18n-key="hotkeyMenu">Toggle menu</span><span>M</span></li>
+              <li><span data-i18n-key="hotkeyScrollTop">Scroll to top</span><span>T</span></li>
+              <li><span data-i18n-key="hotkeyScrollBottom">Scroll to bottom</span><span>B</span></li>
+              <li><span data-i18n-key="hotkeyClose">Close menu or dialog</span><span>ESC</span></li>
+          </ul>
+      </div>
+  </div>
+
+  <div id="cookieConsentBanner" class="cookie-banner">
+    <div class="cookie-content">
+      <p data-i18n-key="cookieConsentText">We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies.</p>
+    </div>
+    <div class="cookie-buttons">
+      <button id="acceptCookies" data-i18n-key="cookieAcceptAll">Accept All</button>
+      <button id="rejectCookies" data-i18n-key="cookieRejectAll">Reject All</button>
+      <button id="customizeCookies" data-i18n-key="cookieCustomize">Customize</button>
+    </div>
+  </div>
+
+  <div id="cookieSettingsModal" class="hotkey-modal" role="dialog" aria-modal="true" aria-labelledby="cookie-settings-title" hidden>
+    <div class="modal-content">
+      <button id="closeCookieSettingsModalBtn" class="close-btn" aria-label="Close cookie settings">&times;</button>
+      <h2 id="cookie-settings-title" data-i18n-key="cookieSettingsTitle">Privacy Settings</h2>
+      <div class="cookie-setting-item">
+        <p data-i18n-key="cookieEssential">Essential Cookies (Required)</p>
+        <label class="toggle-switch">
+          <input type="checkbox" id="essentialCookiesToggle" checked disabled>
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="cookie-setting-item">
+        <p data-i18n-key="cookieAnalytics">Analytics Cookies</p>
+        <label class="toggle-switch">
+          <input type="checkbox" id="analyticsCookiesToggle">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="cookie-setting-item">
+        <p data-i18n-key="cookieMarketing">Marketing Cookies</p>
+        <label class="toggle-switch">
+          <input type="checkbox" id="marketingCookiesToggle">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="cookie-settings-actions">
+        <button id="saveCookieSettings" data-i18n-key="cookieSaveSettings">Save Settings</button>
+        <button id="resetCookieSettings" data-i18n-key="cookieResetSettings">Reset to Default</button>
+      </div>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.min.js"></script>
+  <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+
+  <script defer>
+    const translations = {
+        'en': {
+            channelTitle: "Sam Plays",
+            navHome: "Home",
+            navAbout: "About",
+            navRecentVideos: "Recent Videos",
+            navChangelog: "Changelog",
+            headingAccessibility: "Accessibility",
+            optionReduceMotion: "Reduce Motion",
+            headingCursorStyle: "Cursor Style",
+            cursorAmbientDot: "Ambient Dot",
+            cursorDefault: "Default",
+            cursorCrosshair: "Crosshair",
+            headingTheme: "Theme",
+            themeSystem: "System",
+            themeLight: "Light",
+            themeDark: "Dark",
+            headingLanguage: "Language",
+            recentVideosTitle: "Recent Videos",
+            hotkeyTitle: "Keyboard Shortcuts",
+            hotkeyHelp: "Show this help menu",
+            hotkeyMenu: "Toggle menu",
+            hotkeyScrollTop: "Scroll to top",
+            hotkeyScrollBottom: "Scroll to bottom",
+            hotkeyClose: "Close menu or dialog",
+            cookieConsentText: `We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies.`,
+            cookieAcceptAll: "Accept All",
+            cookieRejectAll: "Reject All",
+            cookieCustomize: "Customize",
+            cookieSettingsTitle: "Privacy Settings",
+            cookieEssential: "Essential Cookies (Required)",
+            cookieAnalytics: "Analytics Cookies",
+            cookieMarketing: "Marketing Cookies",
+            cookieSaveSettings: "Save Settings",
+            cookieResetSettings: "Reset to Default",
+            viewMoreVideos: "View More Videos"
+        },
+        'de': {
+            channelTitle: "Sam Spielt",
+            navHome: "Startseite",
+            navAbout: "Über Mich",
+            navRecentVideos: "Neueste Videos",
+            navChangelog: "Änderungsprotokoll",
+            headingAccessibility: "Barrierefreiheit",
+            optionReduceMotion: "Bewegung reduzieren",
+            headingCursorStyle: "Cursor-Stil",
+            cursorAmbientDot: "Umgebungs-Punkt",
+            cursorDefault: "Standard",
+            cursorCrosshair: "Fadenkreuz",
+            headingTheme: "Thema",
+            themeSystem: "System",
+            themeLight: "Hell",
+            themeDark: "Dunkel",
+            headingLanguage: "Sprache",
+            recentVideosTitle: "Neueste Videos",
+            hotkeyTitle: "Tastaturkürzel",
+            hotkeyHelp: "Dieses Hilfemenü anzeigen",
+            hotkeyMenu: "Menü umschalten",
+            hotkeyScrollTop: "Nach oben scrollen",
+            hotkeyScrollBottom: "Nach unten scrollen",
+            hotkeyClose: "Menü oder Dialog schließen",
+            cookieConsentText: `Wir verwenden Cookies, um Ihr Surferlebnis zu verbessern, personalisierte Anzeigen oder Inhalte bereitzustellen und unseren Traffic zu analysieren. Indem Sie auf "Alle akzeptieren" klicken, stimmen Sie der Verwendung von Cookies zu.`,
+            cookieAcceptAll: "Alle akzeptieren",
+            cookieRejectAll: "Alle ablehnen",
+            cookieCustomize: "Anpassen",
+            cookieSettingsTitle: "Datenschutzeinstellungen",
+            cookieEssential: "Essenzielle Cookies (Erforderlich)",
+            cookieAnalytics: "Analyse-Cookies",
+            cookieMarketing: "Marketing-Cookies",
+            cookieSaveSettings: "Einstellungen speichern",
+            cookieResetSettings: "Auf Standard zurücksetzen",
+            viewMoreVideos: "Weitere Videos anzeigen"
+        }
+    };
+
+    function setLanguage(lang) {
+        document.documentElement.lang = lang;
+        document.querySelectorAll('[data-i18n-key]').forEach(el => {
+            const key = el.dataset.i18nKey;
+            const translation = translations[lang][key];
+            if (translation) {
+                el.innerHTML = translation;
             }
-        };
+        });
+        if (locoScroll) locoScroll.update();
+    }
 
-        function setLanguage(lang) {
-            document.documentElement.lang = lang;
-            document.querySelectorAll('[data-i18n-key]').forEach(el => {
-                const key = el.dataset.i18nKey;
-                const translation = translations[lang][key];
-                if (translation) {
-                    el.innerHTML = translation;
+    const themeRadios = document.querySelectorAll('input[name="theme-style"]');
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    const faviconLink = document.getElementById('favicon');
+    const darkFaviconUrl = 'https://raw.githubusercontent.com/SamarYT567/Test/refs/heads/main/Assets/FaviconDark.png';
+    const lightFaviconUrl = 'https://raw.githubusercontent.com/SamarYT567/Test/refs/heads/main/Assets/FaviconLight.png';
+
+    function applyTheme(theme) {
+        document.body.classList.remove('light-theme', 'dark-theme');
+        let currentFaviconUrl = lightFaviconUrl;
+
+        if (theme === 'light') {
+            document.body.classList.add('light-theme');
+            currentFaviconUrl = lightFaviconUrl;
+        } else if (theme === 'dark') {
+            document.body.classList.add('dark-theme');
+            currentFaviconUrl = darkFaviconUrl;
+        } else if (theme === 'system') {
+            if (prefersDarkScheme.matches) {
+                document.body.classList.add('dark-theme');
+                currentFaviconUrl = darkFaviconUrl;
+            } else {
+                document.body.classList.add('light-theme');
+                currentFaviconUrl = lightFaviconUrl;
+            }
+        }
+        localStorage.setItem('theme', theme);
+        if (faviconLink) {
+            faviconLink.href = currentFaviconUrl;
+        }
+    }
+
+    function initializeTheme() {
+        const savedTheme = localStorage.getItem('theme') || 'system';
+        applyTheme(savedTheme);
+        const initialThemeRadio = document.querySelector(`input[name="theme-style"][value="${savedTheme}"]`);
+        if (initialThemeRadio) {
+            initialThemeRadio.checked = true;
+        }
+    }
+
+    prefersDarkScheme.addEventListener('change', () => {
+        if (localStorage.getItem('theme') === 'system') {
+            applyTheme('system');
+        }
+    });
+
+    const reduceMotion = localStorage.getItem('reduceMotion') === 'true';
+
+    let locoScroll;
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const scrollContainer = document.querySelector('[data-scroll-container]');
+        if (!scrollContainer) return;
+
+        initializeTheme();
+
+        const loader = document.getElementById("loader");
+        if (loader) {
+            setTimeout(() => {
+                loader.classList.add("hide");
+            }, 500);
+        }
+
+        locoScroll = new LocomotiveScroll({
+            el: scrollContainer,
+            smooth: !reduceMotion,
+            getDirection: true,
+        });
+
+        locoScroll.on('scroll', (args) => {
+            const header = document.getElementById('mainHeader');
+            if (args.scroll.y > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+            const scrollTopBtn = document.getElementById('scrollTopBtn');
+            if (scrollTopBtn) {
+                scrollTopBtn.classList.toggle('visible', args.scroll.y > window.innerHeight / 2);
+            }
+        });
+        
+        imagesLoaded(scrollContainer, { background: true }, () => {
+            if (locoScroll) locoScroll.update();
+        });
+        
+        new ResizeObserver(() => locoScroll.update()).observe(scrollContainer);
+
+        const header = document.getElementById('mainHeader');
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
+
+        const menuBtn = document.getElementById('menuBtn');
+        const closeMenuBtn = document.getElementById('closeMenuBtn');
+        const sideMenu = document.getElementById('sideMenu');
+        
+        function toggleMenu() {
+            const isOpen = menuBtn.classList.contains('open');
+            menuBtn.classList.toggle('open', !isOpen);
+            sideMenu.classList.toggle('visible', !isOpen);
+
+            if (!isOpen) {
+                document.body.classList.add('no-scroll');
+                if (locoScroll) {
+                    locoScroll.stop();
+                }
+            } else {
+                document.body.classList.remove('no-scroll');
+                if (locoScroll) {
+                    locoScroll.start();
+                }
+            }
+        }
+
+        if (menuBtn && sideMenu && closeMenuBtn) {
+            menuBtn.addEventListener('click', (event) => {
+                event.stopPropagation();
+                toggleMenu();
+            });
+            closeMenuBtn.addEventListener('click', toggleMenu);
+            
+            document.addEventListener('click', (event) => {
+                if (sideMenu.classList.contains('visible') && !sideMenu.contains(event.target) && !menuBtn.contains(event.target)) {
+                    toggleMenu();
                 }
             });
+
+            let touchStartX = 0;
+            let touchEndX = 0;
+            const minSwipeDistance = 50;
+
+            sideMenu.addEventListener('touchstart', (e) => {
+                touchStartX = e.touches[0].clientX;
+                touchEndX = 0;
+            });
+
+            sideMenu.addEventListener('touchmove', (e) => {
+                touchEndX = e.touches[0].clientX;
+            });
+
+            sideMenu.addEventListener('touchend', () => {
+                if (sideMenu.classList.contains('visible') && touchEndX !== 0) {
+                    const swipeDistance = touchEndX - touchStartX;
+                    if (swipeDistance > minSwipeDistance) {
+                        toggleMenu();
+                    }
+                }
+                touchStartX = 0;
+                touchEndX = 0;
+            });
+        }
+        
+        if (scrollTopBtn) {
+            scrollTopBtn.addEventListener('click', () => {
+                if (locoScroll) locoScroll.scrollTo('top');
+            });
+        }
+
+        const reduceMotionToggle = document.getElementById('reduceMotionToggle');
+        const cursorOptionsContainer = document.querySelector('.cursor-options');
+        const cursorRadios = document.querySelectorAll('input[name="cursor-style"]');
+
+        if (reduceMotionToggle) {
+            reduceMotionToggle.checked = reduceMotion;
+            applyReduceMotionSettings(reduceMotion);
+
+            reduceMotionToggle.addEventListener('change', (e) => {
+                localStorage.setItem('reduceMotion', e.target.checked);
+                applyReduceMotionSettings(e.target.checked);
+                location.reload();
+            });
+        }
+
+        function applyReduceMotionSettings(isReduced) {
+            if (isReduced) {
+                document.body.classList.add('reduce-motion');
+                cursorRadios.forEach(radio => {
+                    radio.disabled = true;
+                });
+                const defaultCursorRadio = document.querySelector('input[name="cursor-style"][value="default"]');
+                if (defaultCursorRadio) {
+                    defaultCursorRadio.checked = true;
+                    updateCursorStyle('default');
+                }
+            } else {
+                document.body.classList.remove('reduce-motion');
+                cursorRadios.forEach(radio => {
+                    radio.disabled = false;
+                });
+                const ambientDotRadio = document.querySelector('input[name="cursor-style"][value="ambient-dot"]');
+                if (ambientDotRadio) {
+                    ambientDotRadio.checked = true;
+                    updateCursorStyle('ambient-dot');
+                }
+            }
+        }
+
+        themeRadios.forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                applyTheme(e.target.value);
+            });
+        });
+
+        const languageSelector = document.getElementById('languageSelector');
+        const savedLanguage = localStorage.getItem('language') || 'en';
+        languageSelector.value = savedLanguage;
+        setLanguage(savedLanguage);
+
+        languageSelector.addEventListener('change', (e) => {
+            const selectedLang = e.target.value;
+            localStorage.setItem('language', selectedLang);
+            setLanguage(selectedLang);
+        });
+        
+        const hotkeyModal = document.getElementById('hotkeyHelpModal');
+        const closeHelpModalBtn = document.getElementById('closeHelpModalBtn');
+
+        function showHelpModal() { hotkeyModal.hidden = false; }
+        function hideHelpModal() { hotkeyModal.hidden = true; }
+
+        closeHelpModalBtn.addEventListener('click', hideHelpModal);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') {
+                return;
+            }
+            
+            const key = e.key.toLowerCase();
+
+            if (e.key === '?' || key === 'h') {
+                showHelpModal();
+            }
+            if (key === 'm') {
+                toggleMenu();
+            }
+            if (key === 't') {
+                locoScroll.scrollTo('top');
+            }
+            if (key === 'b') {
+                locoScroll.scrollTo('bottom');
+            }
+            if (e.key === 'Escape') {
+                if (!hotkeyModal.hidden) {
+                    hideHelpModal();
+                } else if (sideMenu.classList.contains('visible')) {
+                    toggleMenu();
+                } else if (!cookieSettingsModal.hidden) {
+                    hideCookieSettingsModal();
+                }
+            }
+        });
+
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorFollower = document.querySelector('.cursor-follower');
+        
+        let mouseX = 0, mouseY = 0;
+        let followerX = 0, followerY = 0;
+        
+        window.addEventListener('mousemove', e => {
+            if (!('ontouchstart' in window) || document.body.classList.contains('cursor-ambient-dot')) {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            }
+        });
+
+        function animateCursor() {
+            if (document.body.classList.contains('cursor-ambient-dot') && !('ontouchstart' in window)) {
+                cursorDot.style.left = `${mouseX}px`;
+                cursorDot.style.top = `${mouseY}px`;
+                followerX += (mouseX - followerX) * 0.1;
+                followerY += (mouseY - followerY) * 0.1;
+                cursorFollower.style.left = `${followerX}px`;
+                cursorFollower.style.top = `${followerY}px`;
+                cursorDot.style.display = 'block';
+                cursorFollower.style.display = 'block';
+            } else {
+                cursorDot.style.display = 'none';
+                cursorFollower.style.display = 'none';
+            }
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        function updateCursorStyle(style) {
+            document.body.classList.remove('cursor-ambient-dot');
+            document.body.style.cursor = 'default';
+
+            if (!('ontouchstart' in window)) {
+                if (style === 'ambient-dot') {
+                    document.body.classList.add('cursor-ambient-dot');
+                    document.body.style.cursor = 'none';
+                } else {
+                    document.body.style.cursor = style;
+                }
+            } else {
+                document.body.style.cursor = 'default';
+            }
+            localStorage.setItem('cursorStyle', style);
+        }
+        
+        cursorRadios.forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                updateCursorStyle(e.target.value);
+            });
+        });
+        
+        const initialCursor = localStorage.getItem('cursorStyle') || document.querySelector('input[name="cursor-style"][value="ambient-dot"]').value;
+        updateCursorStyle(initialCursor);
+
+        document.querySelectorAll('a, button, .faq-question, .slider, select').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                if (!('ontouchstart' in window)) {
+                    cursorFollower.classList.add('active');
+                }
+            });
+            el.addEventListener('mouseleave', () => {
+                if (!('ontouchstart' in window)) {
+                    cursorFollower.classList.remove('active');
+                }
+            });
+        });
+
+        const cookieConsentBanner = document.getElementById('cookieConsentBanner');
+        const acceptCookiesBtn = document.getElementById('acceptCookies');
+        const rejectCookiesBtn = document.getElementById('rejectCookies');
+        const customizeCookiesBtn = document.getElementById('customizeCookies');
+        const cookieSettingsModal = document.getElementById('cookieSettingsModal');
+        const closeCookieSettingsModalBtn = document.getElementById('closeCookieSettingsModalBtn');
+        const essentialCookiesToggle = document.getElementById('essentialCookiesToggle');
+        const analyticsCookiesToggle = document.getElementById('analyticsCookiesToggle');
+        const marketingCookiesToggle = document.getElementById('marketingCookiesToggle');
+        const saveCookieSettingsBtn = document.getElementById('saveCookieSettings');
+        const resetCookieSettingsBtn = document.getElementById('resetCookieSettings');
+
+        function showCookieBanner() {
+            if (!localStorage.getItem('cookieConsent')) {
+                cookieConsentBanner.classList.add('show');
+            }
+        }
+
+        function hideCookieBanner() {
+            cookieConsentBanner.classList.remove('show');
+        }
+
+        function showCookieSettingsModal() {
+            cookieSettingsModal.hidden = false;
+            const consent = JSON.parse(localStorage.getItem('cookieConsentSettings')) || {};
+            analyticsCookiesToggle.checked = consent.analytics || false;
+            marketingCookiesToggle.checked = consent.marketing || false;
+        }
+
+        function hideCookieSettingsModal() {
+            cookieSettingsModal.hidden = true;
+        }
+
+        function saveCookieConsent(consentType) {
+            let settings = {
+                essential: true,
+                analytics: false,
+                marketing: false
+            };
+
+            if (consentType === 'acceptAll') {
+                settings.analytics = true;
+                settings.marketing = true;
+            } else if (consentType === 'rejectAll') {
+            } else if (consentType === 'custom') {
+                settings.analytics = analyticsCookiesToggle.checked;
+                settings.marketing = marketingCookiesToggle.checked;
+            }
+            
+            localStorage.setItem('cookieConsent', 'true');
+            localStorage.setItem('cookieConsentSettings', JSON.stringify(settings));
+            hideCookieBanner();
+            hideCookieSettingsModal();
+            console.log('Cookie consent saved:', settings);
+        }
+
+        acceptCookiesBtn.addEventListener('click', () => saveCookieConsent('acceptAll'));
+        rejectCookiesBtn.addEventListener('click', () => saveCookieConsent('rejectAll'));
+        customizeCookiesBtn.addEventListener('click', showCookieSettingsModal);
+
+        closeCookieSettingsModalBtn.addEventListener('click', hideCookieSettingsModal);
+        saveCookieSettingsBtn.addEventListener('click', () => saveCookieConsent('custom'));
+        resetCookieSettingsBtn.addEventListener('click', () => {
+            analyticsCookiesToggle.checked = false;
+            marketingCookiesToggle.checked = false;
+        });
+
+        setTimeout(showCookieBanner, 1000);
+
+        const allVideosData = [
+            {
+                thumbnailUrl: "https://i3.ytimg.com/vi/d3oIJsELCoM/sddefault.jpg", 
+                videoUrl: "https://www.youtube.com/watch?v=uL_f_3x_4y_5",
+                title: "Further Into The Depths (Hindi) | Subnautica Part 3 | Sam Plays"
+            },
+            {
+                thumbnailUrl: "https://i3.ytimg.com/vi/u6PCFCBlMA8/sddefault.jpg", 
+                videoUrl: "https://www.youtube.com/watch?v=rC500sK_t2o",
+                title: "Surviving as an Undercover Cop (Hindi) | Sleeping Dogs Episode 1 | Sam Plays"
+            },
+            {
+                thumbnailUrl: "https://img.youtube.com/vi/eRou7u-pUdw/hqdefault.jpg",
+                videoUrl: "https://www.youtube.com/watch?v=eRou7u-pUdw",
+                title: "Surviving my First day in Liberty City (Hindi) | GTA III Story Mode Walkthrough | Episode 1"
+            },
+            {
+                thumbnailUrl: "https://img.youtube.com/vi/Hy67SdfabQQ/hqdefault.jpg",
+                videoUrl: "https://www.youtube.com/watch?v=Hy67SdfabQQ",
+                title: "Making my First Farm [Minecraft Part 6]"
+            },
+            {
+                thumbnailUrl: "https://img.youtube.com/vi/tWY0ghnb8-Y/hqdefault.jpg",
+                videoUrl: "https://www.youtube.com/watch?v=tWY0ghnb8-Y",
+                title: "Can i beat this guy? [Akinator Part 2]"
+            },
+            {
+                thumbnailUrl: "https://img.youtube.com/vi/lS8X0lv1Xm8/hqdefault.jpg",
+                videoUrl: "https://www.youtube.com/watch?v=lS8X0lv1Xm8",
+                title: "Playing this game once again... [Minecraft Survival Part 5]"
+            },
+            {
+                thumbnailUrl: "https://img.youtube.com/vi/_xAe_RBzuYM/hqdefault.jpg",
+                videoUrl: "https://www.youtube.com/watch?v=_xAe_RBzuYM",
+                title: "Exploring The Mysterious Depths! | Subnautica Part 2"
+            },
+            {
+                thumbnailUrl: "https://img.youtube.com/vi/lDNlLVJVNgc/hqdefault.jpg",
+                videoUrl: "https://www.youtube.com/watch?v=lDNlLVJVNgc",
+                title: "Ocean World with Aliens | Subnautica Part - 1"
+            },
+            {
+                thumbnailUrl: "https://i3.ytimg.com/vi/n5c0EJnTRAQ/sddefault.jpg", 
+                videoUrl: "https://www.youtube.com/watch?v=5L-1aB2c3D4",
+                title: "A Bad Decision"
+            },
+            {
+                thumbnailUrl: "https://i3.ytimg.com/vi/qTBNixDtIxo/sddefault.jpg", 
+                videoUrl: "https://www.youtube.com/watch?v=xY_z_1a2b3c",
+                title: "Would You Rather (Episode 2)"
+            },
+            {
+                thumbnailUrl: "https://i3.ytimg.com/vi/919shCeew-M/sddefault.jpg", 
+                videoUrl: "https://www.youtube.com/watch?v=8Pq2vGj-0s4",
+                title: "WE DID IT! A Difficult Game About Climbing (Episode 4)"
+            },
+            {
+                thumbnailUrl: "https://i3.ytimg.com/vi/1I74ECLn_5g/sddefault.jpg", 
+                videoUrl: "https://www.youtube.com/watch?v=kM0nO_p1q2r",
+                title: "  Ultimate Comeback! A Difficult Game About Climbing (Episode 3)"
+            }
+        ];
+
+        const videosPerPage = 6;
+        let currentVideoIndex = 0;
+        const videoContainer = document.getElementById('videoContainer');
+        const viewMoreBtn = document.getElementById('viewMoreBtn');
+
+        function renderVideos() {
+            const endIndex = currentVideoIndex + videosPerPage;
+            const videosToRender = allVideosData.slice(currentVideoIndex, endIndex);
+
+            videosToRender.forEach((video, index) => {
+                const videoBox = document.createElement('div');
+                videoBox.className = 'video-box';
+                videoBox.setAttribute('data-scroll', '');
+                videoBox.setAttribute('data-scroll-class', 'is-inview');
+                videoBox.setAttribute('data-scroll-delay', `${0.05 * (currentVideoIndex + index + 1)}`); 
+
+                const videoLink = document.createElement('a');
+                videoLink.href = video.videoUrl;
+                videoLink.target = '_blank';
+                videoLink.title = `Watch ${video.title}`;
+
+                const thumbnailContainer = document.createElement('div');
+                thumbnailContainer.className = 'thumbnail-container';
+
+                const thumbnailImg = document.createElement('img');
+                thumbnailImg.className = 'video-thumbnail';
+                thumbnailImg.src = video.thumbnailUrl;
+                thumbnailImg.alt = `${video.title} Thumbnail`;
+                thumbnailImg.onerror = function() { this.onerror=null; this.src='https://placehold.co/600x338/0a0f14/cce7ff?text=Video+Not+Found'; };
+                thumbnailImg.loading = 'lazy'; 
+
+                const videoTitle = document.createElement('p');
+                videoTitle.className = 'video-title';
+                videoTitle.textContent = video.title;
+
+                thumbnailContainer.appendChild(thumbnailImg);
+                videoLink.appendChild(thumbnailContainer);
+                videoLink.appendChild(videoTitle);
+                videoBox.appendChild(videoLink);
+                videoContainer.appendChild(videoBox);
+            });
+
+            currentVideoIndex = endIndex;
+            if (currentVideoIndex >= allVideosData.length) {
+                viewMoreBtn.style.display = 'none';
+            } else {
+                viewMoreBtn.style.display = 'inline-flex';
+            }
             if (locoScroll) locoScroll.update();
         }
 
-        const themeRadios = document.querySelectorAll('input[name="theme-style"]');
-        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-        const faviconLink = document.getElementById('favicon');
-        const darkFaviconUrl = 'https://raw.githubusercontent.com/SamarYT567/Test/refs/heads/main/Assets/FaviconDark.png';
-        const lightFaviconUrl = 'https://raw.githubusercontent.com/SamarYT567/Test/refs/heads/main/Assets/FaviconLight.png';
+        renderVideos(); 
 
-        function applyTheme(theme) {
-            document.body.classList.remove('light-theme', 'dark-theme');
-            let currentFaviconUrl = lightFaviconUrl;
-
-            if (theme === 'light') {
-                document.body.classList.add('light-theme');
-                currentFaviconUrl = lightFaviconUrl;
-            } else if (theme === 'dark') {
-                document.body.classList.add('dark-theme');
-                currentFaviconUrl = darkFaviconUrl;
-            } else if (theme === 'system') {
-                if (prefersDarkScheme.matches) {
-                    document.body.classList.add('dark-theme');
-                    currentFaviconUrl = darkFaviconUrl;
-                } else {
-                    document.body.classList.add('light-theme');
-                    currentFaviconUrl = lightFaviconUrl;
-                }
-            }
-            localStorage.setItem('theme', theme);
-            if (faviconLink) {
-                faviconLink.href = currentFaviconUrl;
-            }
+        if (viewMoreBtn) {
+            viewMoreBtn.addEventListener('click', renderVideos);
         }
+    });
+  </script>
 
-        function initializeTheme() {
-            const savedTheme = localStorage.getItem('theme') || 'system';
-            applyTheme(savedTheme);
-            const initialThemeRadio = document.querySelector(`input[name="theme-style"][value="${savedTheme}"]`);
-            if (initialThemeRadio) {
-                initialThemeRadio.checked = true;
-            }
-        }
-
-        prefersDarkScheme.addEventListener('change', () => {
-            if (localStorage.getItem('theme') === 'system') {
-                applyTheme('system');
-            }
-        });
-
-        const reduceMotion = localStorage.getItem('reduceMotion') === 'true';
-        if (reduceMotion) {
-            document.body.classList.add('reduce-motion');
-        }
-
-        let locoScroll;
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const scrollContainer = document.querySelector('[data-scroll-container]');
-            if (!scrollContainer) return;
-
-            initializeTheme();
-
-            const loader = document.getElementById("loader");
-            if (loader) {
-                setTimeout(() => {
-                    loader.classList.add("hide");
-                }, 500);
-            }
-
-            locoScroll = new LocomotiveScroll({
-                el: scrollContainer,
-                smooth: !reduceMotion,
-                getDirection: true,
-            });
-
-            locoScroll.on('scroll', (args) => {
-                const header = document.getElementById('mainHeader');
-                if (args.scroll.y > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-                if (scrollTopBtn) {
-                    scrollTopBtn.classList.toggle('visible', args.scroll.y > window.innerHeight / 2);
-                }
-            });
-            
-            imagesLoaded(scrollContainer, { background: true }, () => {
-                if (locoScroll) locoScroll.update();
-            });
-            
-            new ResizeObserver(() => locoScroll.update()).observe(scrollContainer);
-
-            const header = document.getElementById('mainHeader');
-            const scrollTopBtn = document.getElementById('scrollTopBtn');
-
-            const menuBtn = document.getElementById('menuBtn');
-            const closeMenuBtn = document.getElementById('closeMenuBtn');
-            const sideMenu = document.getElementById('sideMenu');
-            
-            function toggleMenu() {
-                const isOpen = menuBtn.classList.contains('open');
-                menuBtn.classList.toggle('open', !isOpen);
-                sideMenu.classList.toggle('visible', !isOpen);
-
-                if (!isOpen) {
-                    document.body.classList.add('no-scroll');
-                    if (locoScroll) {
-                        locoScroll.stop();
-                    }
-                } else {
-                    document.body.classList.remove('no-scroll');
-                    if (locoScroll) {
-                        locoScroll.start();
-                    }
-                }
-            }
-
-            if (menuBtn && sideMenu && closeMenuBtn) {
-                menuBtn.addEventListener('click', (event) => {
-                    event.stopPropagation();
-                    toggleMenu();
-                });
-                closeMenuBtn.addEventListener('click', toggleMenu);
-                
-                document.addEventListener('click', (event) => {
-                    if (sideMenu.classList.contains('visible') && !sideMenu.contains(event.target) && !menuBtn.contains(event.target)) {
-                        toggleMenu();
-                    }
-                });
-
-                let touchStartX = 0;
-                let touchEndX = 0;
-                const minSwipeDistance = 50;
-
-                sideMenu.addEventListener('touchstart', (e) => {
-                    touchStartX = e.touches[0].clientX;
-                    touchEndX = 0;
-                });
-
-                sideMenu.addEventListener('touchmove', (e) => {
-                    touchEndX = e.touches[0].clientX;
-                });
-
-                sideMenu.addEventListener('touchend', () => {
-                    if (sideMenu.classList.contains('visible') && touchEndX !== 0) {
-                        const swipeDistance = touchEndX - touchStartX;
-                        if (swipeDistance > minSwipeDistance) {
-                            toggleMenu();
-                        }
-                    }
-                    touchStartX = 0;
-                    touchEndX = 0;
-                });
-            }
-            
-            if (scrollTopBtn) {
-                scrollTopBtn.addEventListener('click', () => {
-                    if (locoScroll) locoScroll.scrollTo('top');
-                });
-            }
-
-            const reduceMotionToggle = document.getElementById('reduceMotionToggle');
-            const cursorOptionsContainer = document.querySelector('.cursor-options');
-            const cursorRadios = document.querySelectorAll('input[name="cursor-style"]');
-
-            if (reduceMotionToggle) {
-                reduceMotionToggle.checked = reduceMotion;
-                applyReduceMotionSettings(reduceMotion);
-
-                reduceMotionToggle.addEventListener('change', (e) => {
-                    localStorage.setItem('reduceMotion', e.target.checked);
-                    applyReduceMotionSettings(e.target.checked);
-                    location.reload();
-                });
-            }
-
-            function applyReduceMotionSettings(isReduced) {
-                if (isReduced) {
-                    document.body.classList.add('reduce-motion');
-                    cursorRadios.forEach(radio => {
-                        radio.disabled = true;
-                    });
-                    const defaultCursorRadio = document.querySelector('input[name="cursor-style"][value="default"]');
-                    if (defaultCursorRadio) {
-                        defaultCursorRadio.checked = true;
-                        updateCursorStyle('default');
-                    }
-                } else {
-                    document.body.classList.remove('reduce-motion');
-                    cursorRadios.forEach(radio => {
-                        radio.disabled = false;
-                    });
-                    const ambientDotRadio = document.querySelector('input[name="cursor-style"][value="ambient-dot"]');
-                    if (ambientDotRadio) {
-                        ambientDotRadio.checked = true;
-                        updateCursorStyle('ambient-dot');
-                    }
-                }
-            }
-
-            themeRadios.forEach(radio => {
-                radio.addEventListener('change', (e) => {
-                    applyTheme(e.target.value);
-                });
-            });
-
-            const languageSelector = document.getElementById('languageSelector');
-            const savedLanguage = localStorage.getItem('language') || 'en';
-            languageSelector.value = savedLanguage;
-            setLanguage(savedLanguage);
-
-            languageSelector.addEventListener('change', (e) => {
-                const selectedLang = e.target.value;
-                localStorage.setItem('language', selectedLang);
-                setLanguage(selectedLang);
-            });
-            
-            const hotkeyModal = document.getElementById('hotkeyHelpModal');
-            const closeHelpModalBtn = document.getElementById('closeHelpModalBtn');
-
-            function showHelpModal() { hotkeyModal.hidden = false; }
-            function hideHelpModal() { hotkeyModal.hidden = true; }
-
-            closeHelpModalBtn.addEventListener('click', hideHelpModal);
-
-            document.addEventListener('keydown', (e) => {
-                if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') {
-                    return;
-                }
-                
-                const key = e.key.toLowerCase();
-
-                if (e.key === '?' || key === 'h') {
-                    showHelpModal();
-                }
-                if (key === 'm') {
-                    toggleMenu();
-                }
-                if (key === 't') {
-                    locoScroll.scrollTo('top');
-                }
-                if (key === 'b') {
-                    locoScroll.scrollTo('bottom');
-                }
-                if (e.key === 'Escape') {
-                    if (!hotkeyModal.hidden) {
-                        hideHelpModal();
-                    } else if (sideMenu.classList.contains('visible')) {
-                        toggleMenu();
-                    } else if (!cookieSettingsModal.hidden) {
-                        hideCookieSettingsModal();
-                    }
-                }
-            });
-
-            const cursorDot = document.querySelector('.cursor-dot');
-            const cursorFollower = document.querySelector('.cursor-follower');
-            
-            let mouseX = 0, mouseY = 0;
-            let followerX = 0, followerY = 0;
-            
-            window.addEventListener('mousemove', e => {
-                if (!('ontouchstart' in window) || document.body.classList.contains('cursor-ambient-dot')) {
-                    mouseX = e.clientX;
-                    mouseY = e.clientY;
-                }
-            });
-
-            function animateCursor() {
-                if (document.body.classList.contains('cursor-ambient-dot') && !('ontouchstart' in window)) {
-                    cursorDot.style.left = `${mouseX}px`;
-                    cursorDot.style.top = `${mouseY}px`;
-                    followerX += (mouseX - followerX) * 0.1;
-                    followerY += (mouseY - followerY) * 0.1;
-                    cursorFollower.style.left = `${followerX}px`;
-                    cursorFollower.style.top = `${followerY}px`;
-                    cursorDot.style.display = 'block';
-                    cursorFollower.style.display = 'block';
-                } else {
-                    cursorDot.style.display = 'none';
-                    cursorFollower.style.display = 'none';
-                }
-                requestAnimationFrame(animateCursor);
-            }
-            animateCursor();
-
-            function updateCursorStyle(style) {
-                document.body.classList.remove('cursor-ambient-dot');
-                document.body.style.cursor = 'default';
-
-                if (!('ontouchstart' in window)) {
-                    if (style === 'ambient-dot') {
-                        document.body.classList.add('cursor-ambient-dot');
-                        document.body.style.cursor = 'none';
-                    } else {
-                        document.body.style.cursor = style;
-                    }
-                } else {
-                    document.body.style.cursor = 'default';
-                }
-                localStorage.setItem('cursorStyle', style);
-            }
-            
-            cursorRadios.forEach(radio => {
-                radio.addEventListener('change', (e) => {
-                    updateCursorStyle(e.target.value);
-                });
-            });
-            
-            const initialCursor = localStorage.getItem('cursorStyle') || document.querySelector('input[name="cursor-style"][value="ambient-dot"]').value;
-            updateCursorStyle(initialCursor);
-
-            document.querySelectorAll('a, button, .faq-question, .slider, select').forEach(el => {
-                el.addEventListener('mouseenter', () => {
-                    if (!('ontouchstart' in window)) {
-                        cursorFollower.classList.add('active');
-                    }
-                });
-                el.addEventListener('mouseleave', () => {
-                    if (!('ontouchstart' in window)) {
-                        cursorFollower.classList.remove('active');
-                    }
-                });
-            });
-
-            const cookieConsentBanner = document.getElementById('cookieConsentBanner');
-            const acceptCookiesBtn = document.getElementById('acceptCookies');
-            const rejectCookiesBtn = document.getElementById('rejectCookies');
-            const customizeCookiesBtn = document.getElementById('customizeCookies');
-            const cookieSettingsModal = document.getElementById('cookieSettingsModal');
-            const closeCookieSettingsModalBtn = document.getElementById('closeCookieSettingsModalBtn');
-            const essentialCookiesToggle = document.getElementById('essentialCookiesToggle');
-            const analyticsCookiesToggle = document.getElementById('analyticsCookiesToggle');
-            const marketingCookiesToggle = document.getElementById('marketingCookiesToggle');
-            const saveCookieSettingsBtn = document.getElementById('saveCookieSettings');
-            const resetCookieSettingsBtn = document.getElementById('resetCookieSettings');
-
-            function showCookieBanner() {
-                if (!localStorage.getItem('cookieConsent')) {
-                    cookieConsentBanner.classList.add('show');
-                }
-            }
-
-            function hideCookieBanner() {
-                cookieConsentBanner.classList.remove('show');
-            }
-
-            function showCookieSettingsModal() {
-                cookieSettingsModal.hidden = false;
-                const consent = JSON.parse(localStorage.getItem('cookieConsentSettings')) || {};
-                analyticsCookiesToggle.checked = consent.analytics || false;
-                marketingCookiesToggle.checked = consent.marketing || false;
-            }
-
-            function hideCookieSettingsModal() {
-                cookieSettingsModal.hidden = true;
-            }
-
-            function saveCookieConsent(consentType) {
-                let settings = {
-                    essential: true,
-                    analytics: false,
-                    marketing: false
-                };
-
-                if (consentType === 'acceptAll') {
-                    settings.analytics = true;
-                    settings.marketing = true;
-                } else if (consentType === 'rejectAll') {
-                } else if (consentType === 'custom') {
-                    settings.analytics = analyticsCookiesToggle.checked;
-                    settings.marketing = marketingCookiesToggle.checked;
-                }
-                
-                localStorage.setItem('cookieConsent', 'true');
-                localStorage.setItem('cookieConsentSettings', JSON.stringify(settings));
-                hideCookieBanner();
-                hideCookieSettingsModal();
-                console.log('Cookie consent saved:', settings);
-            }
-
-            acceptCookiesBtn.addEventListener('click', () => saveCookieConsent('acceptAll'));
-            rejectCookiesBtn.addEventListener('click', () => saveCookieConsent('rejectAll'));
-            customizeCookiesBtn.addEventListener('click', showCookieSettingsModal);
-
-            closeCookieSettingsModalBtn.addEventListener('click', hideCookieSettingsModal);
-            saveCookieSettingsBtn.addEventListener('click', () => saveCookieConsent('custom'));
-            resetCookieSettingsBtn.addEventListener('click', () => {
-                analyticsCookiesToggle.checked = false;
-                marketingCookiesToggle.checked = false;
-            });
-
-            setTimeout(showCookieBanner, 1000);
-        });
-    </script>
 </body>
 </html>
