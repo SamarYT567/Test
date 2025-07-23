@@ -4,22 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Samplays - Complete Changelog</title>
-    <!-- Favicon from Index.html -->
-    <link rel="icon" type="image/png" href="https://i2.imageban.ru/out/2025/04/12/7f6f0dae06fbdc5d9a8b592f4a3ba931.png">
+    <link id="favicon" rel="icon" type="image/png" href="https://raw.githubusercontent.com/SamarYT567/Test/refs/heads/main/Assets/FaviconLight.png">
 
-    <!-- Fonts from Index.html -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/dungeon-depths" rel="stylesheet">
     
-    <!-- Locomotive Scroll CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css">
 
     <style>
-        /* Color Variables from Index.html */
         :root {
-            /* Dark Theme Defaults */
             --main-red: #ff4757;
             --main-blue: #3498db;
             --light-accent: #f1faee;
@@ -35,17 +30,15 @@
             --cookie-button-bg: #3498db;
             --cookie-button-hover-bg: #4a9eda;
 
-            --border-radius-soft: 12px; /* Consistent border radius */
+            --border-radius-soft: 12px;
 
-            /* New Light theme specific overrides for elements that need black in light mode */
             --image-border-color-light: #000000;
             --subscribe-button-bg-light: #000000;
-            --subscribe-button-hover-bg-light: #333333; /* Slightly lighter black on hover */
+            --subscribe-button-hover-bg-light: #333333;
             --contact-button-bg-light: #000000;
-            --contact-button-hover-bg-light: #333333; /* Slightly lighter black on hover */
+            --contact-button-hover-bg-light: #333333;
         }
 
-        /* Light Theme from Index.html */
         body.light-theme {
             --dark-bg: #f0f2f5;
             --card-bg: #ffffff;
@@ -59,15 +52,13 @@
             --cookie-button-bg: #3b82f6;
             --cookie-button-hover-bg: #60a5fa;
 
-            /* Light theme specific overrides for text colors */
             --header-text-color-light: #000000;
             --section-heading-color-light: #000000;
-            --cursor-dot-color-light: #000000; /* Black for ambient dot in light mode */
-            --side-menu-heading-color-light: #000000; /* Black for side menu headings in light mode */
-            --hamburger-icon-color-light: #000000; /* Black for hamburger icon in light mode */
+            --cursor-dot-color-light: #000000;
+            --side-menu-heading-color-light: #000000;
+            --hamburger-icon-color-light: #000000;
         }
 
-        /* Basic setup and variables from Index.html */
         html {
             overflow-x: hidden;
         }
@@ -83,13 +74,15 @@
             color: var(--text-primary);
         }
 
-        /* Reduce Motion */
+        body.no-scroll {
+            overflow: hidden;
+        }
+
         body.reduce-motion * {
             animation: none !important;
             transition: none !important;
         }
 
-        /* Custom Cursor: Ambient Dot */
         .cursor-dot, .cursor-follower {
             position: fixed;
             top: 0;
@@ -133,7 +126,6 @@
             cursor: none !important;
         }
 
-        /* Page Loader */
         #loader {
             position: fixed;
             width: 100vw;
@@ -163,7 +155,6 @@
             visibility: hidden;
         }
 
-        /* Header Styling */
         header {
             position: fixed;
             top: 0;
@@ -175,7 +166,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            /* Default transparent state */
             background-color: transparent;
             backdrop-filter: blur(0px);
             -webkit-backdrop-filter: blur(0px);
@@ -183,13 +173,12 @@
             transition: background-color 0.4s ease, backdrop-filter 0.4s ease, border-bottom-color 0.4s ease;
         }
         header.scrolled {
-            /* Glassmorphism effect when scrolled */
-            background-color: rgba(22, 27, 34, 0.8); /* Dark theme glassmorphism */
+            background-color: rgba(22, 27, 34, 0.8);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border-color);
         }
-        body.light-theme header.scrolled { /* Apply light theme glassmorphism when scrolled */
+        body.light-theme header.scrolled {
             background-color: rgba(255, 255, 255, 0.8);
         }
         .header-title {
@@ -198,7 +187,8 @@
         }
         .header-title h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: clamp(1.5em, 4vw, 1.8em); /* Auto-adjusting font size */
+            color: var(--light-accent);
+            font-size: clamp(1.5em, 4vw, 1.8em);
             margin: 0;
             text-shadow: 0 0 5px var(--main-red);
             display: inline-block;
@@ -211,7 +201,6 @@
             width: 44px;
         }
 
-        /* Menu Button (Hamburger) */
         #menuBtn {
             background: none;
             border: none;
@@ -241,11 +230,10 @@
         #menuBtn.open .menu-icon span:nth-child(2) { opacity: 0; }
         #menuBtn.open .menu-icon span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
-        /* Side Menu */
         #sideMenu {
             position: fixed;
             top: 0;
-            right: -320px; /* Hidden by default */
+            right: -320px;
             width: 300px;
             height: 100%;
             background: var(--side-menu-bg);
@@ -327,7 +315,6 @@
             width: 100%;
         }
         
-        /* Toggle Switch Base */
         .toggle-switch-container {
             display: flex;
             justify-content: space-between;
@@ -374,7 +361,6 @@
             transform: translateX(22px);
         }
 
-        /* Radio Buttons for Cursor Style & Theme */
         .cursor-options label,
         .theme-options label {
             display: block;
@@ -398,7 +384,6 @@
             pointer-events: none;
         }
 
-        /* Language Selector */
         .language-options select {
             width: 100%;
             padding: 8px;
@@ -422,9 +407,8 @@
             box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.3);
         }
 
-        /* Main Content Layout */
         .main-container {
-            padding: 120px 5vw 40px; /* Adjusted top padding for fixed header and responsive horizontal padding */
+            padding: 120px 5vw 40px;
             max-width: 1200px;
             margin: 0 auto;
         }
@@ -443,7 +427,7 @@
 
         .section-heading {
             font-family: 'Orbitron', sans-serif;
-            font-size: clamp(1.8rem, 5vw, 2.5rem); /* Made responsive */
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
             color: var(--light-accent);
             text-align: center;
             margin-bottom: 30px;
@@ -452,7 +436,6 @@
             color: var(--section-heading-color-light);
         }
 
-        /* Changelog specific styling */
         .changelog-entry {
             margin-bottom: 2.5rem;
             padding-bottom: 2rem;
@@ -465,19 +448,19 @@
         .changelog-entry h2 {
             font-family: 'Poppins', sans-serif;
             font-weight: 700;
-            font-size: clamp(1.5rem, 4vw, 1.875rem); /* Made responsive */
+            font-size: clamp(1.5rem, 4vw, 1.875rem);
             color: var(--main-blue);
             margin-bottom: 0.5rem;
         }
         .changelog-entry p.release-date {
-            font-size: clamp(0.8rem, 2vw, 0.875rem); /* Made responsive */
+            font-size: clamp(0.8rem, 2vw, 0.875rem);
             color: var(--text-secondary);
             margin-bottom: 1rem;
         }
         .changelog-entry h3 {
             font-family: 'Poppins', sans-serif;
             font-weight: 600;
-            font-size: clamp(1.1rem, 3vw, 1.25rem); /* Made responsive */
+            font-size: clamp(1.1rem, 3vw, 1.25rem);
             color: var(--text-primary);
             margin-bottom: 0.5rem;
             margin-top: 1.5rem;
@@ -492,13 +475,12 @@
         }
         .changelog-entry ul li {
             margin-bottom: 0.5rem;
-            font-size: clamp(1rem, 2.5vw, 1.125rem); /* Made responsive */
+            font-size: clamp(1rem, 2.5vw, 1.125rem);
         }
         .changelog-entry ul li:last-child {
             margin-bottom: 0;
         }
 
-        /* Scroll to Top Button */
         #scrollTopBtn {
             position: fixed; bottom: 20px; right: 20px; z-index: 999;
             background-color: var(--main-red);
@@ -515,7 +497,6 @@
         #scrollTopBtn:hover { background-color: #ff6b81; transform: scale(1.1); }
         #scrollTopBtn svg { width: 20px; height: 20px; fill: white; }
 
-        /* Hotkey Help Modal */
         .hotkey-modal {
             position: fixed;
             z-index: 10001;
@@ -596,7 +577,6 @@
             margin-left: 10px;
         }
 
-        /* Cookie Consent Banner */
         #cookieConsentBanner {
             position: fixed;
             bottom: 0;
@@ -653,7 +633,6 @@
             transform: translateY(-2px);
         }
 
-        /* Cookie Settings Modal */
         #cookieSettingsModal {
             position: fixed;
             z-index: 10002;
@@ -697,7 +676,6 @@
         #resetCookieSettings:hover {
             background-color: var(--border-color);
         }
-        /* Styles for cookie modal content from Index.html */
         #cookieSettingsModal .modal-content {
             background-color: var(--modal-bg);
             padding: 30px 40px;
@@ -751,9 +729,7 @@
             margin-left: 15px;
         }
 
-
-        /* Responsive Adjustments */
-        @media (max-width: 1024px) { /* Combined mobile and tablet for cursor removal */
+        @media (max-width: 1024px) {
             .cursor-dot, .cursor-follower {
                 display: none !important;
             }
@@ -761,27 +737,26 @@
                 cursor: default !important;
             }
             .cursor-options {
-                display: none; /* Hide cursor options on touch devices */
+                display: none;
             }
 
-            /* Make side menu full screen on mobile/tablet */
             #sideMenu {
                 width: 100%;
-                right: -100%; /* Initially off-screen */
-                border-radius: 0; /* Remove rounded corners for full screen */
+                right: -100%;
+                border-radius: 0;
             }
             #sideMenu.visible {
-                right: 0; /* Slide in to cover full screen */
+                right: 0;
             }
         }
 
         @media (max-width: 768px) {
             header h1 { font-size: clamp(1.2em, 5vw, 1.5em); }
             .main-container {
-                padding: 100px 3vw 30px; /* Adjusted top padding for header and responsive horizontal padding */
+                padding: 100px 3vw 30px;
             }
             .section-heading {
-                font-size: clamp(1.5rem, 6vw, 2rem); /* Adjusted for smaller screens */
+                font-size: clamp(1.5rem, 6vw, 2rem);
             }
             .changelog-entry h2 { font-size: clamp(1.3rem, 5vw, 1.5rem); }
             .changelog-entry h3 { font-size: clamp(1rem, 3.5vw, 1.125rem); }
@@ -793,13 +768,12 @@
 
         @media (max-width: 480px) {
             header h1 { font-size: clamp(1.1em, 6vw, 1.3em); white-space: normal; }
-            .section-heading { font-size: clamp(1.3rem, 7vw, 1.8rem); } /* Further adjusted for very small screens */
+            .section-heading { font-size: clamp(1.3rem, 7vw, 1.8rem); }
             .main-container {
-                padding: 80px 3vw 20px; /* Further adjusted padding for very small screens */
+                padding: 80px 3vw 20px;
             }
         }
 
-        /* Tablet-specific adjustments (769px to 1024px) */
         @media (min-width: 769px) and (max-width: 1024px) {
             .main-container {
                 padding: 120px 7vw 40px;
@@ -810,7 +784,6 @@
             .changelog-entry ul li { font-size: 1.1rem; }
         }
 
-        /* Landscape phone orientation adjustments */
         @media screen and (max-width: 820px) and (orientation: landscape) {
             .main-container {
                 padding: 80px 5vw 20px;
@@ -833,7 +806,6 @@
             <div class="spinner"></div>
         </div>
 
-        <!-- Header consistent with Index.html's design -->
         <header id="mainHeader">
             <div class="header-placeholder"></div>
             <div class="header-title">
@@ -848,7 +820,6 @@
             </button>
         </header>
 
-        <!-- Side Menu -->
         <div id="sideMenu">
             <div class="side-menu-header">
                 <button id="closeMenuBtn" title="Close Menu" aria-label="Close Menu">×</button>
@@ -858,7 +829,6 @@
                     <a href="https://samaryt567.github.io/Test/Index.html" data-i18n-key="navHome">Home</a>
                     <a href="https://samaryt567.github.io/Test/About.html" data-i18n-key="navAbout">About</a>
                     <a href="https://samaryt567.github.io/Test/RecentVideos.html" data-i18n-key="navRecentVideos">Recent Videos</a>
-                    <!-- Removed Changelog link as per request -->
                 </div>
                 <div class="setting-section accessibility-options">
                     <h3 data-i18n-key="headingAccessibility">Accessibility</h3>
@@ -910,7 +880,6 @@
                     Complete Changelog
                 </h1>
 
-                <!-- Version 2.0.0 -->
                 <div class="changelog-entry">
                     <h2>v2.0.0 - The Overhaul Update</h2>
                     <p class="release-date">Release Date: September 5, 2025</p>
@@ -987,7 +956,6 @@
                     </ul>
                 </div>
 
-                <!-- Version 1.8.5 -->
                 <div class="changelog-entry">
                     <h2>v1.8.5 - URL Update</h2>
                     <p class="release-date">Release Date: May 26, 2025</p>
@@ -999,7 +967,6 @@
                     </ul>
                 </div>
 
-                <!-- Version 1.8.0 -->
                 <div class="changelog-entry">
                     <h2>v1.8.0 - A Better, Smoother Experience</h2>
                     <p class="release-date">Release Date: May 25, 2025</p>
@@ -1020,7 +987,6 @@
                     </ul>
                 </div>
 
-                <!-- Version 1.6.0 -->
                 <div class="changelog-entry">
                     <h2>v1.6.0 - New Features</h2>
                     <p class="release-date">Release Date: Early May 2025</p>
@@ -1034,7 +1000,6 @@
                     </ul>
                 </div>
 
-                <!-- Version 1.4.0 -->
                 <div class="changelog-entry">
                     <h2>v1.4.0 - Improvements and New Features</h2>
                     <p class="release-date">Release Date: April 2025</p>
@@ -1050,7 +1015,6 @@
                     </ul>
                 </div>
 
-                <!-- Version 1.2.0 -->
                 <div class="changelog-entry">
                     <h2>v1.2.0 - First Update</h2>
                     <p class="release-date">Release Date: March 2025</p>
@@ -1064,7 +1028,6 @@
                     </ul>
                 </div>
 
-                <!-- Version 1.0.0 -->
                 <div class="changelog-entry">
                     <h2>v1.0.0 - Early Development Files</h2>
                     <p class="release-date">Release Date: February 2025</p>
@@ -1083,7 +1046,6 @@
         </button>
     </div> 
 
-    <!-- Hotkey Help Modal -->
     <div id="hotkeyHelpModal" class="hotkey-modal" role="dialog" aria-modal="true" aria-labelledby="hotkey-title" hidden>
         <div class="modal-content">
             <button id="closeHelpModalBtn" class="close-btn" aria-label="Close hotkey help">&times;</button>
@@ -1098,7 +1060,6 @@
         </div>
     </div>
 
-    <!-- Cookie Consent Banner -->
     <div id="cookieConsentBanner" class="cookie-banner">
         <div class="cookie-content">
             <p data-i18n-key="cookieConsentText">We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies.</p>
@@ -1110,7 +1071,6 @@
         </div>
     </div>
 
-    <!-- Cookie Settings Modal -->
     <div id="cookieSettingsModal" class="hotkey-modal" role="dialog" aria-modal="true" aria-labelledby="cookie-settings-title" hidden>
         <div class="modal-content">
             <button id="closeCookieSettingsModalBtn" class="close-btn" aria-label="Close cookie settings">&times;</button>
@@ -1147,14 +1107,13 @@
     <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
 
     <script defer>
-        // --- i18n Translation Scaffolding ---
         const translations = {
             'en': {
                 channelTitle: "Sam Plays",
                 navHome: "Home",
                 navAbout: "About",
                 navRecentVideos: "Recent Videos",
-                navChangelog: "Changelog", // Added new translation key
+                navChangelog: "Changelog",
                 headingAccessibility: "Accessibility",
                 optionReduceMotion: "Reduce Motion",
                 headingCursorStyle: "Cursor Style",
@@ -1188,7 +1147,7 @@
                 navHome: "Startseite",
                 navAbout: "Über Mich",
                 navRecentVideos: "Neueste Videos",
-                navChangelog: "Änderungsprotokoll", // Added new translation key
+                navChangelog: "Änderungsprotokoll",
                 headingAccessibility: "Barrierefreiheit",
                 optionReduceMotion: "Bewegung reduzieren",
                 headingCursorStyle: "Cursor-Stil",
@@ -1231,24 +1190,35 @@
             if (locoScroll) locoScroll.update();
         }
 
-        // --- Theme Management ---
         const themeRadios = document.querySelectorAll('input[name="theme-style"]');
         const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        const faviconLink = document.getElementById('favicon');
+        const darkModeFavicon = 'https://raw.githubusercontent.com/SamarYT567/Test/refs/heads/main/Assets/FaviconDark.png';
+        const lightModeFavicon = 'https://raw.githubusercontent.com/SamarYT567/Test/refs/heads/main/Assets/FaviconLight.png';
 
         function applyTheme(theme) {
             document.body.classList.remove('light-theme', 'dark-theme');
+            let currentFavicon = darkModeFavicon;
+
             if (theme === 'light') {
                 document.body.classList.add('light-theme');
+                currentFavicon = lightModeFavicon;
             } else if (theme === 'dark') {
                 document.body.classList.add('dark-theme');
+                currentFavicon = darkModeFavicon;
             } else if (theme === 'system') {
                 if (prefersDarkScheme.matches) {
                     document.body.classList.add('dark-theme');
+                    currentFavicon = darkModeFavicon;
                 } else {
                     document.body.classList.add('light-theme');
+                    currentFavicon = lightModeFavicon;
                 }
             }
             localStorage.setItem('theme', theme);
+            if (faviconLink) {
+                faviconLink.href = currentFavicon;
+            }
         }
 
         function initializeTheme() {
@@ -1266,11 +1236,7 @@
             }
         });
 
-        // --- Accessibility Settings ---
         const reduceMotion = localStorage.getItem('reduceMotion') === 'true';
-        if (reduceMotion) {
-            document.body.classList.add('reduce-motion');
-        }
 
         let locoScroll;
 
@@ -1287,7 +1253,6 @@
                 }, 500);
             }
 
-            // --- Locomotive Scroll Initialization (Consistent with Index.html) ---
             locoScroll = new LocomotiveScroll({
                 el: scrollContainer,
                 smooth: !reduceMotion,
@@ -1310,29 +1275,12 @@
                 }
             });
 
-            // Removed the scroll position memory for browser back/forward buttons
-            // window.addEventListener('beforeunload', () => {
-            //     sessionStorage.setItem('scrollPosition', lastScrollY);
-            // });
-            
-            // const navigationEntries = performance.getEntriesByType("navigation");
-            // if (sessionStorage.getItem('scrollPosition') && navigationEntries.length > 0 && navigationEntries[0].type === 'back_forward') {
-            //     const savedPosition = parseInt(sessionStorage.getItem('scrollPosition'), 10);
-            //     if (!isNaN(savedPosition)) {
-            //         setTimeout(() => {
-            //             locoScroll.scrollTo(savedPosition, { duration: 0, disableLerp: true });
-            //             sessionStorage.removeItem('scrollPosition');
-            //         }, 100);
-            //     }
-            // }
-
             imagesLoaded(scrollContainer, { background: true }, () => {
                 if (locoScroll) locoScroll.update();
             });
             
             new ResizeObserver(() => locoScroll.update()).observe(scrollContainer);
 
-            // --- Side Menu ---
             const menuBtn = document.getElementById('menuBtn');
             const closeMenuBtn = document.getElementById('closeMenuBtn');
             const sideMenu = document.getElementById('sideMenu');
@@ -1341,34 +1289,45 @@
                 const isOpen = menuBtn.classList.contains('open');
                 menuBtn.classList.toggle('open', !isOpen);
                 sideMenu.classList.toggle('visible', !isOpen);
+
+                if (!isOpen) {
+                    document.body.classList.add('no-scroll');
+                    if (locoScroll) {
+                        locoScroll.stop();
+                    }
+                } else {
+                    document.body.classList.remove('no-scroll');
+                    if (locoScroll) {
+                        locoScroll.start();
+                    }
+                }
             }
 
             if (menuBtn && sideMenu && closeMenuBtn) {
                 menuBtn.addEventListener('click', (event) => {
                     event.stopPropagation();
                     toggleMenu();
-                    vibrate(50); // Haptic feedback on menu open
+                    vibrate(50);
                 });
                 closeMenuBtn.addEventListener('click', () => {
                     toggleMenu();
-                    vibrate(50); // Haptic feedback on menu close
+                    vibrate(50);
                 });
                 
                 document.addEventListener('click', (event) => {
                     if (sideMenu.classList.contains('visible') && !sideMenu.contains(event.target) && !menuBtn.contains(event.target)) {
                         toggleMenu();
-                        vibrate(50); // Haptic feedback on menu close via outside click
+                        vibrate(50);
                     }
                 });
 
-                // --- Swipe to Close Gesture Support ---
                 let touchStartX = 0;
                 let touchEndX = 0;
-                const minSwipeDistance = 50; // Minimum pixels for a swipe to be recognized
+                const minSwipeDistance = 50;
 
                 sideMenu.addEventListener('touchstart', (e) => {
                     touchStartX = e.touches[0].clientX;
-                    touchEndX = 0; // Reset end position
+                    touchEndX = 0;
                 });
 
                 sideMenu.addEventListener('touchmove', (e) => {
@@ -1378,26 +1337,23 @@
                 sideMenu.addEventListener('touchend', () => {
                     if (sideMenu.classList.contains('visible') && touchEndX !== 0) {
                         const swipeDistance = touchEndX - touchStartX;
-                        if (swipeDistance > minSwipeDistance) { // Swiped right
+                        if (swipeDistance > minSwipeDistance) {
                             toggleMenu();
-                            vibrate(50); // Haptic feedback on swipe close
+                            vibrate(50);
                         }
                     }
-                    // Reset touch positions
                     touchStartX = 0;
                     touchEndX = 0;
                 });
             }
 
-            // --- Scroll to Top ---
             if (scrollTopBtn) {
                 scrollTopBtn.addEventListener('click', () => {
                     if (locoScroll) locoScroll.scrollTo('top');
-                    vibrate(50); // Haptic feedback on scroll to top
+                    vibrate(50);
                 });
             }
 
-            // --- Settings ---
             const reduceMotionToggle = document.getElementById('reduceMotionToggle');
             const cursorRadios = document.querySelectorAll('input[name="cursor-style"]');
 
@@ -1434,7 +1390,7 @@
             themeRadios.forEach(radio => {
                 radio.addEventListener('change', (e) => {
                     applyTheme(e.target.value);
-                    vibrate(30); // Haptic feedback on theme change
+                    vibrate(30);
                 });
             });
 
@@ -1447,10 +1403,9 @@
                 const selectedLang = e.target.value;
                 localStorage.setItem('language', selectedLang);
                 setLanguage(selectedLang);
-                vibrate(30); // Haptic feedback on language change
+                vibrate(30);
             });
             
-            // --- Hotkey Help Modal & Keyboard Shortcuts ---
             const hotkeyModal = document.getElementById('hotkeyHelpModal');
             const closeHelpModalBtn = document.getElementById('closeHelpModalBtn');
 
@@ -1466,35 +1421,34 @@
 
                 if (e.key === '?' || key === 'h') {
                     showHelpModal();
-                    vibrate(20); // Haptic feedback for hotkey help
+                    vibrate(20);
                 }
                 if (key === 'm') {
                     toggleMenu();
-                    vibrate(20); // Haptic feedback for menu toggle
+                    vibrate(20);
                 }
                 if (key === 't' && locoScroll) {
                     locoScroll.scrollTo('top');
-                    vibrate(20); // Haptic feedback for scroll to top
+                    vibrate(20);
                 }
                 if (key === 'b' && locoScroll) {
                     locoScroll.scrollTo('bottom');
-                    vibrate(20); // Haptic feedback for scroll to bottom
+                    vibrate(20);
                 }
                 if (e.key === 'Escape') {
                     if (!hotkeyModal.hidden) {
                         hideHelpModal();
-                        vibrate(20); // Haptic feedback for closing hotkey modal
+                        vibrate(20);
                     } else if (sideMenu.classList.contains('visible')) {
                         toggleMenu();
-                        vibrate(20); // Haptic feedback for closing menu
+                        vibrate(20);
                     } else if (!cookieSettingsModal.hidden) {
                         hideCookieSettingsModal();
-                        vibrate(20); // Haptic feedback for closing cookie modal
+                        vibrate(20);
                     }
                 }
             });
 
-            // --- Custom Cursor Logic ---
             const cursorDot = document.querySelector('.cursor-dot');
             const cursorFollower = document.querySelector('.cursor-follower');
             
@@ -1546,7 +1500,7 @@
             cursorRadios.forEach(radio => {
                 radio.addEventListener('change', (e) => {
                     updateCursorStyle(e.target.value);
-                    vibrate(30); // Haptic feedback on cursor style change
+                    vibrate(30);
                 });
             });
             
@@ -1569,22 +1523,18 @@
                 });
             });
 
-            // --- Haptic Feedback Function ---
             function vibrate(duration) {
                 if (navigator.vibrate) {
                     navigator.vibrate(duration);
                 }
             }
 
-            // Add haptic feedback to all interactive buttons/links
             document.querySelectorAll('button, a.subscribe-button, #openFeedbackFormBtn, #acceptCookies, #rejectCookies, #customizeCookies, #saveCookieSettings, #resetCookieSettings').forEach(element => {
                 element.addEventListener('click', () => {
-                    vibrate(50); // General haptic feedback for clicks
+                    vibrate(50);
                 });
             });
 
-
-            // --- Cookie Consent Logic ---
             const cookieConsentBanner = document.getElementById('cookieConsentBanner');
             const acceptCookiesBtn = document.getElementById('acceptCookies');
             const rejectCookiesBtn = document.getElementById('rejectCookies');
@@ -1629,7 +1579,6 @@
                     settings.analytics = true;
                     settings.marketing = true;
                 } else if (consentType === 'rejectAll') {
-                    // All non-essential are false
                 } else if (consentType === 'custom') {
                     settings.analytics = analyticsCookiesToggle.checked;
                     settings.marketing = marketingCookiesToggle.checked;
@@ -1653,7 +1602,7 @@
             });
 
             setTimeout(showCookieBanner, 1000);
-        }); // This closing brace was missing, causing the SyntaxError.
+        });
     </script>
 </body>
 </html>
