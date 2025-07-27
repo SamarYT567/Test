@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sam Plays - Recent Videos</title>
+<link href="https://raw.githubusercontent.com/SamarYT567/Test/refs/heads/main/Assets/FaviconLight.png" id="favicon" rel="icon" type="image/png"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.cdnfonts.com/css/dungeon-depths" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css" rel="stylesheet"/>
+
+<link href="recentvideos.css" rel="stylesheet"/></head>
+<body>
+<div class="cursor-dot"></div>
+<div class="cursor-follower"></div>
+<div data-scroll-container="">
+<div id="loader">
+<div class="spinner"></div>
+</div>
+<header id="mainHeader">
+<div class="header-placeholder"></div>
+<div class="header-title">
+<h1 data-i18n-key="channelTitle">Sam Plays</h1>
+</div>
+<button aria-label="Open Menu" id="menuBtn" title="Open Menu">
+<div class="menu-icon">
+<span></span>
+<span></span>
+<span></span>
+</div>
+</button>
+</header>
+<div id="sideMenu">
+<div class="side-menu-header">
+<button aria-label="Close Menu" id="closeMenuBtn" title="Close Menu">×</button>
+</div>
+<div class="side-menu-content">
+<div class="setting-section menu-nav-links">
+<a data-i18n-key="navHome" href="https://samaryt567.github.io/Test/Index.html">Home</a>
+<a data-i18n-key="navAbout" href="https://samaryt567.github.io/Test/About.html">About</a>
+<a data-i18n-key="navChangelog" href="https://samaryt567.github.io/Test/Changelog.html">Changelog</a>
+</div>
+<div class="setting-section accessibility-options">
+<h3 data-i18n-key="headingAccessibility">Accessibility</h3>
+<div class="toggle-switch-container">
+<span data-i18n-key="optionReduceMotion">Reduce Motion</span>
+<label class="toggle-switch">
+<input id="reduceMotionToggle" type="checkbox"/>
+<span class="slider"></span>
+</label>
+</div>
+</div>
+<div class="setting-section cursor-options">
+<h3 data-i18n-key="headingCursorStyle">Cursor Style</h3>
+<label>
+<input checked="" name="cursor-style" type="radio" value="ambient-dot"/> <span data-i18n-key="cursorAmbientDot">Ambient Dot</span>
+</label>
+<label>
+<input name="cursor-style" type="radio" value="default"/> <span data-i18n-key="cursorDefault">Default</span>
+</label>
+<label>
+<input name="cursor-style" type="radio" value="crosshair"/> <span data-i18n-key="cursorCrosshair">Crosshair</span>
+</label>
+</div>
+<div class="setting-section theme-options">
+<h3 data-i18n-key="headingTheme">Theme</h3>
+<label>
+<input checked="" name="theme-style" type="radio" value="system"/> <span data-i18n-key="themeSystem">System</span>
+</label>
+<label>
+<input name="theme-style" type="radio" value="light"/> <span data-i18n-key="themeLight">Light</span>
+</label>
+<label>
+<input name="theme-style" type="radio" value="dark"/> <span data-i18n-key="themeDark">Dark</span>
+</label>
+</div>
+<div class="setting-section language-options">
+<h3 data-i18n-key="headingLanguage">Language</h3>
+<select aria-label="Select Language" id="languageSelector">
+<option value="en">English</option>
+<option value="de">Deutsch</option>
+</select>
+</div>
+</div>
+</div>
+<main class="main-container" data-scroll-section="">
+<h2 class="page-heading" data-i18n-key="recentVideosTitle">Recent Videos</h2>
+<div class="content-container" id="videoContainer">
+</div>
+<div class="view-more-container">
+<button id="viewMoreBtn">
+<span data-i18n-key="viewMoreVideos">View More Videos</span>
+<svg class="lucide lucide-arrow-down" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M12 5v14"></path><path d="m19 12-7 7-7-7"></path></svg>
+</button>
+</div>
+</main>
+<button aria-label="Scroll to top" id="scrollTopBtn" title="Go to top">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 4l8 8h-6v8h-4v-8H4l8-8z"></path></svg>
+</button>
+</div>
+<div aria-labelledby="hotkey-title" aria-modal="true" class="hotkey-modal" hidden="" id="hotkeyHelpModal" role="dialog">
+<div class="modal-content">
+<button aria-label="Close hotkey help" class="close-btn" id="closeHelpModalBtn">×</button>
+<h2 data-i18n-key="hotkeyTitle" id="hotkey-title">Keyboard Shortcuts</h2>
+<ul>
+<li><span data-i18n-key="hotkeyHelp">Show this help menu</span><div><span>?</span> or <span>H</span></div></li>
+<li><span data-i18n-key="hotkeyMenu">Toggle menu</span><span>M</span></li>
+<li><span data-i18n-key="hotkeyScrollTop">Scroll to top</span><span>T</span></li>
+<li><span data-i18n-key="hotkeyScrollBottom">Scroll to bottom</span><span>B</span></li>
+<li><span data-i18n-key="hotkeyClose">Close menu or dialog</span><span>ESC</span></li>
+</ul>
+</div>
+</div>
+<div class="cookie-banner" id="cookieConsentBanner">
+<div class="cookie-content">
+<p data-i18n-key="cookieConsentText">We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies.</p>
+</div>
+<div class="cookie-buttons">
+<button data-i18n-key="cookieAcceptAll" id="acceptCookies">Accept All</button>
+<button data-i18n-key="cookieRejectAll" id="rejectCookies">Reject All</button>
+<button data-i18n-key="cookieCustomize" id="customizeCookies">Customize</button>
+</div>
+</div>
+<div aria-labelledby="cookie-settings-title" aria-modal="true" class="hotkey-modal" hidden="" id="cookieSettingsModal" role="dialog">
+<div class="modal-content">
+<button aria-label="Close cookie settings" class="close-btn" id="closeCookieSettingsModalBtn">×</button>
+<h2 data-i18n-key="cookieSettingsTitle" id="cookie-settings-title">Privacy Settings</h2>
+<div class="cookie-setting-item">
+<p data-i18n-key="cookieEssential">Essential Cookies (Required)</p>
+<label class="toggle-switch">
+<input checked="" disabled="" id="essentialCookiesToggle" type="checkbox"/>
+<span class="slider"></span>
+</label>
+</div>
+<div class="cookie-setting-item">
+<p data-i18n-key="cookieAnalytics">Analytics Cookies</p>
+<label class="toggle-switch">
+<input id="analyticsCookiesToggle" type="checkbox"/>
+<span class="slider"></span>
+</label>
+</div>
+<div class="cookie-setting-item">
+<p data-i18n-key="cookieMarketing">Marketing Cookies</p>
+<label class="toggle-switch">
+<input id="marketingCookiesToggle" type="checkbox"/>
+<span class="slider"></span>
+</label>
+</div>
+<div class="cookie-settings-actions">
+<button data-i18n-key="cookieSaveSettings" id="saveCookieSettings">Save Settings</button>
+<button data-i18n-key="cookieResetSettings" id="resetCookieSettings">Reset to Default</button>
+</div>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.min.js"></script>
+<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+
+<script defer="True" src="recentvideos.js"></script></body>
+</html>
