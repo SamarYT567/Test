@@ -61,49 +61,62 @@ const translations = {
 
 const GA_MEASUREMENT_ID = 'G-EG0GH8DHMB';
 
-// Initializes Google Analytics and sets default consent
-function initGoogleAnalytics() {
-    // Prevent re-initialization
-    if (window.gtag) {
+// --- Google Analytics Consent Mode v2 Setup ---
+
+// This function sets up the Google Analytics script and defines the default consent state.
+// It ensures that no tracking happens until the user explicitly consents.
+function initializeAnalyticsWithConsent() {
+    // Avoid re-initializing if the script is already there.
+    if (document.querySelector(`script[src*="${GA_MEASUREMENT_ID}"]`)) {
         return;
     }
+
+    // Define the dataLayer and the gtag function.
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    window.gtag = gtag;
+
+    // Set the default consent state to 'denied' for all tracking types.
+    // This is a crucial step for privacy compliance.
+    gtag('consent', 'default', {
+        'analytics_storage': 'denied',
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied'
+    });
+
+    // Load the Google Analytics script asynchronously.
     const script = document.createElement('script');
     script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
     script.async = true;
     document.head.appendChild(script);
 
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    window.gtag = gtag;
-
-    // Set default consent to 'denied' before any events are sent
-    gtag('consent', 'default', {
-        'analytics_storage': 'denied',
-        'ad_storage': 'denied',
-        'ad_user_data': 'denied',
-        'ad_personalization': 'denied',
-    });
-
+    // Initialize the gtag with the current time and measurement ID.
     gtag('js', new Date());
     gtag('config', GA_MEASUREMENT_ID);
-    console.log('Google Analytics Initialized');
+
+    console.log('Google Analytics initialized with default consent set to "denied".');
 }
 
-// Updates Google Analytics consent based on user settings
-function updateGtagConsent(settings) {
+// This function is called to update the user's consent choices.
+function updateUserConsent(settings) {
     if (!window.gtag) {
-        console.error("gtag not initialized");
+        console.error("gtag is not available. Cannot update consent.");
         return;
     }
+
     const consentState = {
         'analytics_storage': settings.analytics ? 'granted' : 'denied',
         'ad_storage': settings.marketing ? 'granted' : 'denied',
         'ad_user_data': settings.marketing ? 'granted' : 'denied',
         'ad_personalization': settings.marketing ? 'granted' : 'denied',
     };
+
     gtag('consent', 'update', consentState);
-    console.log('Google Analytics consent updated:', consentState);
+    console.log('User consent updated:', consentState);
 }
+
+// --- End of Analytics Setup ---
 
 
 function setLanguage(lang) {
@@ -169,13 +182,12 @@ const reduceMotion = localStorage.getItem('reduceMotion') === 'true';
 let locoScroll;
 
 document.addEventListener('DOMContentLoaded', () => {
-  // --- START: GA & Cookie Consent Initialization ---
-  initGoogleAnalytics();
+  // Initialize Analytics and check for previously saved consent.
+  initializeAnalyticsWithConsent();
   const savedConsentSettings = localStorage.getItem('cookieConsentSettings');
   if (savedConsentSettings) {
-      updateGtagConsent(JSON.parse(savedConsentSettings));
+      updateUserConsent(JSON.parse(savedConsentSettings));
   }
-  // --- END: GA & Cookie Consent Initialization ---
 
   const scrollContainer = document.querySelector('[data-scroll-container]');
   if (!scrollContainer) return;
@@ -515,11 +527,11 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('cookieConsent', 'true');
     localStorage.setItem('cookieConsentSettings', JSON.stringify(settings));
     
-    updateGtagConsent(settings);
+    // This is the key part: update the live consent state in Google Analytics.
+    updateUserConsent(settings);
 
     hideCookieBanner();
     hideCookieSettingsModal();
-    console.log('Cookie consent saved:', settings);
   }
 
   acceptCookiesBtn.addEventListener('click', () => saveCookieConsent('acceptAll'));
