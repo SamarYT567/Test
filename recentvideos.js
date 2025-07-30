@@ -75,7 +75,7 @@ const translations = {
 
 const GA_MEASUREMENT_ID = 'G-EG0GH8DHMB';
 
-// Initializes Google Analytics
+// Initializes Google Analytics and sets default consent
 function initGoogleAnalytics() {
     // Prevent re-initialization
     if (window.gtag) {
@@ -89,6 +89,14 @@ function initGoogleAnalytics() {
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     window.gtag = gtag;
+
+    // Set default consent to 'denied' before any events are sent
+    gtag('consent', 'default', {
+        'analytics_storage': 'denied',
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+    });
 
     gtag('js', new Date());
     gtag('config', GA_MEASUREMENT_ID);
@@ -174,11 +182,13 @@ const reduceMotion = localStorage.getItem('reduceMotion') === 'true';
 let locoScroll;
 
 document.addEventListener('DOMContentLoaded', () => {
+    // --- START: GA & Cookie Consent Initialization ---
     initGoogleAnalytics();
     const savedConsentSettings = localStorage.getItem('cookieConsentSettings');
     if (savedConsentSettings) {
         updateGtagConsent(JSON.parse(savedConsentSettings));
     }
+    // --- END: GA & Cookie Consent Initialization ---
 
     const scrollContainer = document.querySelector('[data-scroll-container]');
     if (!scrollContainer) return;
@@ -317,7 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
             cursorRadios.forEach(radio => {
                 radio.disabled = false;
             });
-            const ambientDotRadio = document.querySelector('input[name="cursor-style'][value="ambient-dot"]');
+            const ambientDotRadio = document.querySelector('input[name="cursor-style"][value="ambient-dot"]');
             if (ambientDotRadio) {
                 ambientDotRadio.checked = true;
                 updateCursorStyle('ambient-dot');
