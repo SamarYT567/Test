@@ -16,6 +16,15 @@
 <body>
 <div class="cursor-dot"></div>
 <div class="cursor-follower"></div>
+<div id="cookie-consent-banner">
+<div class="cookie-text" data-i18n-key="cookieText">
+        This website uses cookies to enhance the user experience. By continuing to browse, you agree to our use of cookies.
+    </div>
+<div class="cookie-buttons">
+<button class="cookie-btn" data-i18n-key="cookieDecline" id="cookie-decline-btn">Decline</button>
+<button class="cookie-btn" data-i18n-key="cookieAccept" id="cookie-accept-btn">Accept</button>
+</div>
+</div>
 <div data-scroll-container="">
 <div id="loader">
 <div class="spinner"></div>
@@ -39,9 +48,9 @@
 </div>
 <div class="side-menu-content">
 <div class="setting-section menu-nav-links">
-<a data-i18n-key="navAbout" href="https://samaryt567.github.io/Test/About.html" rel="noopener noreferrer" target="_blank">About</a>
-<a data-i18n-key="navRecentVideos" href="https://samaryt567.github.io/Test/RecentVideos.html" rel="noopener noreferrer" target="_blank">Recent Videos</a>
-<a data-i18n-key="navChangelog" href="https://samaryt567.github.io/Test/Changelog.html" rel="noopener noreferrer" target="_blank">Changelog</a>
+<a data-i18n-key="navAbout" href="https://samaryt567.github.io/Test/about" rel="noopener noreferrer" target="_blank">About</a>
+<a data-i18n-key="navRecentVideos" href="https://samaryt567.github.io/Test/recentvideos" rel="noopener noreferrer" target="_blank">Recent Videos</a>
+<a data-i18n-key="navChangelog" href="https://samaryt567.github.io/Test/changelog" rel="noopener noreferrer" target="_blank">Changelog</a>
 </div>
 <div class="setting-section accessibility-options">
 <h3 data-i18n-key="headingAccessibility">Accessibility</h3>
@@ -84,6 +93,7 @@
 <option value="de">Deutsch</option>
 </select>
 </div>
+<div class="sidebar-version">v2.0.0</div>
 </div>
 </div>
 <main class="main-container" data-scroll-section="">
@@ -176,49 +186,8 @@
 </ul>
 </div>
 </div>
-<div class="cookie-banner" id="cookieConsentBanner">
-<div class="cookie-content">
-<p data-i18n-key="cookieConsentText">We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies.</p>
-</div>
-<div class="cookie-buttons">
-<button data-i18n-key="cookieAcceptAll" id="acceptCookies">Accept All</button>
-<button data-i18n-key="cookieRejectAll" id="rejectCookies">Reject All</button>
-<button data-i18n-key="cookieCustomize" id="customizeCookies">Customize</button>
-</div>
-</div>
-<div aria-labelledby="cookie-settings-title" aria-modal="true" class="hotkey-modal" hidden="" id="cookieSettingsModal" role="dialog">
-<div class="modal-content">
-<button aria-label="Close cookie settings" class="close-btn" id="closeCookieSettingsModalBtn">×</button>
-<h2 data-i18n-key="cookieSettingsTitle" id="cookie-settings-title">Privacy Settings</h2>
-<div class="cookie-setting-item">
-<p data-i18n-key="cookieEssential">Essential Cookies (Required)</p>
-<label class="toggle-switch">
-<input checked="" disabled="" id="essentialCookiesToggle" type="checkbox"/>
-<span class="slider"></span>
-</label>
-</div>
-<div class="cookie-setting-item">
-<p data-i18n-key="cookieAnalytics">Analytics Cookies</p>
-<label class="toggle-switch">
-<input id="analyticsCookiesToggle" type="checkbox"/>
-<span class="slider"></span>
-</label>
-</div>
-<div class="cookie-setting-item">
-<p data-i18n-key="cookieMarketing">Marketing Cookies</p>
-<label class="toggle-switch">
-<input id="marketingCookiesToggle" type="checkbox"/>
-<span class="slider"></span>
-</label>
-</div>
-<div class="cookie-settings-actions">
-<button data-i18n-key="cookieSaveSettings" id="saveCookieSettings">Save Settings</button>
-<button data-i18n-key="cookieResetSettings" id="resetCookieSettings">Reset to Default</button>
-</div>
-</div>
-</div>
 <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.min.js"></script>
 <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.min.js"></script><script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script><script defer="True" src="index.js"></script></body>
+<script defer="True" src="index.js"></script></body>
 </html>
