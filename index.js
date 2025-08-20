@@ -1,4 +1,3 @@
-
     const translations = {
         'en': {
             channelTitle: "Sam Plays",
