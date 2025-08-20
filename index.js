@@ -1,4 +1,5 @@
-const translations = {
+
+    const translations = {
         'en': {
             channelTitle: "Sam Plays",
             navAbout: "About",
@@ -9,7 +10,6 @@ const translations = {
             headingCursorStyle: "Cursor Style",
             cursorAmbientDot: "Ambient Dot",
             cursorDefault: "Default",
-            cursorCrosshair: "Crosshair",
             headingTheme: "Theme",
             themeSystem: "System",
             themeLight: "Light",
@@ -54,7 +54,6 @@ const translations = {
             headingCursorStyle: "Cursor-Stil",
             cursorAmbientDot: "Umgebungs-Punkt",
             cursorDefault: "Standard",
-            cursorCrosshair: "Fadenkreuz",
             headingTheme: "Thema",
             themeSystem: "System",
             themeLight: "Hell",
@@ -96,7 +95,16 @@ const translations = {
         document.querySelectorAll('[data-i18n-key]').forEach(el => {
             const key = el.dataset.i18nKey;
             if (translations[lang] && translations[lang][key]) {
-                el.innerHTML = translations[lang][key];
+                if (el.tagName === 'LABEL') {
+                    const textNode = Array.from(el.childNodes).find(node => node.nodeType === Node.TEXT_NODE);
+                    if (textNode) {
+                        textNode.textContent = ' ' + translations[lang][key];
+                    } else {
+                         el.textContent = translations[lang][key];
+                    }
+                } else {
+                    el.innerHTML = translations[lang][key];
+                }
             }
         });
         if (locoScroll) locoScroll.update();
@@ -165,7 +173,6 @@ const translations = {
         }, 500);
       }
 
-      // --- Cookie Consent Logic ---
       const cookieBanner = document.getElementById('cookie-consent-banner');
       const acceptBtn = document.getElementById('cookie-accept-btn');
       const declineBtn = document.getElementById('cookie-decline-btn');
@@ -192,7 +199,6 @@ const translations = {
       });
 
       showCookieBanner();
-      // --- End Cookie Consent Logic ---
 
       locoScroll = new LocomotiveScroll({
           el: scrollContainer,
@@ -215,21 +221,6 @@ const translations = {
               scrollTopBtn.classList.toggle('visible', args.scroll.y > window.innerHeight / 2);
           }
       });
-
-      window.addEventListener('beforeunload', () => {
-          sessionStorage.setItem('scrollPosition', lastScrollY);
-      });
-      
-      const navigationEntries = performance.getEntriesByType("navigation");
-      if (sessionStorage.getItem('scrollPosition') && navigationEntries.length > 0 && navigationEntries[0].type === 'back_forward') {
-          const savedPosition = parseInt(sessionStorage.getItem('scrollPosition'), 10);
-          if (!isNaN(savedPosition)) {
-              setTimeout(() => {
-                  locoScroll.scrollTo(savedPosition, { duration: 0, disableLerp: true });
-                  sessionStorage.removeItem('scrollPosition');
-              }, 100);
-          }
-      }
 
       imagesLoaded(scrollContainer, { background: true }, () => {
           if (locoScroll) locoScroll.update();
@@ -329,12 +320,12 @@ const translations = {
       }
 
       function checkCursorSupport() {
-          const isMobileOrTablet = window.innerWidth <= 768 || ('ontouchstart' in window);
+          const isMobileOrTablet = window.innerWidth <= 1024 || ('ontouchstart' in window);
           const isReduceMotionActive = document.body.classList.contains('reduce-motion');
 
           if (isMobileOrTablet || isReduceMotionActive) {
               document.body.classList.add('no-custom-cursor');
-              document.body.classList.remove('cursor-ambient-dot', 'cursor-crosshair');
+              document.body.classList.remove('cursor-ambient-dot');
               document.body.style.cursor = 'default';
               if (cursorDot) cursorDot.style.display = 'none';
               if (cursorFollower) cursorFollower.style.display = 'none';
@@ -364,21 +355,13 @@ const translations = {
               if (document.body.classList.contains('no-custom-cursor')) return;
           }
 
-          document.body.classList.remove('cursor-ambient-dot', 'cursor-crosshair');
-          document.body.style.cursor = 'default';
+          document.body.classList.remove('cursor-ambient-dot');
+          document.body.style.cursor = '';
 
           if (style === 'ambient-dot') {
               document.body.classList.add('cursor-ambient-dot');
-              if (cursorDot) cursorDot.style.display = 'block';
-              if (cursorFollower) cursorFollower.style.display = 'block';
-          } else if (style === 'crosshair') {
-              document.body.classList.add('cursor-crosshair');
-              if (cursorDot) cursorDot.style.display = 'none';
-              if (cursorFollower) cursorFollower.style.display = 'none';
-          } else {
-              document.body.style.cursor = style;
-              if (cursorDot) cursorDot.style.display = 'none';
-              if (cursorFollower) cursorFollower.style.display = 'none';
+          } else { 
+              document.body.style.cursor = 'default';
           }
           localStorage.setItem('cursorStyle', style);
       }
@@ -386,10 +369,14 @@ const translations = {
       checkCursorSupport();
       window.addEventListener('resize', checkCursorSupport);
 
-      cursorRadios.forEach(radio => {
-        radio.addEventListener('change', (e) => {
-          updateCursorStyle(e.target.value);
-        });
+      document.querySelectorAll('.cursor-options .radio-option').forEach(option => {
+          option.addEventListener('click', () => {
+              const radio = option.querySelector('input[type="radio"]');
+              if (radio && !radio.disabled) {
+                  radio.checked = true;
+                  updateCursorStyle(radio.value);
+              }
+          });
       });
       
       document.querySelectorAll('a, button, .faq-question, .slider, select').forEach(el => {
@@ -397,9 +384,13 @@ const translations = {
         el.addEventListener('mouseleave', () => cursorFollower.classList.remove('active'));
       });
 
-      themeRadios.forEach(radio => {
-          radio.addEventListener('change', (e) => {
-              applyTheme(e.target.value);
+      document.querySelectorAll('.theme-options .radio-option').forEach(option => {
+          option.addEventListener('click', () => {
+              const radio = option.querySelector('input[type="radio"]');
+              if (radio) {
+                  radio.checked = true;
+                  applyTheme(radio.value);
+              }
           });
       });
 
@@ -417,10 +408,16 @@ const translations = {
       const hotkeyModal = document.getElementById('hotkeyHelpModal');
       const closeHelpModalBtn = document.getElementById('closeHelpModalBtn');
 
-      function showHelpModal() { hotkeyModal.hidden = false; }
-      function hideHelpModal() { hotkeyModal.hidden = true; }
+      function showHelpModal() { 
+        if (hotkeyModal) hotkeyModal.hidden = false; 
+      }
+      function hideHelpModal() { 
+        if (hotkeyModal) hotkeyModal.hidden = true; 
+      }
 
-      closeHelpModalBtn.addEventListener('click', hideHelpModal);
+      if (closeHelpModalBtn) {
+        closeHelpModalBtn.addEventListener('click', hideHelpModal);
+      }
 
       document.addEventListener('keydown', (e) => {
         if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') return;
@@ -433,7 +430,7 @@ const translations = {
         if (key === 'b') locoScroll.scrollTo('bottom');
         
         if (e.key === 'Escape') {
-          if (!hotkeyModal.hidden) hideHelpModal();
+          if (hotkeyModal && !hotkeyModal.hidden) hideHelpModal();
           else if (sideMenu.classList.contains('visible')) toggleMenu();
         }
       });
