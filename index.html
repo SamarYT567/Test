@@ -1,193 +1,375 @@
 <!DOCTYPE html>
-
 <html lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Sam Plays - Home</title>
-<link href="https://raw.githubusercontent.com/SamarYT567/Test/refs/heads/main/Assets/FaviconLight.png" id="favicon" rel="icon" type="image/png"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.cdnfonts.com/css/dungeon-depths" rel="stylesheet"/>
-<link href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css" rel="stylesheet"/>
-
-<link href="index.css" rel="stylesheet"/></head>
-<body>
-<div class="cursor-dot"></div>
-<div class="cursor-follower"></div>
-<div id="cookie-consent-banner">
-<div class="cookie-text" data-i18n-key="cookieText">
-        This website uses cookies to enhance the user experience. By continuing to browse, you agree to our use of cookies.
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Sam Plays - Home
+  </title>
+  <link href="https://raw.githubusercontent.com/SamarYT567/Test/refs/heads/main/Assets/FaviconLight.png" id="favicon" rel="icon" type="image/png"/>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.cdnfonts.com/css/dungeon-depths" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css" rel="stylesheet"/>
+  <link href="index.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div class="cursor-dot">
+  </div>
+  <div class="cursor-follower">
+  </div>
+  <div data-scroll-container="">
+   <div id="loader">
+    <div class="spinner">
     </div>
-<div class="cookie-buttons">
-<button class="cookie-btn" data-i18n-key="cookieDecline" id="cookie-decline-btn">Decline</button>
-<button class="cookie-btn" data-i18n-key="cookieAccept" id="cookie-accept-btn">Accept</button>
-</div>
-</div>
-<div data-scroll-container="">
-<div id="loader">
-<div class="spinner"></div>
-</div>
-<header id="mainHeader">
-<div class="header-placeholder"></div>
-<div class="header-title">
-<h1 data-i18n-key="channelTitle">Sam Plays</h1>
-</div>
-<button aria-label="Open Menu" id="menuBtn" title="Open Menu">
-<div class="menu-icon">
-<span></span>
-<span></span>
-<span></span>
-</div>
-</button>
-</header>
-<div id="sideMenu">
-<div class="side-menu-header">
-<button aria-label="Close Menu" id="closeMenuBtn" title="Close Menu">×</button>
-</div>
-<div class="side-menu-content">
-<div class="setting-section menu-nav-links">
-<a data-i18n-key="navAbout" href="https://samaryt567.github.io/Test/about" rel="noopener noreferrer" target="_blank">About</a>
-<a data-i18n-key="navRecentVideos" href="https://samaryt567.github.io/Test/recentvideos" rel="noopener noreferrer" target="_blank">Recent Videos</a>
-<a data-i18n-key="navChangelog" href="https://samaryt567.github.io/Test/changelog" rel="noopener noreferrer" target="_blank">Changelog</a>
-</div>
-<div class="setting-section accessibility-options">
-<h3 data-i18n-key="headingAccessibility">Accessibility</h3>
-<div class="toggle-switch-container">
-<span data-i18n-key="optionReduceMotion">Reduce Motion</span>
-<label class="toggle-switch">
-<input id="reduceMotionToggle" type="checkbox"/>
-<span class="slider"></span>
-</label>
-</div>
-</div>
-<div class="setting-section cursor-options">
-<h3 data-i18n-key="headingCursorStyle">Cursor Style</h3>
-<label>
-<input checked="" name="cursor-style" type="radio" value="ambient-dot"/> <span data-i18n-key="cursorAmbientDot">Ambient Dot</span>
-</label>
-<label>
-<input name="cursor-style" type="radio" value="default"/> <span data-i18n-key="cursorDefault">Default</span>
-</label>
-<label>
-<input name="cursor-style" type="radio" value="crosshair"/> <span data-i18n-key="cursorCrosshair">Crosshair</span>
-</label>
-</div>
-<div class="setting-section theme-options">
-<h3 data-i18n-key="headingTheme">Theme</h3>
-<label>
-<input checked="" name="theme-style" type="radio" value="system"/> <span data-i18n-key="themeSystem">System</span>
-</label>
-<label>
-<input name="theme-style" type="radio" value="light"/> <span data-i18n-key="themeLight">Light</span>
-</label>
-<label>
-<input name="theme-style" type="radio" value="dark"/> <span data-i18n-key="themeDark">Dark</span>
-</label>
-</div>
-<div class="setting-section language-options">
-<h3 data-i18n-key="headingLanguage">Language</h3>
-<select aria-label="Select Language" id="languageSelector">
-<option value="en">English</option>
-<option value="de">Deutsch</option>
-</select>
-</div>
-<div class="sidebar-version">v2.0.0</div>
-</div>
-</div>
-<main class="main-container" data-scroll-section="">
-<div class="grid-layout">
-<div class="grid-item full-width hero-content" data-scroll="">
-<div class="image-wrapper">
-<img alt="Gaming Setup" onerror="this.onerror=null;this.src='https://placehold.co/240x160/0d1117/c9d1d9?text=SP';" src="https://raw.githubusercontent.com/samaryt567/Test/main/Assets/img1.webp"/>
-</div>
-<div class="hero-text-column">
-<div class="welcome-text" data-i18n-key="heroWelcome">Welcome.</div>
-<div class="experience-text" data-i18n-key="heroExperience">Experience high-quality gaming content across titles like Minecraft, Subnautica and Grand Theft Auto.</div>
-<a class="subscribe-button" data-i18n-key="heroSubscribe" href="https://www.youtube.com/channel/UCRLPBBL_LGFl14mIGaOMnxA?sub_confirmation=1" rel="noopener noreferrer" target="_blank">Subscribe</a>
-</div>
-</div>
-<div class="grid-item full-width about-section" data-scroll="" id="about">
-<h2 class="section-heading" data-i18n-key="aboutTitle">About Me</h2>
-<p data-i18n-key="aboutParagraph">
-                    Hey there! I'm Samar, the creator behind Sam Plays, where I dive into games like Minecraft, Would You Rather, and PUBG. It all started on a random day when a simple question popped into my head: "How do people upload videos to their channel?" That curiosity sparked something big—and just like that, Sam Plays was born. Now, I'm here to share my gaming adventures, have fun, and connect with awesome people like you. Hit that subscribe button and join the journey!
-                </p>
-</div>
-<div class="grid-item full-width quote-section" data-scroll="">
-<div class="quote-text" data-i18n-key="quoteText">
-                    "Sam Plays is a very good content creator. His gaming videos are engaging and entertaining. Keep up the great work, Sam Plays! Thank you for providing such awesome videos. I hope he never quits."
-                </div>
-</div>
-<div class="grid-item full-width faq-container" data-scroll="" id="faq">
-<h2 class="section-heading" data-i18n-key="faqTitle">Frequently Asked Questions</h2>
-<div class="faq-list">
-<div class="faq-item">
-<button class="faq-question">
-<span class="question-text" data-i18n-key="faq1Question">What types of games do you play?</span>
-<div class="faq-icon"><svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><line x1="12" x2="12" y1="5" y2="19"></line><line x1="5" x2="19" y1="12" y2="12"></line></svg></div>
-</button>
-<div class="faq-answer"><p data-i18n-key="faq1Answer">I play a wide variety of games, from popular AAA titles to indie games. My main focus is on open-world, survival, and story-driven games, but I'm always open to trying new genres based on community suggestions!</p></div>
-</div>
-<div class="faq-item">
-<button class="faq-question">
-<span class="question-text" data-i18n-key="faq2Question">Do you create original gaming content?</span>
-<div class="faq-icon"><svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><line x1="12" x2="12" y1="5" y2="19"></line><line x1="5" x2="19" y1="12" y2="12"></line></svg></div>
-</button>
-<div class="faq-answer"><p data-i18n-key="faq2Answer">Yes. 100% of my content is original. I handle everything from gameplay recording and editing to voiceovers and thumbnails. I haven't and don't plan to copy anyone's content.</p></div>
-</div>
-<div class="faq-item">
-<button class="faq-question">
-<span class="question-text" data-i18n-key="faq3Question">Can I request a specific game to be featured?</span>
-<div class="faq-icon"><svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><line x1="12" x2="12" y1="5" y2="19"></line><line x1="5" x2="19" y1="12" y2="12"></line></svg></div>
-</button>
-<div class="faq-answer"><p data-i18n-key="faq3Answer">Absolutely! I welcome requests from my subscribers and consider featuring their favorite games in my upcoming videos. The best way to suggest a game is to leave a comment on my latest YouTube video.</p></div>
-</div>
-<div class="faq-item">
-<button class="faq-question">
-<span class="question-text" data-i18n-key="faq4Question">How frequently do you upload new videos?</span>
-<div class="faq-icon"><svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><line x1="12" x2="12" y1="5" y2="19"></line><line x1="5" x2="19" y1="12" y2="12"></line></svg></div>
-</button>
-<div class="faq-answer"><p data-i18n-key="faq4Answer">Since I am the only person who makes the content, I am not very consistent, but I mostly upload at least two videos in a month. Quality is more important to me than quantity, so I take my time to make each video enjoyable.</p></div>
-</div>
-</div>
-</div>
-<div class="grid-item full-width socials-section" data-scroll="" id="socials">
-<h2 class="section-heading" data-i18n-key="socialsTitle">My Socials</h2>
-<div class="social-icons">
-<a href="https://www.youtube.com/channel/UCRLPBBL_LGFl14mIGaOMnxA" rel="noopener noreferrer" target="_blank" title="YouTube"><img alt="YouTube" src="https://raw.githubusercontent.com/samaryt567/Test/main/Assets/Youtube.svg"/></a>
-<a href="https://www.instagram.com/the.silent.kidd/" rel="noopener noreferrer" target="_blank" title="Instagram"><img alt="Instagram" src="https://raw.githubusercontent.com/samaryt567/Test/main/Assets/instagram.svg"/></a>
-<a href="https://x.com/SamPlaysHindi" rel="noopener noreferrer" target="_blank" title="X / Twitter"><img alt="X / Twitter" src="https://raw.githubusercontent.com/samaryt567/Test/main/Assets/Twitter.svg"/></a>
-<a href="https://discord.com/invite/shM9m47vBa" rel="noopener noreferrer" target="_blank" title="Discord"><img alt="Discord" src="https://raw.githubusercontent.com/samaryt567/Test/main/Assets/discord.svg"/></a>
-<a href="https://github.com/Samplayshindi/Main" rel="noopener noreferrer" target="_blank" title="GitHub"><img alt="GitHub" src="https://raw.githubusercontent.com/samaryt567/Test/main/Assets/github.svg"/></a>
-</div>
-</div>
-</div>
-<footer class="footer-section" data-scroll="">
-<div class="thanks-text" data-i18n-key="footerThanks">Thanks for Visiting</div>
-<div class="contact-text" data-i18n-key="footerContact">Contact stgbussiness436@gmail.com for more info.</div>
-<a data-i18n-key="footerContactBtn" href="mailto:stgbussiness436@gmail.com" id="openFeedbackFormBtn" rel="noopener noreferrer">Contact / Feedback</a>
-</footer>
-</main>
-<button aria-label="Scroll to top" id="scrollTopBtn" title="Go to top">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 4l8 8h-6v8h-4v-8H4l8-8z"></path></svg>
-</button>
-</div>
-<div aria-labelledby="hotkey-title" aria-modal="true" class="hotkey-modal" hidden="" id="hotkeyHelpModal" role="dialog">
-<div class="modal-content">
-<button aria-label="Close hotkey help" class="close-btn" id="closeHelpModalBtn">×</button>
-<h2 data-i18n-key="hotkeyTitle" id="hotkey-title">Keyboard Shortcuts</h2>
-<ul>
-<li><span data-i18n-key="hotkeyHelp">Show this help menu</span><div><span>?</span> or <span>H</span></div></li>
-<li><span data-i18n-key="hotkeyMenu">Toggle menu</span><span>M</span></li>
-<li><span data-i18n-key="hotkeyScrollTop">Scroll to top</span><span>T</span></li>
-<li><span data-i18n-key="hotkeyScrollBottom">Scroll to bottom</span><span>B</span></li>
-<li><span data-i18n-key="hotkeyClose">Close menu or dialog</span><span>ESC</span></li>
-</ul>
-</div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.min.js"></script>
-<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
-
-<script defer="True" src="index.js"></script></body>
+   </div>
+   <header id="mainHeader">
+    <div class="header-placeholder">
+    </div>
+    <div class="header-title">
+     <h1 data-i18n-key="channelTitle">
+      Sam Plays
+     </h1>
+    </div>
+    <button aria-label="Open Menu" id="menuBtn" title="Open Menu">
+     <div class="menu-icon">
+      <span>
+      </span>
+      <span>
+      </span>
+      <span>
+      </span>
+     </div>
+    </button>
+   </header>
+   <div id="sideMenu">
+    <div class="side-menu-header">
+     <button aria-label="Close Menu" id="closeMenuBtn" title="Close Menu">
+      ×
+     </button>
+    </div>
+    <div class="side-menu-content">
+     <div class="setting-section menu-nav-links">
+      <a data-i18n-key="navAbout" href="https://samaryt567.github.io/Test/About.html">
+       About
+      </a>
+      <a data-i18n-key="navRecentVideos" href="https://samaryt567.github.io/Test/RecentVideos.html">
+       Recent Videos
+      </a>
+      <a data-i18n-key="navChangelog" href="https://samaryt567.github.io/Test/Changelog.html">
+       Changelog
+      </a>
+     </div>
+     <div class="setting-section accessibility-options">
+      <h3 data-i18n-key="headingAccessibility">
+       Accessibility
+      </h3>
+      <div class="toggle-switch-container">
+       <span data-i18n-key="optionReduceMotion">
+        Reduce Motion
+       </span>
+       <label class="toggle-switch">
+        <input id="reduceMotionToggle" type="checkbox"/>
+        <span class="slider">
+        </span>
+       </label>
+      </div>
+     </div>
+     <div class="setting-section cursor-options">
+      <h3 data-i18n-key="headingCursorStyle">
+       Cursor Style
+      </h3>
+      <div class="radio-option">
+       <input checked="" id="cursor-ambient-dot" name="cursor-style" type="radio" value="ambient-dot"/>
+       <label data-i18n-key="cursorAmbientDot" for="cursor-ambient-dot">
+        Ambient Dot
+       </label>
+      </div>
+      <div class="radio-option">
+       <input id="cursor-default" name="cursor-style" type="radio" value="default"/>
+       <label data-i18n-key="cursorDefault" for="cursor-default">
+        Default
+       </label>
+      </div>
+     </div>
+     <div class="setting-section theme-options">
+      <h3 data-i18n-key="headingTheme">
+       Theme
+      </h3>
+      <div class="radio-option">
+       <input id="theme-system" name="theme-style" type="radio" value="system"/>
+       <label data-i18n-key="themeSystem" for="theme-system">
+        System
+       </label>
+      </div>
+      <div class="radio-option">
+       <input id="theme-light" name="theme-style" type="radio" value="light"/>
+       <label data-i18n-key="themeLight" for="theme-light">
+        Light
+       </label>
+      </div>
+      <div class="radio-option">
+       <input id="theme-dark" name="theme-style" type="radio" value="dark"/>
+       <label data-i18n-key="themeDark" for="theme-dark">
+        Dark
+       </label>
+      </div>
+     </div>
+     <div class="setting-section language-options">
+      <h3 data-i18n-key="headingLanguage">
+       Language
+      </h3>
+      <select aria-label="Select Language" id="languageSelector">
+       <option value="en">
+        English
+       </option>
+       <option value="de">
+        Deutsch
+       </option>
+      </select>
+     </div>
+     <div class="sidebar-version">
+      v2.0.0
+     </div>
+    </div>
+   </div>
+   <main class="main-container" data-scroll-section="">
+    <div class="grid-layout">
+     <div class="grid-item full-width hero-content" data-scroll="">
+      <div class="image-wrapper">
+       <img alt="Gaming Setup" onerror="this.onerror=null;this.src='https://placehold.co/240x160/0d1117/c9d1d9?text=SP';" src="https://raw.githubusercontent.com/samaryt567/Test/main/Assets/img1.webp"/>
+      </div>
+      <div class="hero-text-column">
+       <div class="welcome-text" data-i18n-key="heroWelcome">
+        Welcome.
+       </div>
+       <div class="experience-text" data-i18n-key="heroExperience">
+        Experience high-quality gaming content across titles like Minecraft, Subnautica and Grand Theft Auto.
+       </div>
+       <a class="subscribe-button" data-i18n-key="heroSubscribe" href="https://www.youtube.com/channel/UCRLPBBL_LGFl14mIGaOMnxA?sub_confirmation=1" rel="noopener noreferrer" target="_blank">
+        Subscribe
+       </a>
+      </div>
+     </div>
+     <div class="grid-item full-width about-section" data-scroll="" id="about">
+      <h2 class="section-heading" data-i18n-key="aboutTitle">
+       About Me
+      </h2>
+      <p data-i18n-key="aboutParagraph">
+       Hey there! I'm Samar, the creator behind Sam Plays, where I dive into games like Minecraft, Would You Rather, and PUBG. It all started on a random day when a simple question popped into my head: "How do people upload videos to their channel?" That curiosity sparked something big—and just like that, Sam Plays was born. Now, I'm here to share my gaming adventures, have fun, and connect with awesome people like you. Hit that subscribe button and join the journey!
+      </p>
+     </div>
+     <div class="grid-item full-width quote-section" data-scroll="">
+      <div class="quote-text" data-i18n-key="quoteText">
+       "Sam Plays is a very good content creator. His gaming videos are engaging and entertaining. Keep up the great work, Sam Plays! Thank you for providing such awesome videos. I hope he never quits."
+      </div>
+     </div>
+     <div class="grid-item full-width" data-scroll="" id="faq">
+      <h2 class="section-heading" data-i18n-key="faqTitle">
+       Frequently Asked Questions
+      </h2>
+      <div class="faq-list">
+       <div class="faq-item">
+        <button class="faq-question">
+         <span class="question-text" data-i18n-key="faq1Question">
+          What types of games do you play?
+         </span>
+         <div class="faq-icon">
+          <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+           <line x1="12" x2="12" y1="5" y2="19">
+           </line>
+           <line x1="5" x2="19" y1="12" y2="12">
+           </line>
+          </svg>
+         </div>
+        </button>
+        <div class="faq-answer">
+         <p data-i18n-key="faq1Answer">
+          I play a wide variety of games, from popular AAA titles to indie games. My main focus is on open-world, survival, and story-driven games, but I'm always open to trying new genres based on community suggestions!
+         </p>
+        </div>
+       </div>
+       <div class="faq-item">
+        <button class="faq-question">
+         <span class="question-text" data-i18n-key="faq2Question">
+          Do you create original gaming content?
+         </span>
+         <div class="faq-icon">
+          <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+           <line x1="12" x2="12" y1="5" y2="19">
+           </line>
+           <line x1="5" x2="19" y1="12" y2="12">
+           </line>
+          </svg>
+         </div>
+        </button>
+        <div class="faq-answer">
+         <p data-i18n-key="faq2Answer">
+          Yes. 100% of my content is original. I handle everything from gameplay recording and editing to voiceovers and thumbnails. I haven't and don't plan to copy anyone's content.
+         </p>
+        </div>
+       </div>
+       <div class="faq-item">
+        <button class="faq-question">
+         <span class="question-text" data-i18n-key="faq3Question">
+          Can I request a specific game to be featured?
+         </span>
+         <div class="faq-icon">
+          <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+           <line x1="12" x2="12" y1="5" y2="19">
+           </line>
+           <line x1="5" x2="19" y1="12" y2="12">
+           </line>
+          </svg>
+         </div>
+        </button>
+        <div class="faq-answer">
+         <p data-i18n-key="faq3Answer">
+          Absolutely! I welcome requests from my subscribers and consider featuring their favorite games in my upcoming videos. The best way to suggest a game is to leave a comment on my latest YouTube video.
+         </p>
+        </div>
+       </div>
+       <div class="faq-item">
+        <button class="faq-question">
+         <span class="question-text" data-i18n-key="faq4Question">
+          How frequently do you upload new videos?
+         </span>
+         <div class="faq-icon">
+          <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+           <line x1="12" x2="12" y1="5" y2="19">
+           </line>
+           <line x1="5" x2="19" y1="12" y2="12">
+           </line>
+          </svg>
+         </div>
+        </button>
+        <div class="faq-answer">
+         <p data-i18n-key="faq4Answer">
+          Since I am the only person who makes the content, I am not very consistent, but I mostly upload at least two videos in a month. Quality is more important to me than quantity, so I take my time to make each video enjoyable.
+         </p>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="grid-item full-width" data-scroll="" id="socials">
+      <h2 class="section-heading" data-i18n-key="socialsTitle">
+       My Socials
+      </h2>
+      <div class="social-icons">
+       <a href="https://www.youtube.com/channel/UCRLPBBL_LGFl14mIGaOMnxA" rel="noopener noreferrer" target="_blank" title="YouTube">
+        <img alt="YouTube" src="https://raw.githubusercontent.com/samaryt567/Test/main/Assets/Youtube.svg"/>
+       </a>
+       <a href="https://www.instagram.com/the.silent.kidd/" rel="noopener noreferrer" target="_blank" title="Instagram">
+        <img alt="Instagram" src="https://raw.githubusercontent.com/samaryt567/Test/main/Assets/instagram.svg"/>
+       </a>
+       <a href="https://x.com/SamPlaysHindi" rel="noopener noreferrer" target="_blank" title="X / Twitter">
+        <img alt="X / Twitter" src="https://raw.githubusercontent.com/samaryt567/Test/main/Assets/Twitter.svg"/>
+       </a>
+       <a href="https://discord.com/invite/shM9m47vBa" rel="noopener noreferrer" target="_blank" title="Discord">
+        <img alt="Discord" src="https://raw.githubusercontent.com/samaryt567/Test/main/Assets/discord.svg"/>
+       </a>
+       <a href="https://github.com/Samplayshindi/Main" rel="noopener noreferrer" target="_blank" title="GitHub">
+        <img alt="GitHub" src="https://raw.githubusercontent.com/samaryt567/Test/main/Assets/github.svg"/>
+       </a>
+      </div>
+     </div>
+    </div>
+    <footer class="footer-section" data-scroll="">
+     <div class="thanks-text" data-i18n-key="footerThanks">
+      Thanks for Visiting
+     </div>
+     <div class="contact-text" data-i18n-key="footerContact">
+      Contact stgbussiness436@gmail.com for more info.
+     </div>
+     <a data-i18n-key="footerContactBtn" href="mailto:stgbussiness436@gmail.com" id="openFeedbackFormBtn" rel="noopener noreferrer">
+      Contact / Feedback
+     </a>
+    </footer>
+   </main>
+   <button aria-label="Scroll to top" id="scrollTopBtn" title="Go to top">
+    <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+     <path d="M12 4l8 8h-6v8h-4v-8H4l8-8z">
+     </path>
+    </svg>
+   </button>
+  </div>
+  <div aria-labelledby="hotkey-title" aria-modal="true" class="hotkey-modal" hidden="" id="hotkeyHelpModal" role="dialog">
+   <div class="modal-content">
+    <button aria-label="Close hotkey help" class="close-btn" id="closeHelpModalBtn">
+     ×
+    </button>
+    <h2 data-i18n-key="hotkeyTitle" id="hotkey-title">
+     Keyboard Shortcuts
+    </h2>
+    <ul>
+     <li>
+      <span data-i18n-key="hotkeyHelp">
+       Show this help menu
+      </span>
+      <div>
+       <span>
+        ?
+       </span>
+       or
+       <span>
+        H
+       </span>
+      </div>
+     </li>
+     <li>
+      <span data-i18n-key="hotkeyMenu">
+       Toggle menu
+      </span>
+      <span>
+       M
+      </span>
+     </li>
+     <li>
+      <span data-i18n-key="hotkeyScrollTop">
+       Scroll to top
+      </span>
+      <span>
+       T
+      </span>
+     </li>
+     <li>
+      <span data-i18n-key="hotkeyScrollBottom">
+       Scroll to bottom
+      </span>
+      <span>
+       B
+      </span>
+     </li>
+     <li>
+      <span data-i18n-key="hotkeyClose">
+       Close menu or dialog
+      </span>
+      <span>
+       ESC
+      </span>
+     </li>
+    </ul>
+   </div>
+  </div>
+  <div id="cookie-consent-banner">
+   <div class="cookie-text" data-i18n-key="cookieText">
+    This website uses cookies to enhance the user experience. By continuing to browse, you agree to our use of cookies.
+   </div>
+   <div class="cookie-buttons">
+    <button class="cookie-btn" data-i18n-key="cookieDecline" id="cookie-decline-btn">
+     Decline
+    </button>
+    <button class="cookie-btn" data-i18n-key="cookieAccept" id="cookie-accept-btn">
+     Accept
+    </button>
+   </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.min.js">
+  </script>
+  <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js">
+  </script>
+  <script src="index.js">
+  </script>
+ </body>
 </html>
