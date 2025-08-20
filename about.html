@@ -1,217 +1,339 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Sam Plays - About</title>
-    <link id="favicon" rel="icon" type="image/png" href="https://raw.githubusercontent.com/SamarYT567/Test/refs/heads/main/Assets/FaviconLight.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.cdnfonts.com/css/dungeon-depths" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css">
-
-<link rel="stylesheet" href="about.css">
-</head>
-<body>
-    <div class="cursor-dot"></div>
-    <div class="cursor-follower"></div>
-
-    <div data-scroll-container>
-        <div id="loader">
-            <div class="spinner"></div>
-        </div>
-
-        <header id="mainHeader">
-            <div class="header-placeholder"></div>
-            <div class="header-title">
-                <h1 data-i18n-key="channelTitle">Sam Plays</h1>
-            </div>
-            <button id="menuBtn" title="Open Menu" aria-label="Open Menu">
-                <div class="menu-icon">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </button>
-        </header>
-        
-        <div id="sideMenu">
-            <div class="side-menu-header">
-                <button id="closeMenuBtn" title="Close Menu" aria-label="Close Menu">×</button>
-            </div>
-            <div class="side-menu-content">
-                <div class="setting-section menu-nav-links">
-                     <a href="https://samaryt567.github.io/Test/Index.html" data-i18n-key="navHome">Home</a>
-                     <a href="https://samaryt567.github.io/Test/RecentVideos.html" data-i18n-key="navRecentVideos">Recent Videos</a>
-                     <a href="https://samaryt567.github.io/Test/Changelog.html" data-i18n-key="navChangelog">Changelog</a>
-                </div>
-                <div class="setting-section accessibility-options">
-                    <h3 data-i18n-key="headingAccessibility">Accessibility</h3>
-                    <div class="toggle-switch-container">
-                        <span data-i18n-key="optionReduceMotion">Reduce Motion</span>
-                        <label class="toggle-switch">
-                            <input type="checkbox" id="reduceMotionToggle">
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-                </div>
-                <div class="setting-section cursor-options">
-                    <h3 data-i18n-key="headingCursorStyle">Cursor Style</h3>
-                    <label>
-                        <input type="radio" name="cursor-style" value="ambient-dot" checked> <span data-i18n-key="cursorAmbientDot">Ambient Dot</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="cursor-style" value="default"> <span data-i18n-key="cursorDefault">Default</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="cursor-style" value="crosshair"> <span data-i18n-key="cursorCrosshair">Crosshair</span>
-                    </label>
-                </div>
-                <div class="setting-section theme-options">
-                    <h3 data-i18n-key="headingTheme">Theme</h3>
-                    <label>
-                        <input type="radio" name="theme-style" value="system" checked> <span data-i18n-key="themeSystem">System</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="theme-style" value="light"> <span data-i18n-key="themeLight">Light</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="theme-style" value="dark"> <span data-i18n-key="themeDark">Dark</span>
-                    </label>
-                </div>
-                <div class="setting-section language-options">
-                    <h3 data-i18n-key="headingLanguage">Language</h3>
-                    <select id="languageSelector" aria-label="Select Language">
-                        <option value="en">English</option>
-                        <option value="de">Deutsch</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-
-        <main class="main-container" data-scroll-section>
-            <div class="grid-layout">
-                <div class="grid-item full-width about-page-section philosophy-section" data-scroll>
-                    <h2 data-i18n-key="aboutPhilosophyTitle">My Gaming Philosophy</h2>
-                    <p data-i18n-key="aboutPhilosophyContent">
-                        At Sam Plays, gaming isn't only about playing. it's about the vibes, the stories, and the memories that linger. Whether it's that rush of adrenaline from a boss battle, the joy of crafting something from nothing, or those unexpected twists. I'm in for all of it. If you're a games enthusiast, awkward moments, in depth content, or just here to chill, you're in the right community. Let's game, laugh, create, and get lost in the worlds we cherish, Together.
-                    </p>
-                </div>
-
-                <div class="grid-item full-width about-page-section process-section" data-scroll>
-                    <h2 data-i18n-key="aboutProcessTitle">The Creation Process</h2>
-                    <p data-i18n-key="aboutProcessContent">
-                        Each video at Sam Plays is made for perfection. From planning content ideas and recording high quality gameplay, to the process of editing, sound design, and creating the eye catching thumbnails, I handle it all. It's a labor of love, ensuring that each video provides value and a unique perspective on the games I play. My goal is to deliver content that resonates with you long even after the video ends.
-                    </p>
-                </div>
-
-                <div class="grid-item full-width about-page-section specs-section" data-scroll>
-                    <h2 data-i18n-key="aboutSpecsTitle">My PC Specs</h2>
-                    <ul>
-                        <li><strong>Cabinet (Case):</strong> HP Slim Desktop Chassis (Stock Compact Case)</li>
-                        <li><strong>Power Supply (PSU):</strong> HP OEM Power Supply (limited GPU support)</li>
-                        <li><strong>Motherboard:</strong> HP Slim Desktop Motherboard
-                            <ul>
-                                <li>Form Factor: Custom Micro-ATX / Proprietary</li>
-                                <li>RAM Support: Up to 64GB DDR4, 2933 MT/s</li>
-                                <li>Socket: LGA1200 (for Intel 10th Gen CPUs)</li>
-                            </ul>
-                        </li>
-                        <li><strong>CPU (Processor):</strong> Intel Core i9-10900</li>
-                        <li><strong>GPU (Graphics Card):</strong> AMD Radeon RX 6400 (Low Profile)</li>
-                        <li><strong>RAM:</strong> 64GB DDR4 (2933 MT/s)
-                            <ul>
-                                <li>2 x 32GB Modules (Dual Channel)</li>
-                            </ul>
-                        </li>
-                        <li><strong>Storage:</strong>
-                            <ul>
-                                <li>SSD: 500GB NVMe SSD</li>
-                                <li>HDD: 500GB (7200 RPM)</li>
-                            </ul>
-                        </li>
-                        <li><strong>Operating System:</strong> Windows 11 Home 64-bit</li>
-                        <li><strong>Monitor:</strong> Acer HA270 27" Full HD IPS Monitor</li>
-                        <li><strong>Audio & Peripherals:</strong>
-                            <ul>
-                                <li>Boat Rockerz 425 headphones</li>
-                                <li>Zebronics transformer keyboard and Mouse (white)</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <footer class="footer-section" data-scroll>
-                </footer>
-        </main>
-
-        <button id="scrollTopBtn" title="Go to top" aria-label="Scroll to top">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 4l8 8h-6v8h-4v-8H4l8-8z"/></svg>
-        </button>
-    </div> 
-
-    <div id="hotkeyHelpModal" class="hotkey-modal" role="dialog" aria-modal="true" aria-labelledby="hotkey-title" hidden>
-        <div class="modal-content">
-            <button id="closeHelpModalBtn" class="close-btn" aria-label="Close hotkey help">&times;</button>
-            <h2 id="hotkey-title" data-i18n-key="hotkeyTitle">Keyboard Shortcuts</h2>
-            <ul>
-                <li><span data-i18n-key="hotkeyHelp">Show this help menu</span><div><span>?</span> or <span>H</span></div></li>
-                <li><span data-i18n-key="hotkeyMenu">Toggle menu</span><span>M</span></li>
-                <li><span data-i18n-key="hotkeyScrollTop">Scroll to top</span><span>T</span></li>
-                <li><span data-i18n-key="hotkeyScrollBottom">Scroll to bottom</span><span>B</span></li>
-                <li><span data-i18n-key="hotkeyClose">Close menu or dialog</span><span>ESC</span></li>
-            </ul>
-        </div>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Sam Plays - About
+  </title>
+  <link href="https://raw.githubusercontent.com/SamarYT567/Test/refs/heads/main/Assets/FaviconLight.png" id="favicon" rel="icon" type="image/png"/>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.cdnfonts.com/css/dungeon-depths" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css" rel="stylesheet"/>
+  <link href="about.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div class="cursor-dot">
+  </div>
+  <div class="cursor-follower">
+  </div>
+  <div data-scroll-container="">
+   <div id="loader">
+    <div class="spinner">
     </div>
-
-    <div id="cookieConsentBanner" class="cookie-banner">
-        <div class="cookie-content">
-            <p data-i18n-key="cookieConsentText">We use cookies to enhance your Browse experience, serve personalized ads or content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies.</p>
-        </div>
-        <div class="cookie-buttons">
-            <button id="acceptCookies" data-i18n-key="cookieAcceptAll">Accept All</button>
-            <button id="rejectCookies" data-i18n-key="cookieRejectAll">Reject All</button>
-            <button id="customizeCookies" data-i18n-key="cookieCustomize">Customize</button>
-        </div>
+   </div>
+   <header id="mainHeader">
+    <div class="header-placeholder">
     </div>
-
-    <div id="cookieSettingsModal" class="hotkey-modal" role="dialog" aria-modal="true" aria-labelledby="cookie-settings-title" hidden>
-        <div class="modal-content">
-            <button id="closeCookieSettingsModalBtn" class="close-btn" aria-label="Close cookie settings">&times;</button>
-            <h2 id="cookie-settings-title" data-i18n-key="cookieSettingsTitle">Privacy Settings</h2>
-            <div class="cookie-setting-item">
-                <p data-i18n-key="cookieEssential">Essential Cookies (Required)</p>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="essentialCookiesToggle" checked disabled>
-                    <span class="slider"></span>
-                </label>
-            </div>
-            <div class="cookie-setting-item">
-                <p data-i18n-key="cookieAnalytics">Analytics Cookies</p>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="analyticsCookiesToggle">
-                    <span class="slider"></span>
-                </label>
-            </div>
-            <div class="cookie-setting-item">
-                <p data-i18n-key="cookieMarketing">Marketing Cookies</p>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="marketingCookiesToggle">
-                    <span class="slider"></span>
-                </label>
-            </div>
-            <div class="cookie-settings-actions">
-                <button id="saveCookieSettings" data-i18n-key="cookieSaveSettings">Save Settings</button>
-                <button id="resetCookieSettings" data-i18n-key="cookieResetSettings">Reset to Default</button>
-            </div>
-        </div>
+    <div class="header-title">
+     <h1 data-i18n-key="channelTitle">
+      Sam Plays
+     </h1>
     </div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.min.js"></script>
-    <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
-
-<script defer src="about.js"></script>
-</body>
+    <button aria-label="Open Menu" id="menuBtn" title="Open Menu">
+     <div class="menu-icon">
+      <span>
+      </span>
+      <span>
+      </span>
+      <span>
+      </span>
+     </div>
+    </button>
+   </header>
+   <div id="sideMenu">
+    <div class="side-menu-header">
+     <button aria-label="Close Menu" id="closeMenuBtn" title="Close Menu">
+      ×
+     </button>
+    </div>
+    <div class="side-menu-content">
+     <div class="setting-section menu-nav-links">
+      <a data-i18n-key="navHome" href="https://samaryt567.github.io/Test/Index.html">
+       Home
+      </a>
+      <a data-i18n-key="navRecentVideos" href="https://samaryt567.github.io/Test/RecentVideos.html">
+       Recent Videos
+      </a>
+      <a data-i18n-key="navChangelog" href="https://samaryt567.github.io/Test/Changelog.html">
+       Changelog
+      </a>
+     </div>
+     <div class="setting-section accessibility-options">
+      <h3 data-i18n-key="headingAccessibility">
+       Accessibility
+      </h3>
+      <div class="toggle-switch-container">
+       <span data-i18n-key="optionReduceMotion">
+        Reduce Motion
+       </span>
+       <label class="toggle-switch">
+        <input id="reduceMotionToggle" type="checkbox"/>
+        <span class="slider">
+        </span>
+       </label>
+      </div>
+     </div>
+     <div class="setting-section cursor-options">
+      <h3 data-i18n-key="headingCursorStyle">
+       Cursor Style
+      </h3>
+      <div class="radio-option">
+       <input checked="" id="cursor-ambient-dot" name="cursor-style" type="radio" value="ambient-dot"/>
+       <label data-i18n-key="cursorAmbientDot" for="cursor-ambient-dot">
+        Ambient Dot
+       </label>
+      </div>
+      <div class="radio-option">
+       <input id="cursor-default" name="cursor-style" type="radio" value="default"/>
+       <label data-i18n-key="cursorDefault" for="cursor-default">
+        Default
+       </label>
+      </div>
+     </div>
+     <div class="setting-section theme-options">
+      <h3 data-i18n-key="headingTheme">
+       Theme
+      </h3>
+      <div class="radio-option">
+       <input id="theme-system" name="theme-style" type="radio" value="system"/>
+       <label data-i18n-key="themeSystem" for="theme-system">
+        System
+       </label>
+      </div>
+      <div class="radio-option">
+       <input id="theme-light" name="theme-style" type="radio" value="light"/>
+       <label data-i18n-key="themeLight" for="theme-light">
+        Light
+       </label>
+      </div>
+      <div class="radio-option">
+       <input id="theme-dark" name="theme-style" type="radio" value="dark"/>
+       <label data-i18n-key="themeDark" for="theme-dark">
+        Dark
+       </label>
+      </div>
+     </div>
+     <div class="setting-section language-options">
+      <h3 data-i18n-key="headingLanguage">
+       Language
+      </h3>
+      <select aria-label="Select Language" id="languageSelector">
+       <option value="en">
+        English
+       </option>
+       <option value="de">
+        Deutsch
+       </option>
+      </select>
+     </div>
+     <div class="sidebar-version">
+      v2.0.0
+     </div>
+    </div>
+   </div>
+   <main class="main-container" data-scroll-section="">
+    <div class="grid-layout">
+     <div class="grid-item full-width about-page-section" data-scroll="">
+      <h2 data-i18n-key="aboutPhilosophyTitle">
+       My Gaming Philosophy
+      </h2>
+      <p data-i18n-key="aboutPhilosophyContent">
+       At Sam Plays, gaming isn't only about playing. it's about the vibes, the stories, and the memories that linger. Whether it's that rush of adrenaline from a boss battle, the joy of crafting something from nothing, or those unexpected twists. I'm in for all of it. If you're a games enthusiast, awkward moments, in depth content, or just here to chill, you're in the right community. Let's game, laugh, create, and get lost in the worlds we cherish, Together.
+      </p>
+     </div>
+     <div class="grid-item full-width about-page-section" data-scroll="">
+      <h2 data-i18n-key="aboutProcessTitle">
+       The Creation Process
+      </h2>
+      <p data-i18n-key="aboutProcessContent">
+       Each video at Sam Plays is made for perfection. From planning content ideas and recording high quality gameplay, to the process of editing, sound design, and creating the eye catching thumbnails, I handle it all. It's a labor of love, ensuring that each video provides value and a unique perspective on the games I play. My goal is to deliver content that resonates with you long even after the video ends.
+      </p>
+     </div>
+     <div class="grid-item full-width about-page-section specs-section" data-scroll="">
+      <h2 data-i18n-key="aboutSpecsTitle">
+       My PC Specs
+      </h2>
+      <ul>
+       <li>
+        <strong>
+         Cabinet (Case):
+        </strong>
+        HP Slim Desktop Chassis (Stock Compact Case)
+       </li>
+       <li>
+        <strong>
+         Power Supply (PSU):
+        </strong>
+        HP OEM Power Supply (limited GPU support)
+       </li>
+       <li>
+        <strong>
+         Motherboard:
+        </strong>
+        HP Slim Desktop Motherboard
+        <ul>
+         <li>
+          Form Factor: Custom Micro-ATX / Proprietary
+         </li>
+         <li>
+          RAM Support: Up to 64GB DDR4, 2933 MT/s
+         </li>
+         <li>
+          Socket: LGA1200 (for Intel 10th Gen CPUs)
+         </li>
+        </ul>
+       </li>
+       <li>
+        <strong>
+         CPU (Processor):
+        </strong>
+        Intel Core i9-10900
+       </li>
+       <li>
+        <strong>
+         GPU (Graphics Card):
+        </strong>
+        AMD Radeon RX 6400 (Low Profile)
+       </li>
+       <li>
+        <strong>
+         RAM:
+        </strong>
+        64GB DDR4 (2933 MT/s)
+        <ul>
+         <li>
+          2 x 32GB Modules (Dual Channel)
+         </li>
+        </ul>
+       </li>
+       <li>
+        <strong>
+         Storage:
+        </strong>
+        <ul>
+         <li>
+          SSD: 500GB NVMe SSD
+         </li>
+         <li>
+          HDD: 500GB (7200 RPM)
+         </li>
+        </ul>
+       </li>
+       <li>
+        <strong>
+         Operating System:
+        </strong>
+        Windows 11 Home 64-bit
+       </li>
+       <li>
+        <strong>
+         Monitor:
+        </strong>
+        Acer HA270 27" Full HD IPS Monitor
+       </li>
+       <li>
+        <strong>
+         Audio &amp; Peripherals:
+        </strong>
+        <ul>
+         <li>
+          Boat Rockerz 425 headphones
+         </li>
+         <li>
+          Zebronics transformer keyboard and Mouse (white)
+         </li>
+        </ul>
+       </li>
+      </ul>
+     </div>
+    </div>
+   </main>
+   <button aria-label="Scroll to top" id="scrollTopBtn" title="Go to top">
+    <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+     <path d="M12 4l8 8h-6v8h-4v-8H4l8-8z">
+     </path>
+    </svg>
+   </button>
+  </div>
+  <div aria-labelledby="hotkey-title" aria-modal="true" class="hotkey-modal" hidden="" id="hotkeyHelpModal" role="dialog">
+   <div class="modal-content">
+    <button aria-label="Close hotkey help" class="close-btn" id="closeHelpModalBtn">
+     ×
+    </button>
+    <h2 data-i18n-key="hotkeyTitle" id="hotkey-title">
+     Keyboard Shortcuts
+    </h2>
+    <ul>
+     <li>
+      <span data-i18n-key="hotkeyHelp">
+       Show this help menu
+      </span>
+      <div>
+       <span>
+        ?
+       </span>
+       or
+       <span>
+        H
+       </span>
+      </div>
+     </li>
+     <li>
+      <span data-i18n-key="hotkeyMenu">
+       Toggle menu
+      </span>
+      <span>
+       M
+      </span>
+     </li>
+     <li>
+      <span data-i18n-key="hotkeyScrollTop">
+       Scroll to top
+      </span>
+      <span>
+       T
+      </span>
+     </li>
+     <li>
+      <span data-i18n-key="hotkeyScrollBottom">
+       Scroll to bottom
+      </span>
+      <span>
+       B
+      </span>
+     </li>
+     <li>
+      <span data-i18n-key="hotkeyClose">
+       Close menu or dialog
+      </span>
+      <span>
+       ESC
+      </span>
+     </li>
+    </ul>
+   </div>
+  </div>
+  <div id="cookie-consent-banner">
+   <div class="cookie-text" data-i18n-key="cookieText">
+    This website uses cookies to enhance the user experience. By continuing to browse, you agree to our use of cookies.
+   </div>
+   <div class="cookie-buttons">
+    <button class="cookie-btn" data-i18n-key="cookieDecline" id="cookie-decline-btn">
+     Decline
+    </button>
+    <button class="cookie-btn" data-i18n-key="cookieAccept" id="cookie-accept-btn">
+     Accept
+    </button>
+   </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.min.js">
+  </script>
+  <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js">
+  </script>
+  <script src="about.js">
+  </script>
+ </body>
 </html>
