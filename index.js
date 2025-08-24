@@ -172,6 +172,72 @@
         }, 500);
       }
 
+      // --- WELCOME BOX SCRIPT START ---
+      const welcomeOverlay = document.getElementById('welcome-overlay');
+      const mainContent = document.querySelector('[data-scroll-container]');
+      const closeWelcomeBtn = document.getElementById('close-welcome-box');
+      const dontShowAgainBtn = document.getElementById('dont-show-again-btn');
+      const welcomeSlider = document.querySelector('.welcome-slider');
+      const navArrows = document.querySelectorAll('.nav-arrow');
+      const navDots = document.querySelectorAll('.nav-dot');
+      let currentSlide = 0;
+      const totalSlides = 3;
+
+      function showSlide(index) {
+          if (index >= totalSlides) index = 0;
+          if (index < 0) index = totalSlides - 1;
+          
+          welcomeSlider.style.transform = `translateX(-${index * (100 / totalSlides)}%)`;
+          
+          navDots.forEach(dot => dot.classList.remove('active'));
+          navDots[index].classList.add('active');
+          
+          currentSlide = index;
+      }
+
+      function showWelcomeBox() {
+          welcomeOverlay.classList.add('visible');
+          mainContent.classList.add('content-blurred');
+          if (locoScroll) locoScroll.stop();
+      }
+
+      function hideWelcomeBox() {
+          welcomeOverlay.classList.remove('visible');
+          mainContent.classList.remove('content-blurred');
+          if (locoScroll) locoScroll.start();
+      }
+
+      // Check localStorage to see if we should show the box
+      if (localStorage.getItem('welcomeBoxShown') !== 'true') {
+          setTimeout(showWelcomeBox, 1000); // Show after a short delay
+      }
+
+      closeWelcomeBtn.addEventListener('click', hideWelcomeBox);
+      
+      dontShowAgainBtn.addEventListener('click', () => {
+          localStorage.setItem('welcomeBoxShown', 'true');
+          hideWelcomeBox();
+      });
+
+      navArrows.forEach(arrow => {
+          arrow.addEventListener('click', () => {
+              if (arrow.classList.contains('right')) {
+                  showSlide(currentSlide + 1);
+              } else {
+                  showSlide(currentSlide - 1);
+              }
+          });
+      });
+
+      navDots.forEach(dot => {
+          dot.addEventListener('click', (e) => {
+              const slideIndex = parseInt(e.target.dataset.slide, 10);
+              showSlide(slideIndex);
+          });
+      });
+      // --- WELCOME BOX SCRIPT END ---
+
+
       const cookieBanner = document.getElementById('cookie-consent-banner');
       const acceptBtn = document.getElementById('cookie-accept-btn');
       const declineBtn = document.getElementById('cookie-decline-btn');
@@ -264,8 +330,15 @@
         const button = item.querySelector('.faq-question');
         button.addEventListener('click', () => {
           const wasActive = item.classList.contains('active');
-          faqItems.forEach(otherItem => otherItem.classList.remove('active'));
-          if (!wasActive) item.classList.add('active');
+          // This allows closing an already open item
+          // faqItems.forEach(otherItem => otherItem.classList.remove('active'));
+          if (!wasActive) {
+            // Optional: close others when one opens
+            faqItems.forEach(otherItem => otherItem.classList.remove('active'));
+            item.classList.add('active');
+          } else {
+            item.classList.remove('active');
+          }
           setTimeout(() => { if (locoScroll) locoScroll.update(); }, 500);
         });
       });
@@ -394,6 +467,7 @@
       });
 
       const languageSelector = document.getElementById('languageSelector');
+      // Get saved language from localStorage, default to 'en' (English) if not found.
       const savedLanguage = localStorage.getItem('language') || 'en';
       languageSelector.value = savedLanguage;
       setLanguage(savedLanguage);
@@ -429,7 +503,8 @@
         if (key === 'b') locoScroll.scrollTo('bottom');
         
         if (e.key === 'Escape') {
-          if (hotkeyModal && !hotkeyModal.hidden) hideHelpModal();
+          if (welcomeOverlay.classList.contains('visible')) hideWelcomeBox();
+          else if (hotkeyModal && !hotkeyModal.hidden) hideHelpModal();
           else if (sideMenu.classList.contains('visible')) toggleMenu();
         }
       });
